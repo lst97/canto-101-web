@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
-import { Languages } from 'lucide-react';
+import { useTranslation } from "react-i18next";
+import { Languages } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -12,8 +12,8 @@ export const LanguageSwitcher = () => {
   const { i18n, t } = useTranslation();
 
   const languages = [
-    { code: 'en', name: t('language.english') },
-    { code: 'zh', name: t('language.chinese') },
+    { code: "en", name: t("language.english") },
+    { code: "zh", name: t("language.chinese") },
   ];
 
   const handleLanguageChange = (languageCode: string) => {
@@ -25,7 +25,9 @@ export const LanguageSwitcher = () => {
       <Languages className="h-4 w-4" />
       <Select value={i18n.language} onValueChange={handleLanguageChange}>
         <SelectTrigger className="w-[100px]">
-          <SelectValue placeholder={t('language.selectLanguage', 'Select language')} />
+          <SelectValue
+            placeholder={t("language.selectLanguage", "Select language")}
+          />
         </SelectTrigger>
         <SelectContent>
           {languages.map((lang) => (

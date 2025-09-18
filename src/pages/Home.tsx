@@ -1,10 +1,12 @@
-import type { ReactElement } from 'react'
-import { lazy, Suspense } from 'react'
+import type { ReactElement } from "react";
+import { lazy, Suspense } from "react";
 
-const Hero = lazy(async () => import('@/pages/home/Hero'))
-const CoreSections = lazy(async () => import('@/pages/home/CoreSections'))
-const ProductsShowcase = lazy(async () => import('@/pages/home/ProductsShowcase'))
-const Cta = lazy(async () => import('@/pages/home/Cta'))
+const Hero = lazy(async () => import("@/pages/home/Hero"));
+const CoreSections = lazy(async () => import("@/pages/home/CoreSections"));
+const ProductsShowcase = lazy(async () =>
+  import("@/pages/home/ProductsShowcase")
+);
+const Cta = lazy(async () => import("@/pages/home/Cta"));
 
 export default function Home(): ReactElement {
   return (
@@ -30,5 +32,5 @@ export default function Home(): ReactElement {
         </Suspense>
       </main>
     </div>
-  )
+  );
 }

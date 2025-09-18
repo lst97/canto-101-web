@@ -1,37 +1,37 @@
-import type { ReactElement } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import type { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const toDomId = (translationKey: string): string => {
-  const tail = translationKey.split('.').pop() ?? translationKey
-  return tail.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)
-}
+  const tail = translationKey.split(".").pop() ?? translationKey;
+  return tail.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
+};
 
 const coreSections = [
   {
-    translationKey: 'homepage.programOverview',
-    highlightKeys: ['roadmap', 'playlists', 'checkpoints'] as const,
+    translationKey: "homepage.programOverview",
+    highlightKeys: ["roadmap", "playlists", "checkpoints"] as const,
   },
   {
-    translationKey: 'homepage.gettingStarted',
-    highlightKeys: ['tones', 'dialects', 'romanization'] as const,
+    translationKey: "homepage.gettingStarted",
+    highlightKeys: ["tones", "dialects", "romanization"] as const,
   },
   {
-    translationKey: 'homepage.resources',
-    highlightKeys: ['downloads', 'integrations', 'media'] as const,
+    translationKey: "homepage.resources",
+    highlightKeys: ["downloads", "integrations", "media"] as const,
   },
   {
-    translationKey: 'homepage.community',
-    highlightKeys: ['forums', 'events', 'booking'] as const,
+    translationKey: "homepage.community",
+    highlightKeys: ["forums", "events", "booking"] as const,
   },
-] as const
+] as const;
 
 export default function CoreSections(): ReactElement {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <section className="mt-24 space-y-16">
       {coreSections.map((section) => {
-        const sectionId = toDomId(section.translationKey)
+        const sectionId = toDomId(section.translationKey);
         return (
           <article key={section.translationKey} id={sectionId}>
             <Card className="grid gap-12 rounded-[2.5rem] border border-border/80 bg-card/70 px-8 py-12 shadow-[0_32px_80px_-48px_rgba(0,0,0,0.4)] backdrop-blur-sm md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:px-12">
@@ -50,9 +50,14 @@ export default function CoreSections(): ReactElement {
                       key={`${section.translationKey}.highlights.${highlightKey}`}
                       className="flex items-start gap-3 rounded-2xl bg-primary/5 px-5 py-4 text-foreground"
                     >
-                      <span className="mt-1 inline-flex size-2.5 rounded-full bg-primary" aria-hidden />
+                      <span
+                        className="mt-1 inline-flex size-2.5 rounded-full bg-primary"
+                        aria-hidden
+                      />
                       <span className="leading-relaxed">
-                        {t(`${section.translationKey}.highlights.${highlightKey}`)}
+                        {t(
+                          `${section.translationKey}.highlights.${highlightKey}`,
+                        )}
                       </span>
                     </li>
                   ))}
@@ -60,8 +65,8 @@ export default function CoreSections(): ReactElement {
               </CardContent>
             </Card>
           </article>
-        )
+        );
       })}
     </section>
-  )
+  );
 }

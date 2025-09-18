@@ -1,49 +1,60 @@
 # Constitution Update Checklist
 
-When amending the constitution (`/memory/constitution.md`), ensure all dependent documents are updated to maintain consistency.
+When amending the constitution (`/memory/constitution.md`), ensure all dependent
+documents are updated to maintain consistency.
 
 ## Templates to Update
 
 ### When adding/modifying ANY article:
+
 - [x] `/templates/plan-template.md` - Update Constitution Check section
 - [x] `/templates/spec-template.md` - Update if requirements/scope affected
 - [x] `/templates/tasks-template.md` - Update if new task types needed
-- [ ] `/.claude/commands/plan.md` - Update if planning process changes (file does not exist)
-- [ ] `/.claude/commands/tasks.md` - Update if task generation affected (file does not exist)
+- [ ] `/.claude/commands/plan.md` - Update if planning process changes (file
+      does not exist)
+- [ ] `/.claude/commands/tasks.md` - Update if task generation affected (file
+      does not exist)
 - [ ] `/CLAUDE.md` - Update runtime development guidelines (file does not exist)
 
 ### Article-specific updates:
 
 #### Article I (Library-First):
+
 - [ ] Ensure templates emphasize library creation
 - [ ] Update CLI command examples
 - [ ] Add llms.txt documentation requirements
 
 #### Article II (CLI Interface):
+
 - [ ] Update CLI flag requirements in templates
 - [ ] Add text I/O protocol reminders
 
 #### Article III (Test-First):
+
 - [ ] Update test order in all templates
 - [ ] Emphasize TDD requirements
 - [ ] Add test approval gates
 
 #### Article IV (Integration Testing):
+
 - [ ] List integration test triggers
 - [ ] Update test type priorities
 - [ ] Add real dependency requirements
 
 #### Article V (Observability):
+
 - [ ] Add logging requirements to templates
 - [ ] Include multi-tier log streaming
 - [ ] Update performance monitoring sections
 
 #### Article VI (Versioning):
+
 - [ ] Add version increment reminders
 - [ ] Include breaking change procedures
 - [ ] Update migration requirements
 
 #### Article VII (Simplicity):
+
 - [ ] Update project count limits
 - [ ] Add pattern prohibition examples
 - [ ] Include YAGNI reminders
@@ -68,6 +79,7 @@ When amending the constitution (`/memory/constitution.md`), ensure all dependent
 ## Common Misses
 
 Watch for these often-forgotten updates:
+
 - Command documentation (`/commands/*.md`)
 - Checklist items in templates
 - Example code/commands
@@ -77,9 +89,13 @@ Watch for these often-forgotten updates:
 ## Template Sync Status
 
 Last sync check: 2025-09-18
+
 - Constitution version: 1.0
-- Templates aligned: ⚠️ Partially (plan-template.md and spec-template.md updated; tasks-template.md updated; .claude/commands/ and CLAUDE.md do not exist in workspace)
+- Templates aligned: ⚠️ Partially (plan-template.md and spec-template.md
+  updated; tasks-template.md updated; .claude/commands/ and CLAUDE.md do not
+  exist in workspace)
 
 ---
 
-*This checklist ensures the constitution's principles are consistently applied across all project documentation.*
+_This checklist ensures the constitution's principles are consistently applied
+across all project documentation._
