@@ -1,0 +1,174 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "close": "Close"
+  },
+  "navigation": {
+    "home": "Home",
+    "lyrics": "Lyrics",
+    "artists": "Artists",
+    "albums": "Albums",
+    "playlists": "Playlists"
+  },
+  "lyrics": {
+    "title": "Lyrics",
+    "original": "Original Lyrics",
+    "translation": "Translation",
+    "romanization": "Romanization",
+    "noLyrics": "No lyrics available",
+    "loadingLyrics": "Loading lyrics..."
+  },
+  "search": {
+    "placeholder": "Search for songs, artists, or lyrics...",
+    "noResults": "No results found",
+    "results": "results"
+  },
+  "language": {
+    "english": "English",
+    "chinese": "中文",
+    "switchLanguage": "Switch Language",
+    "selectLanguage": "Select language"
+  },
+  "theme": {
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "switchTheme": "Toggle theme"
+  },
+  "homepage": {
+    "hero": {
+      "eyebrow": "Cantonese 101",
+      "title": "Find Your Cantonese Voice",
+      "subtitle": "A bold, modern learning studio that moves you from tone basics to confident conversations with immersive music-led practice.",
+      "primaryCta": "Start your journey",
+      "secondaryCta": "See curriculum map",
+      "metrics": {
+        "lessons": "60+ guided lessons",
+        "drills": "Tone-first micro drills",
+        "community": "Weekly community sessions"
+      }
+    },
+    "programOverview": {
+      "title": "Homepage / Program Overview",
+      "description": "See what to expect in Canto101, how each stage builds skills, and how to navigate the platform for the best results.",
+      "highlights": {
+        "roadmap": "Progressive roadmap from phonetics to storytelling.",
+        "playlists": "Adaptive playlists blend lyric study with cultural notes.",
+        "checkpoints": "Milestones prompt self-checks and tutor feedback."
+      }
+    },
+    "gettingStarted": {
+      "title": "Getting Started / About Cantonese",
+      "description": "Dive into Cantonese history, regional usage, and the tonal system so every syllable lands with confidence.",
+      "highlights": {
+        "tones": "Interactive tone playground visualises contour patterns.",
+        "dialects": "Compare Hong Kong, Macau, and diaspora variations.",
+        "romanization": "Jyutping primer connects sound, script, and tone marks."
+      }
+    },
+    "resources": {
+      "title": "Resources & Extras",
+      "description": "Add-on assets keep you practising between sessions—online or offline.",
+      "highlights": {
+        "downloads": "Printable cheat sheets, tone charts, and handwriting grids.",
+        "integrations": "Sync drills to mobile via our companion app integrations.",
+        "media": "Curated podcasts, dramas, and reading lists for every level."
+      }
+    },
+    "community": {
+      "title": "Community & Tutor Connection",
+      "description": "Join a supportive network for Q&A, accountability, and live coaching.",
+      "highlights": {
+        "forums": "Peer-led forums surface questions and wins in real time.",
+        "events": "Weekly office hours with native tutors and industry guests.",
+        "booking": "Book 1:1 sessions or small-group labs directly inside the platform."
+      }
+    },
+    "products": {
+      "title": "Products",
+      "description": "Purpose-built tools accelerate your Cantonese learning flow.",
+      "items": {
+        "viewDetails": "View details",
+        "cantoLyr": {
+          "label": "CantoLyr",
+          "description": "Lyric-driven lessons that align pronunciation, script, and culture.",
+          "features": {
+            "romanization": "Romanization walkthroughs pair Jyutping with native audio.",
+            "vocabulary": "Core vocabulary decks with spaced repetition prompts.",
+            "phrases": "Essential dialogues map phrases to everyday scenarios.",
+            "grammar": "Grammar blueprints demystify particles and aspect markers.",
+            "pronunciation": "Tone lab visualises pitch curves to reinforce accuracy."
+          }
+        },
+        "cantoCap": {
+          "label": "CantoCap",
+          "description": "Auto-generate Cantonese captions to shadow authentic speech.",
+          "features": {
+            "captions": "Time-synced captions for dramas, vlogs, and live events.",
+            "annotations": "Inline annotations flag tone sandhi and colloquialisms.",
+            "export": "Export caption files for subtitles, flashcards, or karaoke.",
+            "mobile": "Send caption packs to mobile for on-the-go review."
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to step into Canto101?",
+      "description": "Unlock the full guided experience, personalise your roadmap, and keep Cantonese at the centre of your day.",
+      "button": "Create your learner profile"
+    }
+  }
+  ,
+  "nav": {
+    "title": "Canto101",
+    "links": {
+      "programOverview": "Overview",
+      "gettingStarted": "Getting Started",
+      "resources": "Resources",
+      "community": "Community",
+      "products": "Products"
+    }
+  },
+  "footer": {
+    "title": "Bold, large typography",
+    "summary": "Summarizes learning goals, curriculum structure, and how to navigate the platform for the best results.",
+    "sections": {
+      "gettingStarted": {
+        "title": "Getting Started / About Cantonese",
+        "about": "About Cantonese",
+        "background": "Background about Cantonese, its importance, dialectic features, how tones work, and regional context."
+      },
+      "resources": {
+        "title": "Resources & Extras",
+        "downloads": "Links to printable/downloadable materials",
+        "integrations": "App integrations for on-the-go learning",
+        "media": "Recommended podcasts, media, and reading"
+      },
+      "community": {
+        "title": "Community & Tutor Connection",
+        "qa": "Q&A forums, learning communities, or a place to book lessons with tutors",
+        "tutors": "Book lessons with tutors"
+      },
+      "products": {
+        "title": "Products"
+      },
+      "products.cantoLyr": "CantoLyr — lyric generation & Cantonese learning portal (Romanization, Vocabulary, Phrases, Grammar, Pronunciation)",
+      "products.cantoCap": "CantoCap — caption generation",
+      "legal": {
+        "title": "Legal",
+        "terms": "Terms & Conditions",
+        "privacy": "Privacy",
+        "accessibility": "Accessibility"
+      }
+    },
+    "disclaimer": "This is an educational platform that provides learning materials and community resources to support Cantonese studies.",
+    "copyright": "© Copyright 2025"
+  }
+}

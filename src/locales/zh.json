@@ -1,0 +1,174 @@
+{
+  "common": {
+    "loading": "載入中...",
+    "error": "錯誤",
+    "save": "儲存",
+    "cancel": "取消",
+    "delete": "刪除",
+    "edit": "編輯",
+    "search": "搜尋",
+    "close": "關閉"
+  },
+  "navigation": {
+    "home": "首頁",
+    "lyrics": "歌詞",
+    "artists": "歌手",
+    "albums": "專輯",
+    "playlists": "播放清單"
+  },
+  "lyrics": {
+    "title": "歌詞",
+    "original": "原文歌詞",
+    "translation": "翻譯",
+    "romanization": "羅馬化",
+    "noLyrics": "沒有歌詞",
+    "loadingLyrics": "載入歌詞中..."
+  },
+  "search": {
+    "placeholder": "搜尋歌曲、歌手或歌詞...",
+    "noResults": "沒有找到結果",
+    "results": "個結果"
+  },
+  "language": {
+    "english": "English",
+    "chinese": "中文",
+    "switchLanguage": "切換語言",
+    "selectLanguage": "選擇語言"
+  },
+  "theme": {
+    "theme": "主題",
+    "light": "淺色",
+    "dark": "深色",
+    "system": "系統",
+    "switchTheme": "切換主題"
+  },
+  "homepage": {
+    "hero": {
+      "eyebrow": "粵語 101",
+      "title": "找到屬於你的粵語聲線",
+      "subtitle": "大膽、現代的學習空間，讓你從聲調基礎走到自然對話，並以音樂引導沉浸式練習。",
+      "primaryCta": "開始旅程",
+      "secondaryCta": "查看課程地圖",
+      "metrics": {
+        "lessons": "超過 60 節引導課程",
+        "drills": "聲調優先的微練習",
+        "community": "每週社群共修"
+      }
+    },
+    "programOverview": {
+      "title": "首頁／課程總覽",
+      "description": "了解 Canto101 的學習節奏、每個階段的重點，以及如何善用平台功能。",
+      "highlights": {
+        "roadmap": "由語音到敘事的循序進階路線圖。",
+        "playlists": "自動調整的歌詞播放清單，結合文化注釋。",
+        "checkpoints": "里程碑提醒自我檢測並串接導師回饋。"
+      }
+    },
+    "gettingStarted": {
+      "title": "入門指南／認識粵語",
+      "description": "從歷史脈絡、地域使用到聲調系統，建立穩固基礎讓每個音節都自信。",
+      "highlights": {
+        "tones": "互動聲調遊樂場視覺化曲線走向。",
+        "dialects": "比較香港、澳門與海外華人社群的差異。",
+        "romanization": "粵拼速成班連結聲音、文字與聲調符號。"
+      }
+    },
+    "resources": {
+      "title": "資源與加值內容",
+      "description": "額外素材讓你在線上線下都能持續練習。",
+      "highlights": {
+        "downloads": "可列印的速查表、聲調圖與書寫格線。",
+        "integrations": "透過夥伴 App 將練習同步到手機。",
+        "media": "精選 Podcast、劇集與閱讀清單，涵蓋不同程度。"
+      }
+    },
+    "community": {
+      "title": "社群與導師",
+      "description": "加入互相支持的網絡，獲得問答、督導與即時指導。",
+      "highlights": {
+        "forums": "同儕論壇即時分享問題與學習成果。",
+        "events": "每週母語導師與業界來賓的線上諮詢。",
+        "booking": "在平台內直接預訂一對一或小組實驗課。"
+      }
+    },
+    "products": {
+      "title": "產品工具",
+      "description": "專為加速粵語學習而設計的數位夥伴。",
+      "items": {
+        "viewDetails": "查看詳情",
+        "cantoLyr": {
+          "label": "CantoLyr",
+          "description": "以歌詞驅動的課程，連結發音、文字與文化。",
+          "features": {
+            "romanization": "粵拼引導配合母語音檔，逐步拆解發音。",
+            "vocabulary": "核心詞彙卡片搭配間隔重複提醒。",
+            "phrases": "實用情境對話，幫你記住常用語。",
+            "grammar": "語法藍圖拆解助詞與時態標記。",
+            "pronunciation": "聲調實驗室以圖像呈現音高曲線，強化準確度。"
+          }
+        },
+        "cantoCap": {
+          "label": "CantoCap",
+          "description": "自動產生粵語字幕，跟讀真實語料。",
+          "features": {
+            "captions": "為劇集、Vlog 與活動提供精準時間軸字幕。",
+            "annotations": "即時標註變調與口語化用法。",
+            "export": "輸出字幕檔作為字幕、字卡或卡拉 OK 教材。",
+            "mobile": "將字幕包同步到手機，隨時複習。"
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "準備好踏進 Canto101 嗎？",
+      "description": "解鎖完整指導體驗、自訂學習地圖，讓粵語成為生活日常。",
+      "button": "建立學習者檔案"
+    }
+  }
+  ,
+  "nav": {
+    "title": "Canto101",
+    "links": {
+      "programOverview": "總覽",
+      "gettingStarted": "入門指南",
+      "resources": "資源",
+      "community": "社群",
+      "products": "產品"
+    }
+  },
+  "footer": {
+    "title": "醒目而大的字體",
+    "summary": "總結學習目標、課程結構，以及如何在平台上有效導航以取得最佳成果。",
+    "sections": {
+      "gettingStarted": {
+        "title": "入門 / 關於粵語",
+        "about": "關於粵語",
+        "background": "粵語的重要性、方言特點、聲調運作及地區背景。"
+      },
+      "resources": {
+        "title": "資源與額外教材",
+        "downloads": "可列印/下載的教材連結",
+        "integrations": "行動裝置整合，隨時學習",
+        "media": "推薦的 Podcast、媒體與閱讀"
+      },
+      "community": {
+        "title": "社群與導師連結",
+        "qa": "問答論壇、學習社群，或預約導師上課的地方",
+        "tutors": "預約導師課程"
+      },
+      "products": {
+        "title": "產品"
+      },
+      "products.cantoLyr": "CantoLyr — 歌詞生成與粵語學習入口（粵拼、核心詞彙、實用語句、基礎語法、發音與聲調指南等）",
+      "products.cantoCap": "CantoCap — 字幕生成",
+      "legal": {
+        "title": "法律",
+        "terms": "條款與條件",
+        "privacy": "隱私",
+        "accessibility": "無障礙"
+      }
+    },
+    "disclaimer": "本平台提供學習資料與社群資源，以支援粵語學習。",
+    "copyright": "© 版權 2025"
+  }
+}
