@@ -44,11 +44,55 @@ Application must support light, dark, and system theme modes. Theme preference
 should be persisted in localStorage and automatically detect system preference
 changes.
 
+### VIII. Error Handling Architecture (NON-NEGOTIABLE)
+
+1. Rendering / Component Errors:
+  - Must be captured by `react-error-boundary` instances.
+  - Root layout wraps the app with `AppErrorBoundary`.
+  - Data-fetching UI regions (pages, complex widgets) use `QueryErrorBoundary` coupled with `useQueryErrorResetBoundary`.
+2. Async / Network Errors:
+  - All Axios requests flow through a single client (`src/lib/api.ts`).
+  - Response interceptor transforms errors into typed `AppError` variants:
+    - `network` (no response / connectivity)
+    - `api` (HTTP status >= 400)
+    - `unexpected` (anything else)
+3. Error Types:
+  - Defined in `src/types/errors.ts` as a discriminated union.
+  - No `any` in error surfaces; start from `unknown`, then refine.
+4. React Query:
+  - Use built-in error states (`error`, `isError`) instead of wrapping query functions with manual `try/catch`.
+  - Reset flows initiated via boundary `onReset` or the query reset boundary.
+5. User-Facing Messages:
+  - Always internationalized. Raw server strings are never rendered directly unless mapped to a key. Fallback copy lives in `errors.*` namespace.
+6. Logging:
+  - All logging must use Pino via the centralized logger in `src/lib/logger.ts`.
+  - Prohibit direct use of `console.log`, `console.error`, etc.
+  - Use structured logging with levels: debug, info, warn, error, fatal.
+  - Future: Integrate with external reporters (Sentry, OpenTelemetry) via logger configuration.
+7. Prohibited Patterns:
+  - Broad `try/catch` in component render bodies.
+  - Silent error suppression (empty catch blocks or ignored promise rejections).
+8. Future Extension:
+  - Central logging/reporting hook can be injected via boundary `onError` without altering component trees.
+
+All new components must declare how they surface operational errors (boundary, query error UI, or controlled form state) in their PR description per governance rules.
+
+### IX. Schema Validation Contract (NON-NEGOTIABLE)
+
+- Frontend search flows and data hooks (`frontend/src/hooks/`) must validate user
+  inputs and server payloads with `zod@4.1.11`, using shared schemas under
+  `frontend/src/lib/schemas/`.
+- `frontend/src/hooks/useLexiconSearch.ts` is the reference implementation:
+  inputs are parsed before requests and responses are parsed before state is mutated.
+- New UI features that fetch data must provide matching Zod schemas and verify
+  both `safeParse` success and failure paths via tests.
+
 ## Technology Stack
 
 - React 19+ with hooks
 - Vite for build tooling
 - TypeScript strict mode
+- Zod v4 for shared schema validation
 - Tailwind CSS v4
 - shadcn/ui for components
 - Axios for HTTP requests
@@ -89,39 +133,56 @@ Routing Principles (Required when multiple pages exist)
 - Keep routes small and enable code-splitting via lazy components where
   appropriate.
 
-### Sample Project Structure
+### Project Structure
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── ui/             # Base components (shadcn/ui)
-│   ├── auth/           # Authentication components
-│   └── dashboard/      # Dashboard-specific components
-├── hooks/              # Custom hooks
-│   ├── useAuth.ts      # Authentication hook
-│   └── useApi.ts       # API interaction hook
-├── stores/             # Zustand stores
-│   ├── authStore.ts    # Authentication state
-│   ├── uiStore.ts      # UI state (modals, themes)
-│   └── themeStore.ts   # Theme state management
-├── lib/                # Utilities and configs
-│   ├── utils.ts        # Helper functions
-│   ├── api.ts          # API client setup
-│   ├── constants.ts    # App constants
-│   └── i18n.ts         # Internationalization configuration
-├── locales/            # Translation files
-│   ├── en.json         # English translations
-│   └── zh.json         # Chinese translations
-├── types/              # TypeScript definitions
-│   ├── user.ts         # User-related types
-│   └── api.ts          # API response types
-├── pages/              # Route components
-│   ├── Login.tsx       # Login page
-│   └── Dashboard.tsx   # Dashboard page
-├── __tests__/          # Test files
-│   ├── components/     # Component tests
-│   └── hooks/          # Hook tests
-└── assets/             # Static assets
+├── App.css                    # Global app styles
+├── App.tsx                    # Main app component
+├── assets/                    # Static media files (images, icons)
+│   ├── community.png
+│   ├── home.png
+│   ├── resources.png
+│   └── tools.png
+├── components/                # Reusable UI components
+│   ├── Root.tsx              # Root layout component
+│   ├── Footer.tsx            # Footer component
+│   ├── Header.tsx            # Header component
+│   ├── ThemeProvider.tsx     # Theme context provider
+│   ├── ThemeToggle.tsx       # Theme toggle button
+│   ├── mode-toggle.tsx       # Mode toggle component
+│   ├── LanguageSwitcher.tsx  # Language switcher component
+│   ├── cantoLyr/             # CantoLyr feature components
+│   ├── errors/               # Error boundary components
+│   ├── home/                 # Home page components
+│   └── ui/                   # Base UI components (shadcn/ui)
+├── hooks/                    # Custom React hooks
+│   ├── useLexiconSearch.ts   # Hook for lexicon search
+│   └── useLyricGeneration.ts # Hook for lyric generation
+├── lib/                      # Shared utilities and configurations
+│   ├── api.ts                # Axios API client and interceptors
+│   ├── constants.ts          # Application constants
+│   ├── i18n.ts               # Internationalization configuration
+│   ├── logger.ts             # Pino-based centralized logger
+│   ├── queryClient.ts        # TanStack Query client setup
+│   ├── schemas/              # Shared Zod schemas
+│   │   └── lexicon.ts        # Lexicon request/response validators
+│   └── utils.ts              # General utility functions
+├── locales/                  # Translation files
+│   ├── en.json               # English translations
+│   └── zh.json               # Chinese translations
+├── pages/                    # Page-level route components
+│   ├── CantoCap.tsx          # CantoCap page
+│   ├── CantoLyr.tsx          # CantoLyr page
+│   └── Home.tsx              # Home page
+├── router.tsx                # TanStack Router configuration
+├── stores/                   # Zustand state management stores
+│   └── themeStore.ts         # Theme state store
+├── types/                    # TypeScript type definitions
+│   └── errors.ts             # Error type definitions
+├── index.css                 # Global CSS styles
+├── main.tsx                  # Application entry point
+└── vite-env.d.ts             # Vite environment types
 ```
 
 Performance Optimizations: Use memoization (React.memo, useMemo), code splitting

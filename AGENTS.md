@@ -1,4 +1,6 @@
-# Reposi## Coding Style & Naming Conventions
+# Repository Guidelines
+
+## Coding Style & Naming Conventions
 
 Observe the constitution's TypeScript-strict mandate: no `any`, explicit return
 types, and exhaustive discriminated unions. React components use PascalCase,
@@ -7,7 +9,40 @@ stay inline unless a variant fits better alongside the component in `src/lib/`.
 Use Zustand stores for complex state management, with store files organized in
 `src/stores/`. ESLint (see `eslint.config.js`) expects 2-space indentation and
 complete hook dependency arrays. Prettier is optional but encouraged for
-consistent wrapping.ry Guidelines
+consistent wrapping.
+
+### Error Handling (Required Patterns)
+
+1. Render / Component Errors: Must be isolated with `react-error-boundary`.
+  - Global root wrapped in `AppErrorBoundary`.
+  - Data-fetching surfaces additionally wrapped in `QueryErrorBoundary` to leverage React Query reset.
+  - No broad `try/catch` inside React render logic or component bodies for render-time errors.
+2. Async / HTTP Errors: Centralized in Axios interceptors (`src/lib/api.ts`). Interceptors convert failures to typed `AppError` variants (`network | api | unexpected`). Components and hooks consume normalized errors via React Query or hook state.
+3. React Query Errors: Use `useQueryErrorResetBoundary` with `QueryErrorBoundary` for retry flows. Avoid manual `try/catch` around `useQuery`/`mutations`; rely on `error`/`isError` state.
+4. Hook State Errors: For imperative flows (e.g. form submissions not yet migrated to React Query), surface string keys referencing i18n (e.g. `cantoLyr.errors.pron.missingQuery`) or user-safe messages.
+5. Internationalization: All displayed error text must be translation keys. Raw server messages may be logged but must not appear un-sanitized in UI.
+6. Logging (Future): Introduce a pluggable reporter (Sentry, OpenTelemetry) by passing `onError` to `ErrorBoundary`. Keep side effects out of fallback components now.
+7. Centralized Logging: All logging must use the Pino-based logger from `src/lib/logger.ts`. Never use `console.log`, `console.error`, etc. directly. Use structured logging with appropriate levels (debug, info, warn, error, fatal).
+8. Exhaustiveness: Use discriminated unions for error kinds. Prefer type narrowing helpers (`isAppError`) over `instanceof` where cross-bundle concerns may arise.
+
+### Error Handling Do / Don't
+
+- DO throw inside Axios interceptor so downstream code receives `AppError` without repetitive normalization.
+- DO reset queries using the provided boundary reset callback.
+- DO NOT swallow errors silently; either handle with UI state or rethrow as `AppError`.
+- DO NOT use `any` for error types; prefer `unknown` then narrow.
+- DO NOT catch and immediately rethrow the same error unless adding semantic context.
+
+## Validation System
+
+- All frontend data flows validate inputs and outputs with `zod@4.1.11` using
+  schemas under `src/lib/schemas/`.
+- `src/hooks/useLexiconSearch.ts` is the pattern to follow: user input goes
+  through a Zod schema before network calls, and responses are parsed before
+  touching UI state.
+- Any new API interaction must ship with shared schemas, tests covering both
+  `safeParse` success/failure, and documentation updates so other agents can
+  trace the contract.
 
 ## Project Structure & Module Organization
 
@@ -22,33 +57,59 @@ belong in `.env.local` with a `VITE_` prefix so Vite exposes them safely.
 
 ```
 src/
-├── components/          # Reusable UI components (shadcn/ui, custom)
-│   ├── ui/             # Base UI components (buttons, inputs, etc.)
-│   └── [feature]/      # Feature-specific components
-├── hooks/              # Custom React hooks
-├── stores/             # Zustand state management stores
-│   ├── authStore.ts    # Authentication state
-│   ├── uiStore.ts      # UI state (modals, themes)
-│   └── themeStore.ts   # Theme state management
-├── lib/                # Shared utilities and configurations
-│   ├── utils.ts        # General utility functions
-│   ├── constants.ts    # Application constants
-│   └── i18n.ts         # Internationalization configuration
-├── locales/            # Translation files
-│   ├── en.json         # English translations
-│   └── zh.json         # Chinese translations
-├── types/              # TypeScript type definitions
-├── assets/             # Static media files (images, icons)
-├── __tests__/          # Unit and integration tests
-└── pages/              # Page-level route components (TanStack Router)
+├── App.css                    # Global app styles
+├── App.tsx                    # Main app component
+├── assets/                    # Static media files (images, icons)
+│   ├── community.png
+│   ├── home.png
+│   ├── resources.png
+│   └── tools.png
+├── components/                # Reusable UI components
+│   ├── Root.tsx              # Root layout component
+│   ├── Footer.tsx            # Footer component
+│   ├── Header.tsx            # Header component
+│   ├── ThemeProvider.tsx     # Theme context provider
+│   ├── ThemeToggle.tsx       # Theme toggle button
+│   ├── mode-toggle.tsx       # Mode toggle component
+│   ├── LanguageSwitcher.tsx  # Language switcher component
+│   ├── cantoLyr/             # CantoLyr feature components
+│   ├── errors/               # Error boundary components
+│   ├── home/                 # Home page components
+│   └── ui/                   # Base UI components (shadcn/ui)
+├── hooks/                    # Custom React hooks
+│   ├── useLexiconSearch.ts   # Hook for lexicon search
+│   └── useLyricGeneration.ts # Hook for lyric generation
+├── lib/                      # Shared utilities and configurations
+│   ├── api.ts                # Axios API client and interceptors
+│   ├── constants.ts          # Application constants
+│   ├── i18n.ts               # Internationalization configuration
+│   ├── logger.ts             # Pino-based centralized logger
+│   ├── queryClient.ts        # TanStack Query client setup
+│   ├── schemas/              # Shared Zod schemas
+│   │   └── lexicon.ts        # Lexicon request/response validators
+│   └── utils.ts              # General utility functions
+├── locales/                  # Translation files
+│   ├── en.json               # English translations
+│   └── zh.json               # Chinese translations
+├── pages/                    # Page-level route components
+│   ├── CantoCap.tsx          # CantoCap page
+│   ├── CantoLyr.tsx          # CantoLyr page
+│   └── Home.tsx              # Home page
+├── router.tsx                # TanStack Router configuration
+├── stores/                   # Zustand state management stores
+│   └── themeStore.ts         # Theme state store
+├── types/                    # TypeScript type definitions
+│   └── errors.ts             # Error type definitions
+├── index.css                 # Global CSS styles
+├── main.tsx                  # Application entry point
+└── vite-env.d.ts             # Vite environment types
 
-public/                 # Static assets served directly
-├── vite.svg
-└── [other static files]
+public/                       # Static assets served directly
+└── vite.svg                  # Vite logo
 
-.specify/               # Project specifications and templates
-├── memory/            # Constitution and guidelines
-└── templates/         # Code generation templates
+.specify/                     # Project specifications and templates
+├── memory/                   # Constitution and guidelines
+└── templates/                # Code generation templates
 ```
 
 ### Organization Principles
@@ -79,15 +140,6 @@ TypeScript + Vite production pipeline. Serve the optimized bundle via
 refactors. If file-based routing via the TanStack Router plugin is adopted,
 ensure route generation scripts run before build.
 
-## Coding Style & Naming Conventions
-
-Observe the constitution’s TypeScript-strict mandate: no `any`, explicit return
-types, and exhaustive discriminated unions. React components use PascalCase,
-helpers use camelCase, hooks start with `use`, and Tailwind utility groupings
-stay inline unless a variant fits better alongside the component in `src/lib/`.
-ESLint (see `eslint.config.js`) expects 2-space indentation and complete hook
-dependency arrays. Prettier is optional but encouraged for consistent wrapping.
-
 ## Testing Guidelines
 
 Article III requires TDD. Sketch the test in Vitest (target directory
@@ -105,6 +157,8 @@ be organized by feature domains (e.g., `common.save`, `lyrics.title`). Always
 provide fallback text and ensure translations are complete for all supported
 languages (English and Chinese). Language detection is automatic based on
 browser settings, with localStorage persistence for user preferences.
+
+Error keys live under the `errors.*` namespace (e.g. `errors.network.title`). Feature-specific validation errors stay scoped (e.g. `cantoLyr.errors.pron.missingQuery`).
 
 ## Theme Guidelines
 

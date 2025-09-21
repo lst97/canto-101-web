@@ -9,6 +9,12 @@
     "search": "搜尋",
     "close": "關閉"
   },
+  "errors": {
+    "network": { "title": "網絡連線問題", "message": "無法連線伺服器，請檢查網路。" },
+    "api": { "title": "請求失敗", "message": "伺服器回傳錯誤。" },
+    "unexpected": { "title": "發生未預期錯誤", "message": "系統遇到未預期的情況。" },
+    "actions": { "retry": "重試", "dismiss": "關閉" }
+  },
   "navigation": {
     "home": "首頁",
     "lyrics": "歌詞",
@@ -169,5 +175,76 @@
     },
     "disclaimer": "本平台提供學習資料與社群資源，以支援粵語學習。",
     "copyright": "© 版權 2025"
+  }
+  ,
+  "cantoLyr": {
+    "pron": {
+      "title": "發音搜尋",
+      "inputLabel": "發音查詢",
+      "placeholder": "輸入發音（例如 02）",
+      "prefixLabel": "前綴匹配",
+      "modeLabel": "模式",
+      "limitLabel": "數量上限",
+      "pageSizeLabel": "每頁數量"
+    },
+    "rhyme": {
+      "title": "押韻搜尋",
+      "inputLabel": "押韻查詢",
+      "placeholder": "輸入韻碼（例如 aa）",
+      "modeLabel": "模式",
+      "limitLabel": "數量上限",
+      "pageSizeLabel": "每頁數量"
+    },
+    "pages": {
+      "overview": {
+        "title": "CantoLyr 詞彙工具",
+        "description": "探索專注於發音與押韻的詞彙工具，先釐清聲調與韻母，再開始創作歌詞。",
+        "featuresLabel": "詞彙工作流程",
+        "lexiconTitle": "詞彙工具",
+        "lexiconDescription": "在正式寫詞之前，透過專用搜尋先確認發音或押韻的對應詞彙。",
+        "lyricsTitle": "歌詞生成",
+        "lyricsDescription": "將聲調排列與創作提示結合，生成符合粵語韻律的初稿句子。"
+      },
+      "featureCta": "開啟工作流程",
+      "backToOverview": "回到 CantoLyr 總覽",
+      "pron": {
+        "heading": "發音工具",
+        "preview": "在定稿旋律前先驗證粵拼、檢視聲調走向，快速找到對應的詞彙結果。",
+        "description": "使用粵拼或聲調代碼搜尋詞彙，確認音節是否精準，並整理用法備註支援歌詞創作。"
+      },
+      "rhyme": {
+        "heading": "押韻工具",
+        "preview": "尋找共享韻尾與聲調的音節，打造自然貼合的押韻結構。",
+        "description": "輸入韻碼即可群組同韻同調的詞彙，迅速建立具有節奏感的押韻網格。"
+      },
+      "lyrics": {
+        "heading": "歌詞工作流程",
+        "preview": "把聲調表格與創作提案連結，寫出貼合粵語節奏的歌句。",
+        "description": "輸入創作主題與聲調序列，生成具結構的歌詞草稿，方便後續調整。"
+      }
+    },
+    "lyrics": {
+      "title": "歌詞生成",
+      "promptLabel": "歌詞主題",
+      "promptPlaceholder": "描述場景或主題",
+      "sequencesLabel": "聲調序列",
+      "sequencesPlaceholder": "以逗號分隔的聲調序列（例如 123,456）",
+      "generate": "生成",
+      "generating": "生成中..."
+    },
+    "errors": {
+      "pron": { "missingQuery": "請輸入發音查詢。" },
+      "rhyme": { "missingQuery": "請輸入押韻查詢。" },
+      "lyrics": {
+        "missingPrompt": "請提供歌詞主題。",
+        "missingSequences": "至少輸入一組聲調序列（以逗號分隔）。"
+      }
+    }
+    ,
+    "pagination": {
+      "prev": "上一頁",
+      "next": "下一頁",
+      "page": "第 {{page}} 頁"
+    }
   }
 }

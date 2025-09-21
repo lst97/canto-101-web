@@ -9,6 +9,12 @@
     "search": "Search",
     "close": "Close"
   },
+  "errors": {
+    "network": { "title": "Network issue", "message": "We couldn't reach the server. Please check your connection." },
+    "api": { "title": "Request failed", "message": "The server reported a problem." },
+    "unexpected": { "title": "Something went wrong", "message": "An unexpected error occurred." },
+    "actions": { "retry": "Retry", "dismiss": "Dismiss" }
+  },
   "navigation": {
     "home": "Home",
     "lyrics": "Lyrics",
@@ -169,5 +175,76 @@
     },
     "disclaimer": "This is an educational platform that provides learning materials and community resources to support Cantonese studies.",
     "copyright": "© Copyright 2025"
+  }
+  ,
+  "cantoLyr": {
+    "pron": {
+      "title": "Pronunciation Search",
+      "inputLabel": "Pronunciation query",
+      "placeholder": "Enter pronunciation (e.g. ngo5)",
+      "prefixLabel": "Prefix match",
+      "modeLabel": "Mode",
+      "limitLabel": "Limit",
+      "pageSizeLabel": "Page size"
+    },
+    "rhyme": {
+      "title": "Rhyme Search",
+      "inputLabel": "Rhyme query",
+      "placeholder": "Enter rhyme code (e.g. aa)",
+      "modeLabel": "Mode",
+      "limitLabel": "Limit",
+      "pageSizeLabel": "Page size"
+    },
+    "pages": {
+      "overview": {
+        "title": "CantoLyr Lexicon",
+        "description": "Explore focused tools that help you validate pronunciation and craft rhyme families before you draft lyrics.",
+        "featuresLabel": "Lexicon workflows",
+        "lexiconTitle": "Lexicon tools",
+        "lexiconDescription": "Identify pronunciation or rhyme matches with purpose-built searches before you commit ideas to your draft.",
+        "lyricsTitle": "Lyric generation",
+        "lyricsDescription": "Map tone sequences to creative prompts and generate draft verses while staying aligned with Cantonese prosody."
+      },
+      "featureCta": "Open workflow",
+      "backToOverview": "Back to CantoLyr overview",
+      "pron": {
+        "heading": "Pronunciation tools",
+        "preview": "Validate Jyutping entries, inspect tone contours, and surface lexicon matches before you lock in a vocal line.",
+        "description": "Search by Jyutping or tone code to confirm syllable accuracy, review matched entries, and capture usage notes for lyric writing."
+      },
+      "rhyme": {
+        "heading": "Rhyme tools",
+        "preview": "Build authentic rhyme schemes by discovering syllables that share finals and tone patterns.",
+        "description": "Query the lexicon by rhyme code to group entries with shared finals and tones, making structured rhyme grids fast to assemble."
+      },
+      "lyrics": {
+        "heading": "Lyric workflows",
+        "preview": "Blend tone grids with creative briefs to produce verses that respect Cantonese rhythm.",
+        "description": "Feed a creative prompt and tone sequences into the generator to receive structured lyric ideas you can iterate on."
+      }
+    },
+    "lyrics": {
+      "title": "Lyric Session",
+      "promptLabel": "Lyric prompt",
+      "promptPlaceholder": "Describe the scene or theme",
+      "sequencesLabel": "Tone sequences",
+      "sequencesPlaceholder": "Comma separated tone sequences (e.g. 02,452)",
+      "generate": "Generate",
+      "generating": "Generating..."
+    },
+    "errors": {
+      "pron": { "missingQuery": "Please enter a pronunciation query." },
+      "rhyme": { "missingQuery": "Please enter a rhyme query." },
+      "lyrics": {
+        "missingPrompt": "Prompt is required to generate lyrics.",
+        "missingSequences": "Provide at least one tone sequence (comma separated)."
+      }
+    }
+    ,
+    "pagination": {
+      "prev": "Prev",
+      "next": "Next",
+      "page": "Page {{page}}"
+    }
   }
 }
