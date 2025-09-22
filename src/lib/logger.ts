@@ -11,22 +11,35 @@ const logger = pino({
 
 export default logger;
 
-type LogArgs = unknown[];
+type LogContext = Record<string, unknown> | undefined;
+
+// Helper to normalize variable arguments into (context, msg)
+function normalize(message: string, ctx: LogContext): [Record<string, unknown>, string] {
+  if (ctx && typeof ctx === "object") {
+    return [ctx as Record<string, unknown>, message];
+  }
+  return [{}, message];
+}
 
 export const log = {
-  debug: (message: string, ...args: LogArgs) => {
-    logger.debug(message, ...args);
+  debug: (message: string, context?: LogContext) => {
+    const [ctx, msg] = normalize(message, context);
+    logger.debug(ctx, msg);
   },
-  info: (message: string, ...args: LogArgs) => {
-    logger.info(message, ...args);
+  info: (message: string, context?: LogContext) => {
+    const [ctx, msg] = normalize(message, context);
+    logger.info(ctx, msg);
   },
-  warn: (message: string, ...args: LogArgs) => {
-    logger.warn(message, ...args);
+  warn: (message: string, context?: LogContext) => {
+    const [ctx, msg] = normalize(message, context);
+    logger.warn(ctx, msg);
   },
-  error: (message: string, ...args: LogArgs) => {
-    logger.error(message, ...args);
+  error: (message: string, context?: LogContext) => {
+    const [ctx, msg] = normalize(message, context);
+    logger.error(ctx, msg);
   },
-  fatal: (message: string, ...args: LogArgs) => {
-    logger.fatal(message, ...args);
+  fatal: (message: string, context?: LogContext) => {
+    const [ctx, msg] = normalize(message, context);
+    logger.fatal(ctx, msg);
   },
 };

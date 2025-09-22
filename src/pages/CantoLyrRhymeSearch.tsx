@@ -3,7 +3,14 @@ import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
 
 import LexiconSearch from "@/components/cantoLyr/LexiconSearch";
-import { Button } from "@/components/ui/button";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default function CantoLyrRhymeSearch(): ReactElement {
   const { t } = useTranslation();
@@ -11,9 +18,19 @@ export default function CantoLyrRhymeSearch(): ReactElement {
   return (
     <main className="mx-auto flex max-w-4xl flex-col gap-8 px-6 pb-24 pt-16 md:px-10 md:pt-20">
       <div className="flex flex-col gap-6">
-        <Button asChild variant="ghost" className="self-start pl-0" aria-label={t("cantoLyr.pages.backToOverview")}>
-          <Link to="/canto-lyr">{t("cantoLyr.pages.backToOverview")}</Link>
-        </Button>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/canto-lyr">CantoLyr</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{t("cantoLyr.pages.rhyme.heading")}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <header className="space-y-3">
           <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
             {t("cantoLyr.pages.rhyme.heading")}

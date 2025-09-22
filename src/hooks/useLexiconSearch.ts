@@ -93,12 +93,12 @@ const QUERY_KEY_PREFIX = "lexicon-search";
 
 function createDefaultOptions(kind: SearchKind): OptionsState {
   if (kind === "pron") {
-    return { mode: "all", pageSize: "25", prefix: false } satisfies PronOptions;
+    return { mode: "all", pageSize: "50", prefix: false } satisfies PronOptions;
   }
   if (kind === "rhyme") {
-    return { mode: "all", pageSize: "25" } satisfies RhymeOptions;
+    return { mode: "all", pageSize: "50" } satisfies RhymeOptions;
   }
-  return { mode: "all", pageSize: "25" } satisfies BaseOptions;
+  return { mode: "all", pageSize: "50" } satisfies BaseOptions;
 }
 
 function createQueryKey(kind: SearchKind, snapshot: SearchSnapshot | null): QueryKey {

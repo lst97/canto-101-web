@@ -7,7 +7,8 @@
     "delete": "Delete",
     "edit": "Edit",
     "search": "Search",
-    "close": "Close"
+    "close": "Close",
+    "loadMore": "Load more"
   },
   "errors": {
     "network": { "title": "Network issue", "message": "We couldn't reach the server. Please check your connection." },
@@ -38,6 +39,7 @@
   "language": {
     "english": "English",
     "chinese": "中文",
+    "japanese": "Japanese",
     "switchLanguage": "Switch Language",
     "selectLanguage": "Select language"
   },
@@ -162,10 +164,10 @@
         "tutors": "Book lessons with tutors"
       },
       "products": {
-        "title": "Products"
+        "title": "Products",
+        "cantoLyr": "CantoLyr - Lyric generation tool",
+        "cantoCap": "CantoCap - Cantonese caption generation application"
       },
-      "products.cantoLyr": "CantoLyr — lyric generation & Cantonese learning portal (Romanization, Vocabulary, Phrases, Grammar, Pronunciation)",
-      "products.cantoCap": "CantoCap — caption generation",
       "legal": {
         "title": "Legal",
         "terms": "Terms & Conditions",
@@ -174,26 +176,18 @@
       }
     },
     "disclaimer": "This is an educational platform that provides learning materials and community resources to support Cantonese studies.",
-    "copyright": "© Copyright 2025"
-  }
-  ,
+    "copyright": "© Copyright 2025 - Canto101"
+  },
   "cantoLyr": {
     "pron": {
       "title": "Pronunciation Search",
-      "inputLabel": "Pronunciation query",
       "placeholder": "Enter pronunciation (e.g. ngo5)",
-      "prefixLabel": "Prefix match",
-      "modeLabel": "Mode",
-      "limitLabel": "Limit",
-      "pageSizeLabel": "Page size"
+      "resultsRegionLabel": "Pronunciation search results"
     },
     "rhyme": {
       "title": "Rhyme Search",
-      "inputLabel": "Rhyme query",
       "placeholder": "Enter rhyme code (e.g. aa)",
-      "modeLabel": "Mode",
-      "limitLabel": "Limit",
-      "pageSizeLabel": "Page size"
+      "resultsRegionLabel": "Rhyme search results"
     },
     "pages": {
       "overview": {
@@ -210,7 +204,51 @@
       "pron": {
         "heading": "Pronunciation tools",
         "preview": "Validate Jyutping entries, inspect tone contours, and surface lexicon matches before you lock in a vocal line.",
-        "description": "Search by Jyutping or tone code to confirm syllable accuracy, review matched entries, and capture usage notes for lyric writing."
+        "description": "Search by Jyutping or tone code to confirm syllable accuracy, review matched entries, and capture usage notes for lyric writing.",
+        "numericHeading": "Numeric tone mnemonic",
+        "numericAccordionTrigger": "394052 → open-syllable tone mapping (1–6)",
+        "numericIntro": "Cantonese lyricists map the six open-syllable tone indices (1–6) to the chant \"394052\" so the sounded digits saam1, gau2, sei3, ling4, ng5, ji6 mirror the tones they describe.",
+        "numericDescription": "The extended chant \"394052786\"—documented in Cantonese phonology guides—anchors lyric drafting because each digit carries the contour singers expect. The table summarises the core mapping used before checked tones enter a melody.",
+        "numericCheckedNote": "Digits 7-8-6 (chat1, baat3, luk6) share pitch contours with tones 1, 3, and 6 yet surface only on checked syllables ending in -p/-t/-k.",
+        "numericSourcesLabel": "References",
+        "numericSourceEnglishLabel": "English overview: \"Cantonese phonology\" (Wikipedia) — explains the \"394052786\" mnemonic.",
+        "numericSourceChineseLabel": "Chinese source: \"Cantonese Tones\" Wikipedia — includes the nine-tone formula \"394052786\".",
+        "numericTable": {
+          "caption": "Cantonese tone index mapped to lyricist mnemonic digits",
+          "columns": {
+            "toneIndex": "Tone index",
+            "mnemonicDigit": "Mnemonic digit",
+            "toneName": "Traditional tone name",
+            "example": "Jyutping example",
+            "audio": "Audio"
+          },
+          "rows": {
+            "tone1": {
+              "toneName": "Tone 1 · Yin Ping (high level)",
+              "example": "saam1 — \"three\" (三)"
+            },
+            "tone2": {
+              "toneName": "Tone 2 · Yin Shang (rising)",
+              "example": "gau2 — \"nine\" (九)"
+            },
+            "tone3": {
+              "toneName": "Tone 3 · Yin Qu (mid level)",
+              "example": "sei3 — \"four\" (四)"
+            },
+            "tone4": {
+              "toneName": "Tone 4 · Yang Ping (low falling)",
+              "example": "ling4 — \"zero\" (零)"
+            },
+            "tone5": {
+              "toneName": "Tone 5 · Yang Shang (low rising)",
+              "example": "ng5 — \"five\" (五)"
+            },
+            "tone6": {
+              "toneName": "Tone 6 · Yang Qu (low level)",
+              "example": "ji6 — \"two\" (二)"
+            }
+          }
+        }
       },
       "rhyme": {
         "heading": "Rhyme tools",
@@ -238,6 +276,10 @@
       "lyrics": {
         "missingPrompt": "Prompt is required to generate lyrics.",
         "missingSequences": "Provide at least one tone sequence (comma separated)."
+      },
+      "lexicon": {
+        "invalidDigits": "Only digits 0, 2, 3, 4, 5, and 9 are allowed.",
+        "tooLong": "Query must be no more than 4 digits long."
       }
     }
     ,
@@ -245,6 +287,49 @@
       "prev": "Prev",
       "next": "Next",
       "page": "Page {{page}}"
+    },
+    "lexicon": {
+      "types": {
+        "char": "Character",
+        "vocab": "Vocabulary"
+      },
+      "details": {
+        "pronunciation": "Pronunciation",
+        "tone": "Tone",
+        "jyutping": "Jyutping",
+        "consonants": "Consonants",
+        "rhymes": "Rhymes",
+        "syllables": "Syllables",
+        "frequency": "Frequency",
+        "pos": "Part of speech",
+        "register": "Register",
+        "gloss": "Gloss",
+        "source": "Source"
+      },
+      "badges": {
+        "cached": "Cached"
+      },
+      "messages": {
+        "noMatches": "No matches yet. Try another query.",
+        "endOfResults": "You've reached the end of the results.",
+        "hoverHint": "Click a surface to inspect its details."
+      },
+      "counts": {
+        "showing": "Showing {{shown}} of {{total}} matches"
+      },
+      "group": {
+        "label": "Group {{index}}",
+        "range": "{{start}}–{{end}}"
+      },
+      "langHints": {
+  "zhHk": "Labeled as 'zh-HK': typically used in everyday speech, pop culture, and online language. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'written', colloquial words are closer to daily spoken contexts.",
+  "zhTw": "Labeled as 'zh-TW': typically found in formal texts, news, books, and official documents, representing the written register of Chinese. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'colloquial', written words tend to be more formal and standardized.",
+        "generic": "{{code}}"
+      },
+      "feedback": {
+        "up": "Mark helpful",
+        "down": "Mark not helpful"
+      }
     }
   }
 }

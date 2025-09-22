@@ -14,6 +14,7 @@ export const LanguageSwitcher = () => {
   const languages = [
     { code: "en", name: t("language.english") },
     { code: "zh", name: t("language.chinese") },
+    { code: "ja", name: t("language.japanese") },
   ];
 
   const handleLanguageChange = (languageCode: string) => {

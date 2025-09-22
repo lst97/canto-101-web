@@ -40,6 +40,9 @@ consistent wrapping.
 - `src/hooks/useLexiconSearch.ts` is the pattern to follow: user input goes
   through a Zod schema before network calls, and responses are parsed before
   touching UI state.
+- Forms surfaced through shadcn/ui components should pair TanStack Form with Zod
+  schemas to manage submission, expose real-time validation feedback, and keep
+  error handling type-safe end-to-end.
 - Any new API interaction must ship with shared schemas, tests covering both
   `safeParse` success/failure, and documentation updates so other agents can
   trace the contract.
@@ -57,7 +60,6 @@ belong in `.env.local` with a `VITE_` prefix so Vite exposes them safely.
 
 ```
 src/
-├── App.css                    # Global app styles
 ├── App.tsx                    # Main app component
 ├── assets/                    # Static media files (images, icons)
 │   ├── community.png
@@ -98,6 +100,8 @@ src/
 ├── router.tsx                # TanStack Router configuration
 ├── stores/                   # Zustand state management stores
 │   └── themeStore.ts         # Theme state store
+├── styles/                   # Styles files
+|.  └── index.css             # Global style
 ├── types/                    # TypeScript type definitions
 │   └── errors.ts             # Error type definitions
 ├── index.css                 # Global CSS styles

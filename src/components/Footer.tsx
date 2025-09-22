@@ -1,12 +1,13 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "@tanstack/react-router";
 
 export function Footer(): ReactElement {
   const { t } = useTranslation();
 
-  const productBullets = [
-    "products.cantoLyr",
-    "products.cantoCap",
+  const products = [
+    { label: "footer.sections.products.cantoLyr", route: "/canto-lyr" },
+    { label: "footer.sections.products.cantoCap", route: "/canto-cap" },
   ] as const;
 
   return (
@@ -56,9 +57,11 @@ export function Footer(): ReactElement {
                 {t("footer.sections.products.title")}
               </h3>
               <ul className="mt-3 space-y-2 text-primary/90">
-                {productBullets.map((k) => (
-                  <li key={k} className="font-semibold">
-                    {t(`footer.sections.${k}`)}
+                {products.map(({ label, route }) => (
+                  <li key={route}>
+                    <Link to={route} className="font-semibold hover:underline">
+                      {t(label)}
+                    </Link>
                   </li>
                 ))}
               </ul>

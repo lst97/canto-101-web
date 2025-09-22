@@ -84,6 +84,9 @@ All new components must declare how they surface operational errors (boundary, q
   `frontend/src/lib/schemas/`.
 - `frontend/src/hooks/useLexiconSearch.ts` is the reference implementation:
   inputs are parsed before requests and responses are parsed before state is mutated.
+- Form surfaces rendered with shadcn/ui components must integrate TanStack Form
+  so validation stays centralized, error handling remains type-safe, and
+  real-time feedback is delivered to users.
 - New UI features that fetch data must provide matching Zod schemas and verify
   both `safeParse` success and failure paths via tests.
 
@@ -95,6 +98,7 @@ All new components must declare how they surface operational errors (boundary, q
 - Zod v4 for shared schema validation
 - Tailwind CSS v4
 - shadcn/ui for components
+- TanStack Form for headless, type-safe form state management
 - Axios for HTTP requests
 - TanStack React Query for data fetching
 - Zustand for complex state management
@@ -137,7 +141,6 @@ Routing Principles (Required when multiple pages exist)
 
 ```
 src/
-├── App.css                    # Global app styles
 ├── App.tsx                    # Main app component
 ├── assets/                    # Static media files (images, icons)
 │   ├── community.png
@@ -178,6 +181,8 @@ src/
 ├── router.tsx                # TanStack Router configuration
 ├── stores/                   # Zustand state management stores
 │   └── themeStore.ts         # Theme state store
+├── styles/                   # Styles files
+|.  └── index.css             # Global style
 ├── types/                    # TypeScript type definitions
 │   └── errors.ts             # Error type definitions
 ├── index.css                 # Global CSS styles

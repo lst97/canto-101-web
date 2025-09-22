@@ -138,6 +138,7 @@ export type SearchPronunciationQuery = z.infer<typeof SearchPronunciationQuerySc
 export type SearchRhymeQuery = z.infer<typeof SearchRhymeQuerySchema>;
 export type LyricsPronunciationQuery = z.infer<typeof LyricsPronunciationQuerySchema>;
 export type LyricsRhymeQuery = z.infer<typeof LyricsRhymeQuerySchema>;
+export type ReadingItem = z.infer<typeof ReadingItemSchema>;
 export type SearchResponse = z.infer<typeof SearchResponseSchema>;
+export type LyricLine = z.infer<typeof LyricLineSchema>;
 export type LyricSearchResponse = z.infer<typeof LyricSearchResponseSchema>;
-

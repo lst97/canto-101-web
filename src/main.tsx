@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
+import "./styles/index.css";
 import "./lib/i18n";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { RouterProvider } from "@tanstack/react-router";

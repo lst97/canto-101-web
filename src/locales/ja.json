@@ -1,0 +1,334 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "search": "検索",
+    "close": "閉じる",
+    "loadMore": "もっと読み込む"
+  },
+  "errors": {
+    "network": { "title": "ネットワークの問題", "message": "サーバーに接続できません。接続を確認してください。" },
+    "api": { "title": "リクエスト失敗", "message": "サーバーからエラーが返されました。" },
+    "unexpected": { "title": "予期しないエラー", "message": "予期しない問題が発生しました。" },
+    "actions": { "retry": "再試行", "dismiss": "閉じる" }
+  },
+  "navigation": {
+    "home": "ホーム",
+    "lyrics": "歌詞",
+    "artists": "アーティスト",
+    "albums": "アルバム",
+    "playlists": "プレイリスト"
+  },
+  "lyrics": {
+    "title": "歌詞",
+    "original": "原文歌詞",
+    "translation": "翻訳",
+    "romanization": "ローマ字表記",
+    "noLyrics": "歌詞がありません",
+    "loadingLyrics": "歌詞を読み込み中..."
+  },
+  "search": {
+    "placeholder": "曲名、アーティスト、または歌詞で検索...",
+    "noResults": "結果が見つかりません",
+    "results": "件の結果"
+  },
+  "language": {
+    "english": "英語",
+    "chinese": "中国語",
+    "japanese": "日本語",
+    "switchLanguage": "言語を切り替え",
+    "selectLanguage": "言語を選択"
+  },
+  "theme": {
+    "theme": "テーマ",
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システム",
+    "switchTheme": "テーマを切り替え"
+  },
+  "homepage": {
+    "hero": {
+      "eyebrow": "広東語 101",
+      "title": "あなたの広東語ボイスを見つけよう",
+      "subtitle": "トーンの基礎から自信を持った会話まで、音楽主導の練習で現代的に学べるスタジオ。",
+      "primaryCta": "旅を始める",
+      "secondaryCta": "カリキュラムを見る",
+      "metrics": {
+        "lessons": "60以上のガイド付きレッスン",
+        "drills": "トーン重視のミニ練習",
+        "community": "毎週のコミュニティセッション"
+      }
+    },
+    "programOverview": {
+      "title": "ホーム／プログラム概要",
+      "description": "Canto101の進行、各段階のポイント、最適な使い方を確認しましょう。",
+      "highlights": {
+        "roadmap": "音声からストーリーテリングまでの段階的なロードマップ。",
+        "playlists": "文化的な注釈付きの適応型プレイリスト。",
+        "checkpoints": "マイルストーンで自己チェックとチューターのフィードバックを促進。"
+      }
+    },
+    "gettingStarted": {
+      "title": "はじめに／広東語について",
+      "description": "広東語の歴史、地域での使われ方、トーンシステムを学び、自信を持って発音できる基礎を作ります。",
+      "highlights": {
+        "tones": "インタラクティブなトーンプレイグラウンドで音のパターンを可視化。",
+        "dialects": "香港、マカオ、ディアスポラの違いを比較。",
+        "romanization": "音、文字、トーン記号をつなぐローマ字入門。"
+      }
+    },
+    "resources": {
+      "title": "リソースと追加教材",
+      "description": "オンライン・オフラインで練習を続けるための追加素材。",
+      "highlights": {
+        "downloads": "印刷可能なチートシート、トーンチャート、書き取りグリッド。",
+        "integrations": "連携アプリで練習をモバイルに同期。",
+        "media": "レベル別の厳選ポッドキャスト、ドラマ、読書リスト。"
+      }
+    },
+    "community": {
+      "title": "コミュニティとチューター",
+      "description": "Q&Aやライブ指導のためのサポートネットワークに参加しましょう。",
+      "highlights": {
+        "forums": "ピアフォーラムでリアルタイムに質問や成果を共有。",
+        "events": "毎週のネイティブチューターやゲストによるオフィスアワー。",
+        "booking": "プラットフォーム内で1対1やグループレッスンを予約。"
+      }
+    },
+    "products": {
+      "title": "プロダクト",
+      "description": "広東語学習を加速するための専用ツール。",
+      "items": {
+        "viewDetails": "詳細を見る",
+        "cantoLyr": {
+          "label": "CantoLyr",
+          "description": "歌詞を通じて発音・文字・文化を結びつけるレッスン。",
+          "features": {
+            "romanization": "ローマ字ガイドとネイティブ音声の組み合わせ。",
+            "vocabulary": "コア語彙デッキと間隔反復リマインダー。",
+            "phrases": "日常会話に役立つフレーズ。",
+            "grammar": "文法設計図で助詞やアスペクトマーカーを解説。",
+            "pronunciation": "トーンラボでピッチカーブを可視化し正確さを強化。"
+          }
+        },
+        "cantoCap": {
+          "label": "CantoCap",
+          "description": "広東語字幕を自動生成し、本物の音声をシャドーイング。",
+          "features": {
+            "captions": "ドラマやVlog、ライブイベントのタイムシンク字幕。",
+            "annotations": "トーン変化や口語表現をインラインで注釈。",
+            "export": "字幕ファイルをエクスポートして教材やカラオケに。",
+            "mobile": "字幕パックをモバイルに送信し、いつでも復習。"
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "Canto101を始める準備はできましたか？",
+      "description": "完全なガイド体験をアンロックし、学習ロードマップをパーソナライズして、広東語を日常に取り入れましょう。",
+      "button": "学習者プロフィールを作成"
+    }
+  },
+  "nav": {
+    "title": "Canto101",
+    "links": {
+      "programOverview": "概要",
+      "gettingStarted": "はじめに",
+      "resources": "リソース",
+      "community": "コミュニティ",
+      "products": "プロダクト"
+    }
+  },
+  "footer": {
+    "title": "太字で大きなタイポグラフィ",
+    "summary": "学習目標、カリキュラム構成、最適なナビゲーション方法をまとめています。",
+    "sections": {
+      "gettingStarted": {
+        "title": "はじめに／広東語について",
+        "about": "広東語について",
+        "background": "広東語の重要性、方言の特徴、トーンの仕組み、地域的背景。"
+      },
+      "resources": {
+        "title": "リソースと追加教材",
+        "downloads": "印刷・ダウンロード可能な教材リンク",
+        "integrations": "アプリ連携でどこでも学習",
+        "media": "おすすめのポッドキャスト、メディア、読書"
+      },
+      "community": {
+        "title": "コミュニティとチューター",
+        "qa": "Q&Aフォーラム、学習コミュニティ、またはチューター予約の場所",
+        "tutors": "チューターのレッスンを予約"
+      },
+      "products": {
+        "title": "プロダクト",
+        "cantoLyr": "CantoLyr - 歌詞生成ツール",
+        "cantoCap": "CantoCap - 広東語字幕生成アプリケーション"
+      },
+      "legal": {
+        "title": "法的事項",
+        "terms": "利用規約",
+        "privacy": "プライバシー",
+        "accessibility": "アクセシビリティ"
+      }
+    },
+    "disclaimer": "本プラットフォームは広東語学習を支援する教育資料とコミュニティリソースを提供します。",
+    "copyright": "© 著作権 2025 - Canto101"
+  },
+  "cantoLyr": {
+    "pron": {
+      "title": "発音検索",
+      "placeholder": "発音を入力（例: ngo5）",
+      "resultsRegionLabel": "発音検索結果"
+    },
+    "rhyme": {
+      "title": "韻検索",
+      "placeholder": "韻コードを入力（例: aa）",
+      "resultsRegionLabel": "韻検索結果"
+    },
+    "pages": {
+      "overview": {
+        "title": "CantoLyr レキシコン",
+        "description": "発音や韻を検証し、歌詞作成前に韻ファミリーを作るためのツールを探索。",
+        "featuresLabel": "レキシコンワークフロー",
+        "lexiconTitle": "レキシコンツール",
+        "lexiconDescription": "アイデアを下書きする前に、発音や韻の一致を専用検索で特定。",
+        "lyricsTitle": "歌詞生成",
+        "lyricsDescription": "トーンシーケンスと創作プロンプトをマッピングし、広東語の韻律に沿った下書き歌詞を生成。"
+      },
+      "featureCta": "ワークフローを開く",
+      "backToOverview": "CantoLyr概要に戻る",
+      "pron": {
+        "heading": "発音ツール",
+        "preview": "Jyutpingの検証、トーンカーブの確認、歌声ラインを決める前にレキシコン一致を表示。",
+        "description": "Jyutpingやトーンコードで検索し、音節の正確さを確認。歌詞作成のための一致エントリや用法メモを整理。",
+        "numericHeading": "数値トーン記憶法",
+        "numericAccordionTrigger": "394052 → 開音節トーンマッピング（1–6）",
+        "numericIntro": "広東語作詞家は6つの開音節トーン（1–6）を「394052」として記憶し、saam1, gau2, sei3, ling4, ng5, ji6の発音が各トーンに対応します。",
+        "numericDescription": "拡張記憶法「394052786」は広東語音韻学で記録され、各数字がメロディ前の基準となります。下表はチェックトーン前に使われる主要な対応をまとめています。",
+        "numericCheckedNote": "7-8-6（chat1, baat3, luk6）は1,3,6トーンと同じピッチですが、-p/-t/-kで終わるチェック音節のみに現れます。",
+        "numericSourcesLabel": "参考文献",
+        "numericSourceEnglishLabel": "英語:『Cantonese phonology』（Wikipedia）—「394052786」記憶法を解説。",
+        "numericSourceChineseLabel": "中国語:『広東語声調』Wikipedia —「三九四零五二」九声記憶法を収録。",
+        "numericTable": {
+          "caption": "広東語トーンインデックスと作詞家の記憶数字対応表",
+          "columns": {
+            "toneIndex": "トーンインデックス",
+            "mnemonicDigit": "記憶数字",
+            "toneName": "伝統的トーン名",
+            "example": "Jyutping例",
+            "audio": "音声"
+          },
+          "rows": {
+            "tone1": {
+              "toneName": "トーン1・陰平（高平調）",
+              "example": "saam1 —「三」"
+            },
+            "tone2": {
+              "toneName": "トーン2・陰上（上昇調）",
+              "example": "gau2 —「九」"
+            },
+            "tone3": {
+              "toneName": "トーン3・陰去（中平調）",
+              "example": "sei3 —「四」"
+            },
+            "tone4": {
+              "toneName": "トーン4・陽平（低下降調）",
+              "example": "ling4 —「零」"
+            },
+            "tone5": {
+              "toneName": "トーン5・陽上（低上昇調）",
+              "example": "ng5 —「五」"
+            },
+            "tone6": {
+              "toneName": "トーン6・陽去（低平調）",
+              "example": "ji6 —「二」"
+            }
+          }
+        }
+      },
+      "rhyme": {
+        "heading": "韻ツール",
+        "preview": "同じ韻尾とトーンパターンを持つ音節を見つけて、本格的な韻構造を作成。",
+        "description": "韻コードでレキシコンを検索し、同じ韻とトーンを持つエントリをグループ化。韻グリッドを素早く作成。"
+      },
+      "lyrics": {
+        "heading": "歌詞ワークフロー",
+        "preview": "トーングリッドと創作ブリーフを組み合わせて、広東語リズムに合った歌詞を生成。",
+        "description": "創作プロンプトとトーンシーケンスを入力し、構造化された歌詞案を受け取って調整できます。"
+      }
+    },
+    "lyrics": {
+      "title": "歌詞セッション",
+      "promptLabel": "歌詞プロンプト",
+      "promptPlaceholder": "シーンやテーマを記述",
+      "sequencesLabel": "トーンシーケンス",
+      "sequencesPlaceholder": "カンマ区切りのトーンシーケンス（例: 02,452）",
+      "generate": "生成",
+      "generating": "生成中..."
+    },
+    "errors": {
+      "pron": { "missingQuery": "発音クエリを入力してください。" },
+      "rhyme": { "missingQuery": "韻クエリを入力してください。" },
+      "lyrics": {
+        "missingPrompt": "歌詞生成にはプロンプトが必要です。",
+        "missingSequences": "少なくとも1つのトーンシーケンスを入力してください（カンマ区切り）。"
+      },
+      "lexicon": {
+        "invalidDigits": "0・2・3・4・5・9 の数字のみ使用できます。",
+        "tooLong": "クエリは4桁以内で入力してください。"
+      }
+    },
+    "pagination": {
+      "prev": "前へ",
+      "next": "次へ",
+      "page": "{{page}}ページ"
+    },
+    "lexicon": {
+      "types": {
+        "char": "文字",
+        "vocab": "語彙"
+      },
+      "details": {
+        "pronunciation": "発音",
+        "tone": "トーン",
+        "jyutping": "Jyutping",
+        "consonants": "子音",
+        "rhymes": "押韻",
+        "syllables": "音節数",
+        "frequency": "頻度",
+        "pos": "品詞",
+        "register": "レジスター",
+        "gloss": "語釈",
+        "source": "出典"
+      },
+      "badges": {
+        "cached": "キャッシュ"
+      },
+      "messages": {
+        "noMatches": "まだ結果がありません。別のクエリをお試しください。",
+        "endOfResults": "結果の末尾です。",
+        "hoverHint": "クリックして詳細を表示。"
+      },
+      "counts": {
+        "showing": "{{shown}} / {{total}} 件を表示"
+      },
+      "group": {
+        "label": "グループ {{index}}",
+        "range": "{{start}}–{{end}}"
+      },
+      "langHints": {
+  "zhHk": "「zh-HK」としてラベル付けされた語彙は、日常会話、ポップカルチャー、ネット言語などでよく使われます。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「書面語」と比べて、口語語彙は日常的な話し言葉に近い傾向があります。",
+  "zhTw": "「zh-TW」としてラベル付けされた語彙は、正式な文章、ニュース、本、公的文書などで多く見られ、中国語の書き言葉のレジスターに属します。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「口語」と比べて、書面語語彙はよりフォーマルで規範的な文脈に使われる傾向があります。",
+        "generic": "{{code}}"
+      },
+      "feedback": {
+        "up": "役に立った",
+        "down": "役に立たなかった"
+      }
+    }
+  }
+}
