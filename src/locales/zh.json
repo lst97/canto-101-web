@@ -248,7 +248,30 @@
               "example": "ji6 — 「二」"
             }
           }
-        }
+        },
+        "jyutpingHeading": "粵拼音節基礎",
+        "jyutpingIntro": "每個粵語音節都可以拆解成可選的聲母、韻母，以及聲調。香港語言學學會的粵拼以「聲母 + 韻母 + 聲調數字」記錄結構，方便對齊實際語調。",
+        "jyutpingDetails": {
+          "structure": "書寫順序為「聲母 + 韻母 + 聲調數字」。例如 ngo5 = 聲母 \"ng\"、韻母 \"o\"、第五調；aa3 則沒有聲母，直接以前置的韻母開首。",
+          "onset": "粵拼有 19 個聲母；若音節沒有聲母（即所謂零聲母），拼寫會直接從韻母開始，例如 aa3、oeng2。",
+          "tones": "聲調數字 1–6 對應粵語六個調值；以 -p／-t／-k 結尾的入聲音節會共用 1、3、6 號，而不是另設新數字。",
+          "rhymeLink": "韻母（韻）承載母音與韻尾。下列表格整理的粵拼韻母與押韻搜尋使用的代碼相同。"
+        },
+        "jyutpingConsonantsLabel": "粵拼聲母",
+        "jyutpingConsonantsDescription": "聲母位於音節開頭，可與韻母與聲調數字組合成完整的粵拼拼寫；元音開頭的音節則可省略聲母。",
+        "rhymeHeading": "韻母（韻）參考",
+        "rhymeDescription": "在粵語語音學裡，韻（韻母）由母音核與韻尾組成；共享同一韻的字自然形成押韻族。使用押韻搜尋時，輸入下列任一粵拼韻母即可鎖定對應詞彙。",
+        "rhymeTable": {
+          "caption": "押韻搜尋常用的粵拼韻母",
+          "columns": {
+            "range": "範圍",
+            "finals": "韻母"
+          }
+        },
+        "rhymeListNote": "韻母代碼區分大小寫，請以小寫輸入以符合粵拼慣例。",
+        "rhymeSourcesLabel": "參考資料",
+        "rhymeSourceJyutping": "粵拼聲母韻母概覽（維基百科）",
+        "rhymeSourceRime": "粵語音節結構與韻母說明（維基百科）"
       },
       "rhyme": {
         "heading": "押韻工具",

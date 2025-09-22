@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
 import { ExternalLink, Volume2 } from "lucide-react";
 
-import LexiconSearch from "@/components/cantoLyr/LexiconSearch";
+import { LexiconPronunciationSearch } from "@/components/cantoLyr/lexicon";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
   Breadcrumb,
@@ -159,8 +159,16 @@ export default function CantoLyrPronunciationSearch(): ReactElement {
           </AccordionItem>
         </Accordion>
       </section>
-      <section aria-label={t("cantoLyr.pron.title")}>
-        <LexiconSearch kind="pron" />
+      <section aria-label={t("cantoLyr.pron.title")} className="space-y-4">
+        <div className="space-y-2">
+          <h2 className="text-xl font-semibold tracking-tight">
+            {t("cantoLyr.pages.pron.heading")}
+          </h2>
+          <p className="text-muted-foreground max-w-prose text-sm">
+            {t("cantoLyr.pages.pron.preview")}
+          </p>
+        </div>
+        <LexiconPronunciationSearch />
       </section>
     </main>
   );

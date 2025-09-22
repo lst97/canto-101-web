@@ -248,7 +248,30 @@
               "example": "ji6 —「二」"
             }
           }
-        }
+        },
+        "jyutpingHeading": "Jyutping音節の基礎",
+        "jyutpingIntro": "広東語の各音節は任意の声母・韻母・声調で構成されます。LSHK 粵拼はこの構造を <声母><韻母><声調数字> で表記し、実際の抑揚と歌詞を合わせやすくします。",
+        "jyutpingDetails": {
+          "structure": "表記は常に <声母><韻母><声調数字> の順。例えば ngo5 = 声母 \"ng\" + 韻母 \"o\" + 第5声、aa3 は声母なしで韻母から始まります。",
+          "onset": "粵拼には 19 の声母があります。零声母の音節は韻母から書き出し、aa3 や oeng2 のように記述します。",
+          "tones": "声調数字 1〜6 は広東語の6種類の調値に対応します。-p/-t/-k で終わる入声音節も 1・3・6 を共有し、追加の数字は使いません。",
+          "rhymeLink": "韻母（韻）は母音核と語尾子音を担います。下の表は LSHK 粵拼と韻検索で使用する正規の韻母一覧です。"
+        },
+        "jyutpingConsonantsLabel": "Jyutping声母",
+        "jyutpingConsonantsDescription": "声母は音節の冒頭に現れる子音で、韻母と声調数字を組み合わせて完全なJyutping表記になります。母音から始まる音節は声母を付けずに韻母から書き始めます。",
+        "rhymeHeading": "韻母（韻）リファレンス",
+        "rhymeDescription": "広東語の音韻論では、韻（韻母）は母音核と語尾から成り、同じ韻を共有する語は自然な押韻を形成します。韻検索には下記のJyutping韻母コードを入力してください。",
+        "rhymeTable": {
+          "caption": "韻検索で使える主なJyutping韻母",
+          "columns": {
+            "range": "範囲",
+            "finals": "韻母"
+          }
+        },
+        "rhymeListNote": "韻母コードは小文字で入力し、Jyutpingの綴りと同じ大小文字を守ってください。",
+        "rhymeSourcesLabel": "参考資料",
+        "rhymeSourceJyutping": "Jyutpingの声母・韻母表（Wikipedia）",
+        "rhymeSourceRime": "広東語の音節構造と韻母の説明（Wikipedia）"
       },
       "rhyme": {
         "heading": "韻ツール",

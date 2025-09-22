@@ -248,7 +248,30 @@
               "example": "ji6 — \"two\" (二)"
             }
           }
-        }
+        },
+        "jyutpingHeading": "Jyutping syllable basics",
+        "jyutpingIntro": "Every Cantonese syllable can be analysed as an optional initial consonant, a vowel-based final, and a tone. The LSHK Jyutping scheme records that structure as <initial><final><tone digit>, which keeps lyric stress aligned with the spoken contour.",
+        "jyutpingDetails": {
+          "structure": "Write syllables as <initial><final><tone digit>; for example ngo5 = initial \"ng\" + final \"o\" + tone 5, while aa3 has no initial and starts directly with the final.",
+          "onset": "Jyutping recognises 19 initials. When a syllable lacks an initial (a \"null initial\" in Cantonese phonology) the spelling simply begins with the final, e.g. aa3 or oeng2.",
+          "tones": "Tone digits 1–6 map to the six Cantonese tone contours; checked syllables ending in -p/-t/-k reuse tone numbers 1, 3, or 6 instead of introducing extra digits.",
+          "rhymeLink": "Finals (rimes) carry the vowel nucleus and coda. The table below lists the authorised finals used by the LSHK scheme and by the rhyme search input."
+        },
+        "jyutpingConsonantsLabel": "Jyutping onsets",
+        "jyutpingConsonantsDescription": "These initials appear at the beginning of a syllable. Combine one of them (or none, for vowel-initial syllables) with a rime and tone digit to form a full Jyutping spelling.",
+        "rhymeHeading": "Rime (韻) reference",
+        "rhymeDescription": "In Cantonese phonology the rime (韻/韻母) contains the vowel nucleus plus any ending consonant. Syllables that share a rime form natural rhyme families—enter any final below to anchor the rhyme search.",
+        "rhymeTable": {
+          "caption": "Common Jyutping finals for rhyme search",
+          "columns": {
+            "range": "Range",
+            "finals": "Rhyme finals"
+          }
+        },
+        "rhymeListNote": "Finals are case-sensitive and should be entered in lowercase to match Jyutping conventions.",
+        "rhymeSourcesLabel": "References",
+        "rhymeSourceJyutping": "Jyutping initials and finals overview (Wikipedia)",
+        "rhymeSourceRime": "Cantonese syllable structure and rime explanation (Wikipedia)"
       },
       "rhyme": {
         "heading": "Rhyme tools",
