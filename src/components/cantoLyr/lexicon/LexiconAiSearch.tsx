@@ -186,7 +186,7 @@ export function LexiconAiSearch(): ReactElement {
                 {field.state.meta.errors[0] && (field.state.meta.isTouched || form.state.isSubmitting) && (
                   <p id="ai-lexicon-query-error" className="text-xs text-destructive">
                     {(() => {
-                      const err: any = field.state.meta.errors[0];
+                      const err = field.state.meta.errors[0] as string | { message?: string };
                       const msg: string | undefined = typeof err === "string" ? err : err?.message;
                       if (!msg) return null;
                       return msg.startsWith("cantoLyr.") || msg.startsWith("errors.") ? t(msg) : msg;
@@ -220,7 +220,7 @@ export function LexiconAiSearch(): ReactElement {
                   {field.state.meta.errors[0] && (field.state.meta.isTouched || form.state.isSubmitting) && (
                     <p id="ai-lexicon-pronunciation-error" className="text-xs text-destructive">
                       {(() => {
-                        const err: any = field.state.meta.errors[0];
+                        const err = field.state.meta.errors[0] as string | { message?: string };
                         const msg: string | undefined = typeof err === "string" ? err : err?.message;
                         if (!msg) return null;
                         return msg.startsWith("cantoLyr.") || msg.startsWith("errors.") ? t(msg) : msg;
@@ -251,7 +251,7 @@ export function LexiconAiSearch(): ReactElement {
                   {field.state.meta.errors[0] && (field.state.meta.isTouched || form.state.isSubmitting) && (
                     <p id="ai-lexicon-limit-error" className="text-xs text-destructive">
                       {(() => {
-                        const err: any = field.state.meta.errors[0];
+                        const err = field.state.meta.errors[0] as string | { message?: string };
                         const msg: string | undefined = typeof err === "string" ? err : err?.message;
                         if (!msg) return null;
                         return msg.startsWith("cantoLyr.") || msg.startsWith("errors.") ? t(msg) : msg;

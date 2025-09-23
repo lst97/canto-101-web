@@ -12,9 +12,9 @@ export function Root(): ReactElement {
   const { t } = useTranslation();
   return (
     <AppErrorBoundary>
-      <div className="relative min-h-screen bg-background text-foreground">
+      <div className="relative flex flex-col min-h-screen bg-background text-foreground">
         <Header />
-        <main>
+        <main className="flex-grow">
           <Suspense
             fallback={
               <div className="mx-auto max-w-6xl px-6 py-10 md:px-10">

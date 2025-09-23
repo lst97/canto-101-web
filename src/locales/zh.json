@@ -173,7 +173,123 @@
   "cantoLyr": {
     "ai": {
       "lyrics": {
-        "title": "歌詞生成"
+        "title": "歌詞生成",
+        "description": "用創作提示和目標聲調格指引生成器，以獲得結構化的粵語歌詞建議。",
+        "formHeading": "說明本次操作",
+        "formDescription": "定義場景、聲調格與選填的隨機種子，再開始生成歌詞行草稿。",
+        "page": {
+          "overview": "功能說明",
+          "shortOverview": "限制與提示",
+          "limitationsHeading": "目前限制",
+          "limitations": {
+            "lexiconCoverage": "輸出品質受限於目前匯入的詞彙資料庫範圍（coverage）。當詞條不足時，語意或押韻可能不夠精準。",
+            "modelRetrieval": "語意檢索與向量召回依賴現行模型；若嵌入表徵不足，可能遺漏更貼合語境的候選。",
+            "queryGeneration": "查詢與聲調序列的組合策略仍在優化，複雜場景下可能出現不穩定排序。",
+            "grammarPron": "生成句子可能含語法、搭配或聲調（發音）錯誤，需人工後期潤飾。",
+            "limitedParagraphs": "段落組合採樣目前僅限少量候選（top-N），可能未涵蓋更多具潛力的混合。",
+            "slowGeneration": "當聲調序列較長或需要重新排序多組候選時，生成速度會顯著放緩。",
+            "toneSequenceRange": "支援的聲調序列長度與分組仍在調整，過長序列可能被截斷或降低品質。"
+          },
+          "improveHeading": "演進與改進",
+          "improvements": {
+            "lexiconGrowth": "擴充與清理詞彙資料庫（含頻率、詞性、語域標記）以提升候選詞質量。",
+            "retrievalRerank": "優化語意檢索、分階段 rerank 與多特徵打分（MMR / pattern fit / frequency）。",
+            "patternScoring": "改良聲調模式與句法結構的評估，減少不自然停頓與語序錯置。",
+            "feedbackLoop": "引入人工標註與使用者回饋循環，增強錯誤識別與排序精準度。"
+          },
+          "tipsHeading": "使用技巧",
+          "tips": {
+            "expandLines": "展開每一行查看候選句與模式統計，萃取靈感或替換片段。",
+            "refineSequences": "調整聲調序列長度與結構（例如把長句拆成兩行）可提升匹配穩定度。",
+            "lexiconSemantic": "若某行詞彙過於生硬，可切換到詞彙語意搜尋工具，輸入相同場景描述尋找替代表達。",
+            "manualPolish": "將生成草稿視為骨架：再行優化語序、情感層次、以及真實口語感。"
+          },
+          "disclaimer": "輸出為實驗性草稿，請以人工審校為準"
+        },
+        "form": {
+          "promptLabel": "歌詞提示",
+          "promptPlaceholder": "描述場景、情緒或故事片段",
+          "sequencesLabel": "聲調序列",
+          "sequencesPlaceholder": "以逗號或換行分隔輸入聲調數字序列",
+          "sequencesCaption": "使用粵語聲調數字（例如: 394052）。每一行會成為一個生成的歌詞行。",
+          "seedLabel": "種子（選填）",
+          "seedPlaceholder": "隨機",
+          "seedCaption": "鎖定隨機種子以生成可比較的輸出。",
+          "topLabel": "段落輸出數",
+          "topCaption": "要回傳的段落建議數量（1–3）。",
+          "submit": "生成歌詞",
+          "generating": "生成中...",
+          "generatingHint": "系統正在組裝候選句並進行排序。"
+        },
+        "summary": {
+          "title": "會話摘要",
+          "description": "功能 {{feature}} · 引擎 v{{version}}",
+          "feature": "功能: {{feature}}",
+          "version": "引擎版本 {{version}}",
+          "seed": "種子",
+          "createdAt": "建立時間",
+          "lineCount": "行數",
+          "processingTime": "處理時間",
+          "processingTimeValue": "{{ms}} ms"
+        },
+        "topParagraphs": {
+          "title": "組合段落",
+          "count": "{{count}} 則建議",
+          "badge": "第 {{index}} 名",
+          "empty": "未產生段落建議。增加段落輸出數或再試一次。"
+        },
+        "lines": {
+          "sectionTitle": "逐行細節",
+          "count": "{{count}} 行",
+          "title": "第 {{index}} 行 · 聲調 {{tone}}",
+          "previewFallback": "尚無先導句。展開以查看診斷細節。",
+          "warningsCount": "{{count}} 則警告",
+          "empty": "目前尚無行資料。",
+          "toneSequence": "聲調 {{tone}}",
+          "lineIndex": "行 {{index}}",
+          "digitSet": "數字集合",
+          "primaryPattern": "主模式 {{pattern}}",
+          "primaryRank": "名次 {{rank}}",
+          "primaryMmr": "MMR {{score}}",
+          "noPrimary": "此行未產生排名句子。",
+          "error": "生成錯誤: {{message}}",
+          "candidateStats": {
+            "heading": "候選集",
+            "total": "候選總數",
+            "semantic": "語意匹配",
+            "freqTop": "高頻",
+            "freqRandom": "探索型"
+          },
+          "topSentences": {
+            "heading": "頂級句子",
+            "columns": {
+              "text": "句子",
+              "pattern": "模式",
+              "rank": "名次",
+              "mmr": "MMR"
+            },
+            "empty": "未返回任何排名句子。"
+          },
+          "patterns": {
+            "heading": "聲調模式",
+            "groups": "群組: {{groups}}",
+            "empty": "未返回聲調模式。"
+          },
+          "allCandidates": {
+            "heading": "完整候選集",
+            "pattern": "模式 {{pattern}}",
+            "empty": "未返回其他候選項目。"
+          },
+          "additional": {
+            "heading": "其他排名句子",
+            "rank": "名次 {{rank}}",
+            "mmr": "MMR {{score}}"
+          },
+          "paragraphs": {
+            "heading": "使用此行的段落混合",
+            "label": "段落 {{index}}"
+          }
+        }
       },
       "lexicon": {
         "title": "詞彙搜尋",
@@ -303,7 +419,7 @@
         "description": "輸入韻碼即可群組同韻同調的詞彙，迅速建立具有節奏感的押韻網格。"
       },
       "lyrics": {
-        "heading": "歌詞工具",
+        "heading": "填詞工具",
         "preview": "把聲調表格與創作提案連結，寫出貼合粵語節奏的歌句。",
         "description": "輸入創作主題與聲調序列，生成具結構的歌詞草稿，方便後續調整。"
       },
@@ -339,7 +455,12 @@
       },
       "lyrics": {
         "missingPrompt": "請提供歌詞主題。",
-        "missingSequences": "至少輸入一組聲調序列（以逗號分隔）。"
+        "missingSequences": "至少輸入一組聲調序列（以逗號或換行分隔）。",
+        "promptTooLong": "主題描述過長（超過 200 字元）。",
+        "invalidSequences": "每行至少 3 位，僅可包含 0 2 3 4 5 9，最多 3 行。",
+        "invalidSeed": "種子必須為非負整數。",
+        "invalidTop": "段落輸出數必須介於 1 至 3。",
+        "unexpected": "歌詞生成失敗，請稍後再試。"
       },
       "lexicon": {
         "invalidDigits": "僅可輸入數字 0、2、3、4、5、9。",

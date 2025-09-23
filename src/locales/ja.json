@@ -125,6 +125,16 @@
       "button": "学習者プロフィールを作成"
     }
   },
+  "nav": {
+    "title": "Canto101",
+    "links": {
+      "programOverview": "概要",
+      "gettingStarted": "はじめに",
+      "resources": "リソース",
+      "community": "コミュニティ",
+      "products": "プロダクト"
+    }
+  },
   "footer": {
     "title": "Canto101",
     "summary": "学習目標、カリキュラム構成、最適なナビゲーション方法をまとめています。",
@@ -305,7 +315,12 @@
       },
       "lyrics": {
         "missingPrompt": "歌詞生成にはプロンプトが必要です。",
-        "missingSequences": "少なくとも1つのトーンシーケンスを入力してください（カンマ区切り）。"
+        "missingSequences": "少なくとも1つのトーンシーケンスを入力してください（カンマまたは改行区切り）。",
+        "promptTooLong": "プロンプトが長すぎます（200文字以内）。",
+        "invalidSequences": "各行3桁以上・使用可能数字は 0 2 3 4 5 9 のみ・最大3行まで。",
+        "invalidSeed": "シードは0以上の整数で入力してください。",
+        "invalidTop": "段落出力数は 1〜3 の範囲で指定してください。",
+        "unexpected": "歌詞生成に失敗しました。しばらくしてから再試行してください。"
       },
       "lexicon": {
         "invalidDigits": "0・2・3・4・5・9 の数字のみ使用できます。",
@@ -318,7 +333,122 @@
     },
     "ai": {
       "lyrics": {
-        "title": "歌詞生成"
+        "title": "歌詞生成",
+        "description": "創作のプロンプトと目標となる声調グリッドを指定して、構造化された広東語の歌詞アイデアを受け取ります。",
+        "page": {
+          "shortOverview": "制限とヒント",
+          "limitationsHeading": "現在の制限",
+          "limitations": {
+            "lexiconCoverage": "出力品質は現在のレキシコンデータベースの範囲に制限されます。エントリが不十分な場合、意味的または韻の一致が不正確になる可能性があります。",
+            "modelRetrieval": "意味的検索とベクトル検索は現在のモデルに依存します。不十分な埋め込みは文脈的に関連する候補を見逃す可能性があります。",
+            "queryGeneration": "クエリとトーンシーケンスの組み合わせ戦略はまだ最適化されており、複雑なシナリオで不安定なソートを引き起こす可能性があります。",
+            "grammarPron": "生成された文には文法、コロケーション、またはトーン（発音）のエラーが含まれる可能性があり、手動での後編集が必要です。",
+            "limitedParagraphs": "段落組み合わせのサンプリングは現在少数の候補（top-N）に制限されており、より有望な組み合わせを見逃す可能性があります。",
+            "slowGeneration": "長いトーンシーケンスや複数の候補グループの再ランキング時に生成速度が大幅に低下します。",
+            "toneSequenceRange": "サポートされるトーンシーケンスの長さとグループ化はまだ調整中です。過度に長いシーケンスは切り詰められたり品質が低下したりする可能性があります。"
+          },
+          "improveHeading": "進化と改善",
+          "improvements": {
+            "lexiconGrowth": "レキシコンデータベースを拡張およびクリーンアップ（頻度、品詞、レジスタタグを含む）して候補の品質を向上させます。",
+            "retrievalRerank": "意味的検索、段階的再ランキング、多機能スコアリング（MMR / パターンフィット / 頻度）を最適化します。",
+            "patternScoring": "トーンパターンと構文構造の評価を改善して、不自然な休止と語順エラーを減らします。",
+            "feedbackLoop": "手動注釈とユーザーフィードバックループを導入して、エラー検出とランキングの正確性を強化します。"
+          },
+          "tipsHeading": "使用のヒント",
+          "tips": {
+            "expandLines": "各行を展開して候補文とパターン統計を表示し、インスピレーションを抽出したりセグメントを置き換えたりします。",
+            "refineSequences": "トーンシーケンスの長さと構造を調整（例: 長い行を2つに分割）してマッチングの安定性を向上させます。",
+            "lexiconSemantic": "行の語彙が硬すぎる場合、同じシーン説明を入力して代替表現を見つけるために意味的レキシコン検索ツールに切り替えます。",
+            "manualPolish": "生成された下書きをフレームワークとして扱います：語順、感情層、本物の話された広東語をさらに洗練します。"
+          },
+          "disclaimer": "出力は実験的な下書きです。手動でレビューしてください"
+        },
+        "formHeading": "セッションの説明",
+        "formDescription": "シーン、声調グリッド、および任意のシードを設定して歌詞行の下書きを開始します。",
+        "form": {
+          "promptLabel": "歌詞プロンプト",
+          "promptPlaceholder": "シーン、感情、または物語の場面を記述",
+          "sequencesLabel": "声調シーケンス",
+          "sequencesPlaceholder": "カンマまたは改行で区切って声調数字の列を入力",
+          "sequencesCaption": "広東語の声調数字を使用してください（例: 394052）。各行が生成される歌詞の一行になります。",
+          "seedLabel": "シード（任意）",
+          "seedPlaceholder": "ランダム",
+          "seedCaption": "ランダムシードを固定して再現可能な出力を得ます。",
+          "topLabel": "段落出力数",
+          "topCaption": "返す構成済み段落候補の数（1–3）。",
+          "submit": "歌詞を生成",
+          "generating": "生成中...",
+          "generatingHint": "システムは候補文を組み立て、順位付けを行っています。"
+        },
+        "summary": {
+          "title": "セッションの概要",
+          "description": "機能 {{feature}} · エンジン v{{version}}",
+          "feature": "機能: {{feature}}",
+          "version": "エンジンバージョン {{version}}",
+          "seed": "シード",
+          "createdAt": "作成日",
+          "lineCount": "行数",
+          "processingTime": "処理時間",
+          "processingTimeValue": "{{ms}} ms"
+        },
+        "topParagraphs": {
+          "title": "構成された段落",
+          "count": "{{count}} 件の提案",
+          "badge": "トップ {{index}}",
+          "empty": "段落の提案は生成されませんでした。段落出力数を増やすか、もう一度お試しください。"
+        },
+        "lines": {
+          "sectionTitle": "行ごとの内訳",
+          "count": "{{count}} 行",
+          "title": "行 {{index}} · 声調 {{tone}}",
+          "previewFallback": "先頭文がまだありません。診断情報を表示するには展開してください。",
+          "warningsCount": "{{count}} 件の警告",
+          "empty": "まだ行データがありません。",
+          "toneSequence": "声調 {{tone}}",
+          "lineIndex": "行 {{index}}",
+          "digitSet": "数字セット",
+          "primaryPattern": "パターン {{pattern}}",
+          "primaryRank": "ランク {{rank}}",
+          "primaryMmr": "MMR {{score}}",
+          "noPrimary": "この行のランク付けされた文は生成されませんでした。",
+          "error": "生成エラー: {{message}}",
+          "candidateStats": {
+            "heading": "候補プール",
+            "total": "候補総数",
+            "semantic": "意味一致",
+            "freqTop": "高頻度",
+            "freqRandom": "探索的"
+          },
+          "topSentences": {
+            "heading": "上位ランクの文",
+            "columns": {
+              "text": "文",
+              "pattern": "パターン",
+              "rank": "ランク",
+              "mmr": "MMR"
+            },
+            "empty": "ランク付けされた文は返されませんでした。"
+          },
+          "patterns": {
+            "heading": "声調パターン",
+            "groups": "グループ: {{groups}}",
+            "empty": "声調パターンは返されませんでした。"
+          },
+          "allCandidates": {
+            "heading": "全候補プール",
+            "pattern": "パターン {{pattern}}",
+            "empty": "追加の候補は返されませんでした。"
+          },
+          "additional": {
+            "heading": "追加のランク付けされた文",
+            "rank": "ランク {{rank}}",
+            "mmr": "MMR {{score}}"
+          },
+          "paragraphs": {
+            "heading": "この行を使った段落ブレンド",
+            "label": "段落 {{index}}"
+          }
+        }
       },
       "lexicon": {
         "title": "語彙検索",

@@ -1,59 +1,68 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
+
 import { api } from "../lib/api";
+import { LyricGenerationResponseSchema, type LyricGenerationResponse } from "@/lib/schemas/lyric-generation";
 import type { AppError } from "@/types/errors";
 
 export interface LyricSessionOptions {
   prompt: string;
   toneSequences: string[];
+  seed?: number;
+  top?: number;
 }
 
-export function useLyricSession() {
-  const [prompt, setPrompt] = useState("");
-  const [toneSequencesInput, setToneSequencesInput] = useState("");
-  const [result, setResult] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+export interface UseLyricSessionResult {
+  generate: (options: LyricSessionOptions) => Promise<void>;
+  reset: () => void;
+  result: LyricGenerationResponse | null;
+  loading: boolean;
+  error: string | null;
+  rawError: AppError | null;
+}
 
-  const mutation = useMutation<{ data: unknown }, AppError, LyricSessionOptions>({
-    mutationFn: async (vars: LyricSessionOptions) => {
-      return api.post(`/lyrics/session`, vars);
-    },
-    onSuccess: ({ data }) => {
-      setResult(JSON.stringify(data, null, 2));
-    },
-    onError: (err) => {
-      setError(err.message);
+export function useLyricSession(): UseLyricSessionResult {
+  const mutation = useMutation<LyricGenerationResponse, AppError, LyricSessionOptions>({
+    mutationFn: async (vars) => {
+      const payload: Record<string, unknown> = {
+        prompt: vars.prompt,
+        toneSequences: vars.toneSequences,
+      };
+      if (typeof vars.seed === "number" && Number.isFinite(vars.seed)) {
+        payload.seed = vars.seed;
+      }
+      if (typeof vars.top === "number" && Number.isFinite(vars.top)) {
+        payload.top = vars.top;
+      }
+      const { data } = await api.post(`/lyrics/session`, payload);
+      return LyricGenerationResponseSchema.parse(data);
     },
   });
 
-  const generate = useCallback(async (): Promise<void> => {
-    const trimmedPrompt = prompt.trim();
-    const sequences = toneSequencesInput
-      .split(",")
-      .map(v => v.trim())
-      .filter(v => v.length > 0);
+  const generate = useCallback(async (options: LyricSessionOptions): Promise<void> => {
+    mutation.reset();
+    try {
+      await mutation.mutateAsync(options);
+    } catch (err) {
+      // Swallow the error so consumers can read it from mutation state
+      console.error("Lyric session generation failed", err);
+    }
+  }, [mutation]);
 
-    if (!trimmedPrompt) {
-      setError("cantoLyr.errors.lyrics.missingPrompt");
-      return;
-    }
-    if (sequences.length === 0) {
-      setError("cantoLyr.errors.lyrics.missingSequences");
-      return;
-    }
-    setError(null);
-    setResult(null);
-    await mutation.mutateAsync({ prompt: trimmedPrompt, toneSequences: sequences }).catch(() => undefined);
-  }, [prompt, toneSequencesInput, mutation]);
+  const reset = useCallback(() => {
+    mutation.reset();
+  }, [mutation]);
+
+  const resolvedError = mutation.error
+    ? mutation.error.message
+    : null;
 
   return {
-    prompt,
-    setPrompt,
-    toneSequencesInput,
-    setToneSequencesInput,
-    result,
-    error,
-    loading: mutation.isPending,
     generate,
+    reset,
+    result: mutation.data ?? null,
+    loading: mutation.isPending,
+    error: resolvedError,
+    rawError: mutation.error ?? null,
   };
 }
