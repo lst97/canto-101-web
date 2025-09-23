@@ -84,6 +84,49 @@ export const SearchResponseSchema = z.object({
   processingTimeMs: z.number().int().nonnegative(),
 });
 
+export const AiLexiconSearchQuerySchema = z.object({
+  q: z
+    .string()
+    .trim()
+    .min(1, { message: "cantoLyr.errors.lexicon.missingQuery" }),
+  pronunciation: z
+    .string()
+    .trim()
+    .min(1, { message: "cantoLyr.errors.lexicon.missingPronunciation" })
+    .max(4, { message: "cantoLyr.errors.lexicon.tooLong" })
+    .regex(/^[023459]+$/, { message: "cantoLyr.errors.lexicon.invalidDigits" }),
+  // UI restricts limit to 1-25; align schema to avoid inconsistent validation.
+  limit: z.coerce.number().int().min(1).max(25).optional(),
+});
+
+export const AiLexiconSearchItemSchema = z.object({
+  id: z.string(),
+  surface: z.string(),
+  type: z.enum(["vocab", "char"]),
+  lang: z.string(),
+  jyutping: z.array(z.string()),
+  pronunciation: z.string(),
+  tone: z.string(),
+  consonants: z.array(z.string()),
+  rhymes: z.array(z.string()),
+  syllables: z.number().int().nonnegative(),
+  freq: z.number().optional(),
+  pos: z.string().optional(),
+  register: z.string().optional(),
+  gloss: z.string().optional(),
+  source: z.string().optional(),
+  similarity: z.number().min(0).max(1),
+});
+
+export const AiLexiconSearchResponseSchema = z.object({
+  query: z.string(),
+  pronunciation: z.string(),
+  count: z.number().int().nonnegative(),
+  items: z.array(AiLexiconSearchItemSchema),
+  fromCache: z.boolean(),
+  processingTimeMs: z.number().int().nonnegative(),
+});
+
 const LyricPronunciationBigramSchema = z.object({
   value: z.string(),
   position: z.number().int().nonnegative(),
@@ -140,5 +183,8 @@ export type LyricsPronunciationQuery = z.infer<typeof LyricsPronunciationQuerySc
 export type LyricsRhymeQuery = z.infer<typeof LyricsRhymeQuerySchema>;
 export type ReadingItem = z.infer<typeof ReadingItemSchema>;
 export type SearchResponse = z.infer<typeof SearchResponseSchema>;
+export type AiLexiconSearchQuery = z.infer<typeof AiLexiconSearchQuerySchema>;
+export type AiLexiconSearchItem = z.infer<typeof AiLexiconSearchItemSchema>;
+export type AiLexiconSearchResponse = z.infer<typeof AiLexiconSearchResponseSchema>;
 export type LyricLine = z.infer<typeof LyricLineSchema>;
 export type LyricSearchResponse = z.infer<typeof LyricSearchResponseSchema>;

@@ -11,30 +11,22 @@
     "loadMore": "Load more"
   },
   "errors": {
-    "network": { "title": "Network issue", "message": "We couldn't reach the server. Please check your connection." },
-    "api": { "title": "Request failed", "message": "The server reported a problem." },
-    "unexpected": { "title": "Something went wrong", "message": "An unexpected error occurred." },
-    "actions": { "retry": "Retry", "dismiss": "Dismiss" }
-  },
-  "navigation": {
-    "home": "Home",
-    "lyrics": "Lyrics",
-    "artists": "Artists",
-    "albums": "Albums",
-    "playlists": "Playlists"
-  },
-  "lyrics": {
-    "title": "Lyrics",
-    "original": "Original Lyrics",
-    "translation": "Translation",
-    "romanization": "Romanization",
-    "noLyrics": "No lyrics available",
-    "loadingLyrics": "Loading lyrics..."
-  },
-  "search": {
-    "placeholder": "Search for songs, artists, or lyrics...",
-    "noResults": "No results found",
-    "results": "results"
+    "network": {
+      "title": "Network issue",
+      "message": "We couldn't reach the server. Please check your connection."
+    },
+    "api": {
+      "title": "Request failed",
+      "message": "The server reported a problem."
+    },
+    "unexpected": {
+      "title": "Something went wrong",
+      "message": "An unexpected error occurred."
+    },
+    "actions": {
+      "retry": "Retry",
+      "dismiss": "Dismiss"
+    }
   },
   "language": {
     "english": "English",
@@ -144,7 +136,7 @@
     }
   },
   "footer": {
-    "title": "Bold, large typography",
+    "title": "Canto101",
     "summary": "Summarizes learning goals, curriculum structure, and how to navigate the platform for the best results.",
     "sections": {
       "gettingStarted": {
@@ -193,13 +185,21 @@
       "overview": {
         "title": "CantoLyr Lexicon",
         "description": "Explore focused tools that help you validate pronunciation and craft rhyme families before you draft lyrics.",
-        "featuresLabel": "Lexicon workflows",
+        "featuresLabel": "Lexicon tools",
         "lexiconTitle": "Lexicon tools",
         "lexiconDescription": "Identify pronunciation or rhyme matches with purpose-built searches before you commit ideas to your draft.",
         "lyricsTitle": "Lyric generation",
         "lyricsDescription": "Map tone sequences to creative prompts and generate draft verses while staying aligned with Cantonese prosody."
       },
-      "featureCta": "Open workflow",
+      "ai": {
+        "title": "AI tools",
+        "description": "AI-assisted tools to accelerate lyric drafting and lexicon discovery.",
+        "heading": "AI tools",
+        "lexiconTag": "Learning / lyric tool",
+        "lyricsPreview": "Generate draft verses from tone sequences and creative prompts using AI assistance.",
+        "lexiconPreview": "AI-powered lexicon search to suggest matches and usage examples for lyric writing."
+      },
+      "featureCta": "Open tool",
       "backToOverview": "Back to CantoLyr overview",
       "pron": {
         "heading": "Pronunciation tools",
@@ -279,9 +279,21 @@
         "description": "Query the lexicon by rhyme code to group entries with shared finals and tones, making structured rhyme grids fast to assemble."
       },
       "lyrics": {
-        "heading": "Lyric workflows",
+        "heading": "Lyric tools",
         "preview": "Blend tone grids with creative briefs to produce verses that respect Cantonese rhythm.",
         "description": "Feed a creative prompt and tone sequences into the generator to receive structured lyric ideas you can iterate on."
+      },
+      "aiLexicon": {
+        "description": "Blend a semantic description with target tone digits to see AI-ranked vocabulary suggestions rooted in the Cantonese lexicon.",
+        "stepsHeading": "How it works",
+        "steps": {
+          "one": "Describe the scene or lyric intent in natural language.",
+          "two": "Enter the 394052-style tone digits you want the suggestions to follow.",
+          "three": "Submit to view ranked vocabulary with similarity scores you can explore."
+        },
+        "notice": "Results combine statistical frequency with AI similarity. Review tone digits before using entries in your draft.",
+        "formHeading": "Search the semantic lexicon",
+        "formDescription": "The assistant maps your description and tone digits to lexicon entries. Adjust either input to refine the ranked list."
       }
     },
     "lyrics": {
@@ -293,23 +305,50 @@
       "generate": "Generate",
       "generating": "Generating..."
     },
+    "ai": {
+      "lyrics": {
+        "title": "Lyric generation"
+      },
+      "lexicon": {
+        "title": "Lexicon Search",
+        "description": "Use semantic hints and tone digits to surface candidate words and characters that align with your prompt.",
+        "form": {
+          "queryLabel": "Describe the usage context",
+          "queryPlaceholder": "e.g. hopeful chorus about new beginnings",
+          "pronunciationLabel": "Target pronunciation digits",
+          "pronunciationPlaceholder": "Enter tone digits such as 394",
+          "limitLabel": "Suggestions",
+          "limitCaption": "Between 1 and 25 results."
+        },
+        "summary": {
+          "query": "Query: {{query}}",
+          "pronunciation": "Digits: {{pronunciation}}",
+          "timing": "{{ms}} ms"
+        },
+        "similarityBadge": "{{percentage}}% semantic match",
+        "noResults": "No AI suggestions yet. Try broadening your prompt or adjusting the tone digits."
+      }
+    },
     "errors": {
-      "pron": { "missingQuery": "Please enter a pronunciation query." },
-      "rhyme": { "missingQuery": "Please enter a rhyme query." },
+      "pron": {
+        "missingQuery": "Please enter a pronunciation query."
+      },
+      "rhyme": {
+        "missingQuery": "Please enter a rhyme query.",
+        "invalidRhyme": "Please enter a valid rhyme from the Cantonese rhyme table."
+      },
       "lyrics": {
         "missingPrompt": "Prompt is required to generate lyrics.",
         "missingSequences": "Provide at least one tone sequence (comma separated)."
       },
       "lexicon": {
         "invalidDigits": "Only digits 0, 2, 3, 4, 5, and 9 are allowed.",
-        "tooLong": "Query must be no more than 4 digits long."
+        "tooLong": "Query must be no more than 4 digits long.",
+        "missingQuery": "Please describe what you want the AI to find.",
+        "missingPronunciation": "Enter tone digits using the 394052 scheme.",
+        "invalidResponse": "The AI lexicon response could not be decoded. Please try again.",
+        "limitRange": "Limit must be between 1 and 25."
       }
-    }
-    ,
-    "pagination": {
-      "prev": "Prev",
-      "next": "Next",
-      "page": "Page {{page}}"
     },
     "lexicon": {
       "types": {
@@ -345,8 +384,8 @@
         "range": "{{start}}–{{end}}"
       },
       "langHints": {
-  "zhHk": "Labeled as 'zh-HK': typically used in everyday speech, pop culture, and online language. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'written', colloquial words are closer to daily spoken contexts.",
-  "zhTw": "Labeled as 'zh-TW': typically found in formal texts, news, books, and official documents, representing the written register of Chinese. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'colloquial', written words tend to be more formal and standardized.",
+        "zhHk": "Labeled as 'zh-HK': typically used in everyday speech, pop culture, and online language. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'written', colloquial words are closer to daily spoken contexts.",
+        "zhTw": "Labeled as 'zh-TW': typically found in formal texts, news, books, and official documents, representing the written register of Chinese. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'colloquial', written words tend to be more formal and standardized.",
         "generic": "{{code}}"
       },
       "feedback": {

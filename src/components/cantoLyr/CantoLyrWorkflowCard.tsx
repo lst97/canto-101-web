@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Cpu } from "lucide-react";
 
 interface CantoLyrWorkflowCardProps {
   eyebrow?: string;
@@ -16,11 +18,20 @@ interface CantoLyrWorkflowCardProps {
   description: string;
   to: string;
   cta: string;
+  showBadge?: boolean;
 }
 
-export function CantoLyrWorkflowCard({ eyebrow, title, description, to, cta }: CantoLyrWorkflowCardProps): ReactElement {
+export function CantoLyrWorkflowCard({ eyebrow, title, description, to, cta, showBadge = false }: CantoLyrWorkflowCardProps): ReactElement {
   return (
-    <Card className="h-full border-border/60 shadow-none">
+    <Card className="relative h-full border-border/60 shadow-none">
+      {showBadge ? (
+        <div className="absolute right-3 top-3 z-10">
+          <Badge variant="outline" className="inline-flex items-center gap-1">
+            <Cpu className="size-3" />
+            <span className="text-[11px] font-semibold">AI</span>
+          </Badge>
+        </div>
+      ) : null}
       <CardHeader className="space-y-3">
         {eyebrow ? (
           <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">

@@ -9,6 +9,7 @@ const CantoLyr = lazy(async () => import("@/pages/CantoLyr"));
 const CantoLyrPronunciationSearch = lazy(async () => import("@/pages/CantoLyrPronunciationSearch"));
 const CantoLyrRhymeSearch = lazy(async () => import("@/pages/CantoLyrRhymeSearch"));
 const CantoLyrLyricGeneration = lazy(async () => import("@/pages/CantoLyrLyricGeneration"));
+const CantoLyrAiLexiconSearch = lazy(async () => import("@/pages/CantoLyrAiLexiconSearch"));
 const CantoCap = lazy(async () => import("@/pages/CantoCap"));
 
 const rootRoute = createRootRoute({
@@ -46,6 +47,12 @@ const cantoLyrLyricGenerationRoute = createRoute({
   component: CantoLyrLyricGeneration,
 });
 
+const cantoLyrAiLexiconRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/canto-lyr/ai-lexicon-search",
+  component: CantoLyrAiLexiconSearch,
+});
+
 const cantoCapRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/canto-cap",
@@ -58,6 +65,7 @@ const routeTree = rootRoute.addChildren([
   cantoLyrPronunciationRoute,
   cantoLyrRhymeRoute,
   cantoLyrLyricGenerationRoute,
+  cantoLyrAiLexiconRoute,
   cantoCapRoute,
 ]);
 

@@ -11,30 +11,22 @@
     "loadMore": "載入更多"
   },
   "errors": {
-    "network": { "title": "網絡連線問題", "message": "無法連線伺服器，請檢查網路。" },
-    "api": { "title": "請求失敗", "message": "伺服器回傳錯誤。" },
-    "unexpected": { "title": "發生未預期錯誤", "message": "系統遇到未預期的情況。" },
-    "actions": { "retry": "重試", "dismiss": "關閉" }
-  },
-  "navigation": {
-    "home": "首頁",
-    "lyrics": "歌詞",
-    "artists": "歌手",
-    "albums": "專輯",
-    "playlists": "播放清單"
-  },
-  "lyrics": {
-    "title": "歌詞",
-    "original": "原文歌詞",
-    "translation": "翻譯",
-    "romanization": "羅馬化",
-    "noLyrics": "沒有歌詞",
-    "loadingLyrics": "載入歌詞中..."
-  },
-  "search": {
-    "placeholder": "搜尋歌曲、歌手或歌詞...",
-    "noResults": "沒有找到結果",
-    "results": "個結果"
+    "network": {
+      "title": "網絡連線問題",
+      "message": "無法連線伺服器，請檢查網路。"
+    },
+    "api": {
+      "title": "請求失敗",
+      "message": "伺服器回傳錯誤。"
+    },
+    "unexpected": {
+      "title": "發生未預期錯誤",
+      "message": "系統遇到未預期的情況。"
+    },
+    "actions": {
+      "retry": "重試",
+      "dismiss": "關閉"
+    }
   },
   "language": {
     "english": "English",
@@ -144,7 +136,7 @@
     }
   },
   "footer": {
-    "title": "醒目而大的字體",
+    "title": "Canto101",
     "summary": "總結學習目標、課程結構，以及如何在平台上有效導航以取得最佳成果。",
     "sections": {
       "gettingStarted": {
@@ -179,6 +171,30 @@
     "copyright": "© 版權 2025 - Canto101"
   },
   "cantoLyr": {
+    "ai": {
+      "lyrics": {
+        "title": "歌詞生成"
+      },
+      "lexicon": {
+        "title": "詞彙搜尋",
+        "description": "利用語意提示與聲調數字，找到符合你提示的詞語與字詞。",
+        "form": {
+          "queryLabel": "描述使用情境",
+          "queryPlaceholder": "例如：關於新開始的希望副歌",
+          "pronunciationLabel": "目標聲調數字",
+          "pronunciationPlaceholder": "輸入 394 等聲調數字",
+          "limitLabel": "建議數量",
+          "limitCaption": "可輸入 1 至 25 筆結果。"
+        },
+        "summary": {
+          "query": "語意：{{query}}",
+          "pronunciation": "聲調：{{pronunciation}}",
+          "timing": "{{ms}} 毫秒"
+        },
+        "similarityBadge": "{{percentage}}% 語意相似",
+        "noResults": "目前沒有 AI 建議，可嘗試放寬描述或調整聲調數字。"
+      }
+    },
     "pron": {
       "title": "發音搜尋",
       "placeholder": "輸入發音（例如 02）",
@@ -193,13 +209,21 @@
       "overview": {
         "title": "CantoLyr 詞彙工具",
         "description": "探索專注於發音與押韻的詞彙工具，先釐清聲調與韻母，再開始創作歌詞。",
-        "featuresLabel": "詞彙工作流程",
+        "featuresLabel": "詞彙工具",
         "lexiconTitle": "詞彙工具",
         "lexiconDescription": "在正式寫詞之前，透過專用搜尋先確認發音或押韻的對應詞彙。",
         "lyricsTitle": "歌詞生成",
         "lyricsDescription": "將聲調排列與創作提示結合，生成符合粵語韻律的初稿句子。"
       },
-      "featureCta": "開啟工作流程",
+      "ai": {
+        "title": "填詞工具",
+        "description": "由 AI 協助的工具，加速歌詞草擬與詞彙發現。",
+        "heading": "填詞工具",
+        "lyricsPreview": "使用 AI 協助，從聲調序列與創作提示產生歌詞草稿。",
+        "lexiconPreview": "AI 驅動的詞彙搜尋，為歌詞創作建議匹配與用例。",
+        "lexiconTag": "學習/填詞工具"
+      },
+      "featureCta": "開啟工具",
       "backToOverview": "回到 CantoLyr 總覽",
       "pron": {
         "heading": "發音工具",
@@ -279,9 +303,21 @@
         "description": "輸入韻碼即可群組同韻同調的詞彙，迅速建立具有節奏感的押韻網格。"
       },
       "lyrics": {
-        "heading": "歌詞工作流程",
+        "heading": "歌詞工具",
         "preview": "把聲調表格與創作提案連結，寫出貼合粵語節奏的歌句。",
         "description": "輸入創作主題與聲調序列，生成具結構的歌詞草稿，方便後續調整。"
+      },
+      "aiLexicon": {
+        "description": "將語意描述與聲調數字結合，獲得 AI 排序的粵語詞彙建議。",
+        "stepsHeading": "使用方式",
+        "steps": {
+          "one": "用自然語言描述場景或歌詞意圖。",
+          "two": "輸入你想套用的 394052 式聲調數字。",
+          "three": "送出後檢視具相似度分數的詞彙建議。"
+        },
+        "notice": "結果由語料頻率與 AI 相似度組合，套用前請再確認聲調是否合適。",
+        "formHeading": "啟動語意詞彙搜尋",
+        "formDescription": "系統會依據描述與聲調匹配詞彙，調整任一欄位即可重新排序結果。"
       }
     },
     "lyrics": {
@@ -294,22 +330,25 @@
       "generating": "生成中..."
     },
     "errors": {
-      "pron": { "missingQuery": "請輸入發音查詢。" },
-      "rhyme": { "missingQuery": "請輸入押韻查詢。" },
+      "pron": {
+        "missingQuery": "請輸入發音查詢。"
+      },
+      "rhyme": {
+        "missingQuery": "請輸入押韻查詢。",
+        "invalidRhyme": "請輸入粵語韻母表中的有效韻母。"
+      },
       "lyrics": {
         "missingPrompt": "請提供歌詞主題。",
         "missingSequences": "至少輸入一組聲調序列（以逗號分隔）。"
       },
       "lexicon": {
         "invalidDigits": "僅可輸入數字 0、2、3、4、5、9。",
-        "tooLong": "查詢不得超過 4 位數字。"
+        "tooLong": "查詢不得超過 4 位數字。",
+        "missingQuery": "請描述想要查找的語意。",
+        "missingPronunciation": "請輸入 394052 式的聲調數字。",
+        "invalidResponse": "無法解析 AI 詞彙回應，請再試一次。",
+        "limitRange": "數量必須介於 1 至 25 之間。"
       }
-    }
-    ,
-    "pagination": {
-      "prev": "上一頁",
-      "next": "下一頁",
-      "page": "第 {{page}} 頁"
     },
     "lexicon": {
       "types": {

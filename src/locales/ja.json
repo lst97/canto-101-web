@@ -11,30 +11,22 @@
     "loadMore": "もっと読み込む"
   },
   "errors": {
-    "network": { "title": "ネットワークの問題", "message": "サーバーに接続できません。接続を確認してください。" },
-    "api": { "title": "リクエスト失敗", "message": "サーバーからエラーが返されました。" },
-    "unexpected": { "title": "予期しないエラー", "message": "予期しない問題が発生しました。" },
-    "actions": { "retry": "再試行", "dismiss": "閉じる" }
-  },
-  "navigation": {
-    "home": "ホーム",
-    "lyrics": "歌詞",
-    "artists": "アーティスト",
-    "albums": "アルバム",
-    "playlists": "プレイリスト"
-  },
-  "lyrics": {
-    "title": "歌詞",
-    "original": "原文歌詞",
-    "translation": "翻訳",
-    "romanization": "ローマ字表記",
-    "noLyrics": "歌詞がありません",
-    "loadingLyrics": "歌詞を読み込み中..."
-  },
-  "search": {
-    "placeholder": "曲名、アーティスト、または歌詞で検索...",
-    "noResults": "結果が見つかりません",
-    "results": "件の結果"
+    "network": {
+      "title": "ネットワークの問題",
+      "message": "サーバーに接続できません。接続を確認してください。"
+    },
+    "api": {
+      "title": "リクエスト失敗",
+      "message": "サーバーからエラーが返されました。"
+    },
+    "unexpected": {
+      "title": "予期しないエラー",
+      "message": "予期しない問題が発生しました。"
+    },
+    "actions": {
+      "retry": "再試行",
+      "dismiss": "閉じる"
+    }
   },
   "language": {
     "english": "英語",
@@ -133,18 +125,8 @@
       "button": "学習者プロフィールを作成"
     }
   },
-  "nav": {
-    "title": "Canto101",
-    "links": {
-      "programOverview": "概要",
-      "gettingStarted": "はじめに",
-      "resources": "リソース",
-      "community": "コミュニティ",
-      "products": "プロダクト"
-    }
-  },
   "footer": {
-    "title": "太字で大きなタイポグラフィ",
+    "title": "Canto101",
     "summary": "学習目標、カリキュラム構成、最適なナビゲーション方法をまとめています。",
     "sections": {
       "gettingStarted": {
@@ -193,13 +175,21 @@
       "overview": {
         "title": "CantoLyr レキシコン",
         "description": "発音や韻を検証し、歌詞作成前に韻ファミリーを作るためのツールを探索。",
-        "featuresLabel": "レキシコンワークフロー",
+        "featuresLabel": "レキシコンツール",
         "lexiconTitle": "レキシコンツール",
         "lexiconDescription": "アイデアを下書きする前に、発音や韻の一致を専用検索で特定。",
         "lyricsTitle": "歌詞生成",
         "lyricsDescription": "トーンシーケンスと創作プロンプトをマッピングし、広東語の韻律に沿った下書き歌詞を生成。"
       },
-      "featureCta": "ワークフローを開く",
+      "ai": {
+        "title": "AIツール",
+        "description": "歌詞下書きと語彙発見を加速するAI支援ツールです。",
+        "heading": "AIツール",
+        "lexiconTag": "学習／作詞ツール",
+        "lyricsPreview": "AI支援でトーン配列と創作プロンプトから下書き歌詞を生成します。",
+        "lexiconPreview": "歌詞作成向けに候補と用例を提案するAI搭載の語彙検索。"
+      },
+      "featureCta": "ツールを開く",
       "backToOverview": "CantoLyr概要に戻る",
       "pron": {
         "heading": "発音ツール",
@@ -279,9 +269,21 @@
         "description": "韻コードでレキシコンを検索し、同じ韻とトーンを持つエントリをグループ化。韻グリッドを素早く作成。"
       },
       "lyrics": {
-        "heading": "歌詞ワークフロー",
+        "heading": "歌詞ツール",
         "preview": "トーングリッドと創作ブリーフを組み合わせて、広東語リズムに合った歌詞を生成。",
         "description": "創作プロンプトとトーンシーケンスを入力し、構造化された歌詞案を受け取って調整できます。"
+      },
+      "aiLexicon": {
+        "description": "意味の説明と声調数字を組み合わせて、AI が順位付けした広東語語彙を取得します。",
+        "stepsHeading": "使い方",
+        "steps": {
+          "one": "自然な言葉でシーンや歌詞の狙いを説明します。",
+          "two": "希望する 394052 形式の声調数字を入力します。",
+          "three": "送信して類似度スコア付きの語彙候補を確認します。"
+        },
+        "notice": "結果は頻度と AI 類似度を組み合わせています。利用前に声調が目的に合うか再確認してください。",
+        "formHeading": "意味ベースの語彙検索を実行",
+        "formDescription": "説明と声調に基づいて語彙を照合します。いずれかを調整すると順位が更新されます。"
       }
     },
     "lyrics": {
@@ -294,21 +296,49 @@
       "generating": "生成中..."
     },
     "errors": {
-      "pron": { "missingQuery": "発音クエリを入力してください。" },
-      "rhyme": { "missingQuery": "韻クエリを入力してください。" },
+      "pron": {
+        "missingQuery": "発音クエリを入力してください。"
+      },
+      "rhyme": {
+        "missingQuery": "韻クエリを入力してください。",
+        "invalidRhyme": "広東語韻母表から有効な韻を入力してください。"
+      },
       "lyrics": {
         "missingPrompt": "歌詞生成にはプロンプトが必要です。",
         "missingSequences": "少なくとも1つのトーンシーケンスを入力してください（カンマ区切り）。"
       },
       "lexicon": {
         "invalidDigits": "0・2・3・4・5・9 の数字のみ使用できます。",
-        "tooLong": "クエリは4桁以内で入力してください。"
+        "tooLong": "クエリは4桁以内で入力してください。",
+        "missingQuery": "AI に探してほしい内容を説明してください。",
+        "missingPronunciation": "394052 方式の声調数字を入力してください。",
+        "invalidResponse": "AI 語彙検索の結果を処理できませんでした。もう一度お試しください。",
+        "limitRange": "制限は1から25の間で設定してください。"
       }
     },
-    "pagination": {
-      "prev": "前へ",
-      "next": "次へ",
-      "page": "{{page}}ページ"
+    "ai": {
+      "lyrics": {
+        "title": "歌詞生成"
+      },
+      "lexicon": {
+        "title": "語彙検索",
+        "description": "意味のヒントと声調数字を組み合わせることで、プロンプトに合う語彙や漢字候補を提案します。",
+        "form": {
+          "queryLabel": "利用シーンを説明",
+          "queryPlaceholder": "例：新しい始まりを歌う希望のサビ",
+          "pronunciationLabel": "目標の声調数字",
+          "pronunciationPlaceholder": "394 などの声調数字を入力",
+          "limitLabel": "候補数",
+          "limitCaption": "1〜25 件の範囲で設定できます。"
+        },
+        "summary": {
+          "query": "意味: {{query}}",
+          "pronunciation": "声調: {{pronunciation}}",
+          "timing": "{{ms}} ms"
+        },
+        "similarityBadge": "{{percentage}}% 意味的マッチ",
+        "noResults": "AI の候補が見つかりませんでした。説明を広げるか声調数字を調整してください。"
+      }
     },
     "lexicon": {
       "types": {
@@ -344,8 +374,8 @@
         "range": "{{start}}–{{end}}"
       },
       "langHints": {
-  "zhHk": "「zh-HK」としてラベル付けされた語彙は、日常会話、ポップカルチャー、ネット言語などでよく使われます。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「書面語」と比べて、口語語彙は日常的な話し言葉に近い傾向があります。",
-  "zhTw": "「zh-TW」としてラベル付けされた語彙は、正式な文章、ニュース、本、公的文書などで多く見られ、中国語の書き言葉のレジスターに属します。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「口語」と比べて、書面語語彙はよりフォーマルで規範的な文脈に使われる傾向があります。",
+        "zhHk": "「zh-HK」としてラベル付けされた語彙は、日常会話、ポップカルチャー、ネット言語などでよく使われます。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「書面語」と比べて、口語語彙は日常的な話し言葉に近い傾向があります。",
+        "zhTw": "「zh-TW」としてラベル付けされた語彙は、正式な文章、ニュース、本、公的文書などで多く見られ、中国語の書き言葉のレジスターに属します。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「口語」と比べて、書面語語彙はよりフォーマルで規範的な文脈に使われる傾向があります。",
         "generic": "{{code}}"
       },
       "feedback": {

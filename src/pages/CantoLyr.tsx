@@ -2,9 +2,17 @@ import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import CantoLyrWorkflowCard from "@/components/cantoLyr/CantoLyrWorkflowCard";
 
+interface WorkflowFeature {
+  eyebrow: string;
+  title: string;
+  description: string;
+  to: string;
+  showBadge?: boolean;
+}
+
 export default function CantoLyr(): ReactElement {
   const { t } = useTranslation();
-  const lexiconWorkflows = [
+  const lexiconWorkflows: WorkflowFeature[] = [
     {
       eyebrow: t("cantoLyr.pages.pron.heading"),
       title: t("cantoLyr.pron.title"),
@@ -18,12 +26,22 @@ export default function CantoLyr(): ReactElement {
       to: "/canto-lyr/rhyme-search",
     },
   ];
-  const lyricWorkflows = [
+  // lyric workflows moved to AI tools section
+  const aiTools: WorkflowFeature[] = [
     {
-      eyebrow: t("cantoLyr.pages.lyrics.heading"),
-      title: t("cantoLyr.lyrics.title"),
-      description: t("cantoLyr.pages.lyrics.preview"),
+      eyebrow: t("cantoLyr.pages.ai.heading"),
+      title: t("cantoLyr.ai.lyrics.title"),
+      description: t("cantoLyr.pages.ai.lyricsPreview"),
       to: "/canto-lyr/lyric-generation",
+      showBadge: true,
+    },
+    {
+      // lexicon has a more specific tag
+      eyebrow: t("cantoLyr.pages.ai.lexiconTag"),
+      title: t("cantoLyr.ai.lexicon.title"),
+      description: t("cantoLyr.pages.ai.lexiconPreview"),
+      to: "/canto-lyr/ai-lexicon-search",
+      showBadge: true,
     },
   ];
   return (
@@ -58,17 +76,18 @@ export default function CantoLyr(): ReactElement {
           ))}
         </div>
       </section>
-      <section className="space-y-5" aria-label={t("cantoLyr.pages.overview.lyricsTitle")}>
+      {/* lyrics section moved into AI tools */}
+      <section className="space-y-5" aria-label={t("cantoLyr.pages.ai.title")}>
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold tracking-tight">
-            {t("cantoLyr.pages.overview.lyricsTitle")}
+            {t("cantoLyr.pages.ai.title")}
           </h2>
           <p className="text-muted-foreground max-w-prose">
-            {t("cantoLyr.pages.overview.lyricsDescription")}
+            {t("cantoLyr.pages.ai.description")}
           </p>
         </div>
         <div className="grid gap-6 lg:grid-cols-2">
-          {lyricWorkflows.map(feature => (
+          {aiTools.map(feature => (
             <CantoLyrWorkflowCard
               key={feature.to}
               eyebrow={feature.eyebrow}
@@ -76,6 +95,7 @@ export default function CantoLyr(): ReactElement {
               description={feature.description}
               to={feature.to}
               cta={t("cantoLyr.pages.featureCta")}
+              showBadge={Boolean(feature.showBadge)}
             />
           ))}
         </div>
