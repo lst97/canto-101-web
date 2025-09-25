@@ -2,7 +2,7 @@ import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import type { AppError, ApiError, NetworkError, UnexpectedError } from "@/types/errors";
 
 export const API_BASE_URL: string =
-  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000";
+  import.meta.env.VITE_API_BASE_URL ?? "http://175.33.104.105:3000";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,

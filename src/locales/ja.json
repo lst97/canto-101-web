@@ -8,7 +8,8 @@
     "edit": "編集",
     "search": "検索",
     "close": "閉じる",
-    "loadMore": "もっと読み込む"
+    "loadMore": "もっと読み込む",
+    "reset": "リセット"
   },
   "errors": {
     "network": {
@@ -189,7 +190,9 @@
         "lexiconTitle": "レキシコンツール",
         "lexiconDescription": "アイデアを下書きする前に、発音や韻の一致を専用検索で特定。",
         "lyricsTitle": "歌詞生成",
-        "lyricsDescription": "トーンシーケンスと創作プロンプトをマッピングし、広東語の韻律に沿った下書き歌詞を生成。"
+        "lyricsDescription": "トーンシーケンスと創作プロンプトをマッピングし、広東語の韻律に沿った下書き歌詞を生成。",
+        "lyricSearchTitle": "歌詞検索",
+        "lyricSearchDescription": "声調数字や韻母で既存の広東語歌詞行を検索し、作詞の参考にします。"
       },
       "ai": {
         "title": "AIツール",
@@ -294,6 +297,10 @@
         "notice": "結果は頻度と AI 類似度を組み合わせています。利用前に声調が目的に合うか再確認してください。",
         "formHeading": "意味ベースの語彙検索を実行",
         "formDescription": "説明と声調に基づいて語彙を照合します。いずれかを調整すると順位が更新されます。"
+      },
+      "lyricSearch": {
+        "heading": "歌詞検索",
+        "preview": "声調や韻脚で公開済みの歌詞行を調べ、作詞・分析を支援します。"
       }
     },
     "lyrics": {
@@ -511,6 +518,107 @@
       "feedback": {
         "up": "役に立った",
         "down": "役に立たなかった"
+      }
+    },
+    "lyricSearch": {
+      "title": "歌詞検索",
+      "nav": {
+        "pron": "歌詞・声調検索",
+        "rhyme": "歌詞・韻脚検索"
+      },
+      "filters": {
+        "label": "フィルターとオプション",
+        "reset": "フィルターをリセット",
+        "pageSize": {
+          "label": "取得件数",
+          "description": "1 回の取得で読み込む歌詞行の件数（1〜200）。"
+        },
+        "position": {
+          "label": "声調位置",
+          "placeholder": "例: 2",
+          "description": "指定した声調ビグラム（1 = 先頭ペア）だけに絞り込みます。"
+        },
+        "rhymePosition": {
+          "label": "韻脚位置",
+          "placeholder": "例: 5",
+          "description": "歌詞行の中で韻が置かれるインデックス（1始まり）を指定します。"
+        },
+        "themes": {
+          "label": "テーマ",
+          "placeholder": "カンマ区切りのテーマ"
+        },
+        "keywords": {
+          "label": "キーワード",
+          "placeholder": "カンマ区切りのキーワード"
+        },
+        "lyricist": {
+          "label": "作詞者",
+          "placeholder": "例: 黄霑"
+        },
+        "artist": {
+          "label": "歌手",
+          "placeholder": "例: 梅艷芳"
+        },
+        "id": {
+          "label": "歌詞ID",
+          "placeholder": "内部識別子"
+        },
+        "sentiment": {
+          "label": "感情",
+          "placeholder": "例: 希望に満ちた"
+        },
+        "year": {
+          "label": "年代",
+          "placeholder": "例: 1993"
+        }
+      },
+      "labels": {
+        "query": "歌詞検索クエリ",
+        "bigrams": "声調ビグラム",
+        "song": "楽曲",
+        "metadata": "行メタデータ",
+        "lineIndex": "{{index}} 行目",
+        "counts": "文字数 {{chars}}・音節 {{syllables}}・単語 {{tokens}}",
+        "sentiment": "感情"
+      },
+      "results": {
+        "count": "表示 {{shown}} / {{total}} 行",
+        "cached": "キャッシュ",
+        "timing": "{{ms}} ms"
+      },
+      "messages": {
+        "noMatches": "該当する歌詞行が見つかりません。条件を変更して再検索してください。",
+        "endOfResults": "結果はここまでです。"
+      },
+      "pron": {
+        "heading": "歌詞・声調検索",
+        "description": "声調数字を入力し、異なる楽曲で同じ声調パターンを持つ歌詞行を探します。",
+        "tipsHeading": "声調検索のヒント",
+        "tipsDescription": "394052 の数字記憶を使って素早く目的の輪郭を探しましょう。",
+        "tips": {
+          "digits": "394052 型の数字で探したい声調の輪郭を指定します。",
+          "position": "声調位置を指定すると特定のビグラムに絞り込めます。",
+          "filters": "作詞者・年代・テーマ・キーワードを組み合わせると分析対象を狭められます。"
+        },
+        "formHeading": "声調数字で検索",
+        "formDescription": "声調数字と必要なフィルターを入力し、輪郭が一致する既存の歌詞行を確認します。",
+        "placeholder": "声調数字を入力（例: 394052）",
+        "resultsRegionLabel": "歌詞・声調検索結果"
+      },
+      "rhyme": {
+        "heading": "歌詞・韻脚検索",
+        "description": "同じ韻母を共有する歌詞行を探し、押韻パターンづくりに役立てます。",
+        "tipsHeading": "韻脚検索のヒント",
+        "tipsDescription": "公開済みの歌詞で使われている韻脚ファミリーを素早く確認します。",
+        "tips": {
+          "families": "Jyutping の韻母（例: aa・eoi）を入力して、同じ終わり方をする歌詞を探します。",
+          "placement": "韻脚位置を指定し、歌詞行の中で韻が置かれる箇所を一致させます。",
+          "filters": "作詞者・歌手・年代などを組み合わせると対象作品を絞れます。"
+        },
+        "formHeading": "韻母で検索",
+        "formDescription": "Jyutping の韻母と必要なフィルターを入力し、既存の歌詞がその韻をどう使っているか確認します。",
+        "placeholder": "Jyutping の韻母を入力（例: aa）",
+        "resultsRegionLabel": "歌詞・韻脚検索結果"
       }
     }
   }

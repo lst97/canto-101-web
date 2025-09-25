@@ -8,7 +8,8 @@
     "edit": "編輯",
     "search": "搜尋",
     "close": "關閉",
-    "loadMore": "載入更多"
+    "loadMore": "載入更多",
+    "reset": "重置"
   },
   "errors": {
     "network": {
@@ -329,7 +330,9 @@
         "lexiconTitle": "詞彙工具",
         "lexiconDescription": "在正式寫詞之前，透過專用搜尋先確認發音或押韻的對應詞彙。",
         "lyricsTitle": "歌詞生成",
-        "lyricsDescription": "將聲調排列與創作提示結合，生成符合粵語韻律的初稿句子。"
+        "lyricsDescription": "將聲調排列與創作提示結合，生成符合粵語韻律的初稿句子。",
+        "lyricSearchTitle": "歌詞搜尋",
+        "lyricSearchDescription": "透過聲調數字或韻母搜尋現有粵語歌詞行，作為寫作前的參考。"
       },
       "ai": {
         "title": "填詞工具",
@@ -434,6 +437,10 @@
         "notice": "結果由語料頻率與 AI 相似度組合，套用前請再確認聲調是否合適。",
         "formHeading": "啟動語意詞彙搜尋",
         "formDescription": "系統會依據描述與聲調匹配詞彙，調整任一欄位即可重新排序結果。"
+      },
+      "lyricSearch": {
+        "heading": "歌詞搜尋",
+        "preview": "以聲調或韻腳探索已發佈的歌詞行，支援你的創作分析。"
       }
     },
     "lyrics": {
@@ -512,6 +519,107 @@
       "feedback": {
         "up": "有幫助",
         "down": "沒有幫助"
+      }
+    },
+    "lyricSearch": {
+      "title": "歌詞搜尋",
+      "nav": {
+        "pron": "歌詞聲調搜尋",
+        "rhyme": "歌詞押韻搜尋"
+      },
+      "filters": {
+        "label": "篩選與選項",
+        "reset": "重設篩選",
+        "pageSize": {
+          "label": "每頁筆數",
+          "description": "每次請求要擷取的歌詞行數量（1–200）。"
+        },
+        "position": {
+          "label": "聲調位置",
+          "placeholder": "例：2",
+          "description": "鎖定特定聲調雙字的位置（1 = 第一組數字）。"
+        },
+        "rhymePosition": {
+          "label": "韻腳位置",
+          "placeholder": "例：5",
+          "description": "鎖定歌詞行中的韻腳欄位（自 1 起算）。"
+        },
+        "themes": {
+          "label": "主題",
+          "placeholder": "以逗號分隔的主題"
+        },
+        "keywords": {
+          "label": "關鍵詞",
+          "placeholder": "以逗號分隔的關鍵詞"
+        },
+        "lyricist": {
+          "label": "作詞人",
+          "placeholder": "例：黃霑"
+        },
+        "artist": {
+          "label": "演唱者",
+          "placeholder": "例：梅艷芳"
+        },
+        "id": {
+          "label": "歌詞 ID",
+          "placeholder": "內部識別碼"
+        },
+        "sentiment": {
+          "label": "情緒",
+          "placeholder": "例：充滿希望"
+        },
+        "year": {
+          "label": "年份",
+          "placeholder": "例：1993"
+        }
+      },
+      "labels": {
+        "query": "歌詞搜尋查詢",
+        "bigrams": "聲調雙字",
+        "song": "歌曲",
+        "metadata": "行內統計",
+        "lineIndex": "第 {{index}} 行",
+        "counts": "字數 {{chars}} · 音節 {{syllables}} · 詞數 {{tokens}}",
+        "sentiment": "情緒"
+      },
+      "results": {
+        "count": "顯示 {{shown}} / {{total}} 行",
+        "cached": "快取",
+        "timing": "{{ms}} 毫秒"
+      },
+      "messages": {
+        "noMatches": "暫無符合的歌詞行，請嘗試其他條件或調整篩選。",
+        "endOfResults": "已到結果列表結尾。"
+      },
+      "pron": {
+        "heading": "歌詞聲調搜尋",
+        "description": "輸入聲調數字，檢視不同歌曲中具有相同聲調模式的歌詞行。",
+        "tipsHeading": "聲調搜尋提示",
+        "tipsDescription": "善用數字記憶法，更快鎖定目標輪廓。",
+        "tips": {
+          "digits": "以 394052 式聲調數字標記需要的輪廓。",
+          "position": "設定聲調位置鎖定特定雙字欄位。",
+          "filters": "結合作詞人、年份、主題或關鍵詞篩選較小的資料範圍。"
+        },
+        "formHeading": "根據聲調數字搜尋",
+        "formDescription": "輸入聲調數字與可選條件，找出符合輪廓的既有歌詞行。",
+        "placeholder": "輸入聲調數字，例如 394052",
+        "resultsRegionLabel": "歌詞聲調搜尋結果"
+      },
+      "rhyme": {
+        "heading": "歌詞押韻搜尋",
+        "description": "找出共用同一韻母的歌詞行，以建立押韻表或參考案例。",
+        "tipsHeading": "押韻搜尋提示",
+        "tipsDescription": "快速定位已發佈歌詞常用的韻腳組。",
+        "tips": {
+          "families": "輸入 Jyutping 韻母（例：aa、eoi）即可找到相同結尾的歌詞。",
+          "placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
+          "filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。"
+        },
+        "formHeading": "依韻母搜尋",
+        "formDescription": "輸入 Jyutping 韻母與可選條件，分析既有歌詞如何運用此韻腳。",
+        "placeholder": "輸入 Jyutping 韻母（例：aa）",
+        "resultsRegionLabel": "歌詞押韻搜尋結果"
       }
     }
   }

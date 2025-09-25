@@ -7,40 +7,63 @@ import type { AppError } from "@/types/errors";
 import {
   querySchemaByKind,
   responseSchemaByKind,
-  type SearchPronunciationQuery,
-  type SearchResponse,
-  type SearchRhymeQuery,
+  type LyricSearchResponse,
+  type LyricsPronunciationQuery,
+  type LyricsRhymeQuery,
 } from "@/lib/schemas/lexicon";
 
-// Type of lexicon search we support
-export type LexiconSearchKind =
-  | { kind: "pron" }
-  | { kind: "rhyme" };
+export type AiLyricSearchKind =
+  | { kind: "lyrics-pron"; filters?: LyricsPronFilters }
+  | { kind: "lyrics-rhyme"; filters?: LyricsRhymeFilters };
 
-// Shared option base
 interface BaseOptions {
-  pageSize: string; // controlled input, converted to number
+  pageSize: string;
 }
 
-interface PronOptions extends BaseOptions {
-  mode: string; // 'all' sentinel
-  prefix: boolean;
+export interface LyricsPronFilters {
+  position?: string;
+  themes?: string;
+  keywords?: string;
+  lyricist?: string;
+  artist?: string;
+  sentiment?: string;
+  year?: string;
 }
 
-interface RhymeOptions extends BaseOptions {
-  mode: string; // 'all' sentinel
+export interface LyricsRhymeFilters extends Omit<LyricsPronFilters, "position"> {
+  rhymePosition?: string;
 }
 
-type OptionsState = PronOptions | RhymeOptions;
+export interface LyricsPronOptions extends BaseOptions {
+  position: string;
+  themes: string;
+  keywords: string;
+  lyricist: string;
+  artist: string;
+  sentiment: string;
+  year: string;
+}
 
-type QueryParams = SearchPronunciationQuery | SearchRhymeQuery;
+export interface LyricsRhymeOptions extends BaseOptions {
+  rhymePosition: string;
+  themes: string;
+  keywords: string;
+  lyricist: string;
+  artist: string;
+  sentiment: string;
+  year: string;
+}
 
-type SearchResult = SearchResponse;
+type OptionsState = LyricsPronOptions | LyricsRhymeOptions;
+
+type QueryParams = LyricsPronunciationQuery | LyricsRhymeQuery;
+
+type SearchResult = LyricSearchResponse;
 
 type NormalizedQueryError = AppError;
 
-export interface UseLexiconSearchResult {
-  kind: LexiconSearchKind["kind"];
+export interface UseAiLyricSearchResult {
+  kind: AiLyricSearchKind["kind"];
   query: string;
   setQuery: (v: string) => void;
   options: OptionsState;
@@ -64,18 +87,33 @@ interface SearchSnapshot extends SearchSnapshotBase {
   params: QueryParams;
 }
 
-type SearchKind = LexiconSearchKind["kind"];
+type SearchKind = AiLyricSearchKind["kind"];
 
-const QUERY_KEY_PREFIX = "lexicon-search";
+const QUERY_KEY_PREFIX = "lyric-search";
 
 function createDefaultOptions(kind: SearchKind): OptionsState {
-  if (kind === "pron") {
-    return { mode: "all", pageSize: "50", prefix: false } satisfies PronOptions;
+  if (kind === "lyrics-pron") {
+    return {
+      pageSize: "25",
+      position: "",
+      themes: "",
+      keywords: "",
+      lyricist: "",
+      artist: "",
+      sentiment: "",
+      year: "",
+    } satisfies LyricsPronOptions;
   }
-  if (kind === "rhyme") {
-    return { mode: "all", pageSize: "50" } satisfies RhymeOptions;
-  }
-  return { pageSize: "50", mode: "all" } satisfies RhymeOptions;
+  return {
+    pageSize: "25",
+    rhymePosition: "",
+    themes: "",
+    keywords: "",
+    lyricist: "",
+    artist: "",
+    sentiment: "",
+    year: "",
+  } satisfies LyricsRhymeOptions;
 }
 
 function createQueryKey(kind: SearchKind, snapshot: SearchSnapshot | null): QueryKey {
@@ -86,18 +124,17 @@ function createQueryKey(kind: SearchKind, snapshot: SearchSnapshot | null): Quer
 }
 
 function resolveEndpoint(kind: SearchKind): string {
-  if (kind === "pron") return "/lexicon/search/pronunciation";
-  return "/lexicon/search/rhyme";
+  if (kind === "lyrics-pron") return "/lyrics/search/pronunciation";
+  return "/lyrics/search/rhyme";
 }
 
 function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParams {
   const params: Record<string, unknown> = {};
   const trimmedQuery = snapshot.query.trim();
 
-  if (kind === "pron") {
+  if (kind === "lyrics-pron") {
     params.p = trimmedQuery;
-  }
-  if (kind === "rhyme") {
+  } else {
     params.r = trimmedQuery;
   }
 
@@ -107,12 +144,42 @@ function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParam
     params.offset = snapshot.page * pageSizeValue;
   }
 
-  const { mode } = snapshot.options as RhymeOptions | PronOptions;
-  if (mode && mode !== "all") {
-    params.mode = mode;
-  }
-  if (kind === "pron" && (snapshot.options as PronOptions).prefix) {
-    params.prefix = true;
+  if (kind === "lyrics-pron") {
+    const {
+      position,
+      themes,
+      keywords,
+      lyricist,
+      artist,
+      sentiment,
+      year,
+    } = snapshot.options as LyricsPronOptions;
+
+    if (position.trim()) params.position = position.trim();
+    if (themes.trim()) params.themes = themes.trim();
+    if (keywords.trim()) params.keywords = keywords.trim();
+    if (lyricist.trim()) params.lyricist = lyricist.trim();
+    if (artist.trim()) params.artist = artist.trim();
+    if (sentiment.trim()) params.sentiment = sentiment.trim();
+    if (year.trim()) params.year = year.trim();
+  } else {
+    const {
+      rhymePosition,
+      themes,
+      keywords,
+      lyricist,
+      artist,
+      sentiment,
+      year,
+    } = snapshot.options as LyricsRhymeOptions;
+
+    if (rhymePosition.trim()) params.rhymePosition = rhymePosition.trim();
+    if (themes.trim()) params.themes = themes.trim();
+    if (keywords.trim()) params.keywords = keywords.trim();
+    if (lyricist.trim()) params.lyricist = lyricist.trim();
+    if (artist.trim()) params.artist = artist.trim();
+    if (sentiment.trim()) params.sentiment = sentiment.trim();
+    if (year.trim()) params.year = year.trim();
   }
 
   const schema = querySchemaByKind[kind];
@@ -120,7 +187,7 @@ function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParam
 }
 
 function defaultValidationMessage(kind: SearchKind): string {
-  return kind === "rhyme"
+  return kind === "lyrics-rhyme"
     ? "cantoLyr.errors.rhyme.missingQuery"
     : "cantoLyr.errors.pron.missingQuery";
 }
@@ -135,7 +202,7 @@ function extractValidationMessage(error: unknown, kind: SearchKind): string {
   return "Validation failed";
 }
 
-async function fetchLexicon(kind: SearchKind, snapshot: SearchSnapshot): Promise<SearchResult> {
+async function fetchLyricSearch(kind: SearchKind, snapshot: SearchSnapshot): Promise<SearchResult> {
   const response = await api.get<unknown>(resolveEndpoint(kind), {
     params: snapshot.params,
   });
@@ -154,10 +221,7 @@ async function fetchLexicon(kind: SearchKind, snapshot: SearchSnapshot): Promise
   }
 }
 
-/**
- * Hook for querying the pronunciation or rhyme lexicon endpoints.
- */
-export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearchResult {
+export function useAiLyricSearch(kindInput: AiLyricSearchKind): UseAiLyricSearchResult {
   const kind = kindInput.kind;
   const [query, setQueryState] = useState<string>("");
   const [options, setOptions] = useState<OptionsState>(() => createDefaultOptions(kind));
@@ -170,12 +234,12 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
   const setQuery = useCallback((value: string) => {
     setValidationError(null);
     setQueryState(value);
-  }, [setValidationError]);
+  }, []);
 
   const updateOption = useCallback((key: string, value: unknown) => {
     setValidationError(null);
     setOptions(prev => ({ ...prev, [key]: value }));
-  }, [setValidationError]);
+  }, []);
 
   const baseQueryKey = createQueryKey(kind, submitted);
 
@@ -188,22 +252,21 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
           kind: "unexpected",
         } as NormalizedQueryError;
       }
-      return fetchLexicon(kind, submitted);
+      return fetchLyricSearch(kind, submitted);
     },
     enabled: submitted !== null,
     staleTime: 1000 * 60,
     gcTime: 1000 * 60 * 5,
     retry: false,
     meta: {
-      description: "Fetch lexicon search results",
+      description: "Fetch lyric search results",
     },
   });
 
   const search = useCallback(async (): Promise<void> => {
-    const normalizedOptions: OptionsState = { ...options };
     const snapshotBase: SearchSnapshotBase = {
       query,
-      options: normalizedOptions,
+      options,
       page: 0,
     };
 
@@ -222,7 +285,7 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
       await queryClient
         .prefetchQuery({
           queryKey: createQueryKey(kind, nextSnapshot),
-          queryFn: () => fetchLexicon(kind, nextSnapshot),
+          queryFn: () => fetchLyricSearch(kind, nextSnapshot),
         })
         .catch(() => undefined);
     } catch (error) {
@@ -242,9 +305,7 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
   const setPage = useCallback(
     (nextPage: number) => {
       setSubmitted(prev => {
-        if (!prev) {
-          return prev;
-        }
+        if (!prev) return prev;
 
         const nextPageValue = Math.max(0, nextPage);
         const snapshotBase: SearchSnapshotBase = {
@@ -263,7 +324,7 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
           setPageState(nextPageValue);
           void queryClient.prefetchQuery({
             queryKey: createQueryKey(kind, nextSnapshot),
-            queryFn: () => fetchLexicon(kind, nextSnapshot),
+            queryFn: () => fetchLyricSearch(kind, nextSnapshot),
           });
           return nextSnapshot;
         } catch (error) {
@@ -272,7 +333,7 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
         }
       });
     },
-    [kind, queryClient, setValidationError],
+    [kind, queryClient],
   );
 
   const error = validationError ?? (searchQuery.error ? searchQuery.error.message : null);
@@ -295,4 +356,4 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
   };
 }
 
-export default useLexiconSearch;
+export default useAiLyricSearch;

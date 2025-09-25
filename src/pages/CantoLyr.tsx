@@ -26,6 +26,15 @@ export default function CantoLyr(): ReactElement {
       to: "/canto-lyr/rhyme-search",
     },
   ];
+  const lyricWorkflows: WorkflowFeature[] = [
+    {
+      eyebrow: t("cantoLyr.pages.lyricSearch.heading"),
+      title: t("cantoLyr.lyricSearch.title"),
+      description: t("cantoLyr.pages.lyricSearch.preview"),
+      to: "/canto-lyr/lyric-search/pronunciation",
+      showBadge: true,
+    },
+  ];
   // lyric workflows moved to AI tools section
   const aiTools: WorkflowFeature[] = [
     {
@@ -72,6 +81,29 @@ export default function CantoLyr(): ReactElement {
               description={feature.description}
               to={feature.to}
               cta={t("cantoLyr.pages.featureCta")}
+            />
+          ))}
+        </div>
+      </section>
+      <section className="space-y-5" aria-label={t("cantoLyr.pages.overview.lyricSearchTitle")}>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold tracking-tight">
+            {t("cantoLyr.pages.overview.lyricSearchTitle")}
+          </h2>
+          <p className="text-muted-foreground max-w-prose">
+            {t("cantoLyr.pages.overview.lyricSearchDescription")}
+          </p>
+        </div>
+        <div className="grid gap-6 lg:grid-cols-2">
+          {lyricWorkflows.map(feature => (
+            <CantoLyrWorkflowCard
+              key={feature.to}
+              eyebrow={feature.eyebrow}
+              title={feature.title}
+              description={feature.description}
+              to={feature.to}
+              cta={t("cantoLyr.pages.featureCta")}
+              showBadge={Boolean(feature.showBadge)}
             />
           ))}
         </div>

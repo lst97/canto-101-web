@@ -66,7 +66,7 @@ src/
 │   ├── home.png
 │   ├── resources.png
 │   └── tools.png
-├── components/                # Reusable UI components
+├── components/               # Reusable UI components
 │   ├── Root.tsx              # Root layout component
 │   ├── Footer.tsx            # Footer component
 │   ├── Header.tsx            # Header component

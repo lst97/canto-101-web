@@ -10,6 +10,8 @@ const CantoLyrPronunciationSearch = lazy(async () => import("@/pages/CantoLyrPro
 const CantoLyrRhymeSearch = lazy(async () => import("@/pages/CantoLyrRhymeSearch"));
 const CantoLyrLyricGeneration = lazy(async () => import("@/pages/CantoLyrLyricGeneration"));
 const CantoLyrAiLexiconSearch = lazy(async () => import("@/pages/CantoLyrAiLexiconSearch"));
+const CantoLyrLyricPronunciationSearch = lazy(async () => import("@/pages/CantoLyrAiLyricPronunciationSearch"));
+const CantoLyrLyricRhymeSearch = lazy(async () => import("@/pages/CantoLyrAiLyricRhymeSearch"));
 const CantoCap = lazy(async () => import("@/pages/CantoCap"));
 
 const rootRoute = createRootRoute({
@@ -47,6 +49,18 @@ const cantoLyrLyricGenerationRoute = createRoute({
   component: CantoLyrLyricGeneration,
 });
 
+const cantoLyrLyricPronunciationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/canto-lyr/lyric-search/pronunciation",
+  component: CantoLyrLyricPronunciationSearch,
+});
+
+const cantoLyrLyricRhymeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/canto-lyr/lyric-search/rhyme",
+  component: CantoLyrLyricRhymeSearch,
+});
+
 const cantoLyrAiLexiconRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/canto-lyr/ai-lexicon-search",
@@ -65,6 +79,8 @@ const routeTree = rootRoute.addChildren([
   cantoLyrPronunciationRoute,
   cantoLyrRhymeRoute,
   cantoLyrLyricGenerationRoute,
+  cantoLyrLyricPronunciationRoute,
+  cantoLyrLyricRhymeRoute,
   cantoLyrAiLexiconRoute,
   cantoCapRoute,
 ]);
