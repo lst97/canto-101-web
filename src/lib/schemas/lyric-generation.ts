@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const PatternSlotSchema = z.object({
   id: z.string(),
@@ -62,6 +62,8 @@ export const LyricGenerationResponseSchema = z.object({
   topOutputs: z.array(z.string()).optional(),
 });
 
-export type LyricGenerationResponse = z.infer<typeof LyricGenerationResponseSchema>;
+export type LyricGenerationResponse = z.infer<
+  typeof LyricGenerationResponseSchema
+>;
 export type LyricLineResult = z.infer<typeof LyricLineResultSchema>;
 export type LyricSessionMeta = z.infer<typeof LyricSessionMetaSchema>;

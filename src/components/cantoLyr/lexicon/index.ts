@@ -1,3 +1,3 @@
-export { LexiconPronunciationSearch } from "./LexiconPronunciationSearch";
-export { LexiconRhymeSearch } from "./LexiconRhymeSearch";
-export { LexiconAiSearch } from "./LexiconAiSearch";
+export { LexiconPronunciationSearch } from './LexiconPronunciationSearch.tsx';
+export { LexiconRhymeSearch } from './LexiconRhymeSearch.tsx';
+export { LexiconAiSearch } from './LexiconAiSearch.tsx';

@@ -1,3 +1,3 @@
-export { LyricGenerationForm } from "./LyricGenerationForm";
-export { LyricGenerationResults } from "./LyricGenerationResults";
-export { LyricSession } from "./LyricGeneration";
+export { LyricGenerationForm } from './LyricGenerationForm.tsx';
+export { LyricGenerationResults } from './LyricGenerationResults.tsx';
+export { LyricSession } from './LyricGeneration.tsx';

@@ -9,6 +9,7 @@
     "search": "検索",
     "close": "閉じる",
     "loadMore": "もっと読み込む",
+    "showMore": "もっと表示",
     "reset": "リセット"
   },
   "errors": {
@@ -343,6 +344,7 @@
         "title": "歌詞生成",
         "description": "創作のプロンプトと目標となる声調グリッドを指定して、構造化された広東語の歌詞アイデアを受け取ります。",
         "page": {
+          "overview": "機能説明",
           "shortOverview": "制限とヒント",
           "limitationsHeading": "現在の制限",
           "limitations": {
@@ -493,7 +495,8 @@
         "pos": "品詞",
         "register": "レジスター",
         "gloss": "語釈",
-        "source": "出典"
+        "source": "出典",
+        "position": "位置"
       },
       "badges": {
         "cached": "キャッシュ"
@@ -579,7 +582,11 @@
         "metadata": "行メタデータ",
         "lineIndex": "{{index}} 行目",
         "counts": "文字数 {{chars}}・音節 {{syllables}}・単語 {{tokens}}",
-        "sentiment": "感情"
+        "sentiment": "感情",
+        "syntaxNotes": "定義",
+        "artists": "アーティスト",
+        "lyricists": "作詞者",
+        "tokens": "レキシコン"
       },
       "results": {
         "count": "表示 {{shown}} / {{total}} 行",

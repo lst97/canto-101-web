@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '../../ui/badge.tsx';
 
 interface TopParagraphListProps {
   paragraphs: string[];
@@ -13,7 +13,7 @@ export function TopParagraphList({ paragraphs }: TopParagraphListProps) {
     return (
       <div className="rounded-lg border border-border/60 bg-muted/20 p-4">
         <p className="text-sm text-muted-foreground">
-          {t("cantoLyr.ai.lyrics.topParagraphs.empty")}
+          {t('cantoLyr.ai.lyrics.topParagraphs.empty')}
         </p>
       </div>
     );
@@ -22,10 +22,13 @@ export function TopParagraphList({ paragraphs }: TopParagraphListProps) {
   return (
     <div className="space-y-3">
       {paragraphs.map((text, idx) => (
-        <article key={`paragraph-${idx}`} className="space-y-2 rounded-lg border border-border/60 bg-muted/10 p-4">
+        <article
+          key={`paragraph-${idx}`}
+          className="space-y-2 rounded-lg border border-border/60 bg-muted/10 p-4"
+        >
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Badge variant="secondary" className="uppercase tracking-wide">
-              {t("cantoLyr.ai.lyrics.topParagraphs.badge", { index: idx + 1 })}
+              {t('cantoLyr.ai.lyrics.topParagraphs.badge', { index: idx + 1 })}
             </Badge>
           </div>
           <p className="text-sm leading-relaxed text-foreground">{text}</p>

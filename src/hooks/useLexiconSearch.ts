@@ -1,21 +1,19 @@
-import { useState, useCallback } from "react";
-import { useQuery, useQueryClient, type QueryKey } from "@tanstack/react-query";
-import { ZodError } from "zod";
+import { useState, useCallback } from 'react';
+import { useQuery, useQueryClient, type QueryKey } from '@tanstack/react-query';
+import { ZodError } from 'zod';
 
-import { api } from "@/lib/api";
-import type { AppError } from "@/types/errors";
+import { api } from '../lib/api.ts';
+import type { AppError } from '../types/errors.ts';
 import {
   querySchemaByKind,
   responseSchemaByKind,
   type SearchPronunciationQuery,
   type SearchResponse,
   type SearchRhymeQuery,
-} from "@/lib/schemas/lexicon";
+} from '../lib/schemas/lexicon.ts';
 
 // Type of lexicon search we support
-export type LexiconSearchKind =
-  | { kind: "pron" }
-  | { kind: "rhyme" };
+export type LexiconSearchKind = { kind: 'pron' } | { kind: 'rhyme' };
 
 // Shared option base
 interface BaseOptions {
@@ -40,7 +38,7 @@ type SearchResult = SearchResponse;
 type NormalizedQueryError = AppError;
 
 export interface UseLexiconSearchResult {
-  kind: LexiconSearchKind["kind"];
+  kind: LexiconSearchKind['kind'];
   query: string;
   setQuery: (v: string) => void;
   options: OptionsState;
@@ -64,40 +62,52 @@ interface SearchSnapshot extends SearchSnapshotBase {
   params: QueryParams;
 }
 
-type SearchKind = LexiconSearchKind["kind"];
+type SearchKind = LexiconSearchKind['kind'];
 
-const QUERY_KEY_PREFIX = "lexicon-search";
+const QUERY_KEY_PREFIX = 'lexicon-search';
 
 function createDefaultOptions(kind: SearchKind): OptionsState {
-  if (kind === "pron") {
-    return { mode: "all", pageSize: "50", prefix: false } satisfies PronOptions;
+  if (kind === 'pron') {
+    return { mode: 'all', pageSize: '50', prefix: false } satisfies PronOptions;
   }
-  if (kind === "rhyme") {
-    return { mode: "all", pageSize: "50" } satisfies RhymeOptions;
+  if (kind === 'rhyme') {
+    return { mode: 'all', pageSize: '50' } satisfies RhymeOptions;
   }
-  return { pageSize: "50", mode: "all" } satisfies RhymeOptions;
+  return { pageSize: '50', mode: 'all' } satisfies RhymeOptions;
 }
 
-function createQueryKey(kind: SearchKind, snapshot: SearchSnapshot | null): QueryKey {
+function createQueryKey(
+  kind: SearchKind,
+  snapshot: SearchSnapshot | null
+): QueryKey {
   if (!snapshot) {
-    return [QUERY_KEY_PREFIX, kind, "idle"];
+    return [QUERY_KEY_PREFIX, kind, 'idle'];
   }
-  return [QUERY_KEY_PREFIX, kind, snapshot.query, snapshot.page, snapshot.params];
+  return [
+    QUERY_KEY_PREFIX,
+    kind,
+    snapshot.query,
+    snapshot.page,
+    snapshot.params,
+  ];
 }
 
 function resolveEndpoint(kind: SearchKind): string {
-  if (kind === "pron") return "/lexicon/search/pronunciation";
-  return "/lexicon/search/rhyme";
+  if (kind === 'pron') return '/lexicon/search/pronunciation';
+  return '/lexicon/search/rhyme';
 }
 
-function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParams {
+function buildParams(
+  kind: SearchKind,
+  snapshot: SearchSnapshotBase
+): QueryParams {
   const params: Record<string, unknown> = {};
   const trimmedQuery = snapshot.query.trim();
 
-  if (kind === "pron") {
+  if (kind === 'pron') {
     params.p = trimmedQuery;
   }
-  if (kind === "rhyme") {
+  if (kind === 'rhyme') {
     params.r = trimmedQuery;
   }
 
@@ -108,10 +118,10 @@ function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParam
   }
 
   const { mode } = snapshot.options as RhymeOptions | PronOptions;
-  if (mode && mode !== "all") {
+  if (mode && mode !== 'all') {
     params.mode = mode;
   }
-  if (kind === "pron" && (snapshot.options as PronOptions).prefix) {
+  if (kind === 'pron' && (snapshot.options as PronOptions).prefix) {
     params.prefix = true;
   }
 
@@ -120,9 +130,9 @@ function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParam
 }
 
 function defaultValidationMessage(kind: SearchKind): string {
-  return kind === "rhyme"
-    ? "cantoLyr.errors.rhyme.missingQuery"
-    : "cantoLyr.errors.pron.missingQuery";
+  return kind === 'rhyme'
+    ? 'cantoLyr.errors.rhyme.missingQuery'
+    : 'cantoLyr.errors.pron.missingQuery';
 }
 
 function extractValidationMessage(error: unknown, kind: SearchKind): string {
@@ -132,10 +142,13 @@ function extractValidationMessage(error: unknown, kind: SearchKind): string {
   if (error instanceof Error) {
     return error.message;
   }
-  return "Validation failed";
+  return 'Validation failed';
 }
 
-async function fetchLexicon(kind: SearchKind, snapshot: SearchSnapshot): Promise<SearchResult> {
+async function fetchLexicon(
+  kind: SearchKind,
+  snapshot: SearchSnapshot
+): Promise<SearchResult> {
   const response = await api.get<unknown>(resolveEndpoint(kind), {
     params: snapshot.params,
   });
@@ -145,8 +158,8 @@ async function fetchLexicon(kind: SearchKind, snapshot: SearchSnapshot): Promise
   } catch (error) {
     if (error instanceof ZodError) {
       throw {
-        kind: "unexpected",
-        message: "Invalid server response",
+        kind: 'unexpected',
+        message: 'Invalid server response',
         cause: error,
       } satisfies AppError;
     }
@@ -157,25 +170,35 @@ async function fetchLexicon(kind: SearchKind, snapshot: SearchSnapshot): Promise
 /**
  * Hook for querying the pronunciation or rhyme lexicon endpoints.
  */
-export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearchResult {
+export function useLexiconSearch(
+  kindInput: LexiconSearchKind
+): UseLexiconSearchResult {
   const kind = kindInput.kind;
-  const [query, setQueryState] = useState<string>("");
-  const [options, setOptions] = useState<OptionsState>(() => createDefaultOptions(kind));
+  const [query, setQueryState] = useState<string>('');
+  const [options, setOptions] = useState<OptionsState>(() =>
+    createDefaultOptions(kind)
+  );
   const [page, setPageState] = useState<number>(0);
   const [submitted, setSubmitted] = useState<SearchSnapshot | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const queryClient = useQueryClient();
 
-  const setQuery = useCallback((value: string) => {
-    setValidationError(null);
-    setQueryState(value);
-  }, [setValidationError]);
+  const setQuery = useCallback(
+    (value: string) => {
+      setValidationError(null);
+      setQueryState(value);
+    },
+    [setValidationError]
+  );
 
-  const updateOption = useCallback((key: string, value: unknown) => {
-    setValidationError(null);
-    setOptions(prev => ({ ...prev, [key]: value }));
-  }, [setValidationError]);
+  const updateOption = useCallback(
+    (key: string, value: unknown) => {
+      setValidationError(null);
+      setOptions(prev => ({ ...prev, [key]: value }));
+    },
+    [setValidationError]
+  );
 
   const baseQueryKey = createQueryKey(kind, submitted);
 
@@ -184,8 +207,8 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
     queryFn: () => {
       if (!submitted) {
         throw {
-          message: "Query attempted without snapshot",
-          kind: "unexpected",
+          message: 'Query attempted without snapshot',
+          kind: 'unexpected',
         } as NormalizedQueryError;
       }
       return fetchLexicon(kind, submitted);
@@ -195,7 +218,7 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
     gcTime: 1000 * 60 * 5,
     retry: false,
     meta: {
-      description: "Fetch lexicon search results",
+      description: 'Fetch lexicon search results',
     },
   });
 
@@ -234,7 +257,7 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
     setValidationError(null);
     setSubmitted(null);
     setPageState(0);
-    setQuery("");
+    setQuery('');
     setOptions(createDefaultOptions(kind));
     void queryClient.removeQueries({ queryKey: [QUERY_KEY_PREFIX, kind] });
   }, [kind, queryClient, setQuery]);
@@ -272,11 +295,16 @@ export function useLexiconSearch(kindInput: LexiconSearchKind): UseLexiconSearch
         }
       });
     },
-    [kind, queryClient, setValidationError],
+    [kind, queryClient, setValidationError]
   );
 
-  const error = validationError ?? (searchQuery.error ? searchQuery.error.message : null);
-  const loading = submitted !== null && (searchQuery.isPending || searchQuery.isFetching || searchQuery.isRefetching);
+  const error =
+    validationError ?? (searchQuery.error ? searchQuery.error.message : null);
+  const loading =
+    submitted !== null &&
+    (searchQuery.isPending ||
+      searchQuery.isFetching ||
+      searchQuery.isRefetching);
   const result = searchQuery.data ?? null;
 
   return {

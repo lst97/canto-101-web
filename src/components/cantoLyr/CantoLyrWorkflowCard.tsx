@@ -1,5 +1,5 @@
-import type { ReactElement } from "react";
-import { Link } from "@tanstack/react-router";
+import type { ReactElement } from 'react';
+import { Link } from '@tanstack/react-router';
 
 import {
   Card,
@@ -7,10 +7,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Cpu } from "lucide-react";
+} from '../ui/card.tsx';
+import { Button } from '../ui/button.tsx';
+import { Badge } from '../ui/badge.tsx';
+import { Cpu } from 'lucide-react';
 
 interface CantoLyrWorkflowCardProps {
   eyebrow?: string;
@@ -21,7 +21,14 @@ interface CantoLyrWorkflowCardProps {
   showBadge?: boolean;
 }
 
-export function CantoLyrWorkflowCard({ eyebrow, title, description, to, cta, showBadge = false }: CantoLyrWorkflowCardProps): ReactElement {
+export function CantoLyrWorkflowCard({
+  eyebrow,
+  title,
+  description,
+  to,
+  cta,
+  showBadge = false,
+}: CantoLyrWorkflowCardProps): ReactElement {
   return (
     <Card className="relative h-full border-border/60 shadow-none">
       {showBadge ? (
@@ -38,9 +45,7 @@ export function CantoLyrWorkflowCard({ eyebrow, title, description, to, cta, sho
             {eyebrow}
           </span>
         ) : null}
-        <CardTitle className="text-2xl font-semibold">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-2xl font-semibold">{title}</CardTitle>
         <CardDescription className="text-base leading-relaxed text-muted-foreground/90">
           {description}
         </CardDescription>

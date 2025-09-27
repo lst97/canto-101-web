@@ -1,20 +1,20 @@
-import { useState, useCallback } from "react";
-import { useQuery, useQueryClient, type QueryKey } from "@tanstack/react-query";
-import { ZodError } from "zod";
+import { useState, useCallback } from 'react';
+import { useQuery, useQueryClient, type QueryKey } from '@tanstack/react-query';
+import { ZodError } from 'zod';
 
-import { api } from "@/lib/api";
-import type { AppError } from "@/types/errors";
+import { api } from '../lib/api.ts';
+import type { AppError } from '../types/errors.ts';
 import {
   querySchemaByKind,
   responseSchemaByKind,
   type LyricSearchResponse,
   type LyricsPronunciationQuery,
   type LyricsRhymeQuery,
-} from "@/lib/schemas/lexicon";
+} from '../lib/schemas/lexicon.ts';
 
 export type AiLyricSearchKind =
-  | { kind: "lyrics-pron"; filters?: LyricsPronFilters }
-  | { kind: "lyrics-rhyme"; filters?: LyricsRhymeFilters };
+  | { kind: 'lyrics-pron'; filters?: LyricsPronFilters }
+  | { kind: 'lyrics-rhyme'; filters?: LyricsRhymeFilters };
 
 interface BaseOptions {
   pageSize: string;
@@ -30,7 +30,8 @@ export interface LyricsPronFilters {
   year?: string;
 }
 
-export interface LyricsRhymeFilters extends Omit<LyricsPronFilters, "position"> {
+export interface LyricsRhymeFilters
+  extends Omit<LyricsPronFilters, 'position'> {
   rhymePosition?: string;
 }
 
@@ -63,7 +64,7 @@ type SearchResult = LyricSearchResponse;
 type NormalizedQueryError = AppError;
 
 export interface UseAiLyricSearchResult {
-  kind: AiLyricSearchKind["kind"];
+  kind: AiLyricSearchKind['kind'];
   query: string;
   setQuery: (v: string) => void;
   options: OptionsState;
@@ -87,55 +88,66 @@ interface SearchSnapshot extends SearchSnapshotBase {
   params: QueryParams;
 }
 
-type SearchKind = AiLyricSearchKind["kind"];
+type SearchKind = AiLyricSearchKind['kind'];
 
-const QUERY_KEY_PREFIX = "lyric-search";
+const QUERY_KEY_PREFIX = 'lyric-search';
 
 function createDefaultOptions(kind: SearchKind): OptionsState {
-  if (kind === "lyrics-pron") {
+  if (kind === 'lyrics-pron') {
     return {
-      pageSize: "25",
-      position: "",
-      themes: "",
-      keywords: "",
-      lyricist: "",
-      artist: "",
-      sentiment: "",
-      year: "",
+      pageSize: '25',
+      position: '',
+      themes: '',
+      keywords: '',
+      lyricist: '',
+      artist: '',
+      sentiment: '',
+      year: '',
     } satisfies LyricsPronOptions;
   }
   return {
-    pageSize: "25",
-    rhymePosition: "",
-    themes: "",
-    keywords: "",
-    lyricist: "",
-    artist: "",
-    sentiment: "",
-    year: "",
+    pageSize: '25',
+    rhymePosition: '',
+    themes: '',
+    keywords: '',
+    lyricist: '',
+    artist: '',
+    sentiment: '',
+    year: '',
   } satisfies LyricsRhymeOptions;
 }
 
-function createQueryKey(kind: SearchKind, snapshot: SearchSnapshot | null): QueryKey {
+function createQueryKey(
+  kind: SearchKind,
+  snapshot: SearchSnapshot | null
+): QueryKey {
   if (!snapshot) {
-    return [QUERY_KEY_PREFIX, kind, "idle"];
+    return [QUERY_KEY_PREFIX, kind, 'idle'];
   }
-  return [QUERY_KEY_PREFIX, kind, snapshot.query, snapshot.page, snapshot.params];
+  return [
+    QUERY_KEY_PREFIX,
+    kind,
+    snapshot.query,
+    snapshot.page,
+    snapshot.params,
+  ];
 }
 
-function resolveEndpoint(kind: SearchKind): string {
-  if (kind === "lyrics-pron") return "/lyrics/search/pronunciation";
-  return "/lyrics/search/rhyme";
+function resolveEndpoint(): string {
+  return '/lyrics/search';
 }
 
-function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParams {
+function buildParams(
+  kind: SearchKind,
+  snapshot: SearchSnapshotBase
+): QueryParams {
   const params: Record<string, unknown> = {};
   const trimmedQuery = snapshot.query.trim();
 
-  if (kind === "lyrics-pron") {
-    params.p = trimmedQuery;
+  if (kind === 'lyrics-pron') {
+    params.tone = trimmedQuery;
   } else {
-    params.r = trimmedQuery;
+    params.rhyme = trimmedQuery;
   }
 
   const pageSizeValue = Number(snapshot.options.pageSize);
@@ -144,18 +156,11 @@ function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParam
     params.offset = snapshot.page * pageSizeValue;
   }
 
-  if (kind === "lyrics-pron") {
-    const {
-      position,
-      themes,
-      keywords,
-      lyricist,
-      artist,
-      sentiment,
-      year,
-    } = snapshot.options as LyricsPronOptions;
+  if (kind === 'lyrics-pron') {
+    const { position, themes, keywords, lyricist, artist, sentiment, year } =
+      snapshot.options as LyricsPronOptions;
 
-    if (position.trim()) params.position = position.trim();
+    if (position.trim()) params.tonePosition = position.trim();
     if (themes.trim()) params.themes = themes.trim();
     if (keywords.trim()) params.keywords = keywords.trim();
     if (lyricist.trim()) params.lyricist = lyricist.trim();
@@ -187,9 +192,9 @@ function buildParams(kind: SearchKind, snapshot: SearchSnapshotBase): QueryParam
 }
 
 function defaultValidationMessage(kind: SearchKind): string {
-  return kind === "lyrics-rhyme"
-    ? "cantoLyr.errors.rhyme.missingQuery"
-    : "cantoLyr.errors.pron.missingQuery";
+  return kind === 'lyrics-rhyme'
+    ? 'cantoLyr.errors.rhyme.missingQuery'
+    : 'cantoLyr.errors.pron.missingQuery';
 }
 
 function extractValidationMessage(error: unknown, kind: SearchKind): string {
@@ -199,11 +204,14 @@ function extractValidationMessage(error: unknown, kind: SearchKind): string {
   if (error instanceof Error) {
     return error.message;
   }
-  return "Validation failed";
+  return 'Validation failed';
 }
 
-async function fetchLyricSearch(kind: SearchKind, snapshot: SearchSnapshot): Promise<SearchResult> {
-  const response = await api.get<unknown>(resolveEndpoint(kind), {
+async function fetchLyricSearch(
+  kind: SearchKind,
+  snapshot: SearchSnapshot
+): Promise<SearchResult> {
+  const response = await api.get<unknown>(resolveEndpoint(), {
     params: snapshot.params,
   });
   try {
@@ -212,8 +220,8 @@ async function fetchLyricSearch(kind: SearchKind, snapshot: SearchSnapshot): Pro
   } catch (error) {
     if (error instanceof ZodError) {
       throw {
-        kind: "unexpected",
-        message: "Invalid server response",
+        kind: 'unexpected',
+        message: 'Invalid server response',
         cause: error,
       } satisfies AppError;
     }
@@ -221,10 +229,14 @@ async function fetchLyricSearch(kind: SearchKind, snapshot: SearchSnapshot): Pro
   }
 }
 
-export function useAiLyricSearch(kindInput: AiLyricSearchKind): UseAiLyricSearchResult {
+export function useAiLyricSearch(
+  kindInput: AiLyricSearchKind
+): UseAiLyricSearchResult {
   const kind = kindInput.kind;
-  const [query, setQueryState] = useState<string>("");
-  const [options, setOptions] = useState<OptionsState>(() => createDefaultOptions(kind));
+  const [query, setQueryState] = useState<string>('');
+  const [options, setOptions] = useState<OptionsState>(() =>
+    createDefaultOptions(kind)
+  );
   const [page, setPageState] = useState<number>(0);
   const [submitted, setSubmitted] = useState<SearchSnapshot | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -248,8 +260,8 @@ export function useAiLyricSearch(kindInput: AiLyricSearchKind): UseAiLyricSearch
     queryFn: () => {
       if (!submitted) {
         throw {
-          message: "Query attempted without snapshot",
-          kind: "unexpected",
+          message: 'Query attempted without snapshot',
+          kind: 'unexpected',
         } as NormalizedQueryError;
       }
       return fetchLyricSearch(kind, submitted);
@@ -259,7 +271,7 @@ export function useAiLyricSearch(kindInput: AiLyricSearchKind): UseAiLyricSearch
     gcTime: 1000 * 60 * 5,
     retry: false,
     meta: {
-      description: "Fetch lyric search results",
+      description: 'Fetch lyric search results',
     },
   });
 
@@ -297,7 +309,7 @@ export function useAiLyricSearch(kindInput: AiLyricSearchKind): UseAiLyricSearch
     setValidationError(null);
     setSubmitted(null);
     setPageState(0);
-    setQuery("");
+    setQuery('');
     setOptions(createDefaultOptions(kind));
     void queryClient.removeQueries({ queryKey: [QUERY_KEY_PREFIX, kind] });
   }, [kind, queryClient, setQuery]);
@@ -333,11 +345,16 @@ export function useAiLyricSearch(kindInput: AiLyricSearchKind): UseAiLyricSearch
         }
       });
     },
-    [kind, queryClient],
+    [kind, queryClient]
   );
 
-  const error = validationError ?? (searchQuery.error ? searchQuery.error.message : null);
-  const loading = submitted !== null && (searchQuery.isPending || searchQuery.isFetching || searchQuery.isRefetching);
+  const error =
+    validationError ?? (searchQuery.error ? searchQuery.error.message : null);
+  const loading =
+    submitted !== null &&
+    (searchQuery.isPending ||
+      searchQuery.isFetching ||
+      searchQuery.isRefetching);
   const result = searchQuery.data ?? null;
 
   return {

@@ -1,12 +1,14 @@
-import type { ReactElement } from "react";
-import { lazy, Suspense } from "react";
+import type { ReactElement } from 'react';
+import { lazy, Suspense } from 'react';
 
-const Hero = lazy(async () => import("@/components/home/Hero"));
-const CoreSections = lazy(async () => import("@/components/home/CoreSections"));
-const ProductsShowcase = lazy(async () =>
-  import("@/components/home/ProductsShowcase")
+const Hero = lazy(async () => import('../components/home/Hero.tsx'));
+const CoreSections = lazy(
+  async () => import('../components/home/CoreSections.tsx')
 );
-const Cta = lazy(async () => import("@/components/home/Cta"));
+const ProductsShowcase = lazy(
+  async () => import('../components/home/ProductsShowcase.tsx')
+);
+const Cta = lazy(async () => import('../components/home/Cta.tsx'));
 
 export default function Home(): ReactElement {
   return (

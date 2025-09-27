@@ -1,2 +1,2 @@
-export { LyricPronunciationSearch } from "./LyricPronunciationSearch";
-export { LyricRhymeSearch } from "./LyricRhymeSearch";
+export { LyricPronunciationSearch } from './LyricPronunciationSearch.tsx';
+export { LyricRhymeSearch } from './LyricRhymeSearch.tsx';

@@ -1,10 +1,15 @@
-import type { ReactElement } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
+import type { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from '@tanstack/react-router';
+import { ExternalLink } from 'lucide-react';
 
-import { LexiconRhymeSearch } from "@/components/cantoLyr/lexicon";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { LexiconRhymeSearch } from '../components/cantoLyr/lexicon/index.ts';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '../components/ui/accordion.tsx';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,8 +17,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Badge } from "@/components/ui/badge";
+} from '../components/ui/breadcrumb.tsx';
+import { Badge } from '../components/ui/badge.tsx';
 import {
   Table,
   TableBody,
@@ -22,14 +27,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { cantonesePinyinTable } from "@/data/cantonesePinyinTable";
+} from '../components/ui/table.tsx';
+import { cantonesePinyinTable } from '../data/cantonesePinyinTable.ts';
 
 const jyutpingDetailKeys = [
-  "structure",
-  "onset",
-  "tones",
-  "rhymeLink",
+  'structure',
+  'onset',
+  'tones',
+  'rhymeLink',
 ] as const;
 
 function chunkArray<T>(array: readonly T[], size: number): T[][] {
@@ -45,18 +50,18 @@ export default function CantoLyrRhymeSearch(): ReactElement {
   const { t } = useTranslation();
   const consonants = cantonesePinyinTable.consonants;
   const rhymeRows = chunkArray(cantonesePinyinTable.rhymes, 6).map(group => ({
-    start: group[0] ?? "",
-    end: group[group.length - 1] ?? "",
+    start: group[0] ?? '',
+    end: group[group.length - 1] ?? '',
     finals: group,
   }));
   const referenceLinks: Array<{ href: string; label: string }> = [
     {
-      href: "https://en.wikipedia.org/wiki/Jyutping#Chart",
-      label: t("cantoLyr.pages.pron.rhymeSourceJyutping"),
+      href: 'https://en.wikipedia.org/wiki/Jyutping#Chart',
+      label: t('cantoLyr.pages.pron.rhymeSourceJyutping'),
     },
     {
-      href: "https://en.wikipedia.org/wiki/Cantonese_phonology#Finals",
-      label: t("cantoLyr.pages.pron.rhymeSourceRime"),
+      href: 'https://en.wikipedia.org/wiki/Cantonese_phonology#Finals',
+      label: t('cantoLyr.pages.pron.rhymeSourceRime'),
     },
   ];
 
@@ -72,44 +77,55 @@ export default function CantoLyrRhymeSearch(): ReactElement {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>{t("cantoLyr.pages.rhyme.heading")}</BreadcrumbPage>
+              <BreadcrumbPage>
+                {t('cantoLyr.pages.rhyme.heading')}
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
         <header className="space-y-3">
           <h1 className="text-3xl font-semibold tracking-tight">
-            {t("cantoLyr.rhyme.title")}
+            {t('cantoLyr.rhyme.title')}
           </h1>
           <p className="text-muted-foreground max-w-prose">
-            {t("cantoLyr.pages.rhyme.description")}
+            {t('cantoLyr.pages.rhyme.description')}
           </p>
         </header>
       </div>
-      <section className="space-y-4" aria-label={t("cantoLyr.pages.pron.jyutpingHeading")}>
+      <section
+        className="space-y-4"
+        aria-label={t('cantoLyr.pages.pron.jyutpingHeading')}
+      >
         <Accordion type="single" collapsible>
           <AccordionItem value="jyutping">
             <AccordionTrigger>
-              {t("cantoLyr.pages.pron.jyutpingHeading")}
+              {t('cantoLyr.pages.pron.jyutpingHeading')}
             </AccordionTrigger>
             <AccordionContent className="space-y-4">
               <p className="text-muted-foreground max-w-prose">
-                {t("cantoLyr.pages.pron.jyutpingIntro")}
+                {t('cantoLyr.pages.pron.jyutpingIntro')}
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {jyutpingDetailKeys.map(detailKey => (
-                  <li key={detailKey}>{t(`cantoLyr.pages.pron.jyutpingDetails.${detailKey}`)}</li>
+                  <li key={detailKey}>
+                    {t(`cantoLyr.pages.pron.jyutpingDetails.${detailKey}`)}
+                  </li>
                 ))}
               </ul>
               <div className="space-y-2">
                 <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                  {t("cantoLyr.pages.pron.jyutpingConsonantsLabel")}
+                  {t('cantoLyr.pages.pron.jyutpingConsonantsLabel')}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {t("cantoLyr.pages.pron.jyutpingConsonantsDescription")}
+                  {t('cantoLyr.pages.pron.jyutpingConsonantsDescription')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {consonants.map(initial => (
-                    <Badge key={initial} variant="outline" className="font-mono text-sm uppercase">
+                    <Badge
+                      key={initial}
+                      variant="outline"
+                      className="font-mono text-sm uppercase"
+                    >
                       {initial}
                     </Badge>
                   ))}
@@ -119,37 +135,49 @@ export default function CantoLyrRhymeSearch(): ReactElement {
           </AccordionItem>
           <AccordionItem value="rhyme">
             <AccordionTrigger>
-              {t("cantoLyr.pages.pron.rhymeHeading")}
+              {t('cantoLyr.pages.pron.rhymeHeading')}
             </AccordionTrigger>
             <AccordionContent className="space-y-4">
               <p className="text-muted-foreground max-w-prose">
-                {t("cantoLyr.pages.pron.rhymeDescription")}
+                {t('cantoLyr.pages.pron.rhymeDescription')}
               </p>
               <div className="overflow-hidden rounded-xl border border-border/80 bg-muted/40">
                 <Table>
-                  <TableCaption>{t("cantoLyr.pages.pron.rhymeTable.caption")}</TableCaption>
+                  <TableCaption>
+                    {t('cantoLyr.pages.pron.rhymeTable.caption')}
+                  </TableCaption>
                   <TableHeader>
                     <TableRow className="bg-muted/70 text-foreground">
                       <TableHead className="w-32 text-foreground">
-                        {t("cantoLyr.pages.pron.rhymeTable.columns.range")}
+                        {t('cantoLyr.pages.pron.rhymeTable.columns.range')}
                       </TableHead>
                       <TableHead className="text-foreground">
-                        {t("cantoLyr.pages.pron.rhymeTable.columns.finals")}
+                        {t('cantoLyr.pages.pron.rhymeTable.columns.finals')}
                       </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {rhymeRows.map(({ start, end, finals }) => {
-                      const rangeLabel = start && end && start !== end ? `${start} - ${end}` : start ?? "";
+                      const rangeLabel =
+                        start && end && start !== end
+                          ? `${start} - ${end}`
+                          : (start ?? '');
                       return (
-                        <TableRow key={`${start}-${end}`} className="border-border/60">
+                        <TableRow
+                          key={`${start}-${end}`}
+                          className="border-border/60"
+                        >
                           <TableCell className="font-medium text-foreground/90">
                             {rangeLabel}
                           </TableCell>
                           <TableCell>
                             <div className="flex flex-wrap gap-2">
                               {finals.map(final => (
-                                <Badge key={final} variant="secondary" className="font-mono text-sm lowercase">
+                                <Badge
+                                  key={final}
+                                  variant="secondary"
+                                  className="font-mono text-sm lowercase"
+                                >
                                   {final}
                                 </Badge>
                               ))}
@@ -162,12 +190,12 @@ export default function CantoLyrRhymeSearch(): ReactElement {
                 </Table>
               </div>
               <p className="text-xs text-muted-foreground">
-                {t("cantoLyr.pages.pron.rhymeListNote")}
+                {t('cantoLyr.pages.pron.rhymeListNote')}
               </p>
               <div className="space-y-3">
                 <div className="space-y-2 rounded-lg border border-border/50 bg-muted/20 p-4">
                   <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                    {t("cantoLyr.pages.pron.rhymeSourcesLabel")}
+                    {t('cantoLyr.pages.pron.rhymeSourcesLabel')}
                   </h3>
                   {referenceLinks.map(({ href, label }) => (
                     <div key={href} className="flex items-center gap-2 text-sm">
@@ -188,13 +216,13 @@ export default function CantoLyrRhymeSearch(): ReactElement {
           </AccordionItem>
         </Accordion>
       </section>
-      <section aria-label={t("cantoLyr.rhyme.title")} className="space-y-4">
+      <section aria-label={t('cantoLyr.rhyme.title')} className="space-y-4">
         <div className="space-y-2">
           <h2 className="text-xl font-semibold tracking-tight">
-            {t("cantoLyr.pages.rhyme.heading")}
+            {t('cantoLyr.pages.rhyme.heading')}
           </h2>
           <p className="text-muted-foreground max-w-prose text-sm">
-            {t("cantoLyr.pages.rhyme.preview")}
+            {t('cantoLyr.pages.rhyme.preview')}
           </p>
         </div>
         <LexiconRhymeSearch />

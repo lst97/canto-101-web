@@ -1,15 +1,15 @@
-import type { ReactElement } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import type { ReactElement } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import { Separator } from "@/components/ui/separator";
-import ModeToggle from "@/components/mode-toggle";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { useTranslation } from "react-i18next";
+} from './ui/navigation-menu.tsx';
+import { Separator } from './ui/separator.tsx';
+import ModeToggle from './mode-toggle.tsx';
+import { LanguageSwitcher } from './LanguageSwitcher.tsx';
+import { useTranslation } from 'react-i18next';
 import {
   Sheet,
   SheetClose,
@@ -17,120 +17,122 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { ChevronDown, Menu } from "lucide-react";
+} from './ui/sheet.tsx';
+import { Button } from './ui/button.tsx';
+import { ChevronDown, Menu } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Link, useRouterState } from "@tanstack/react-router";
+} from './ui/dropdown-menu.tsx';
+import { Link, useRouterState } from '@tanstack/react-router';
 
 export function Header(): ReactElement {
   const { t } = useTranslation();
-  const [activeId, setActiveId] = useState<string>("");
+  const [activeId, setActiveId] = useState<string>('');
   const productsTriggerRef = useRef<HTMLButtonElement | null>(null);
   const productsScrollPositionRef = useRef<number>(0);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isOnCantoLyr = pathname.startsWith("/canto-lyr");
-  const isOnCantoCap = pathname.startsWith("/canto-cap");
+  const pathname = useRouterState({ select: s => s.location.pathname });
+  const isOnCantoLyr = pathname.startsWith('/canto-lyr');
+  const isOnCantoCap = pathname.startsWith('/canto-cap');
   const isOnProducts = isOnCantoLyr || isOnCantoCap;
 
   const smoothScrollToId = useCallback((id: string): void => {
-    if (typeof window === "undefined" || typeof document === "undefined") {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     const element = document.getElementById(id);
     if (!element) return;
-    const prefersReducedMotion =
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const behavior: ScrollBehavior = prefersReducedMotion ? "auto" : "smooth";
+    const prefersReducedMotion = globalThis.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    const behavior: ScrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
 
-    if ("scrollIntoView" in element) {
-      element.scrollIntoView({ behavior, block: "start" });
+    if ('scrollIntoView' in element) {
+      element.scrollIntoView({ behavior, block: 'start' });
     } else {
-      const targetY = window.scrollY +
+      const targetY =
+        globalThis.scrollY +
         (element as HTMLElement).getBoundingClientRect().top;
-      window.scrollTo({ top: targetY, behavior });
+      globalThis.scrollTo({ top: targetY, behavior });
     }
   }, []);
 
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string): void => {
-      if (!href.startsWith("#")) return;
+      if (!href.startsWith('#')) return;
       e.preventDefault();
       const id = href.slice(1);
       if (
-        typeof window !== "undefined" &&
-        typeof window.requestAnimationFrame === "function"
+        typeof window !== 'undefined' &&
+        typeof globalThis.requestAnimationFrame === 'function'
       ) {
-        window.requestAnimationFrame(() => {
+        globalThis.requestAnimationFrame(() => {
           smoothScrollToId(id);
         });
       } else {
         smoothScrollToId(id);
       }
       // Update hash without causing an instant jump
-      if (typeof window !== "undefined") {
-        window.history.replaceState(null, "", href);
+      if (typeof window !== 'undefined') {
+        globalThis.history.replaceState(null, '', href);
       }
     },
-    [smoothScrollToId],
+    [smoothScrollToId]
   );
 
   const handleProductsMenuOpenChange = useCallback(
     (nextOpen: boolean): void => {
-      if (typeof window === "undefined") return;
+      if (typeof window === 'undefined') return;
       if (nextOpen) {
-        productsScrollPositionRef.current = window.scrollY;
+        productsScrollPositionRef.current = globalThis.scrollY;
         return;
       }
 
       const previousScrollTop = productsScrollPositionRef.current;
       const restoreScroll = (): void => {
-        window.scrollTo({ top: previousScrollTop });
+        globalThis.scrollTo({ top: previousScrollTop });
       };
 
-      if (typeof window.requestAnimationFrame === "function") {
-        window.requestAnimationFrame(restoreScroll);
+      if (typeof globalThis.requestAnimationFrame === 'function') {
+        globalThis.requestAnimationFrame(restoreScroll);
       } else {
         restoreScroll();
       }
     },
-    [],
+    []
   );
 
   const links: Array<{ href: string; key: string }> = [
-    { href: "#program-overview", key: "programOverview" },
-    { href: "#getting-started", key: "gettingStarted" },
-    { href: "#resources", key: "resources" },
-    { href: "#community", key: "community" },
-    { href: "#products", key: "products" },
+    { href: '#program-overview', key: 'programOverview' },
+    { href: '#getting-started', key: 'gettingStarted' },
+    { href: '#resources', key: 'resources' },
+    { href: '#community', key: 'community' },
+    { href: '#products', key: 'products' },
   ];
 
   useEffect(() => {
     const ids = [
-      "program-overview",
-      "getting-started",
-      "resources",
-      "community",
-      "products",
+      'program-overview',
+      'getting-started',
+      'resources',
+      'community',
+      'products',
     ];
     const elements = ids
-      .map((id) => document.getElementById(id))
+      .map(id => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
 
     if (elements.length === 0) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         // Find the most visible section
         const mostVisible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) =>
-            (b.intersectionRatio || 0) - (a.intersectionRatio || 0)
+          .filter(e => e.isIntersecting)
+          .sort(
+            (a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0)
           )[0];
         if (mostVisible?.target?.id) {
           setActiveId(mostVisible.target.id);
@@ -139,11 +141,11 @@ export function Header(): ReactElement {
       {
         // Trigger when ~60% of the section is visible
         threshold: [0.6],
-        rootMargin: "0px 0px -20% 0px",
-      },
+        rootMargin: '0px 0px -20% 0px',
+      }
     );
 
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach(el => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
@@ -153,10 +155,10 @@ export function Header(): ReactElement {
         <div className="flex items-center gap-3 sm:gap-6">
           <Link
             to="/"
-            aria-current={pathname === "/" ? "page" : undefined}
+            aria-current={pathname === '/' ? 'page' : undefined}
             className="font-black tracking-tight text-foreground text-lg sm:text-xl"
           >
-            {t("nav.title")}
+            {t('nav.title')}
           </Link>
           <div className="hidden lg:block">
             <Separator
@@ -166,41 +168,46 @@ export function Header(): ReactElement {
           </div>
           <NavigationMenu className="hidden lg:block">
             <NavigationMenuList>
-              {links.filter((l) => l.key !== "products").map((l) => (
-                <NavigationMenuItem key={l.key}>
-                  <NavigationMenuLink asChild>
-                    <a
-                      href={l.href}
-                      onClick={(e) => handleNavClick(e, l.href)}
-                      aria-current={activeId && l.href === `#${activeId}`
-                        ? "page"
-                        : undefined}
-                      className={[
-                        "px-2 py-1 text-sm font-medium transition-colors",
-                        activeId && l.href === `#${activeId}`
-                          ? "text-foreground"
-                          : "text-muted-foreground hover:text-foreground",
-                      ].join(" ")}
-                    >
-                      {t(`nav.links.${l.key}`)}
-                    </a>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
+              {links
+                .filter(l => l.key !== 'products')
+                .map(l => (
+                  <NavigationMenuItem key={l.key}>
+                    <NavigationMenuLink asChild>
+                      <a
+                        href={l.href}
+                        onClick={e => handleNavClick(e, l.href)}
+                        aria-current={
+                          activeId && l.href === `#${activeId}`
+                            ? 'page'
+                            : undefined
+                        }
+                        className={[
+                          'px-2 py-1 text-sm font-medium transition-colors',
+                          activeId && l.href === `#${activeId}`
+                            ? 'text-foreground'
+                            : 'text-muted-foreground hover:text-foreground',
+                        ].join(' ')}
+                      >
+                        {t(`nav.links.${l.key}`)}
+                      </a>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
               <NavigationMenuItem>
                 <DropdownMenu onOpenChange={handleProductsMenuOpenChange}>
                   <DropdownMenuTrigger asChild>
                     <button
                       ref={productsTriggerRef}
+                      type="button"
                       className={[
-                        "px-2 py-1 text-sm font-medium transition-colors flex items-center gap-1",
+                        'px-2 py-1 text-sm font-medium transition-colors flex items-center gap-1',
                         isOnProducts
-                          ? "text-foreground"
-                          : "text-muted-foreground hover:text-foreground",
-                      ].join(" ")}
-                      aria-current={isOnProducts ? "page" : undefined}
+                          ? 'text-foreground'
+                          : 'text-muted-foreground hover:text-foreground',
+                      ].join(' ')}
+                      aria-current={isOnProducts ? 'page' : undefined}
                     >
-                      {t("nav.links.products")}
+                      {t('nav.links.products')}
                       <ChevronDown className="h-3 w-3" />
                     </button>
                   </DropdownMenuTrigger>
@@ -216,23 +223,27 @@ export function Header(): ReactElement {
                     <DropdownMenuItem asChild>
                       <Link
                         to="/canto-lyr"
-                        aria-current={isOnCantoLyr ? "page" : undefined}
-                        className={isOnCantoLyr
-                          ? "font-semibold text-foreground"
-                          : undefined}
+                        aria-current={isOnCantoLyr ? 'page' : undefined}
+                        className={
+                          isOnCantoLyr
+                            ? 'font-semibold text-foreground'
+                            : undefined
+                        }
                       >
-                        {t("homepage.products.items.cantoLyr.label")}
+                        {t('homepage.products.items.cantoLyr.label')}
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link
                         to="/canto-cap"
-                        aria-current={isOnCantoCap ? "page" : undefined}
-                        className={isOnCantoCap
-                          ? "font-semibold text-foreground"
-                          : undefined}
+                        aria-current={isOnCantoCap ? 'page' : undefined}
+                        className={
+                          isOnCantoCap
+                            ? 'font-semibold text-foreground'
+                            : undefined
+                        }
                       >
-                        {t("homepage.products.items.cantoCap.label")}
+                        {t('homepage.products.items.cantoCap.label')}
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -253,60 +264,63 @@ export function Header(): ReactElement {
             </SheetTrigger>
             <SheetContent side="left" className="w-80">
               <SheetHeader>
-                <SheetTitle>{t("nav.title")}</SheetTitle>
+                <SheetTitle>{t('nav.title')}</SheetTitle>
               </SheetHeader>
               <nav className="mt-6 grid gap-2">
-                {links.filter((l) => l.key !== "products").map((l) => (
-                  <SheetClose asChild key={l.key}>
-                    <a
-                      href={l.href}
-                      onClick={(e) =>
-                        handleNavClick(e, l.href)}
-                      aria-current={activeId && l.href === `#${activeId}`
-                        ? "page"
-                        : undefined}
-                      className={[
-                        "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                        activeId && l.href === `#${activeId}`
-                          ? "bg-primary/10 text-foreground"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted",
-                      ].join(" ")}
-                    >
-                      {t(`nav.links.${l.key}`)}
-                    </a>
-                  </SheetClose>
-                ))}
+                {links
+                  .filter(l => l.key !== 'products')
+                  .map(l => (
+                    <SheetClose asChild key={l.key}>
+                      <a
+                        href={l.href}
+                        onClick={e => handleNavClick(e, l.href)}
+                        aria-current={
+                          activeId && l.href === `#${activeId}`
+                            ? 'page'
+                            : undefined
+                        }
+                        className={[
+                          'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                          activeId && l.href === `#${activeId}`
+                            ? 'bg-primary/10 text-foreground'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                        ].join(' ')}
+                      >
+                        {t(`nav.links.${l.key}`)}
+                      </a>
+                    </SheetClose>
+                  ))}
                 <div className="px-3 py-2">
                   <div className="text-sm font-medium text-muted-foreground mb-2">
-                    {t("nav.links.products")}
+                    {t('nav.links.products')}
                   </div>
                   <div className="ml-4 space-y-1">
                     <SheetClose asChild>
                       <Link
                         to="/canto-lyr"
-                        aria-current={isOnCantoLyr ? "page" : undefined}
+                        aria-current={isOnCantoLyr ? 'page' : undefined}
                         className={[
-                          "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                          'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
                           isOnCantoLyr
-                            ? "bg-primary/10 text-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted",
-                        ].join(" ")}
+                            ? 'bg-primary/10 text-foreground'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                        ].join(' ')}
                       >
-                        {t("homepage.products.items.cantoLyr.label")}
+                        {t('homepage.products.items.cantoLyr.label')}
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>
                       <Link
                         to="/canto-cap"
-                        aria-current={isOnCantoCap ? "page" : undefined}
+                        aria-current={isOnCantoCap ? 'page' : undefined}
                         className={[
-                          "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                          'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
                           isOnCantoCap
-                            ? "bg-primary/10 text-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted",
-                        ].join(" ")}
+                            ? 'bg-primary/10 text-foreground'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                        ].join(' ')}
                       >
-                        {t("homepage.products.items.cantoCap.label")}
+                        {t('homepage.products.items.cantoCap.label')}
                       </Link>
                     </SheetClose>
                   </div>

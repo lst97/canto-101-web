@@ -1,8 +1,8 @@
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ChevronDown } from "lucide-react";
-import * as React from "react";
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { ChevronDown } from 'lucide-react';
+import * as React from 'react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '../../lib/utils.ts';
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -14,9 +14,9 @@ const AccordionItem = React.forwardRef<
     <AccordionPrimitive.Item
       ref={ref}
       className={cn(
-        "overflow-hidden rounded-xl border border-border/70 bg-card/70 shadow-sm transition-colors",
-        "data-[state=open]:border-border data-[state=open]:bg-card/90",
-        className,
+        'overflow-hidden rounded-xl border border-border/70 bg-card/70 shadow-sm transition-colors',
+        'data-[state=open]:border-border data-[state=open]:bg-card/90',
+        className
       )}
       {...props}
     />
@@ -32,10 +32,10 @@ const AccordionTrigger = React.forwardRef<
       <AccordionPrimitive.Trigger
         ref={ref}
         className={cn(
-          "flex flex-1 items-center justify-between gap-3 px-4 py-3 text-left text-base font-medium transition-colors",
-          "hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
-          "rounded-none data-[state=open]:bg-muted/60 data-[state=open]:text-foreground",
-          className,
+          'flex flex-1 items-center justify-between gap-3 px-4 py-3 text-left text-base font-medium transition-colors',
+          'hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60',
+          'rounded-none data-[state=open]:bg-muted/60 data-[state=open]:text-foreground',
+          className
         )}
         {...props}
       >
@@ -56,7 +56,12 @@ const AccordionContent = React.forwardRef<
       className="overflow-hidden text-sm text-muted-foreground"
       {...props}
     >
-      <div className={cn("border-t border-border/60 bg-background/90 px-4 pb-4 pt-3", className)}>
+      <div
+        className={cn(
+          'border-t border-border/60 bg-background/90 px-4 pb-4 pt-3',
+          className
+        )}
+      >
         {children}
       </div>
     </AccordionPrimitive.Content>

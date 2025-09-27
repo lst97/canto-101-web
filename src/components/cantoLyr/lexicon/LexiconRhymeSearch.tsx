@@ -1,17 +1,20 @@
-import type { ReactElement } from "react";
-import { z } from "zod";
+import type { ReactElement } from 'react';
+import { z } from 'zod';
 
-import { cantonesePinyinTable } from "../../../data/cantonesePinyinTable";
-import { LexiconSearchBase } from "./LexiconSearchBase";
+import { cantonesePinyinTable } from '../../../data/cantonesePinyinTable.ts';
+import { LexiconSearchBase } from './LexiconSearchBase.tsx';
 
 const RhymeQuerySchema = z.object({
   query: z
     .string()
     .trim()
-    .min(1, { message: "cantoLyr.errors.rhyme.missingQuery" })
+    .min(1, { message: 'cantoLyr.errors.rhyme.missingQuery' })
     .refine(
-      (val) => cantonesePinyinTable.rhymes.includes(val as typeof cantonesePinyinTable.rhymes[number]),
-      { message: "cantoLyr.errors.rhyme.invalidRhyme" }
+      val =>
+        cantonesePinyinTable.rhymes.includes(
+          val as (typeof cantonesePinyinTable.rhymes)[number]
+        ),
+      { message: 'cantoLyr.errors.rhyme.invalidRhyme' }
     ),
 });
 
@@ -21,7 +24,7 @@ export function LexiconRhymeSearch(): ReactElement {
       kind="rhyme"
       querySchema={RhymeQuerySchema}
       groupSize={50}
-      inputProps={{ autoCapitalize: "off", autoCorrect: "off" }}
+      inputProps={{ autoCapitalize: 'off', autoCorrect: 'off' }}
     />
   );
 }

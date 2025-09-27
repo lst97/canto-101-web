@@ -1,32 +1,41 @@
-import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
-import type { AppError, ApiError, NetworkError, UnexpectedError } from "@/types/errors";
+import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
+import type {
+  AppError,
+  ApiError,
+  NetworkError,
+  UnexpectedError,
+} from '../types/errors.ts';
 
 export const API_BASE_URL: string =
-  import.meta.env.VITE_API_BASE_URL ?? "http://175.33.104.105:3000";
+  import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
   // withCredentials could be enabled here if auth cookies later
 });
 
 // BACKWARDS COMPAT shape (used in some existing hooks). Keep until migration complete.
-export interface NormalizedApiError { message: string; status?: number; cause?: unknown }
+export interface NormalizedApiError {
+  message: string;
+  status?: number;
+  cause?: unknown;
+}
 
 function extractMessage(data: unknown): string | undefined {
-  if (typeof data === "string") {
+  if (typeof data === 'string') {
     return data;
   }
-  if (typeof data === "object" && data !== null) {
+  if (typeof data === 'object' && data !== null) {
     const record = data as Record<string, unknown>;
 
     const errorValue = record.error;
-    if (typeof errorValue === "string") {
+    if (typeof errorValue === 'string') {
       return errorValue;
     }
-    if (typeof errorValue === "object" && errorValue !== null) {
+    if (typeof errorValue === 'object' && errorValue !== null) {
       const nestedMessage = (errorValue as Record<string, unknown>).message;
       if (nestedMessage !== undefined) {
         return String(nestedMessage);
@@ -45,7 +54,10 @@ export function normalizeError(error: unknown): NormalizedApiError {
   if (axios.isAxiosError(error)) {
     const axiosErr = error as AxiosError;
     return {
-      message: extractMessage(axiosErr.response?.data) || axiosErr.message || "Request failed",
+      message:
+        extractMessage(axiosErr.response?.data) ||
+        axiosErr.message ||
+        'Request failed',
       status: axiosErr.response?.status,
       cause: error,
     };
@@ -54,11 +66,14 @@ export function normalizeError(error: unknown): NormalizedApiError {
 }
 
 export class AppNetworkError extends Error implements NetworkError {
-  kind: NetworkError["kind"] = "network";
+  kind: NetworkError['kind'] = 'network';
   status?: number;
   retriable: boolean;
   cause?: unknown;
-  constructor(message: string, opts: { status?: number; cause?: unknown; retriable?: boolean } = {}) {
+  constructor(
+    message: string,
+    opts: { status?: number; cause?: unknown; retriable?: boolean } = {}
+  ) {
     super(message);
     this.status = opts.status;
     this.cause = opts.cause;
@@ -67,13 +82,22 @@ export class AppNetworkError extends Error implements NetworkError {
 }
 
 export class AppApiError extends Error implements ApiError {
-  kind: ApiError["kind"] = "api";
+  kind: ApiError['kind'] = 'api';
   status: number;
   code?: string;
   details?: unknown;
   retriable: boolean;
   cause?: unknown;
-  constructor(message: string, status: number, opts: { code?: string; details?: unknown; cause?: unknown; retriable?: boolean } = {}) {
+  constructor(
+    message: string,
+    status: number,
+    opts: {
+      code?: string;
+      details?: unknown;
+      cause?: unknown;
+      retriable?: boolean;
+    } = {}
+  ) {
     super(message);
     this.status = status;
     this.code = opts.code;
@@ -84,7 +108,7 @@ export class AppApiError extends Error implements ApiError {
 }
 
 export class AppUnexpectedError extends Error implements UnexpectedError {
-  kind: UnexpectedError["kind"] = "unexpected";
+  kind: UnexpectedError['kind'] = 'unexpected';
   cause?: unknown;
   constructor(message: string, cause?: unknown) {
     super(message);
@@ -97,7 +121,8 @@ export function toAppError(error: unknown): AppError {
     const axiosErr = error as AxiosError;
     const status = axiosErr.response?.status;
     const data = axiosErr.response?.data;
-    const message = extractMessage(data) || axiosErr.message || "Request failed";
+    const message =
+      extractMessage(data) || axiosErr.message || 'Request failed';
     if (status && status >= 400) {
       return new AppApiError(message, status, { details: data, cause: error });
     }
@@ -106,7 +131,10 @@ export function toAppError(error: unknown): AppError {
       return new AppNetworkError(message, { cause: error, retriable: true });
     }
   }
-  return new AppUnexpectedError(error instanceof Error ? error.message : String(error), error);
+  return new AppUnexpectedError(
+    error instanceof Error ? error.message : String(error),
+    error
+  );
 }
 
 // Attach interceptors to transform errors before reaching calling code. This avoids pervasive try/catch in components.
@@ -120,5 +148,5 @@ api.interceptors.response.use(
   error => {
     // Always throw typed AppError for downstream consumers / React Query error handling
     throw toAppError(error);
-  },
+  }
 );

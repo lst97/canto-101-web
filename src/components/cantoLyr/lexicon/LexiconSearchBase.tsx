@@ -8,26 +8,32 @@ import {
   useMemo,
   useRef,
   useState,
-} from "react";
-import { useTranslation } from "react-i18next";
-import { useForm } from "@tanstack/react-form";
-import { z } from "zod";
-import { Search, ThumbsDown, ThumbsUp } from "lucide-react";
+} from 'react';
+import { useTranslation } from 'react-i18next';
+import { useForm } from '@tanstack/react-form';
+import { z } from 'zod';
+import { Search, ThumbsDown, ThumbsUp } from 'lucide-react';
 
-import { useLexiconSearch } from "@/hooks/useLexiconSearch";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { LoadingIndicator } from "@/components/ui/loading-indicator";
-import { cn } from "@/lib/utils";
-import type { ReadingItem, SearchResponse } from "@/lib/schemas/lexicon";
+import { useLexiconSearch } from '../../../hooks/useLexiconSearch.ts';
+import { Badge } from '../../ui/badge.tsx';
+import { Button } from '../../ui/button.tsx';
+import { Card, CardContent } from '../../ui/card.tsx';
+import { Input } from '../../ui/input.tsx';
+import { LoadingIndicator } from '../../ui/loading-indicator.tsx';
+import { cn } from '../../../lib/utils.ts';
+import type {
+  ReadingItem,
+  SearchResponse,
+} from '../../../lib/schemas/lexicon.ts';
 
 interface LexiconSearchBaseProps {
-  kind: "pron" | "rhyme";
+  kind: 'pron' | 'rhyme';
   querySchema: z.ZodSchema<{ query: string }>;
   groupSize?: number;
-  inputProps?: Pick<InputHTMLAttributes<HTMLInputElement>, "inputMode" | "pattern" | "autoCapitalize" | "autoCorrect">;
+  inputProps?: Pick<
+    InputHTMLAttributes<HTMLInputElement>,
+    'inputMode' | 'pattern' | 'autoCapitalize' | 'autoCorrect'
+  >;
 }
 
 interface DetailEntry {
@@ -38,27 +44,59 @@ interface DetailEntry {
 
 const DEFAULT_GROUP_SIZE = 50;
 
-function formatEntryType(t: (k: string, opts?: Record<string, unknown>) => string, type: ReadingItem["type"]): string {
+function formatEntryType(
+  t: (k: string, opts?: Record<string, unknown>) => string,
+  type: ReadingItem['type']
+): string {
   return t(`cantoLyr.lexicon.types.${type}`, { defaultValue: type });
 }
 
-function formatList(values: string[], separator = ", "): string {
+function formatList(values: string[], separator = ', '): string {
   return values.filter(Boolean).join(separator);
 }
 
-function createDetailEntries(t: (k: string, opts?: Record<string, unknown>) => string, item: ReadingItem): DetailEntry[] {
+function createDetailEntries(
+  t: (k: string, opts?: Record<string, unknown>) => string,
+  item: ReadingItem
+): DetailEntry[] {
   const entries: DetailEntry[] = [
-    { label: t("cantoLyr.lexicon.details.pronunciation"), value: item.pronunciation },
-    { label: t("cantoLyr.lexicon.details.tone"), value: item.tone },
-    { label: t("cantoLyr.lexicon.details.jyutping"), value: formatList(item.jyutping, " · ") },
-    { label: t("cantoLyr.lexicon.details.consonants"), value: formatList(item.consonants) },
-    { label: t("cantoLyr.lexicon.details.rhymes"), value: formatList(item.rhymes) },
-    { label: t("cantoLyr.lexicon.details.syllables"), value: item.syllables.toString() },
-    { label: t("cantoLyr.lexicon.details.frequency"), value: item.freq.toLocaleString() },
-    { label: t("cantoLyr.lexicon.details.pos"), value: item.pos },
-    { label: t("cantoLyr.lexicon.details.register"), value: item.register },
-    { label: t("cantoLyr.lexicon.details.gloss"), value: item.gloss, fullWidth: true },
-    { label: t("cantoLyr.lexicon.details.source"), value: item.source, fullWidth: true },
+    {
+      label: t('cantoLyr.lexicon.details.pronunciation'),
+      value: item.pronunciation,
+    },
+    { label: t('cantoLyr.lexicon.details.tone'), value: item.tone },
+    {
+      label: t('cantoLyr.lexicon.details.jyutping'),
+      value: formatList(item.jyutping, ' · '),
+    },
+    {
+      label: t('cantoLyr.lexicon.details.consonants'),
+      value: formatList(item.consonants),
+    },
+    {
+      label: t('cantoLyr.lexicon.details.rhymes'),
+      value: formatList(item.rhymes),
+    },
+    {
+      label: t('cantoLyr.lexicon.details.syllables'),
+      value: item.syllables.toString(),
+    },
+    {
+      label: t('cantoLyr.lexicon.details.frequency'),
+      value: item.freq.toLocaleString(),
+    },
+    { label: t('cantoLyr.lexicon.details.pos'), value: item.pos },
+    { label: t('cantoLyr.lexicon.details.register'), value: item.register },
+    {
+      label: t('cantoLyr.lexicon.details.gloss'),
+      value: item.gloss,
+      fullWidth: true,
+    },
+    {
+      label: t('cantoLyr.lexicon.details.source'),
+      value: item.source,
+      fullWidth: true,
+    },
   ];
   return entries.filter(entry => entry.value.trim().length > 0);
 }
@@ -70,20 +108,34 @@ export function LexiconSearchBase({
   inputProps,
 }: LexiconSearchBaseProps): ReactElement {
   const { t } = useTranslation();
-  const { query, setQuery, result, error, loading, search, page, setPage, options } = useLexiconSearch({ kind });
+  const {
+    query,
+    setQuery,
+    result,
+    error,
+    loading,
+    search,
+    page,
+    setPage,
+    options,
+  } = useLexiconSearch({ kind });
   const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const [entries, setEntries] = useState<ReadingItem[]>([]);
   const [groups, setGroups] = useState<ReadingItem[][]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const [currentQueryText, setCurrentQueryText] = useState<string>("");
+  const [currentQueryText, setCurrentQueryText] = useState<string>('');
   const [responseFromCache, setResponseFromCache] = useState<boolean>(false);
-  const [lastProcessingTimeMs, setLastProcessingTimeMs] = useState<number | null>(null);
+  const [lastProcessingTimeMs, setLastProcessingTimeMs] = useState<
+    number | null
+  >(null);
   const resultsScrollRef = useRef<HTMLDivElement | null>(null);
   const scrollSnapshotRef = useRef({ top: 0, height: 0, clientHeight: 0 });
 
   const readingResult = useMemo<SearchResponse | null>(() => {
     if (!result) return null;
-    return kind === "pron" || kind === "rhyme" ? (result as SearchResponse) : null;
+    return kind === 'pron' || kind === 'rhyme'
+      ? (result as SearchResponse)
+      : null;
   }, [result, kind]);
 
   const pageSize = useMemo(() => {
@@ -100,7 +152,7 @@ export function LexiconSearchBase({
       if (!loading && page === 0) {
         setEntries([]);
         setTotalCount(0);
-        setCurrentQueryText("");
+        setCurrentQueryText('');
         setResponseFromCache(false);
         setLastProcessingTimeMs(null);
       }
@@ -169,7 +221,8 @@ export function LexiconSearchBase({
     }
 
     const nearBottomThreshold = 12;
-    const previousDistanceFromBottom = previousHeight - previousTop - previousClientHeight;
+    const previousDistanceFromBottom =
+      previousHeight - previousTop - previousClientHeight;
     const wasNearBottom = previousDistanceFromBottom <= nearBottomThreshold;
 
     if (wasNearBottom) {
@@ -187,18 +240,24 @@ export function LexiconSearchBase({
   useLayoutEffect(() => {
     const el = resultsScrollRef.current;
     if (!el) return;
-    scrollSnapshotRef.current = { top: el.scrollTop, height: el.scrollHeight, clientHeight: el.clientHeight };
+    scrollSnapshotRef.current = {
+      top: el.scrollTop,
+      height: el.scrollHeight,
+      clientHeight: el.clientHeight,
+    };
   });
 
   const hasMore = entriesCount < totalCount;
 
   const activeItem = entries.find(item => item.id === activeItemId) ?? null;
 
-  const missingQueryKey = useMemo(() => (
-    kind === "rhyme"
-      ? "cantoLyr.errors.rhyme.missingQuery"
-      : "cantoLyr.errors.pron.missingQuery"
-  ), [kind]);
+  const missingQueryKey = useMemo(
+    () =>
+      kind === 'rhyme'
+        ? 'cantoLyr.errors.rhyme.missingQuery'
+        : 'cantoLyr.errors.pron.missingQuery',
+    [kind]
+  );
 
   const form = useForm({
     defaultValues: { query },
@@ -209,18 +268,21 @@ export function LexiconSearchBase({
 
   const [submitAttempted, setSubmitAttempted] = useState(false);
 
-  const validateQueryValue = useCallback((value: string): string | undefined => {
-    const result = querySchema.safeParse({ query: value });
-    if (!result.success) {
-      return result.error.issues[0]?.message ?? missingQueryKey;
-    }
-    return undefined;
-  }, [missingQueryKey, querySchema]);
+  const validateQueryValue = useCallback(
+    (value: string): string | undefined => {
+      const result = querySchema.safeParse({ query: value });
+      if (!result.success) {
+        return result.error.issues[0]?.message ?? missingQueryKey;
+      }
+      return undefined;
+    },
+    [missingQueryKey, querySchema]
+  );
 
   useEffect(() => {
-    const currentValue = form.getFieldValue("query");
+    const currentValue = form.getFieldValue('query');
     if (currentValue !== query) {
-      form.setFieldValue("query", () => query);
+      form.setFieldValue('query', () => query);
     }
   }, [form, query]);
 
@@ -232,13 +294,17 @@ export function LexiconSearchBase({
     setPage(page + 1);
   }, [page, setPage]);
 
-  const resolvedError = error ? (error.startsWith("cantoLyr.") ? t(error) : error) : null;
+  const resolvedError = error
+    ? error.startsWith('cantoLyr.')
+      ? t(error)
+      : error
+    : null;
 
   return (
     <Card className="border-border/60 shadow-none">
       <CardContent className="space-y-6">
         <form
-          onSubmit={(event) => {
+          onSubmit={event => {
             event.preventDefault();
             event.stopPropagation();
             setSubmitAttempted(true);
@@ -255,11 +321,12 @@ export function LexiconSearchBase({
                   onSubmit: ({ value }) => validateQueryValue(value),
                 }}
               >
-                {(field) => {
-                  const showFieldError = (
-                    field.state.meta.errors.length > 0
-                    && (field.state.meta.isTouched || field.state.meta.isDirty || submitAttempted)
-                  );
+                {field => {
+                  const showFieldError =
+                    field.state.meta.errors.length > 0 &&
+                    (field.state.meta.isTouched ||
+                      field.state.meta.isDirty ||
+                      submitAttempted);
                   const errorMessageKey = field.state.meta.errors[0];
 
                   return (
@@ -271,14 +338,18 @@ export function LexiconSearchBase({
                           placeholder={t(`cantoLyr.${kind}.placeholder`)}
                           value={field.state.value}
                           onBlur={field.handleBlur}
-                          onChange={(event) => {
+                          onChange={event => {
                             const nextValue = event.target.value;
                             field.handleChange(nextValue);
                             setQuery(nextValue);
                           }}
                           className="pl-10"
                           aria-invalid={showFieldError}
-                          aria-describedby={showFieldError ? `lexicon-${kind}-query-error` : undefined}
+                          aria-describedby={
+                            showFieldError
+                              ? `lexicon-${kind}-query-error`
+                              : undefined
+                          }
                           inputMode={inputProps?.inputMode}
                           pattern={inputProps?.pattern}
                           autoCapitalize={inputProps?.autoCapitalize}
@@ -286,7 +357,11 @@ export function LexiconSearchBase({
                         />
                       </div>
                       {showFieldError && errorMessageKey && (
-                        <p id={`lexicon-${kind}-query-error`} className="mt-2 text-xs text-destructive" role="alert">
+                        <p
+                          id={`lexicon-${kind}-query-error`}
+                          className="mt-2 text-xs text-destructive"
+                          role="alert"
+                        >
                           {t(errorMessageKey)}
                         </p>
                       )}
@@ -298,19 +373,21 @@ export function LexiconSearchBase({
                 {loading ? (
                   <LoadingIndicator
                     size="sm"
-                    label={t("common.loading")}
+                    label={t('common.loading')}
                     spinnerClassName="text-primary-foreground"
                     labelClassName="text-primary-foreground"
                   />
                 ) : (
-                  t("common.search")
+                  t('common.search')
                 )}
               </Button>
             </div>
           </div>
         </form>
         {resolvedError && (
-          <p className="text-sm text-destructive" role="alert">{resolvedError}</p>
+          <p className="text-sm text-destructive" role="alert">
+            {resolvedError}
+          </p>
         )}
         {(entries.length > 0 || loading || readingResult) && (
           <div className="space-y-4">
@@ -328,7 +405,10 @@ export function LexiconSearchBase({
                 ref={resultsScrollRef}
                 className="flex max-h-[420px] flex-col gap-4 overflow-y-auto pr-1"
                 role="region"
-                aria-label={t(`cantoLyr.${kind}.resultsRegionLabel`, { ns: "translation", defaultValue: "Search results" })}
+                aria-label={t(`cantoLyr.${kind}.resultsRegionLabel`, {
+                  ns: 'translation',
+                  defaultValue: 'Search results',
+                })}
               >
                 <GroupedEntrySurface
                   groups={groups}
@@ -346,32 +426,40 @@ export function LexiconSearchBase({
                       {loading ? (
                         <LoadingIndicator
                           size="sm"
-                          label={t("common.loading")}
+                          label={t('common.loading')}
                           spinnerClassName="text-primary-foreground"
                           labelClassName="text-primary-foreground"
                         />
                       ) : (
-                        t("common.loadMore")
+                        t('common.loadMore')
                       )}
                     </Button>
                   </div>
                 ) : (
-                  entries.length > 0 && !loading && (
-                    <p className="text-xs text-muted-foreground">{t("cantoLyr.lexicon.messages.endOfResults")}</p>
+                  entries.length > 0 &&
+                  !loading && (
+                    <p className="text-xs text-muted-foreground">
+                      {t('cantoLyr.lexicon.messages.endOfResults')}
+                    </p>
                   )
                 )}
               </div>
             ) : (
-              !loading && !readingResult && (
-                <p className="text-sm text-muted-foreground">{t("cantoLyr.lexicon.messages.noMatches")}</p>
+              !loading &&
+              !readingResult && (
+                <p className="text-sm text-muted-foreground">
+                  {t('cantoLyr.lexicon.messages.noMatches')}
+                </p>
               )
             )}
-            {entries.length > 0 && (<ActiveEntryPanel activeItem={activeItem} />)}
+            {entries.length > 0 && <ActiveEntryPanel activeItem={activeItem} />}
           </div>
         )}
         {result && !readingResult && (
           <div className="rounded-lg border border-border/60 bg-muted/40 p-4 text-sm">
-            <pre className="whitespace-pre-wrap break-words text-muted-foreground/90">{JSON.stringify(result, null, 2)}</pre>
+            <pre className="whitespace-pre-wrap break-words text-muted-foreground/90">
+              {JSON.stringify(result, null, 2)}
+            </pre>
           </div>
         )}
       </CardContent>
@@ -387,27 +475,41 @@ interface ResultsHeaderProps {
   processingTimeMs: number | null;
 }
 
-const ResultsHeader = memo(function ResultsHeader({ shown, total, cached, queryText, processingTimeMs }: ResultsHeaderProps) {
+const ResultsHeader = memo(function ResultsHeader({
+  shown,
+  total,
+  cached,
+  queryText,
+  processingTimeMs,
+}: ResultsHeaderProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-wrap items-center gap-2">
         {total > 0 && (
           <span className="font-semibold text-foreground">
-            {t("cantoLyr.lexicon.counts.showing", { shown: shown.toLocaleString(), total: total.toLocaleString() })}
+            {t('cantoLyr.lexicon.counts.showing', {
+              shown: shown.toLocaleString(),
+              total: total.toLocaleString(),
+            })}
           </span>
         )}
         {cached && (
-          <Badge variant="outline" className="text-[11px] uppercase tracking-wide">
-            {t("cantoLyr.lexicon.badges.cached")}
+          <Badge
+            variant="outline"
+            className="text-[11px] uppercase tracking-wide"
+          >
+            {t('cantoLyr.lexicon.badges.cached')}
           </Badge>
         )}
       </div>
       <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
         {queryText && (
-          <span className="rounded-md bg-muted/60 px-2 py-0.5 font-mono text-muted-foreground/90">{queryText}</span>
+          <span className="rounded-md bg-muted/60 px-2 py-0.5 font-mono text-muted-foreground/90">
+            {queryText}
+          </span>
         )}
-        {typeof processingTimeMs === "number" && (
+        {typeof processingTimeMs === 'number' && (
           <>
             <span aria-hidden="true">•</span>
             <span>{processingTimeMs.toLocaleString()} ms</span>
@@ -424,7 +526,11 @@ interface GroupedEntrySurfaceProps {
   onActivate: (item: ReadingItem) => void;
 }
 
-const GroupedEntrySurface = memo(function GroupedEntrySurface({ groups, activeId, onActivate }: GroupedEntrySurfaceProps) {
+const GroupedEntrySurface = memo(function GroupedEntrySurface({
+  groups,
+  activeId,
+  onActivate,
+}: GroupedEntrySurfaceProps) {
   const { t } = useTranslation();
   if (!groups.length) return null;
   let runningIndex = 0;
@@ -438,10 +544,17 @@ const GroupedEntrySurface = memo(function GroupedEntrySurface({ groups, activeId
           <div key={group[0]?.id ?? idx} className="flex flex-col gap-2">
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                {t("cantoLyr.lexicon.group.label", { index: idx + 1, defaultValue: `Group ${idx + 1}` })}
+                {t('cantoLyr.lexicon.group.label', {
+                  index: idx + 1,
+                  defaultValue: `Group ${idx + 1}`,
+                })}
               </span>
               <span className="text-[10px] text-muted-foreground/70">
-                {t("cantoLyr.lexicon.group.range", { start, end, defaultValue: `${start}–${end}` })}
+                {t('cantoLyr.lexicon.group.range', {
+                  start,
+                  end,
+                  defaultValue: `${start}–${end}`,
+                })}
               </span>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -449,7 +562,7 @@ const GroupedEntrySurface = memo(function GroupedEntrySurface({ groups, activeId
                 <Button
                   key={item.id}
                   type="button"
-                  variant={item.id === activeId ? "secondary" : "outline"}
+                  variant={item.id === activeId ? 'secondary' : 'outline'}
                   size="sm"
                   onClick={() => onActivate(item)}
                   title={`${item.surface} · ${item.pronunciation}`}
@@ -460,7 +573,10 @@ const GroupedEntrySurface = memo(function GroupedEntrySurface({ groups, activeId
               ))}
             </div>
             {idx < groups.length - 1 && (
-              <div className="mt-1 h-px w-full bg-border/60" aria-hidden="true" />
+              <div
+                className="mt-1 h-px w-full bg-border/60"
+                aria-hidden="true"
+              />
             )}
           </div>
         );
@@ -473,7 +589,9 @@ interface ActiveEntryPanelProps {
   activeItem: ReadingItem | null;
 }
 
-const ActiveEntryPanel = memo(function ActiveEntryPanel({ activeItem }: ActiveEntryPanelProps) {
+const ActiveEntryPanel = memo(function ActiveEntryPanel({
+  activeItem,
+}: ActiveEntryPanelProps) {
   const { t } = useTranslation();
   return (
     <div className="relative rounded-lg border border-border/60 bg-primary/2 p-4 shadow-sm">
@@ -481,15 +599,22 @@ const ActiveEntryPanel = memo(function ActiveEntryPanel({ activeItem }: ActiveEn
         <div className="space-y-4">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h3 className="text-lg font-semibold leading-tight text-foreground">{activeItem.surface}</h3>
-              <p className="text-sm text-muted-foreground">{activeItem.pronunciation}</p>
+              <h3 className="text-lg font-semibold leading-tight text-foreground">
+                {activeItem.surface}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {activeItem.pronunciation}
+              </p>
             </div>
             <div className="flex flex-col items-end gap-2 text-xs text-muted-foreground">
               <Badge variant="outline" className="uppercase tracking-wide">
                 {formatEntryType(t, activeItem.type)}
               </Badge>
               {activeItem.lang && (
-                <LangBadgeWithTooltip idBase={activeItem.id} lang={activeItem.lang} />
+                <LangBadgeWithTooltip
+                  idBase={activeItem.id}
+                  lang={activeItem.lang}
+                />
               )}
             </div>
           </div>
@@ -499,8 +624,10 @@ const ActiveEntryPanel = memo(function ActiveEntryPanel({ activeItem }: ActiveEn
               <button
                 type="button"
                 className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-background/95 px-2 py-1 text-xs text-muted-foreground shadow-sm transition-colors hover:bg-muted/70 hover:text-foreground"
-                aria-label={t("cantoLyr.lexicon.feedback.up", { defaultValue: "Mark helpful" })}
-                onClick={(event) => {
+                aria-label={t('cantoLyr.lexicon.feedback.up', {
+                  defaultValue: 'Mark helpful',
+                })}
+                onClick={event => {
                   event.stopPropagation();
                   // TODO: Wire feedback action.
                 }}
@@ -510,8 +637,10 @@ const ActiveEntryPanel = memo(function ActiveEntryPanel({ activeItem }: ActiveEn
               <button
                 type="button"
                 className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-background/95 px-2 py-1 text-xs text-muted-foreground shadow-sm transition-colors hover:bg-muted/70 hover:text-foreground"
-                aria-label={t("cantoLyr.lexicon.feedback.down", { defaultValue: "Mark not helpful" })}
-                onClick={(event) => {
+                aria-label={t('cantoLyr.lexicon.feedback.down', {
+                  defaultValue: 'Mark not helpful',
+                })}
+                onClick={event => {
                   event.stopPropagation();
                   // TODO: Wire feedback action.
                 }}
@@ -522,7 +651,9 @@ const ActiveEntryPanel = memo(function ActiveEntryPanel({ activeItem }: ActiveEn
           </div>
         </div>
       ) : (
-        <p className="text-sm text-muted-foreground">{t("cantoLyr.lexicon.messages.hoverHint")}</p>
+        <p className="text-sm text-muted-foreground">
+          {t('cantoLyr.lexicon.messages.hoverHint')}
+        </p>
       )}
     </div>
   );
@@ -530,14 +661,19 @@ const ActiveEntryPanel = memo(function ActiveEntryPanel({ activeItem }: ActiveEn
 
 interface LexiconEntryDetailsProps {
   item: ReadingItem;
-  layout?: "stack" | "grid";
+  layout?: 'stack' | 'grid';
   className?: string;
 }
 
-function LexiconEntryDetails({ item, layout = "stack", className }: LexiconEntryDetailsProps) {
+function LexiconEntryDetails({
+  item,
+  layout = 'stack',
+  className,
+}: LexiconEntryDetailsProps) {
   const { t } = useTranslation();
   const detailEntries = useMemo(() => createDetailEntries(t, item), [t, item]);
-  const containerClass = layout === "grid" ? "grid gap-3 sm:grid-cols-2" : "space-y-3";
+  const containerClass =
+    layout === 'grid' ? 'grid gap-3 sm:grid-cols-2' : 'space-y-3';
 
   return (
     <div className={cn(containerClass, className)}>
@@ -545,8 +681,8 @@ function LexiconEntryDetails({ item, layout = "stack", className }: LexiconEntry
         <div
           key={label}
           className={cn(
-            "space-y-1",
-            layout === "grid" && fullWidth ? "sm:col-span-2" : undefined,
+            'space-y-1',
+            layout === 'grid' && fullWidth ? 'sm:col-span-2' : undefined
           )}
         >
           <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -566,16 +702,24 @@ interface LangBadgeWithTooltipProps {
 
 function LangBadgeWithTooltip({ idBase, lang }: LangBadgeWithTooltipProps) {
   const { t } = useTranslation();
-  const explanation = lang === "zh-HK"
-    ? t("cantoLyr.lexicon.langHints.zhHk", { defaultValue: "Colloquial Cantonese (HK)" })
-    : lang === "zh-TW"
-      ? t("cantoLyr.lexicon.langHints.zhTw", { defaultValue: "Standard written Chinese (TW)" })
-      : t("cantoLyr.lexicon.langHints.generic", { code: lang, defaultValue: lang });
+  const explanation =
+    lang === 'zh-HK'
+      ? t('cantoLyr.lexicon.langHints.zhHk', {
+          defaultValue: 'Colloquial Cantonese (HK)',
+        })
+      : lang === 'zh-TW'
+        ? t('cantoLyr.lexicon.langHints.zhTw', {
+            defaultValue: 'Standard written Chinese (TW)',
+          })
+        : t('cantoLyr.lexicon.langHints.generic', {
+            code: lang,
+            defaultValue: lang,
+          });
 
   return (
     <button
       type="button"
-      onClick={(event) => event.stopPropagation()}
+      onClick={event => event.stopPropagation()}
       className="group relative rounded-md border border-primary/50 bg-muted/60 px-1.5 py-0.5 font-mono text-xs uppercase transition-colors hover:bg-muted"
       aria-describedby={`lang-hint-${idBase}`}
       title={explanation}

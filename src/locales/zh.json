@@ -8,7 +8,8 @@
     "edit": "編輯",
     "search": "搜尋",
     "close": "關閉",
-    "loadMore": "載入更多",
+    "loadMore": "載入另外 {{count}} 個",
+    "showMore": "顯示另外 {{count}} 個",
     "reset": "重置"
   },
   "errors": {
@@ -331,7 +332,7 @@
         "lexiconDescription": "在正式寫詞之前，透過專用搜尋先確認發音或押韻的對應詞彙。",
         "lyricsTitle": "歌詞生成",
         "lyricsDescription": "將聲調排列與創作提示結合，生成符合粵語韻律的初稿句子。",
-        "lyricSearchTitle": "歌詞搜尋",
+        "lyricSearchTitle": "歌詞工具",
         "lyricSearchDescription": "透過聲調數字或韻母搜尋現有粵語歌詞行，作為寫作前的參考。"
       },
       "ai": {
@@ -439,7 +440,7 @@
         "formDescription": "系統會依據描述與聲調匹配詞彙，調整任一欄位即可重新排序結果。"
       },
       "lyricSearch": {
-        "heading": "歌詞搜尋",
+        "heading": "歌詞工具",
         "preview": "以聲調或韻腳探索已發佈的歌詞行，支援你的創作分析。"
       }
     },
@@ -494,7 +495,8 @@
         "pos": "詞性",
         "register": "語域",
         "gloss": "註釋",
-        "source": "來源"
+        "source": "來源",
+        "position": "位置"
       },
       "badges": {
         "cached": "快取"
@@ -580,7 +582,11 @@
         "metadata": "行內統計",
         "lineIndex": "第 {{index}} 行",
         "counts": "字數 {{chars}} · 音節 {{syllables}} · 詞數 {{tokens}}",
-        "sentiment": "情緒"
+        "sentiment": "情緒",
+        "syntaxNotes": "定義",
+        "artists": "藝人",
+        "lyricists": "作詞人",
+        "tokens": "詞彙"
       },
       "results": {
         "count": "顯示 {{shown}} / {{total}} 行",
