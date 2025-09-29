@@ -78,6 +78,8 @@ export interface LyricSearchBaseProps {
   >;
   filterOptions?: LyricFilterOptionSets;
   filterOptionsLoading?: boolean;
+  isAiSearch?: boolean;
+  aiQueryPlaceholderKey?: string;
 }
 
 export function LyricSearchBase({
@@ -89,6 +91,8 @@ export function LyricSearchBase({
   inputProps,
   filterOptions,
   filterOptionsLoading = false,
+  isAiSearch = false,
+  aiQueryPlaceholderKey,
 }: LyricSearchBaseProps): ReactElement {
   const { t } = useTranslation();
   const {
@@ -111,6 +115,7 @@ export function LyricSearchBase({
   const [currentQueryText, setCurrentQueryText] = useState<string>('');
   const [responseFromCache, setResponseFromCache] = useState<boolean>(false);
   const [processingTimeMs, setProcessingTimeMs] = useState<number | null>(null);
+  const [aiQuery, setAiQuery] = useState<string>('');
 
   const initialOptionsRef = useRef(options);
 
@@ -204,6 +209,7 @@ export function LyricSearchBase({
 
   const handleReset = useCallback(() => {
     setSubmitAttempted(false);
+    setAiQuery('');
     reset();
   }, [reset]);
 
@@ -250,6 +256,25 @@ export function LyricSearchBase({
           }}
         >
           <div className="space-y-2">
+            {isAiSearch && (
+              <div className="space-y-2">
+                <Label htmlFor={`lyric-${kind}-ai-query`}>
+                  {t('cantoLyr.lyricSearch.labels.aiQuery')}
+                </Label>
+                <Input
+                  id={`lyric-${kind}-ai-query`}
+                  placeholder={
+                    aiQueryPlaceholderKey
+                      ? t(aiQueryPlaceholderKey)
+                      : t('cantoLyr.lyricSearch.placeholders.aiQuery')
+                  }
+                  value={aiQuery}
+                  onChange={event => setAiQuery(event.target.value)}
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                />
+              </div>
+            )}
             <div className="flex flex-col gap-3 sm:flex-row">
               <form.Field
                 name="query"

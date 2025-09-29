@@ -1,0 +1,674 @@
+{
+  "common": {
+    "loading": "载入中...",
+    "error": "错误",
+    "save": "储存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "search": "搜寻",
+    "close": "关闭",
+    "loadMore": "载入另外 {{count}} 个",
+    "showMore": "显示另外 {{count}} 个",
+    "reset": "重置"
+  },
+  "errors": {
+    "network": {
+      "title": "网络连线问题",
+      "message": "无法连线伺服器，请检查网路。"
+    },
+    "api": {
+      "title": "请求失败",
+      "message": "伺服器回传错误。"
+    },
+    "unexpected": {
+      "title": "发生未预期错误",
+      "message": "系统遇到未预期的情况。"
+    },
+    "actions": {
+      "retry": "重试",
+      "dismiss": "关闭"
+    }
+  },
+  "language": {
+    "english": "英语",
+    "chineseSimplified": "简体中文",
+    "chineseTraditional": "繁体中文",
+    "japanese": "日语",
+    "switchLanguage": "切换语言",
+    "selectLanguage": "选择语言"
+  },
+  "theme": {
+    "theme": "主题",
+    "light": "浅色",
+    "dark": "深色",
+    "system": "系统",
+    "switchTheme": "切换主题"
+  },
+  "homepage": {
+    "ai": "AI",
+    "hero": {
+      "eyebrow": "粤语 101",
+      "title": "找到属于你的粤语声线",
+      "subtitle": "大胆、现代的学习空间，让你从声调基础走到自然对话，并以音乐引导沉浸式练习。",
+      "primaryCta": "开始旅程",
+      "secondaryCta": "查看课程地图",
+      "metrics": {
+        "lessons": "超过 60 节引导课程",
+        "drills": "声调优先的微练习",
+        "community": "每周社群共修"
+      }
+    },
+    "programOverview": {
+      "title": "首页／课程总览",
+      "description": "了解 Canto101 的学习节奏、每个阶段的重点，以及如何善用平台功能。",
+      "highlights": {
+        "roadmap": "由语音到叙事的循序进阶路线图。",
+        "playlists": "自动调整的歌词播放清单，结合文化注释。",
+        "checkpoints": "里程碑提醒自我检测并串接导师回馈。"
+      }
+    },
+    "gettingStarted": {
+      "title": "入门指南／认识粤语",
+      "description": "从历史脉络、地域使用到声调系统，建立稳固基础让每个音节都自信。",
+      "highlights": {
+        "tones": "互动声调游乐场视觉化曲线走向。",
+        "dialects": "比较香港、澳门与海外华人社群的差异。",
+        "romanization": "粤拼速成班连结声音、文字与声调符号。"
+      }
+    },
+    "resources": {
+      "title": "资源与加值内容",
+      "description": "额外素材让你在线上线下都能持续练习。",
+      "highlights": {
+        "downloads": "可列印的速查表、声调图与书写格线。",
+        "integrations": "透过伙伴 App 将练习同步到手机。",
+        "media": "精选 Podcast、剧集与阅读清单，涵盖不同程度。"
+      }
+    },
+    "community": {
+      "title": "社群与导师",
+      "description": "加入互相支持的网络，获得问答、督导与即时指导。",
+      "highlights": {
+        "forums": "同侪论坛即时分享问题与学习成果。",
+        "events": "每周母语导师与业界来宾的线上咨询。",
+        "booking": "在平台内直接预订一对一或小组实验课。"
+      }
+    },
+    "products": {
+      "title": "产品工具",
+      "description": "专为加速粤语学习而设计的数位伙伴。",
+      "items": {
+        "viewDetails": "查看详情",
+        "cantoLyr": {
+          "label": "CantoLyr",
+          "description": "以歌词驱动的课程，连结发音、文字与文化。",
+          "features": {
+            "romanization": "粤拼引导配合母语音档，逐步拆解发音。",
+            "vocabulary": "核心词汇卡片搭配间隔重复提醒。",
+            "phrases": "实用情境对话，帮你记住常用语。",
+            "grammar": "语法蓝图拆解助词与时态标记。",
+            "pronunciation": "声调实验室以图像呈现音高曲线，强化准确度。"
+          }
+        },
+        "cantoCap": {
+          "label": "CantoCap",
+          "description": "自动产生粤语字幕，跟读真实语料。",
+          "features": {
+            "captions": "为剧集、Vlog 与活动提供精准时间轴字幕。",
+            "annotations": "即时标注变调与口语化用法。",
+            "export": "输出字幕档作为字幕、字卡或卡拉 OK 教材。",
+            "mobile": "将字幕包同步到手机，随时复习。"
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "准备好踏进 Canto101 吗？",
+      "description": "解锁完整指导体验、自订学习地图，让粤语成为生活日常。",
+      "button": "建立学习者档案"
+    }
+  },
+  "nav": {
+    "title": "Canto101",
+    "links": {
+      "programOverview": "总览",
+      "gettingStarted": "入门指南",
+      "resources": "资源",
+      "community": "社群",
+      "products": "产品"
+    }
+  },
+  "footer": {
+    "title": "Canto101",
+    "summary": "总结学习目标、课程结构，以及如何在平台上有效导航以取得最佳成果。",
+    "sections": {
+      "gettingStarted": {
+        "title": "入门 / 关于粤语",
+        "about": "关于粤语",
+        "background": "粤语的重要性、方言特点、声调运作及地区背景。"
+      },
+      "resources": {
+        "title": "资源与额外教材",
+        "downloads": "可列印/下载的教材连结",
+        "integrations": "行动装置整合，随时学习",
+        "media": "推荐的 Podcast、媒体与阅读"
+      },
+      "community": {
+        "title": "社群与导师连结",
+        "qa": "问答论坛、学习社群，或预约导师上课的地方",
+        "tutors": "预约导师课程"
+      },
+      "products": {
+        "title": "产品",
+        "cantoLyr": "CantoLyr - 歌词生成，学习工具",
+        "cantoCap": "CantoCap - 粤语字幕生成应用"
+      },
+      "legal": {
+        "title": "法律",
+        "terms": "条款与条件",
+        "privacy": "隐私",
+        "accessibility": "无障碍"
+      }
+    },
+    "disclaimer": "本平台提供学习资料与社群资源，以支援粤语学习。",
+    "copyright": "© 版权 2025 - Canto101"
+  },
+  "cantoLyr": {
+    "ai": {
+      "lyricSearch": {
+        "title": "AI 歌词搜寻",
+        "pron": {
+          "nav": "AI 声调搜寻",
+          "heading": "AI 歌词声调搜寻",
+          "description": "结合声调数字与可选语意提示，更聪明地搜寻歌词行。",
+          "tipsHeading": "AI 声调搜寻提示",
+          "tipsDescription": "将声调数字与简短描述结合，可提升召回品质。",
+          "tips": {
+            "digits": "以 394052 式声调数字标记需要的轮廓。",
+            "position": "设定声调位置锁定特定双字栏位。",
+            "filters": "结合作词人、年份、主题或关键词筛选较小的资料范围。",
+            "aiQuery": "加入简短描述（如情绪或场景）以引导语意召回。"
+          },
+          "formHeading": "以声调数字 + 语意搜寻",
+          "formDescription": "输入声调数字与可选的语意描述，再配合筛选条件精炼结果。",
+          "placeholder": "描述情绪或场景（选填）"
+        },
+        "rhyme": {
+          "nav": "AI 押韵搜寻",
+          "heading": "AI 歌词押韵搜寻",
+          "description": "搭配可选语意提示，依韵母探索歌词行。",
+          "tipsHeading": "AI 押韵搜寻提示",
+          "tipsDescription": "将韵母与简短描述配对以聚焦结果。",
+          "tips": {
+            "families": "输入 Jyutping 韵母（例：aa、eoi）即可找到相同结尾的歌词。",
+            "placement": "设定韵脚位置锁定歌词行中特定栏位。",
+            "filters": "搭配作词人、演唱者或年份筛选，聚焦指定作品。",
+            "aiQuery": "加入简短描述（如场景或主题）以引导语意检索。"
+          },
+          "formHeading": "以韵母 + 语意搜寻",
+          "formDescription": "输入 Jyutping 韵母与可选语意描述，必要时再加入筛选。",
+          "placeholder": "描述情绪或用法（选填）"
+        }
+      },
+      "lyrics": {
+        "title": "歌词生成",
+        "description": "用创作提示和目标声调格指引生成器，以获得结构化的粤语歌词建议。",
+        "formHeading": "说明本次操作",
+        "formDescription": "定义场景、声调格与选填的随机种子，再开始生成歌词行草稿。",
+        "page": {
+          "overview": "功能说明",
+          "shortOverview": "限制与提示",
+          "limitationsHeading": "目前限制",
+          "limitations": {
+            "lexiconCoverage": "输出品质受限于目前汇入的词汇资料库范围（coverage）。当词条不足时，语意或押韵可能不够精准。",
+            "modelRetrieval": "语意检索与向量召回依赖现行模型；若嵌入表征不足，可能遗漏更贴合语境的候选。",
+            "queryGeneration": "查询与声调序列的组合策略仍在优化，复杂场景下可能出现不稳定排序。",
+            "grammarPron": "生成句子可能含语法、搭配或声调（发音）错误，需人工后期润饰。",
+            "limitedParagraphs": "段落组合采样目前仅限少量候选（top-N），可能未涵盖更多具潜力的混合。",
+            "slowGeneration": "当声调序列较长或需要重新排序多组候选时，生成速度会显著放缓。",
+            "toneSequenceRange": "支援的声调序列长度与分组仍在调整，过长序列可能被截断或降低品质。"
+          },
+          "improveHeading": "演进与改进",
+          "improvements": {
+            "lexiconGrowth": "扩充与清理词汇资料库（含频率、词性、语域标记）以提升候选词质量。",
+            "retrievalRerank": "优化语意检索、分阶段 rerank 与多特征打分（MMR / pattern fit / frequency）。",
+            "patternScoring": "改良声调模式与句法结构的评估，减少不自然停顿与语序错置。",
+            "feedbackLoop": "引入人工标注与使用者回馈循环，增强错误识别与排序精准度。"
+          },
+          "tipsHeading": "使用技巧",
+          "tips": {
+            "expandLines": "展开每一行查看候选句与模式统计，萃取灵感或替换片段。",
+            "refineSequences": "调整声调序列长度与结构（例如把长句拆成两行）可提升匹配稳定度。",
+            "lexiconSemantic": "若某行词汇过于生硬，可切换到词汇语意搜寻工具，输入相同场景描述寻找替代表达。",
+            "manualPolish": "将生成草稿视为骨架：再行优化语序、情感层次、以及真实口语感。"
+          },
+          "disclaimer": "输出为实验性草稿，请以人工审校为准"
+        },
+        "form": {
+          "promptLabel": "歌词提示",
+          "promptPlaceholder": "描述场景、情绪或故事片段",
+          "sequencesLabel": "声调序列",
+          "sequencesPlaceholder": "以逗号或换行分隔输入声调数字序列",
+          "sequencesCaption": "使用粤语声调数字（例如: 394052）。每一行会成为一个生成的歌词行。",
+          "seedLabel": "种子（选填）",
+          "seedPlaceholder": "随机",
+          "seedCaption": "锁定随机种子以生成可比较的输出。",
+          "topLabel": "段落输出数",
+          "topCaption": "要回传的段落建议数量（1–3）。",
+          "submit": "生成歌词",
+          "generating": "生成中...",
+          "generatingHint": "系统正在组装候选句并进行排序。"
+        },
+        "summary": {
+          "title": "会话摘要",
+          "description": "功能 {{feature}} · 引擎 v{{version}}",
+          "feature": "功能: {{feature}}",
+          "version": "引擎版本 {{version}}",
+          "seed": "种子",
+          "createdAt": "建立时间",
+          "lineCount": "行数",
+          "processingTime": "处理时间",
+          "processingTimeValue": "{{ms}} ms"
+        },
+        "topParagraphs": {
+          "title": "组合段落",
+          "count": "{{count}} 则建议",
+          "badge": "第 {{index}} 名",
+          "empty": "未产生段落建议。增加段落输出数或再试一次。"
+        },
+        "lines": {
+          "sectionTitle": "逐行细节",
+          "count": "{{count}} 行",
+          "title": "第 {{index}} 行 · 声调 {{tone}}",
+          "previewFallback": "尚无先导句。展开以查看诊断细节。",
+          "warningsCount": "{{count}} 则警告",
+          "empty": "目前尚无行资料。",
+          "toneSequence": "声调 {{tone}}",
+          "lineIndex": "行 {{index}}",
+          "digitSet": "数字集合",
+          "primaryPattern": "主模式 {{pattern}}",
+          "primaryRank": "名次 {{rank}}",
+          "primaryMmr": "MMR {{score}}",
+          "noPrimary": "此行未产生排名句子。",
+          "error": "生成错误: {{message}}",
+          "candidateStats": {
+            "heading": "候选集",
+            "total": "候选总数",
+            "semantic": "语意匹配",
+            "freqTop": "高频",
+            "freqRandom": "探索型"
+          },
+          "topSentences": {
+            "heading": "顶级句子",
+            "columns": {
+              "text": "句子",
+              "pattern": "模式",
+              "rank": "名次",
+              "mmr": "MMR"
+            },
+            "empty": "未返回任何排名句子。"
+          },
+          "patterns": {
+            "heading": "声调模式",
+            "groups": "群组: {{groups}}",
+            "empty": "未返回声调模式。"
+          },
+          "allCandidates": {
+            "heading": "完整候选集",
+            "pattern": "模式 {{pattern}}",
+            "empty": "未返回其他候选项目。"
+          },
+          "additional": {
+            "heading": "其他排名句子",
+            "rank": "名次 {{rank}}",
+            "mmr": "MMR {{score}}"
+          },
+          "paragraphs": {
+            "heading": "使用此行的段落混合",
+            "label": "段落 {{index}}"
+          }
+        }
+      },
+      "lexicon": {
+        "title": "词汇搜寻",
+        "description": "利用语意提示与声调数字，找到符合你提示的词语与字词。",
+        "form": {
+          "queryLabel": "描述使用情境",
+          "queryPlaceholder": "例如：关于新开始的希望副歌",
+          "pronunciationLabel": "目标声调数字",
+          "pronunciationPlaceholder": "输入 394 等声调数字",
+          "limitLabel": "建议数量",
+          "limitCaption": "可输入 1 至 25 笔结果。"
+        },
+        "summary": {
+          "query": "语意：{{query}}",
+          "pronunciation": "声调：{{pronunciation}}",
+          "timing": "{{ms}} 毫秒"
+        },
+        "similarityBadge": "{{percentage}}% 语意相似",
+        "noResults": "目前没有 AI 建议，可尝试放宽描述或调整声调数字。"
+      }
+    },
+    "pron": {
+      "title": "发音搜寻",
+      "placeholder": "输入发音（例如 02）",
+      "resultsRegionLabel": "发音搜寻结果"
+    },
+    "rhyme": {
+      "title": "押韵搜寻",
+      "placeholder": "输入韵码（例如 aa）",
+      "resultsRegionLabel": "押韵搜寻结果"
+    },
+    "pages": {
+      "overview": {
+        "title": "CantoLyr 词汇工具",
+        "description": "探索专注于发音与押韵的词汇工具，先厘清声调与韵母，再开始创作歌词。",
+        "featuresLabel": "词汇工具",
+        "lexiconTitle": "词汇工具",
+        "lexiconDescription": "在正式写词之前，透过专用搜寻先确认发音或押韵的对应词汇。",
+        "lyricsTitle": "歌词生成",
+        "lyricsDescription": "将声调排列与创作提示结合，生成符合粤语韵律的初稿句子。",
+        "lyricSearchTitle": "歌词工具",
+        "lyricSearchDescription": "透过声调数字或韵母搜寻现有粤语歌词行，作为写作前的参考。"
+      },
+      "ai": {
+        "title": "填词工具",
+        "description": "由 AI 协助的工具，加速歌词草拟与词汇发现。",
+        "heading": "填词工具",
+        "lyricsPreview": "使用 AI 协助，从声调序列与创作提示产生歌词草稿。",
+        "lexiconPreview": "AI 驱动的词汇搜寻，为歌词创作建议匹配与用例。",
+        "lexiconTag": "学习/填词工具",
+        "lyricSearchPreview": "使用语意提示结合声调或韵脚的查询，探索既有歌词行。"
+      },
+      "featureCta": "开启工具",
+      "backToOverview": "回到 CantoLyr 总览",
+      "pron": {
+        "heading": "发音工具",
+        "preview": "在定稿旋律前先验证粤拼、检视声调走向，快速找到对应的词汇结果。",
+        "description": "使用粤拼或声调代码搜寻词汇，确认音节是否精准，并整理用法备注支援歌词创作。",
+        "numericHeading": "数字声调口诀",
+        "numericAccordionTrigger": "394052 → 开音节一至六调对应",
+        "numericIntro": "粤语词作者会把六个开音节声调索引（1–6）转成「394052」，因为读成 saam1、gau2、sei3、ling4、ng5、ji6 时便对应该调的实际音高。",
+        "numericDescription": "延伸口诀「394052786」记录于多份粤语语音资料，为创作旋律时的基准；以下表格整理进入旋律前最常用的六个开音节调值与数字对应。",
+        "numericCheckedNote": "数字 7-8-6（chat1、baat3、luk6）虽然与一、三、六调的音高轮廓相同，但只会出现在以 -p／-t／-k 收尾的入声音节。",
+        "numericSourcesLabel": "参考资料",
+        "numericSourceEnglishLabel": "英文资料：《Cantonese phonology》（Wikipedia）— 说明「394052786」口诀。",
+        "numericSourceChineseLabel": "中文资料：《粤语声调》维基百科 — 收录「三九四零五二」九声口诀。",
+        "numericTable": {
+          "caption": "粤语声调索引与词作者常用数字口诀对照",
+          "columns": {
+            "toneIndex": "声调索引",
+            "mnemonicDigit": "口诀数字",
+            "toneName": "传统调名",
+            "example": "粤拼示例",
+            "audio": "音频"
+          },
+          "rows": {
+            "tone1": {
+              "toneName": "阴平（高平调）",
+              "example": "saam1 — 「三」"
+            },
+            "tone2": {
+              "toneName": "阴上（中升调）",
+              "example": "gau2 — 「九」"
+            },
+            "tone3": {
+              "toneName": "阴去（中平调）",
+              "example": "sei3 — 「四」"
+            },
+            "tone4": {
+              "toneName": "阳平（低降调）",
+              "example": "ling4 — 「零」"
+            },
+            "tone5": {
+              "toneName": "阳上（低升调）",
+              "example": "ng5 — 「五」"
+            },
+            "tone6": {
+              "toneName": "阳去（低平调）",
+              "example": "ji6 — 「二」"
+            }
+          }
+        },
+        "jyutpingHeading": "粤拼音节基础",
+        "jyutpingIntro": "每个粤语音节都可以拆解成可选的声母、韵母，以及声调。香港语言学学会的粤拼以「声母 + 韵母 + 声调数字」记录结构，方便对齐实际语调。",
+        "jyutpingDetails": {
+          "structure": "书写顺序为「声母 + 韵母 + 声调数字」。例如 ngo5 = 声母 \"ng\"、韵母 \"o\"、第五调；aa3 则没有声母，直接以前置的韵母开首。",
+          "onset": "粤拼有 19 个声母；若音节没有声母（即所谓零声母），拼写会直接从韵母开始，例如 aa3、oeng2。",
+          "tones": "声调数字 1–6 对应粤语六个调值；以 -p／-t／-k 结尾的入声音节会共用 1、3、6 号，而不是另设新数字。",
+          "rhymeLink": "韵母（韵）承载母音与韵尾。下列表格整理的粤拼韵母与押韵搜寻使用的代码相同。"
+        },
+        "jyutpingConsonantsLabel": "粤拼声母",
+        "jyutpingConsonantsDescription": "声母位于音节开头，可与韵母与声调数字组合成完整的粤拼拼写；元音开头的音节则可省略声母。",
+        "rhymeHeading": "韵母（韵）参考",
+        "rhymeDescription": "在粤语语音学里，韵（韵母）由母音核与韵尾组成；共享同一韵的字自然形成押韵族。使用押韵搜寻时，输入下列任一粤拼韵母即可锁定对应词汇。",
+        "rhymeTable": {
+          "caption": "押韵搜寻常用的粤拼韵母",
+          "columns": {
+            "range": "范围",
+            "finals": "韵母"
+          }
+        },
+        "rhymeListNote": "韵母代码区分大小写，请以小写输入以符合粤拼惯例。",
+        "rhymeSourcesLabel": "参考资料",
+        "rhymeSourceJyutping": "粤拼声母韵母概览（维基百科）",
+        "rhymeSourceRime": "粤语音节结构与韵母说明（维基百科）"
+      },
+      "rhyme": {
+        "heading": "押韵工具",
+        "preview": "寻找共享韵尾与声调的音节，打造自然贴合的押韵结构。",
+        "description": "输入韵码即可群组同韵同调的词汇，迅速建立具有节奏感的押韵网格。"
+      },
+      "lyrics": {
+        "heading": "填词工具",
+        "preview": "把声调表格与创作提案连结，写出贴合粤语节奏的歌句。",
+        "description": "输入创作主题与声调序列，生成具结构的歌词草稿，方便后续调整。"
+      },
+      "aiLexicon": {
+        "description": "将语意描述与声调数字结合，获得 AI 排序的粤语词汇建议。",
+        "stepsHeading": "使用方式",
+        "steps": {
+          "one": "用自然语言描述场景或歌词意图。",
+          "two": "输入你想套用的 394052 式声调数字。",
+          "three": "送出后检视具相似度分数的词汇建议。"
+        },
+        "notice": "结果由语料频率与 AI 相似度组合，套用前请再确认声调是否合适。",
+        "formHeading": "启动语意词汇搜寻",
+        "formDescription": "系统会依据描述与声调匹配词汇，调整任一栏位即可重新排序结果。"
+      },
+      "lyricSearch": {
+        "heading": "歌词工具",
+        "preview": "以声调或韵脚探索已发布的歌词行，支援你的创作分析。"
+      }
+    },
+    "lyrics": {
+      "title": "歌词生成",
+      "promptLabel": "歌词主题",
+      "promptPlaceholder": "描述场景或主题",
+      "sequencesLabel": "声调序列",
+      "sequencesPlaceholder": "以逗号分隔的声调序列（例如 123,456）",
+      "generate": "生成",
+      "generating": "生成中..."
+    },
+    "errors": {
+      "pron": {
+        "missingQuery": "请输入发音查询。"
+      },
+      "rhyme": {
+        "missingQuery": "请输入押韵查询。",
+        "invalidRhyme": "请输入粤语韵母表中的有效韵母。"
+      },
+      "lyrics": {
+        "missingPrompt": "请提供歌词主题。",
+        "missingSequences": "至少输入一组声调序列（以逗号或换行分隔）。",
+        "promptTooLong": "主题描述过长（超过 200 字元）。",
+        "invalidSequences": "每行至少 3 位，仅可包含 0 2 3 4 5 9，最多 3 行。",
+        "invalidSeed": "种子必须为非负整数。",
+        "invalidTop": "段落输出数必须介于 1 至 3。",
+        "unexpected": "歌词生成失败，请稍后再试。"
+      },
+      "lexicon": {
+        "invalidDigits": "仅可输入数字 0、2、3、4、5、9。",
+        "tooLong": "查询不得超过 4 位数字。",
+        "missingQuery": "请描述想要查找的语意。",
+        "missingPronunciation": "请输入 394052 式的声调数字。",
+        "invalidResponse": "无法解析 AI 词汇回应，请再试一次。",
+        "limitRange": "数量必须介于 1 至 25 之间。"
+      }
+    },
+    "lexicon": {
+      "types": {
+        "char": "字",
+        "vocab": "词汇"
+      },
+      "details": {
+        "pronunciation": "发音",
+        "tone": "声调",
+        "jyutping": "粤拼",
+        "consonants": "声母",
+        "rhymes": "韵",
+        "syllables": "音节数",
+        "frequency": "频率",
+        "pos": "词性",
+        "register": "语域",
+        "gloss": "注释",
+        "source": "来源",
+        "position": "位置"
+      },
+      "badges": {
+        "cached": "快取"
+      },
+      "messages": {
+        "noMatches": "尚无结果，试试其他查询。",
+        "endOfResults": "已到结果结尾。",
+        "hoverHint": "点击词面以检视细节。"
+      },
+      "counts": {
+        "showing": "显示 {{shown}} / {{total}} 笔"
+      },
+      "group": {
+        "label": "第 {{index}} 组",
+        "range": "{{start}}–{{end}}"
+      },
+      "langHints": {
+        "zhHk": "标记为「zh-HK」的词语通常用于日常对话、流行文化、网络语言等，属于粤语的口语层面。这个标签仅作为参考，实际用法可能会有重叠或变化，未来会持续优化。与「书面语」相比，口语词汇更贴近日常生活语境。",
+        "zhTw": "标记为「zh-TW」的词语多见于正式文本、新闻、书籍、官方文件等，属于中文的书面层面。这个标签仅作为参考，实际用法可能会有重叠或变化，未来会持续优化。与「口语」相比，书面语词汇更偏向正式、规范的语境。",
+        "generic": "{{code}}"
+      },
+      "feedback": {
+        "up": "有帮助",
+        "down": "没有帮助"
+      }
+    },
+    "lyricSearch": {
+      "title": "歌词搜寻",
+      "nav": {
+        "pron": "歌词声调搜寻",
+        "rhyme": "歌词押韵搜寻"
+      },
+      "placeholders": {
+        "aiQuery": "以自然语言描述场景或用法"
+      },
+      "filters": {
+        "label": "筛选与选项",
+        "reset": "重设筛选",
+        "pageSize": {
+          "label": "每页笔数",
+          "description": "每次请求要撷取的歌词行数量（1–200）。"
+        },
+        "position": {
+          "label": "声调位置",
+          "placeholder": "例：2",
+          "description": "锁定特定声调双字的位置（1 = 第一组数字）。"
+        },
+        "rhymePosition": {
+          "label": "韵脚位置",
+          "placeholder": "例：5",
+          "description": "锁定歌词行中的韵脚栏位（自 1 起算）。"
+        },
+        "themes": {
+          "label": "主题",
+          "placeholder": "以逗号分隔的主题"
+        },
+        "keywords": {
+          "label": "关键词",
+          "placeholder": "以逗号分隔的关键词"
+        },
+        "lyricist": {
+          "label": "作词人",
+          "placeholder": "例：黄沾"
+        },
+        "artist": {
+          "label": "演唱者",
+          "placeholder": "例：梅艳芳"
+        },
+        "id": {
+          "label": "歌词 ID",
+          "placeholder": "内部识别码"
+        },
+        "sentiment": {
+          "label": "情绪",
+          "placeholder": "例：充满希望"
+        },
+        "year": {
+          "label": "年份",
+          "placeholder": "例：1993"
+        }
+      },
+      "labels": {
+        "query": "歌词搜寻查询",
+        "aiQuery": "语意查询（选填）",
+        "bigrams": "声调双字",
+        "song": "歌曲",
+        "metadata": "行内统计",
+        "lineIndex": "第 {{index}} 行",
+        "counts": "字数 {{chars}} · 音节 {{syllables}} · 词数 {{tokens}}",
+        "sentiment": "情绪",
+        "syntaxNotes": "定义",
+        "artists": "艺人",
+        "lyricists": "作词人",
+        "tokens": "词汇"
+      },
+      "results": {
+        "count": "显示 {{shown}} / {{total}} 行",
+        "cached": "快取",
+        "timing": "{{ms}} 毫秒"
+      },
+      "messages": {
+        "noMatches": "暂无符合的歌词行，请尝试其他条件或调整筛选。",
+        "endOfResults": "已到结果列表结尾。"
+      },
+      "pron": {
+        "heading": "歌词声调搜寻",
+        "description": "输入声调数字，检视不同歌曲中具有相同声调模式的歌词行。",
+        "tipsHeading": "声调搜寻提示",
+        "tipsDescription": "善用数字记忆法，更快锁定目标轮廓。",
+        "tips": {
+          "digits": "以 394052 式声调数字标记需要的轮廓。",
+          "position": "设定声调位置锁定特定双字栏位。",
+          "filters": "结合作词人、年份、主题或关键词筛选较小的资料范围。"
+        },
+        "formHeading": "根据声调数字搜寻",
+        "formDescription": "输入声调数字与可选条件，找出符合轮廓的既有歌词行。",
+        "placeholder": "输入声调数字，例如 394052",
+        "resultsRegionLabel": "歌词声调搜寻结果"
+      },
+      "rhyme": {
+        "heading": "歌词押韵搜寻",
+        "description": "找出共用同一韵母的歌词行，以建立押韵表或参考案例。",
+        "tipsHeading": "押韵搜寻提示",
+        "tipsDescription": "快速定位已发布歌词常用的韵脚组。",
+        "tips": {
+          "families": "输入 Jyutping 韵母（例：aa、eoi）即可找到相同结尾的歌词。",
+          "placement": "设定韵脚位置锁定歌词行中特定栏位。",
+          "filters": "搭配作词人、演唱者或年份筛选，聚焦指定作品。"
+        },
+        "formHeading": "依韵母搜寻",
+        "formDescription": "输入 Jyutping 韵母与可选条件，分析既有歌词如何运用此韵脚。",
+        "placeholder": "输入 Jyutping 韵母（例：aa）",
+        "resultsRegionLabel": "歌词押韵搜寻结果"
+      }
+    }
+  }
+}

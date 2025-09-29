@@ -10,7 +10,7 @@ import type { AppError } from '../types/errors.ts';
 
 export interface LyricSessionOptions {
   prompt: string;
-  toneSequences: string[];
+  tones: string[];
   seed?: number;
   top?: number;
 }
@@ -33,7 +33,7 @@ export function useLyricSession(): UseLyricSessionResult {
     mutationFn: async vars => {
       const payload: Record<string, unknown> = {
         prompt: vars.prompt,
-        toneSequences: vars.toneSequences,
+        tones: vars.tones,
       };
       if (typeof vars.seed === 'number' && Number.isFinite(vars.seed)) {
         payload.seed = vars.seed;
@@ -41,7 +41,7 @@ export function useLyricSession(): UseLyricSessionResult {
       if (typeof vars.top === 'number' && Number.isFinite(vars.top)) {
         payload.top = vars.top;
       }
-      const { data } = await api.post(`/lyrics/session`, payload);
+      const { data } = await api.post(`/lyrics/generate`, payload);
       return LyricGenerationResponseSchema.parse(data);
     },
   });

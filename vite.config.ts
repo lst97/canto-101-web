@@ -2,10 +2,11 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import { devLocalesApi } from "./plugins/devLocalesApi";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), devLocalesApi()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

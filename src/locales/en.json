@@ -32,7 +32,8 @@
   },
   "language": {
     "english": "English",
-    "chinese": "中文",
+    "chineseTraditional": "Traditional Chinese",
+    "chineseSimplified": "Simplified Chinese",
     "japanese": "Japanese",
     "switchLanguage": "Switch Language",
     "selectLanguage": "Select language"
@@ -90,6 +91,7 @@
     "copyright": "© Copyright 2025 - Canto101"
   },
   "homepage": {
+    "ai": "AI",
     "hero": {
       "eyebrow": "Cantonese 101",
       "title": "Find Your Cantonese Voice",
@@ -201,7 +203,8 @@
         "heading": "AI tools",
         "lexiconTag": "Learning / lyric tool",
         "lyricsPreview": "Generate draft verses from tone sequences and creative prompts using AI assistance.",
-        "lexiconPreview": "AI-powered lexicon search to suggest matches and usage examples for lyric writing."
+        "lexiconPreview": "AI-powered lexicon search to suggest matches and usage examples for lyric writing.",
+        "lyricSearchPreview": "Investigate lyric lines with AI-enhanced tone or rhyme queries using a semantic hint."
       },
       "featureCta": "Open tool",
       "backToOverview": "Back to CantoLyr overview",
@@ -314,6 +317,41 @@
       "generating": "Generating..."
     },
     "ai": {
+      "lyricSearch": {
+        "title": "AI lyric search",
+        "pron": {
+          "nav": "AI tone search",
+          "heading": "AI lyric tone search",
+          "description": "Search lyric lines by tone digits with an optional semantic hint for smarter matches.",
+          "tipsHeading": "AI tone search tips",
+          "tipsDescription": "Combine tone digits with a short description to improve recall.",
+          "tips": {
+            "digits": "Use 394052-style tone digits to anchor the contour you need.",
+            "position": "Add a tone position to focus on a particular digit pair within the line.",
+            "filters": "Layer lyricist, year, themes, or keywords to narrow the catalogue slice you’re studying.",
+            "aiQuery": "Add a short description (e.g., mood or scene) to guide semantic recall."
+          },
+          "formHeading": "Search by tone digits + meaning",
+          "formDescription": "Enter tone digits and an optional semantic description, then refine with filters.",
+          "placeholder": "Describe mood or scene (optional)"
+        },
+        "rhyme": {
+          "nav": "AI rhyme search",
+          "heading": "AI lyric rhyme search",
+          "description": "Discover lyric lines by rhyme final with an optional semantic hint.",
+          "tipsHeading": "AI rhyme search tips",
+          "tipsDescription": "Pair a rhyme final with a brief description to focus results.",
+          "tips": {
+            "families": "Enter a Jyutping final (e.g. aa, eoi) to surface matching lyrical endings.",
+            "placement": "Use the rhyme position to match the exact slot inside the line.",
+            "filters": "Combine lyricist, artist, or year filters to focus on a catalogue segment.",
+            "aiQuery": "Add a short description (e.g., scene or theme) to guide semantic retrieval."
+          },
+          "formHeading": "Search by rhyme + meaning",
+          "formDescription": "Provide a Jyutping final and an optional semantic description; add filters if needed.",
+          "placeholder": "Describe mood or usage (optional)"
+        }
+      },
       "lyrics": {
         "title": "Lyric generation",
         "description": "Guide the engine with your creative prompt and target tone grids to receive structured Cantonese lyric ideas.",
@@ -529,6 +567,9 @@
         "pron": "Lyric tone search",
         "rhyme": "Lyric rhyme search"
       },
+      "placeholders": {
+        "aiQuery": "Describe the scene or usage in natural language"
+      },
       "filters": {
         "label": "Filters & options",
         "reset": "Reset filters",
@@ -577,6 +618,7 @@
       },
       "labels": {
         "query": "Lyric search query",
+        "aiQuery": "Semantic query (optional)",
         "bigrams": "Tone bigrams",
         "song": "Song",
         "metadata": "Line metrics",

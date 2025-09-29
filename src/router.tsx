@@ -13,7 +13,7 @@ const CantoLyrRhymeSearch = lazy(
   async () => import('./pages/CantoLyrRhymeSearch.tsx')
 );
 const CantoLyrLyricGeneration = lazy(
-  async () => import('./pages/CantoLyrLyricGeneration.tsx')
+  async () => import('./pages/CantoLyrAiLyricGeneration.tsx')
 );
 const CantoLyrAiLexiconSearch = lazy(
   async () => import('./pages/CantoLyrAiLexiconSearch.tsx')
@@ -24,7 +24,23 @@ const CantoLyrLyricPronunciationSearch = lazy(
 const CantoLyrLyricRhymeSearch = lazy(
   async () => import('./pages/CantoLyrLyricRhymeSearch.tsx')
 );
+const CantoLyrAiLyricPronunciationSearch = lazy(
+  async () => import('./pages/CantoLyrAiLyricPronunciationSearch.tsx')
+);
+const CantoLyrAiLyricRhymeSearch = lazy(
+  async () => import('./pages/CantoLyrAiLyricRhymeSearch.tsx')
+);
 const CantoCap = lazy(async () => import('./pages/CantoCap.tsx'));
+
+// Development-only routes
+const TranslationEditor = lazy(
+  async () => import('./pages/dev/TranslationEditor.tsx')
+);
+const translationEditorRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/translations',
+  component: TranslationEditor,
+});
 
 const rootRoute = createRootRoute({
   component: Root,
@@ -79,6 +95,18 @@ const cantoLyrAiLexiconRoute = createRoute({
   component: CantoLyrAiLexiconSearch,
 });
 
+const cantoLyrAiLyricPronunciationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/canto-lyr/ai-lyric-pronunciation-search',
+  component: CantoLyrAiLyricPronunciationSearch,
+});
+
+const cantoLyrAiLyricRhymeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/canto-lyr/ai-lyric-rhyme-search',
+  component: CantoLyrAiLyricRhymeSearch,
+});
+
 const cantoCapRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/canto-cap',
@@ -94,7 +122,10 @@ const routeTree = rootRoute.addChildren([
   cantoLyrLyricPronunciationRoute,
   cantoLyrLyricRhymeRoute,
   cantoLyrAiLexiconRoute,
+  cantoLyrAiLyricPronunciationRoute,
+  cantoLyrAiLyricRhymeRoute,
   cantoCapRoute,
+  translationEditorRoute,
 ]);
 
 export const router = createRouter({ routeTree });

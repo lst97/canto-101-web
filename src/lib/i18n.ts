@@ -24,6 +24,10 @@ i18n
         const mod = await import('../locales/ja.json');
         return mod.default || mod;
       }
+      if (language === 'cn') {
+        const mod = await import('../locales/cn.json');
+        return mod.default || mod;
+      }
       // Fallback for any other languages - return en as default
       return Promise.resolve(en);
     })
@@ -35,7 +39,7 @@ i18n
     ns: ['translation'],
     defaultNS: 'translation',
     // Ensure language resolution aligns to our supported base codes
-    supportedLngs: ['en', 'zh', 'ja'],
+    supportedLngs: ['en', 'zh', 'ja', 'cn'],
     nonExplicitSupportedLngs: true,
     load: 'languageOnly',
     fallbackLng: 'en',
@@ -90,6 +94,15 @@ const preloadDetectedLanguage = async () => {
           true,
           true
         );
+      } else if (detectedLng === 'cn') {
+        const mod = await import('../locales/cn.json');
+        i18n.addResourceBundle(
+          detectedLng,
+          'translation',
+          mod.default || mod,
+          true,
+          true
+        );
       }
     }
   } catch (error) {
@@ -117,6 +130,15 @@ i18n.on('languageChanged', async lng => {
         );
       } else if (lng === 'zh') {
         const mod = await import('../locales/zh.json');
+        i18n.addResourceBundle(
+          lng,
+          'translation',
+          mod.default || mod,
+          true,
+          true
+        );
+      } else if (lng === 'cn') {
+        const mod = await import('../locales/cn.json');
         i18n.addResourceBundle(
           lng,
           'translation',

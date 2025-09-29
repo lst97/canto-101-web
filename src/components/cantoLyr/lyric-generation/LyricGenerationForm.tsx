@@ -49,7 +49,7 @@ export function LyricGenerationForm({
       const sequences = parseToneSequences(value.toneSequences);
       const payload: LyricSessionOptions = {
         prompt: value.prompt.trim(),
-        toneSequences: sequences,
+        tones: sequences,
       };
       if (value.seed.trim().length > 0) {
         payload.seed = Number(value.seed.trim());

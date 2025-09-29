@@ -32,7 +32,8 @@
   },
   "language": {
     "english": "英語",
-    "chinese": "中国語",
+    "chineseSimplified": "簡体字中国語",
+    "chineseTraditional": "繁体字中国語",
     "japanese": "日本語",
     "switchLanguage": "言語を切り替え",
     "selectLanguage": "言語を選択"
@@ -45,6 +46,7 @@
     "switchTheme": "テーマを切り替え"
   },
   "homepage": {
+    "ai": "AI",
     "hero": {
       "eyebrow": "広東語 101",
       "title": "あなたの広東語ボイスを見つけよう",
@@ -201,7 +203,8 @@
         "heading": "AIツール",
         "lexiconTag": "学習／作詞ツール",
         "lyricsPreview": "AI支援でトーン配列と創作プロンプトから下書き歌詞を生成します。",
-        "lexiconPreview": "歌詞作成向けに候補と用例を提案するAI搭載の語彙検索。"
+        "lexiconPreview": "歌詞作成向けに候補と用例を提案するAI搭載の語彙検索。",
+        "lyricSearchPreview": "意味ヒントを添えたトーンまたは韻の検索で、歌詞行を調査します。"
       },
       "featureCta": "ツールを開く",
       "backToOverview": "CantoLyr概要に戻る",
@@ -340,6 +343,41 @@
       }
     },
     "ai": {
+      "lyricSearch": {
+        "title": "AI 歌詞検索",
+        "pron": {
+          "nav": "AI・声調検索",
+          "heading": "AI 歌詞・声調検索",
+          "description": "声調数字に意味のヒントを加えて、より賢く歌詞行を検索します。",
+          "tipsHeading": "AI 声調検索のヒント",
+          "tipsDescription": "数字と短い説明を組み合わせると再現率が向上します。",
+          "tips": {
+            "digits": "394052 型の数字で必要な輪郭を固定します。",
+            "position": "声調位置を指定して、行内の特定のビグラムにフォーカスします。",
+            "filters": "作詞者・年代・テーマ・キーワードで対象を絞り込みます。",
+            "aiQuery": "ムードや場面などの短い説明を追加して、意味検索を誘導します。"
+          },
+          "formHeading": "声調数字 + 意味で検索",
+          "formDescription": "声調数字と任意の意味説明を入力し、必要に応じてフィルターを追加します。",
+          "placeholder": "ムードや場面を説明（任意）"
+        },
+        "rhyme": {
+          "nav": "AI・韻脚検索",
+          "heading": "AI 歌詞・韻脚検索",
+          "description": "韻母に意味のヒントを組み合わせて歌詞行を見つけます。",
+          "tipsHeading": "AI 韻脚検索のヒント",
+          "tipsDescription": "韻母と短い説明を合わせて結果��絞り込みます。",
+          "tips": {
+            "families": "Jyutping の韻母（例: aa・eoi）を入力して一致する語尾を探します。",
+            "placement": "韻脚位置を使って、行内のスロットを一致させます。",
+            "filters": "作詞者・歌手・年代などのフィルターを組み合わせます。",
+            "aiQuery": "場面やテーマなどの短い説明を追加して意味検索を誘導します。"
+          },
+          "formHeading": "韻母 + 意味で検索",
+          "formDescription": "Jyutping の韻母と任意の意味説明を入力し、必要ならフィルターを追加します。",
+          "placeholder": "ムードや使い方を説明（任意）"
+        }
+      },
       "lyrics": {
         "title": "歌詞生成",
         "description": "創作のプロンプトと目標となる声調グリッドを指定して、構造化された広東語の歌詞アイデアを受け取ります。",
@@ -529,6 +567,9 @@
         "pron": "歌詞・声調検索",
         "rhyme": "歌詞・韻脚検索"
       },
+      "placeholders": {
+        "aiQuery": "場面や使い方を自然な言葉で説明"
+      },
       "filters": {
         "label": "フィルターとオプション",
         "reset": "フィルターをリセット",
@@ -577,6 +618,7 @@
       },
       "labels": {
         "query": "歌詞検索クエリ",
+        "aiQuery": "意味クエリ（任意）",
         "bigrams": "声調ビグラム",
         "song": "楽曲",
         "metadata": "行メタデータ",

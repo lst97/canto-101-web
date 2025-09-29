@@ -31,8 +31,9 @@
     }
   },
   "language": {
-    "english": "English",
-    "chinese": "中文",
+    "english": "英語",
+    "chineseSimplified": "简体中文",
+    "chineseTraditional": "繁体中文",
     "japanese": "日语",
     "switchLanguage": "切換語言",
     "selectLanguage": "選擇語言"
@@ -45,6 +46,7 @@
     "switchTheme": "切換主題"
   },
   "homepage": {
+    "ai": "AI",
     "hero": {
       "eyebrow": "粵語 101",
       "title": "找到屬於你的粵語聲線",
@@ -174,6 +176,41 @@
   },
   "cantoLyr": {
     "ai": {
+      "lyricSearch": {
+        "title": "AI 歌詞搜尋",
+        "pron": {
+          "nav": "AI 聲調搜尋",
+          "heading": "AI 歌詞聲調搜尋",
+          "description": "結合聲調數字與可選語意提示，更聰明地搜尋歌詞行。",
+          "tipsHeading": "AI 聲調搜尋提示",
+          "tipsDescription": "將聲調數字與簡短描述結合，可提升召回品質。",
+          "tips": {
+            "digits": "以 394052 式聲調數字標記需要的輪廓。",
+            "position": "設定聲調位置鎖定特定雙字欄位。",
+            "filters": "結合作詞人、年份、主題或關鍵詞篩選較小的資料範圍。",
+            "aiQuery": "加入簡短描述（如情緒或場景）以引導語意召回。"
+          },
+          "formHeading": "以聲調數字 + 語意搜尋",
+          "formDescription": "輸入聲調數字與可選的語意描述，再配合篩選條件精煉結果。",
+          "placeholder": "描述情緒或場景（選填）"
+        },
+        "rhyme": {
+          "nav": "AI 押韻搜尋",
+          "heading": "AI 歌詞押韻搜尋",
+          "description": "搭配可選語意提示，依韻母探索歌詞行。",
+          "tipsHeading": "AI 押韻搜尋提示",
+          "tipsDescription": "將韻母與簡短描述配對以聚焦結果。",
+          "tips": {
+            "families": "輸入 Jyutping 韻母（例：aa、eoi）即可找到相同結尾的歌詞。",
+            "placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
+            "filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。",
+            "aiQuery": "加入簡短描述（如場景或主題）以引導語意檢索。"
+          },
+          "formHeading": "以韻母 + 語意搜尋",
+          "formDescription": "輸入 Jyutping 韻母與可選語意描述，必要時再加入篩選。",
+          "placeholder": "描述情緒或用法（選填）"
+        }
+      },
       "lyrics": {
         "title": "歌詞生成",
         "description": "用創作提示和目標聲調格指引生成器，以獲得結構化的粵語歌詞建議。",
@@ -341,7 +378,8 @@
         "heading": "填詞工具",
         "lyricsPreview": "使用 AI 協助，從聲調序列與創作提示產生歌詞草稿。",
         "lexiconPreview": "AI 驅動的詞彙搜尋，為歌詞創作建議匹配與用例。",
-        "lexiconTag": "學習/填詞工具"
+        "lexiconTag": "學習/填詞工具",
+        "lyricSearchPreview": "使用語意提示結合聲調或韻腳的查詢，探索既有歌詞行。"
       },
       "featureCta": "開啟工具",
       "backToOverview": "回到 CantoLyr 總覽",
@@ -529,6 +567,9 @@
         "pron": "歌詞聲調搜尋",
         "rhyme": "歌詞押韻搜尋"
       },
+      "placeholders": {
+        "aiQuery": "以自然語言描述場景或用法"
+      },
       "filters": {
         "label": "篩選與選項",
         "reset": "重設篩選",
@@ -577,6 +618,7 @@
       },
       "labels": {
         "query": "歌詞搜尋查詢",
+        "aiQuery": "語意查詢（選填）",
         "bigrams": "聲調雙字",
         "song": "歌曲",
         "metadata": "行內統計",

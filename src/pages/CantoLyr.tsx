@@ -33,6 +33,13 @@ export default function CantoLyr(): ReactElement {
       description: t('cantoLyr.pages.lyricSearch.preview'),
       to: '/canto-lyr/lyric-search/pronunciation',
     },
+    {
+      eyebrow: t('cantoLyr.pages.ai.heading'),
+      title: t('cantoLyr.ai.lyricSearch.title'),
+      description: t('cantoLyr.pages.ai.lyricSearchPreview'),
+      to: '/canto-lyr/ai-lyric-pronunciation-search',
+      showBadge: true,
+    },
   ];
   // lyric workflows moved to AI tools section
   const aiTools: WorkflowFeature[] = [
