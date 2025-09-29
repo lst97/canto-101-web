@@ -1,18 +1,14 @@
+'use client';
+
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { cva } from 'class-variance-authority';
-import type { VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { PanelLeftIcon } from 'lucide-react';
 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  SidebarContext,
-  useSidebar,
-  type SidebarContextProps,
-} from '@/components/ui/use-sidebar';
 import { Separator } from '@/components/ui/separator';
 import {
   Sheet,
@@ -31,10 +27,31 @@ import {
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = '22rem';
-const SIDEBAR_WIDTH_MOBILE = '20rem';
+const SIDEBAR_WIDTH = '20rem';
+const SIDEBAR_WIDTH_MOBILE = '22rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
+
+type SidebarContextProps = {
+  state: 'expanded' | 'collapsed';
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  openMobile: boolean;
+  setOpenMobile: (open: boolean) => void;
+  isMobile: boolean;
+  toggleSidebar: () => void;
+};
+
+const SidebarContext = React.createContext<SidebarContextProps | null>(null);
+
+function useSidebar() {
+  const context = React.useContext(SidebarContext);
+  if (!context) {
+    throw new Error('useSidebar must be used within a SidebarProvider.');
+  }
+
+  return context;
+}
 
 function SidebarProvider({
   defaultOpen = true,
@@ -212,8 +229,8 @@ function Sidebar({
       <div
         data-slot="sidebar-container"
         className={cn(
-          // Reserve space for the sticky app header (height ~56px => top-14)
-          'fixed inset-x-auto bottom-0 top-14 z-10 hidden h-[calc(100svh-theme(spacing.14))] w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
+          // Position under sticky header using a dynamic CSS variable with sensible fallback
+          'fixed bottom-0 top-[var(--app-header-height,4.5rem)] z-10 hidden w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
           side === 'left'
             ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
             : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',

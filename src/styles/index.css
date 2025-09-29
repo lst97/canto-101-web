@@ -55,8 +55,8 @@ body {
 }
 
 html {
-  /* Offset for sticky header */
-  scroll-padding-top: 4.5rem;
+  /* Offset for sticky header; fallback 4.5rem if variable not set */
+  scroll-padding-top: var(--app-header-height, 4.5rem);
   scroll-behavior: smooth;
 }
 
@@ -68,7 +68,7 @@ html {
 
 /* Ensure in-page anchors don’t hide under header */
 :where(section, article, header, div, main)[id] {
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: var(--app-header-height, 4.5rem);
 }
 
 @theme inline {

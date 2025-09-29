@@ -542,50 +542,50 @@ const TranslationEditor: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-none">
-      <SidebarProvider>
-        <div className="flex h-[calc(100vh-12rem)] w-full border rounded-lg overflow-hidden">
-          <Sidebar>
-            <SidebarHeader className="border-b p-4">
-              <div className="flex items-center gap-2">
-                <Search className="h-4 w-4 flex-shrink-0" />
-                <Input
-                  placeholder="Search translations..."
-                  value={searchTerm}
-                  onChange={e => setSearchTerm(e.target.value)}
-                  className="h-8 flex-1"
-                />
-              </div>
-            </SidebarHeader>
-            <SidebarContent>
-              <SidebarGroup>
-                <SidebarGroupLabel>Translation Keys</SidebarGroupLabel>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {filteredTree.map((node, index) => (
-                      <TreeNodeComponent
-                        key={`${node.fullPath}-${index}`}
-                        node={node}
-                      />
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </SidebarGroup>
-            </SidebarContent>
-          </Sidebar>
-          <SidebarInset>
-            <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarHeader className="border-b p-4">
+          <div className="flex items-center gap-2">
+            <Search className="h-4 w-4 flex-shrink-0" />
+            <Input
+              placeholder="Search translations..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              className="h-8 flex-1"
+            />
+          </div>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel>Translation Keys</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {filteredTree.map((node, index) => (
+                  <TreeNodeComponent
+                    key={`${node.fullPath}-${index}`}
+                    node={node}
+                  />
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
+      <SidebarInset>
+        <div className="container mx-auto p-6 max-w-none">
+          <div className="rounded-lg border overflow-hidden">
+            <header className="flex h-24 shrink-0 items-center gap-2 border-b px-4">
               <SidebarTrigger className="-ml-1" />
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
                   <h1 className="text-lg font-semibold">Translation Editor</h1>
-                  <Badge variant="secondary">Development Only</Badge>
+                  <Badge variant="secondary">Local</Badge>
                 </div>
                 {selectedKey && renderBreadcrumb(selectedKey)}
               </div>
               <div className="ml-auto flex items-center gap-2">
                 <Label htmlFor="source-select" className="text-sm">
-                  Source of Truth:
+                  Source:
                 </Label>
                 <Select value={sourceOfTruth} onValueChange={setSourceOfTruth}>
                   <SelectTrigger className="w-32">
@@ -611,14 +611,14 @@ const TranslationEditor: React.FC = () => {
                 )}
               </div>
             </header>
-            <div className="flex flex-1 flex-col gap-4 p-4 relative">
+            <div className="relative flex flex-col gap-4 p-4">
               {/* Validation Summary per Language (vs source-of-truth) */}
               {Object.keys(validationByLanguage).length > 0 && (
                 <Card className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20">
                   <CardHeader>
                     <CardTitle className="text-green-800 dark:text-green-200 flex items-center gap-2">
                       <File className="h-4 w-4" />
-                      Validation Summary (source: {sourceOfTruth})
+                      Validation Summary (source: {sourceOfTruth}.json)
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="flex flex-wrap gap-3">
@@ -642,7 +642,7 @@ const TranslationEditor: React.FC = () => {
                             {issues === 0 ? (
                               <>
                                 <CheckCircle className="h-3 w-3 mr-1" />
-                                {name}: Synced
+                                {name}: PASS
                               </>
                             ) : (
                               name
@@ -747,10 +747,10 @@ const TranslationEditor: React.FC = () => {
                 </div>
               )}
             </div>
-          </SidebarInset>
+          </div>
         </div>
-      </SidebarProvider>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };
 

@@ -149,8 +149,31 @@ export function Header(): ReactElement {
     return () => observer.disconnect();
   }, []);
 
+  // Measure header height on mount and on resize to update a CSS variable used for offsetting content
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const root = document.documentElement;
+    const measure = () => {
+      const headerEl = document.querySelector('header[data-app-header]');
+      const h = headerEl ? (headerEl as HTMLElement).offsetHeight : 72;
+      root.style.setProperty('--app-header-height', `${h}px`);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    const headerEl = document.querySelector('header[data-app-header]');
+    if (headerEl) ro.observe(headerEl as Element);
+    window.addEventListener('resize', measure);
+    return () => {
+      window.removeEventListener('resize', measure);
+      ro.disconnect();
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      data-app-header
+      className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 md:px-10">
         <div className="flex items-center gap-3 sm:gap-6">
           <Link
