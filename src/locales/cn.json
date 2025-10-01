@@ -12,6 +12,11 @@
     "showMore": "显示另外 {{count}} 个",
     "reset": "重置"
   },
+  "notFound": {
+    "title": "页面未找到",
+    "description": "您寻找的页面不存在。",
+    "goHome": "返回首页"
+  },
   "errors": {
     "network": {
       "title": "网络连线问题",
@@ -177,7 +182,7 @@
   "cantoLyr": {
     "ai": {
       "lyricSearch": {
-        "title": "AI 歌词搜寻",
+        "title": "歌词搜寻",
         "pron": {
           "nav": "AI 声调搜寻",
           "heading": "AI 歌词声调搜寻",
@@ -458,7 +463,10 @@
       "rhyme": {
         "heading": "押韵工具",
         "preview": "寻找共享韵尾与声调的音节，打造自然贴合的押韵结构。",
-        "description": "输入韵码即可群组同韵同调的词汇，迅速建立具有节奏感的押韵网格。"
+        "description": "输入韵码即可群组同韵同调的词汇，迅速建立具有节奏感的押韵网格。",
+        "sequenceEnabled": "仅显示连续押韵",
+        "sequenceDisabled": "包含所有押韵（不限位置）",
+        "sequenceToggle": "切换连续押韵模式"
       },
       "lyrics": {
         "heading": "填词工具",
@@ -559,6 +567,17 @@
       "feedback": {
         "up": "有帮助",
         "down": "没有帮助"
+      },
+      "options": {
+        "label": "选项"
+      },
+      "rhyme": {
+        "modeLabel": "押韵匹配模式",
+        "sequenceEnabled": "仅显示连续押韵",
+        "sequenceDisabled": "包含所有押韵（不限位置）",
+        "sequenceLabel": "连续",
+        "inclusiveLabel": "全部",
+        "sequenceToggle": "切换连续押韵模式"
       }
     },
     "lyricSearch": {
@@ -667,7 +686,11 @@
         "formHeading": "依韵母搜寻",
         "formDescription": "输入 Jyutping 韵母与可选条件，分析既有歌词如何运用此韵脚。",
         "placeholder": "输入韵码（例如 aa 或 aa,aai 以逗号分隔多个韵母）",
-        "resultsRegionLabel": "歌词押韵搜寻结果"
+        "modeLabel": "押韵匹配模式",
+        "resultsRegionLabel": "歌词押韵搜寻结果",
+        "sequenceEnabled": "仅显示连续押韵",
+        "sequenceDisabled": "包含所有押韵（不限位置）",
+        "sequenceToggle": "切换连续押韵模式"
       }
     }
   }

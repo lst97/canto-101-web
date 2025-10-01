@@ -12,6 +12,11 @@
     "showMore": "Show {{count}} more",
     "reset": "Reset"
   },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "goHome": "Go Home"
+  },
   "errors": {
     "network": {
       "title": "Network issue",
@@ -321,7 +326,7 @@
     },
     "ai": {
       "lyricSearch": {
-        "title": "AI lyric search",
+        "title": "lyric search",
         "pron": {
           "nav": "AI tone search",
           "heading": "AI lyric tone search",
@@ -562,6 +567,17 @@
       "feedback": {
         "up": "Mark helpful",
         "down": "Mark not helpful"
+      },
+      "options": {
+        "label": "Options"
+      },
+      "rhyme": {
+        "modeLabel": "Rhyme matching mode",
+        "sequenceEnabled": "Show only consecutive rhymes",
+        "sequenceDisabled": "Contains all rhymes (regardless of position)",
+        "sequenceLabel": "Seq",
+        "inclusiveLabel": "All",
+        "sequenceToggle": "Toggle continuous rhyme mode"
       }
     },
     "lyricSearch": {
@@ -670,7 +686,11 @@
         "formHeading": "Search by rhyme",
         "formDescription": "Provide a Jyutping final and optional filters to inspect how existing lyrics deploy that rhyme.",
         "placeholder": "Enter Jyutping final(s) (e.g. aa, aai - comma-separated for multiple)",
-        "resultsRegionLabel": "Lyric rhyme search results"
+        "modeLabel": "Rhyme matching mode",
+        "resultsRegionLabel": "Lyric rhyme search results",
+        "sequenceEnabled": "Show only consecutive rhymes",
+        "sequenceDisabled": "Contains all rhymes (regardless of position)",
+        "sequenceToggle": "Toggle continuous rhyme mode"
       }
     }
   }

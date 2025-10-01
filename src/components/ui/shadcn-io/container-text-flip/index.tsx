@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useEffect, useId, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';

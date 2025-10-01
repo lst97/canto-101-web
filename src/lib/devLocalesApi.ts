@@ -1,7 +1,7 @@
 // Dev-only helpers to interact with Vite middleware API
 // Only available during `pnpm dev` runs.
 
-export type LocaleCode = 'en' | 'zh' | 'ja';
+export type LocaleCode = 'en' | 'zh' | 'ja' | 'cn';
 
 export type ListResponse = {
   files: string[]; // e.g., ['en.json','zh.json']

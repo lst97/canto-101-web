@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router';
 import { ExternalLink, Volume2 } from 'lucide-react';
 
 import { LexiconPronunciationSearch } from '../components/cantoLyr/lexicon/index.ts';
+import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';
 import {
   Accordion,
   AccordionContent,
@@ -208,7 +209,9 @@ export default function CantoLyrPronunciationSearch(): ReactElement {
             {t('cantoLyr.pages.pron.preview')}
           </p>
         </div>
-        <LexiconPronunciationSearch />
+        <QueryErrorBoundary>
+          <LexiconPronunciationSearch />
+        </QueryErrorBoundary>
       </section>
     </main>
   );

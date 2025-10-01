@@ -13,7 +13,6 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from '@tanstack/react-form';
 import { z } from 'zod';
 import { Search, ThumbsDown, ThumbsUp } from 'lucide-react';
-import { Label } from '@/components/ui/label.tsx';
 
 import { useLexiconSearch } from '../../../hooks/useLexiconSearch.ts';
 import { Badge } from '../../ui/badge.tsx';
@@ -21,6 +20,8 @@ import { Button } from '../../ui/button.tsx';
 import { Card, CardContent } from '../../ui/card.tsx';
 import { Input } from '../../ui/input.tsx';
 import { LoadingIndicator } from '../../ui/loading-indicator.tsx';
+import { Toggle } from '../../ui/toggle.tsx';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../../ui/tooltip.tsx';
 import { cn } from '../../../lib/utils.ts';
 import type {
   LexiconRhymeSearchVariantsResponse,
@@ -28,7 +29,6 @@ import type {
   ReadingItem,
   SearchResponse,
 } from '../../../lib/schemas/lexicon.ts';
-import { Switch } from '../../ui/switch.tsx';
 
 interface LexiconSearchBaseProps {
   kind: 'pron' | 'rhyme';
@@ -133,6 +133,7 @@ export function LexiconSearchBase({
     page,
     setPage,
     options,
+    updateOption,
   } = useLexiconSearch({ kind });
   const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const [entries, setEntries] = useState<ReadingItem[]>([]);
@@ -408,7 +409,7 @@ export function LexiconSearchBase({
           className="space-y-6"
         >
           <div className="space-y-2">
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-start">
               <form.Field
                 name="query"
                 validators={{
@@ -464,6 +465,43 @@ export function LexiconSearchBase({
                   );
                 }}
               </form.Field>
+              {isRhymeSearch && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Toggle
+                      pressed={sequenceView}
+                      onPressedChange={pressed => {
+                        setSequenceView(Boolean(pressed));
+                        updateOption(
+                          'mode',
+                          pressed ? 'sequence' : 'inclusive'
+                        );
+                      }}
+                      variant="outline"
+                      size="lg"
+                      aria-label={t('cantoLyr.lexicon.rhyme.sequenceToggle', {
+                        defaultValue: 'Toggle contiguous rhyme matching',
+                      })}
+                    >
+                      {sequenceView
+                        ? t('cantoLyr.lexicon.rhyme.sequenceLabel')
+                        : t('cantoLyr.lexicon.rhyme.inclusiveLabel')}
+                    </Toggle>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>
+                      {sequenceView
+                        ? t('cantoLyr.lexicon.rhyme.sequenceEnabled', {
+                            defaultValue: 'Show only consecutive rhymes',
+                          })
+                        : t('cantoLyr.lexicon.rhyme.sequenceDisabled', {
+                            defaultValue:
+                              'Contains all rhymes (regardless of position)',
+                          })}
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
               <Button type="submit" disabled={loading} className="px-6">
                 {loading ? (
                   <LoadingIndicator
@@ -477,30 +515,6 @@ export function LexiconSearchBase({
                 )}
               </Button>
             </div>
-            {isRhymeSearch && (
-              <div className="flex items-center justify-end gap-3">
-                <Label
-                  htmlFor={`lexicon-${kind}-contiguous-toggle`}
-                  className="text-sm text-muted-foreground"
-                >
-                  {sequenceView
-                    ? t('cantoLyr.lexicon.rhyme.sequenceEnabled', {
-                        defaultValue: 'Contiguous pattern required',
-                      })
-                    : t('cantoLyr.lexicon.rhyme.sequenceDisabled', {
-                        defaultValue: 'Inclusive pattern (any order)',
-                      })}
-                </Label>
-                <Switch
-                  id={`lexicon-${kind}-contiguous-toggle`}
-                  checked={sequenceView}
-                  onCheckedChange={checked => setSequenceView(Boolean(checked))}
-                  aria-label={t('cantoLyr.lexicon.rhyme.sequenceToggle', {
-                    defaultValue: 'Toggle contiguous rhyme matching',
-                  })}
-                />
-              </div>
-            )}
           </div>
         </form>
         {resolvedError && (

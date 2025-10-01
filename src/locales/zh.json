@@ -12,6 +12,11 @@
     "showMore": "顯示另外 {{count}} 個",
     "reset": "重置"
   },
+  "notFound": {
+    "title": "頁面未找到",
+    "description": "您尋找的頁面不存在。",
+    "goHome": "返回首頁"
+  },
   "errors": {
     "network": {
       "title": "網絡連線問題",
@@ -177,7 +182,7 @@
   "cantoLyr": {
     "ai": {
       "lyricSearch": {
-        "title": "AI 歌詞搜尋",
+        "title": "歌詞搜尋",
         "pron": {
           "nav": "AI 聲調搜尋",
           "heading": "AI 歌詞聲調搜尋",
@@ -458,7 +463,10 @@
       "rhyme": {
         "heading": "押韻工具",
         "preview": "尋找共享韻尾與聲調的音節，打造自然貼合的押韻結構。",
-        "description": "輸入韻碼即可群組同韻同調的詞彙，迅速建立具有節奏感的押韻網格。"
+        "description": "輸入韻碼即可群組同韻同調的詞彙，迅速建立具有節奏感的押韻網格。",
+        "sequenceEnabled": "僅顯示連續押韻",
+        "sequenceDisabled": "包含所有押韻（不限位置）",
+        "sequenceToggle": "切換連續押韻模式"
       },
       "lyrics": {
         "heading": "填詞工具",
@@ -559,6 +567,17 @@
       "feedback": {
         "up": "有幫助",
         "down": "沒有幫助"
+      },
+      "options": {
+        "label": "選項"
+      },
+      "rhyme": {
+        "modeLabel": "押韻匹配模式",
+        "sequenceEnabled": "僅顯示連續押韻",
+        "sequenceDisabled": "包含所有押韻（不限位置）",
+        "sequenceLabel": "連續",
+        "inclusiveLabel": "全部",
+        "sequenceToggle": "切換連續押韻模式"
       }
     },
     "lyricSearch": {
@@ -667,7 +686,11 @@
         "formHeading": "依韻母搜尋",
         "formDescription": "輸入 Jyutping 韻母與可選條件，分析既有歌詞如何運用此韻腳。",
         "placeholder": "輸入韻碼（例如 aa 或 aa,aai 以逗號分隔多個韻母）",
-        "resultsRegionLabel": "歌詞押韻搜尋結果"
+        "modeLabel": "押韻匹配模式",
+        "resultsRegionLabel": "歌詞押韻搜尋結果",
+        "sequenceEnabled": "僅顯示連續押韻",
+        "sequenceDisabled": "包含所有押韻（不限位置）",
+        "sequenceToggle": "切換連續押韻模式"
       }
     }
   }

@@ -12,6 +12,11 @@
     "showMore": "もっと表示",
     "reset": "リセット"
   },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページは存在しません。",
+    "goHome": "ホームに戻る"
+  },
   "errors": {
     "network": {
       "title": "ネットワークの問題",
@@ -283,7 +288,10 @@
       "rhyme": {
         "heading": "韻ツール",
         "preview": "同じ韻尾とトーンパターンを持つ音節を見つけて、本格的な韻構造を作成。",
-        "description": "韻コードでレキシコンを検索し、同じ韻とトーンを持つエントリをグループ化。韻グリッドを素早く作成。"
+        "description": "韻コードでレキシコンを検索し、同じ韻とトーンを持つエントリをグループ化。韻グリッドを素早く作成。",
+        "sequenceEnabled": "連続した韻のみを表示",
+        "sequenceDisabled": "すべての韻を含む（位置に関係なく）",
+        "sequenceToggle": "連続韻モードを切り替える"
       },
       "lyrics": {
         "heading": "歌詞ツール",
@@ -344,7 +352,7 @@
     },
     "ai": {
       "lyricSearch": {
-        "title": "AI 歌詞検索",
+        "title": "歌詞検索",
         "pron": {
           "nav": "AI・声調検索",
           "heading": "AI 歌詞・声調検索",
@@ -559,6 +567,17 @@
       "feedback": {
         "up": "役に立った",
         "down": "役に立たなかった"
+      },
+      "options": {
+        "label": "オプション"
+      },
+      "rhyme": {
+        "modeLabel": "押韻マッチングモード",
+        "sequenceEnabled": "連続した韻のみを表示",
+        "sequenceDisabled": "すべての韻を含む（位置に関係なく）",
+        "sequenceToggle": "連続押韻モードを切り替え",
+        "sequenceLabel": "連続",
+        "inclusiveLabel": "全て"
       }
     },
     "lyricSearch": {
@@ -566,6 +585,25 @@
       "nav": {
         "pron": "歌詞・声調検索",
         "rhyme": "歌詞・韻脚検索"
+      },
+      "rhyme": {
+        "heading": "歌詞・韻脚検索",
+        "description": "同じ韻母を共有する歌詞行を探し、押韻パターンづくりに役立てます。",
+        "tipsHeading": "韻脚検索のヒント",
+        "tipsDescription": "公開済みの歌詞で使われている韻脚ファミリーを素早く確認します。",
+        "tips": {
+          "families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
+          "placement": "韻脚位置を指定し、歌詞行の中で韻が置かれる箇所を一致させます。",
+          "filters": "作詞者・歌手・年代などを組み合わせると対象作品を絞れます。"
+        },
+        "formHeading": "韻母で検索",
+        "formDescription": "Jyutping の韻母と必要なフィルターを入力し、既存の歌詞がその韻をどう使っているか確認します。",
+        "placeholder": "Jyutping の韻母を入力（例: aa または aa,aai のようにカンマ区切りで複数入力可）",
+        "modeLabel": "押韻マッチングモード",
+        "resultsRegionLabel": "歌詞・韻脚検索結果",
+        "sequenceEnabled": "連続した韻のみを表示",
+        "sequenceDisabled": "すべての韻を含む（位置に関係なく）",
+        "sequenceToggle": "連続韻モードを切り替える"
       },
       "placeholders": {
         "aiQuery": "場面や使い方を自然な言葉で説明"
@@ -653,21 +691,6 @@
         "formDescription": "声調数字と必要なフィルターを入力し、輪郭が一致する既存の歌詞行を確認します。",
         "placeholder": "声調数字を入力（例: 394052）",
         "resultsRegionLabel": "歌詞・声調検索結果"
-      },
-      "rhyme": {
-        "heading": "歌詞・韻脚検索",
-        "description": "同じ韻母を共有する歌詞行を探し、押韻パターンづくりに役立てます。",
-        "tipsHeading": "韻脚検索のヒント",
-        "tipsDescription": "公開済みの歌詞で使われている韻脚ファミリーを素早く確認します。",
-        "tips": {
-          "families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
-          "placement": "韻脚位置を指定し、歌詞行の中で韻が置かれる箇所を一致させます。",
-          "filters": "作詞者・歌手・年代などを組み合わせると対象作品を絞れます。"
-        },
-        "formHeading": "韻母で検索",
-        "formDescription": "Jyutping の韻母と必要なフィルターを入力し、既存の歌詞がその韻をどう使っているか確認します。",
-        "placeholder": "Jyutping の韻母を入力（例: aa または aa,aai のようにカンマ区切りで複数入力可）",
-        "resultsRegionLabel": "歌詞・韻脚検索結果"
       }
     }
   }

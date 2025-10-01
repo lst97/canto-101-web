@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button.tsx';
-import { isAppError } from '../../types/errors.ts';
+import { ApiErrorDisplay as ApiErrorDisplayComponent } from './ApiErrorDisplay';
 
 export interface QueryErrorBoundaryProps {
   children: ReactNode;
@@ -19,28 +19,23 @@ function DefaultQueryFallback({
   reset: () => void;
 }): ReactElement {
   const { t } = useTranslation();
-  const isApp = isAppError(error);
-  const message = isApp
-    ? error.message
-    : error instanceof Error
-      ? error.message
-      : String(error);
-  const titleKey = isApp
-    ? `errors.${error.kind}.title`
-    : 'errors.unexpected.title';
+
   return (
-    <div
-      role="alert"
-      className="rounded-md border border-border/60 bg-muted/30 p-4 space-y-3"
-    >
-      <div>
-        <h3 className="font-medium">{t(titleKey)}</h3>
-        <p className="text-sm text-muted-foreground">{message}</p>
-      </div>
-      <div className="flex gap-2">
-        <Button size="sm" onClick={reset}>
-          {t('errors.actions.retry')}
-        </Button>
+    <div className="min-h-[400px] flex items-center justify-center p-6">
+      <div
+        role="alert"
+        className="w-full max-w-2xl rounded-md border border-border/60 bg-muted/30 p-4 space-y-3"
+      >
+        <ApiErrorDisplayComponent
+          error={error}
+          title={t('errors.query.title', 'Query Error')}
+          showTechnicalDetails={false}
+        />
+        <div className="flex gap-2">
+          <Button size="sm" onClick={reset}>
+            {t('errors.actions.retry')}
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -5,6 +5,10 @@ import type {
   NetworkError,
   UnexpectedError,
 } from '../types/errors.ts';
+import {
+  ApiErrorResponseSchema,
+  ApiDirectErrorResponseSchema,
+} from './schemas/api-response.ts';
 
 export const API_BASE_URL: string =
   import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
@@ -31,6 +35,33 @@ function extractMessage(data: unknown): string | undefined {
   if (typeof data === 'object' && data !== null) {
     const record = data as Record<string, unknown>;
 
+    // Try to parse as structured API error response (nested under error key)
+    const parseResult = ApiErrorResponseSchema.safeParse(data);
+    if (parseResult.success) {
+      const errorData = parseResult.data.error;
+      if (typeof errorData.message === 'string') {
+        return errorData.message;
+      }
+      if (Array.isArray(errorData.message)) {
+        // Join multiple error messages with semicolons
+        return errorData.message.map(detail => detail.message).join('; ');
+      }
+    }
+
+    // Try to parse as direct API error response
+    const directParseResult = ApiDirectErrorResponseSchema.safeParse(data);
+    if (directParseResult.success) {
+      const errorData = directParseResult.data;
+      if (typeof errorData.message === 'string') {
+        return errorData.message;
+      }
+      if (Array.isArray(errorData.message)) {
+        // Join multiple error messages with semicolons
+        return errorData.message.map(detail => detail.message).join('; ');
+      }
+    }
+
+    // Fallback: check for direct error fields
     const errorValue = record.error;
     if (typeof errorValue === 'string') {
       return errorValue;
@@ -42,9 +73,34 @@ function extractMessage(data: unknown): string | undefined {
       }
     }
 
+    // Check for direct message field
     const messageValue = record.message;
     if (messageValue !== undefined) {
       return String(messageValue);
+    }
+
+    // Check if the entire response is an error object
+    if (record.code && record.message) {
+      if (typeof record.message === 'string') {
+        return record.message;
+      }
+      if (Array.isArray(record.message)) {
+        return record.message
+          .map(m => {
+            if (typeof m === 'string') return m;
+            if (typeof m === 'object' && m !== null && 'message' in m) {
+              const value = (m as { message?: unknown }).message;
+              return typeof value === 'string'
+                ? value
+                : value !== undefined
+                  ? String(value)
+                  : '';
+            }
+            return String(m);
+          })
+          .filter(segment => segment.length > 0)
+          .join('; ');
+      }
     }
   }
   return undefined;

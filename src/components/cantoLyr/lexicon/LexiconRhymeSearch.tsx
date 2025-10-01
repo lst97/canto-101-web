@@ -10,10 +10,17 @@ const RhymeQuerySchema = z.object({
     .trim()
     .min(1, { message: 'cantoLyr.errors.rhyme.missingQuery' })
     .refine(
-      val =>
-        cantonesePinyinTable.rhymes.includes(
-          val as (typeof cantonesePinyinTable.rhymes)[number]
-        ),
+      val => {
+        const rhymes = val
+          .split(',')
+          .map(r => r.trim())
+          .filter(r => r.length > 0);
+        return rhymes.every(rhyme =>
+          cantonesePinyinTable.rhymes.includes(
+            rhyme as (typeof cantonesePinyinTable.rhymes)[number]
+          )
+        );
+      },
       { message: 'cantoLyr.errors.rhyme.invalidRhyme' }
     ),
 });

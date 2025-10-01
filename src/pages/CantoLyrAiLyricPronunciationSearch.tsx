@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from '@tanstack/react-router';
 
 import { AiLyricPronunciationSearch } from '../components/cantoLyr/lyrics-search/index.ts';
+import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';
 import type { LyricFilterOptionSets } from '../components/cantoLyr/lyrics-search/LyricSearchBase.tsx';
 import {
   Breadcrumb,
@@ -133,10 +134,12 @@ export default function CantoLyrAiLyricPronunciationSearch(): ReactElement {
             {t('cantoLyr.ai.lyricSearch.pron.formDescription')}
           </p>
         </div>
-        <AiLyricPronunciationSearch
-          filterOptions={filterOptions}
-          filterOptionsLoading={filterOptionsLoading}
-        />
+        <QueryErrorBoundary>
+          <AiLyricPronunciationSearch
+            filterOptions={filterOptions}
+            filterOptionsLoading={filterOptionsLoading}
+          />
+        </QueryErrorBoundary>
       </section>
     </main>
   );

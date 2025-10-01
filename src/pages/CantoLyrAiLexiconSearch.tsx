@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router';
 import { Sparkles } from 'lucide-react';
 
 import { LexiconAiSearch } from '../components/cantoLyr/lexicon/index.ts';
+import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -83,7 +84,9 @@ export default function CantoLyrAiLexiconSearch(): ReactElement {
             {t('cantoLyr.pages.aiLexicon.formDescription')}
           </p>
         </div>
-        <LexiconAiSearch />
+        <QueryErrorBoundary>
+          <LexiconAiSearch />
+        </QueryErrorBoundary>
       </section>
     </main>
   );

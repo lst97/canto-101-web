@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from '@tanstack/react-router';
 
 import { AiLyricRhymeSearch } from '../components/cantoLyr/lyrics-search/index.ts';
+import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';
 import type { LyricFilterOptionSets } from '../components/cantoLyr/lyrics-search/LyricSearchBase.tsx';
 import {
   Breadcrumb,
@@ -137,10 +138,12 @@ export default function CantoLyrAiLyricRhymeSearch(): ReactElement {
             {t('cantoLyr.ai.lyricSearch.rhyme.formDescription')}
           </p>
         </div>
-        <AiLyricRhymeSearch
-          filterOptions={filterOptions}
-          filterOptionsLoading={filterOptionsLoading}
-        />
+        <QueryErrorBoundary>
+          <AiLyricRhymeSearch
+            filterOptions={filterOptions}
+            filterOptionsLoading={filterOptionsLoading}
+          />
+        </QueryErrorBoundary>
       </section>
     </main>
   );

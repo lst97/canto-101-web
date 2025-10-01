@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState, type ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { LyricLine } from '@/lib/schemas/lexicon.ts';
+import type { LyricLine } from '@/lib/schemas/lyric.ts';
 import { Badge } from '@/components/ui/badge.tsx';
 import { Separator } from '@/components/ui/separator.tsx';
 import { HighlightText } from '@/components/ui/shadcn-io/highlight-text/index.tsx';

@@ -5,13 +5,23 @@ import { ZodError } from 'zod';
 import { api } from '../lib/api.ts';
 import type { AppError } from '../types/errors.ts';
 import {
-  querySchemaByKind,
-  responseSchemaByKind,
+  LyricsPronunciationQuerySchema,
+  LyricsRhymeQuerySchema,
+  LyricPronunciationSearchResponseSchema,
   type LyricSearchResponse,
   type LyricsPronunciationQuery,
   type LyricsRhymeQuery,
-  type LyricRhymeSearchVariantsResponse,
-} from '../lib/schemas/lexicon.ts';
+} from '../lib/schemas/lyric.ts';
+
+const querySchemaByKind = {
+  'lyrics-pron': LyricsPronunciationQuerySchema,
+  'lyrics-rhyme': LyricsRhymeQuerySchema,
+};
+
+const responseSchemaByKind = {
+  'lyrics-pron': LyricPronunciationSearchResponseSchema,
+  'lyrics-rhyme': LyricPronunciationSearchResponseSchema,
+};
 
 export type AiLyricSearchKind =
   | { kind: 'lyrics-pron'; filters?: LyricsPronFilters }
@@ -33,7 +43,7 @@ export interface LyricsPronFilters {
 
 export interface LyricsRhymeFilters
   extends Omit<LyricsPronFilters, 'position'> {
-  rhymePosition?: string;
+  mode?: 'sequence' | 'inclusive';
 }
 
 export interface LyricsPronOptions extends BaseOptions {
@@ -54,14 +64,14 @@ export interface LyricsRhymeOptions extends BaseOptions {
   artist: string;
   sentiment: string;
   year: string;
-  patternMode: 'inclusive' | 'sequence' | 'both';
+  mode: 'sequence' | 'inclusive';
 }
 
 type OptionsState = LyricsPronOptions | LyricsRhymeOptions;
 
 type QueryParams = LyricsPronunciationQuery | LyricsRhymeQuery;
 
-type SearchResult = LyricSearchResponse | LyricRhymeSearchVariantsResponse;
+type SearchResult = LyricSearchResponse;
 
 type NormalizedQueryError = AppError;
 
@@ -73,6 +83,7 @@ export interface UseAiLyricSearchResult {
   updateOption: (k: string, v: unknown) => void;
   loading: boolean;
   error: string | null;
+  rawError: AppError | null;
   result: SearchResult | null;
   search: () => Promise<void>;
   reset: () => void;
@@ -116,7 +127,7 @@ function createDefaultOptions(kind: SearchKind): OptionsState {
     artist: '',
     sentiment: '',
     year: '',
-    patternMode: 'both',
+    mode: 'inclusive',
   } satisfies LyricsRhymeOptions;
 }
 
@@ -179,7 +190,7 @@ function buildParams(
       artist,
       sentiment,
       year,
-      patternMode,
+      mode,
     } = snapshot.options as LyricsRhymeOptions;
 
     if (rhymePosition.trim()) params.rhymePosition = rhymePosition.trim();
@@ -190,11 +201,7 @@ function buildParams(
     if (sentiment.trim()) params.sentiment = sentiment.trim();
     if (year.trim()) params.year = year.trim();
 
-    const normalizedMode = patternMode ?? 'both';
-    params.mode = normalizedMode;
-    if (normalizedMode === 'sequence') {
-      params.rhymeSequence = true;
-    }
+    params.mode = mode;
   }
 
   const schema = querySchemaByKind[kind];
@@ -360,6 +367,9 @@ export function useAiLyricSearch(
 
   const error =
     validationError ?? (searchQuery.error ? searchQuery.error.message : null);
+  const rawError = validationError
+    ? null
+    : ((searchQuery.error as AppError | null) ?? null);
   const loading =
     submitted !== null &&
     (searchQuery.isPending ||
@@ -375,6 +385,7 @@ export function useAiLyricSearch(
     updateOption,
     loading,
     error,
+    rawError,
     result,
     search,
     reset,

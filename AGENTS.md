@@ -91,7 +91,6 @@ src/
 │   │   └── lexicon.ts        # Lexicon request/response validators
 │   └── utils.ts              # General utility functions
 ├── locales/                  # Translation files
-│   ├── en.json               # English translations
 │   └── zh.json               # Chinese translations
 ├── pages/                    # Page-level route components
 │   ├── CantoCap.tsx          # CantoCap page
@@ -162,7 +161,7 @@ provide fallback text and ensure translations are complete for all supported
 languages (English and Chinese). Language detection is automatic based on
 browser settings, with localStorage persistence for user preferences.
 
-When adding or updating translations, prioritize `zh.json` (Traditional Chinese) first, then proceed to other translation files (e.g., `ja.json`). The `locales-fmt.ts` file is used for structural validation of translation files and must pass after any translation updates to ensure consistency and prevent build failures.
+When adding or updating translations, prioritize `zh.json` (Traditional Chinese) first, and it is not necessary to update other translation files. The `locales-fmt.ts` file is used for structural validation of translation files and must pass after any translation updates to ensure consistency and prevent build failures.
 
 When adding a new language file (e.g., `fr.json`), update the allowed files list in `plugins/devLocalesApi.ts` to include the new file name for dev-only editing support.
 

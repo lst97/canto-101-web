@@ -19,7 +19,7 @@ import {
 import type {
   LyricSearchResponse,
   LyricLine,
-} from '../../../lib/schemas/lexicon.ts';
+} from '../../../lib/schemas/lyric.ts';
 import {
   Accordion,
   AccordionContent,

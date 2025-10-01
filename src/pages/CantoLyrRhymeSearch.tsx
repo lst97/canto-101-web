@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router';
 import { ExternalLink } from 'lucide-react';
 
 import { LexiconRhymeSearch } from '../components/cantoLyr/lexicon/index.ts';
+import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';
 import {
   Accordion,
   AccordionContent,
@@ -225,7 +226,9 @@ export default function CantoLyrRhymeSearch(): ReactElement {
             {t('cantoLyr.pages.rhyme.preview')}
           </p>
         </div>
-        <LexiconRhymeSearch />
+        <QueryErrorBoundary>
+          <LexiconRhymeSearch />
+        </QueryErrorBoundary>
       </section>
     </main>
   );

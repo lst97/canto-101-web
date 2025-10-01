@@ -16,18 +16,21 @@ import {
 // Type of lexicon search we support
 export type LexiconSearchKind = { kind: 'pron' } | { kind: 'rhyme' };
 
+type EntryTypeOption = 'all' | 'vocab' | 'char';
+type PatternModeOption = 'inclusive' | 'sequence' | 'both';
+
 // Shared option base
 interface BaseOptions {
   pageSize: string; // controlled input, converted to number
+  entryType: EntryTypeOption;
 }
 
 interface PronOptions extends BaseOptions {
-  mode: string; // 'all' sentinel
   prefix: boolean;
 }
 
 interface RhymeOptions extends BaseOptions {
-  patternMode: 'inclusive' | 'sequence' | 'both';
+  patternMode: PatternModeOption;
 }
 
 type OptionsState = PronOptions | RhymeOptions;
@@ -69,12 +72,24 @@ const QUERY_KEY_PREFIX = 'lexicon-search';
 
 function createDefaultOptions(kind: SearchKind): OptionsState {
   if (kind === 'pron') {
-    return { mode: 'all', pageSize: '50', prefix: false } satisfies PronOptions;
+    return {
+      pageSize: '50',
+      entryType: 'all',
+      prefix: false,
+    } satisfies PronOptions;
   }
   if (kind === 'rhyme') {
-    return { pageSize: '50', patternMode: 'both' } satisfies RhymeOptions;
+    return {
+      pageSize: '50',
+      entryType: 'all',
+      patternMode: 'both',
+    } satisfies RhymeOptions;
   }
-  return { pageSize: '50', patternMode: 'both' } satisfies RhymeOptions;
+  return {
+    pageSize: '50',
+    entryType: 'all',
+    patternMode: 'both',
+  } satisfies RhymeOptions;
 }
 
 function createQueryKey(
@@ -119,9 +134,9 @@ function buildParams(
   }
 
   if (kind === 'pron') {
-    const { mode, prefix } = snapshot.options as PronOptions;
-    if (mode && mode !== 'all') {
-      params.mode = mode;
+    const { entryType, prefix } = snapshot.options as PronOptions;
+    if (entryType && entryType !== 'all') {
+      params.entryType = entryType;
     }
     if (prefix) {
       params.prefix = true;
@@ -129,8 +144,18 @@ function buildParams(
   }
 
   if (kind === 'rhyme') {
-    const { patternMode } = snapshot.options as RhymeOptions;
-    params.mode = patternMode ?? 'both';
+    const { entryType, patternMode } = snapshot.options as RhymeOptions;
+    const normalizedMode = patternMode ?? 'both';
+    params.mode = normalizedMode;
+    if (normalizedMode === 'sequence') {
+      params.rhymeSequence = true;
+    }
+    if (normalizedMode === 'inclusive') {
+      params.rhymeSequence = false;
+    }
+    if (entryType && entryType !== 'all') {
+      params.entryType = entryType;
+    }
   }
 
   const schema = querySchemaByKind[kind];

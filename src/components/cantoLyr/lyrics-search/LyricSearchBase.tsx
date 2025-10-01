@@ -21,7 +21,7 @@ import type {
   LyricRhymeSearchVariantsResponse,
   LyricSearchResponse,
   LyricSearchList,
-} from '@/lib/schemas/lexicon.ts';
+} from '@/lib/schemas/lyric.ts';
 
 import { stripSpacesPunctAndSymbols } from './base/text-helpers';
 import { LyricSearchProvider } from './base/LyricSearchContext';
@@ -35,7 +35,7 @@ import { Card, CardContent } from '@/components/ui/card.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { Label } from '@/components/ui/label.tsx';
 import { LoadingIndicator } from '@/components/ui/loading-indicator.tsx';
-import { Switch } from '@/components/ui/switch.tsx';
+import { ApiErrorDisplay } from '@/components/errors/ApiErrorDisplay';
 import {
   Accordion,
   AccordionContent,
@@ -44,6 +44,13 @@ import {
 } from '@/components/ui/accordion.tsx';
 import { SearchableSelect } from '@/components/ui/searchable-select.tsx';
 import { ScrollArea } from '@/components/ui/scroll-area.tsx';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select.tsx';
 
 // Public types used by pages
 export type LyricFilterKey = keyof LyricsPronOptions | keyof LyricsRhymeOptions;
@@ -117,7 +124,7 @@ export function LyricSearchBase({
     query,
     setQuery,
     result,
-    error,
+    rawError,
     loading,
     search,
     reset,
@@ -135,7 +142,15 @@ export function LyricSearchBase({
   const [processingTimeMs, setProcessingTimeMs] = useState<number | null>(null);
   const [aiQuery, setAiQuery] = useState<string>('');
   const isRhymeSearch = kind === 'lyrics-rhyme';
-  const [sequenceView, setSequenceView] = useState<boolean>(false);
+  const [sequenceView, setSequenceView] = useState<boolean>(
+    isRhymeSearch ? (options as LyricsRhymeOptions).mode === 'sequence' : false
+  );
+
+  useEffect(() => {
+    if (isRhymeSearch) {
+      setSequenceView((options as LyricsRhymeOptions).mode === 'sequence');
+    }
+  }, [isRhymeSearch, options]);
   const [inclusiveEntries, setInclusiveEntries] = useState<LyricLine[]>([]);
   const [sequenceEntries, setSequenceEntries] = useState<LyricLine[]>([]);
   const [inclusiveTotal, setInclusiveTotal] = useState<number>(0);
@@ -144,18 +159,48 @@ export function LyricSearchBase({
   const initialOptionsRef = useRef(options);
 
   const lyricResult = useMemo<LyricSearchResponse | null>(() => {
-    if (!result || isRhymeSearch) return null;
-    return result as LyricSearchResponse;
-  }, [result, isRhymeSearch]);
+    if (!result) return null;
+    // Check if it's a simple response (has 'items' property)
+    if ('items' in result) {
+      return result as LyricSearchResponse;
+    }
+    return null;
+  }, [result]);
 
   const lyricRhymeResult =
     useMemo<LyricRhymeSearchVariantsResponse | null>(() => {
       if (!result || !isRhymeSearch) return null;
-      return result as LyricRhymeSearchVariantsResponse;
+      // Check if it's a variants response (has 'inclusive' or 'sequence' properties)
+      if ('inclusive' in result || 'sequence' in result) {
+        return result as LyricRhymeSearchVariantsResponse;
+      }
+      return null;
     }, [result, isRhymeSearch]);
 
   useEffect(() => {
     if (isRhymeSearch) {
+      // Handle simple response format (backward compatibility)
+      if (lyricResult && !lyricRhymeResult) {
+        setTotalCount(lyricResult.count);
+        setCurrentQueryText(lyricResult.query);
+        setResponseFromCache(lyricResult.fromCache);
+        setProcessingTimeMs(lyricResult.processingTimeMs);
+
+        setEntries(prev => {
+          const combined =
+            page === 0 ? lyricResult.items : [...prev, ...lyricResult.items];
+          const newEntries = dedupeByNormalizedText(combined);
+          // For simple responses, show same data in both views
+          setInclusiveEntries(newEntries);
+          setSequenceEntries(newEntries);
+          setInclusiveTotal(lyricResult.count);
+          setSequenceTotal(lyricResult.count);
+          return newEntries;
+        });
+        return;
+      }
+
+      // Handle variants response format
       if (!lyricRhymeResult) {
         if (!loading && page === 0) {
           setInclusiveEntries([]);
@@ -301,11 +346,6 @@ export function LyricSearchBase({
     reset();
   }, [reset]);
 
-  const resolvedError = useMemo(() => {
-    if (!error) return null;
-    return error.startsWith('cantoLyr.') ? t(error) : error;
-  }, [error, t]);
-
   const resultsAriaLabel = t(resultsLabelKey, {
     defaultValue: 'Lyric search results',
   });
@@ -314,7 +354,6 @@ export function LyricSearchBase({
   const activeFilterValues = useMemo(() => {
     const entries: Array<[string, string]> = [];
     for (const field of filterFields) {
-      if (field.key === 'patternMode') continue;
       const rawValue = typedOptions[field.key as string];
       const value =
         typeof rawValue === 'string' ? rawValue : String(rawValue ?? '');
@@ -453,36 +492,52 @@ export function LyricSearchBase({
               </form.Field>
             </div>
           </div>
-          {isRhymeSearch && (
-            <div className="flex items-center justify-end gap-3">
-              <Label
-                htmlFor={`lyric-${kind}-contiguous-toggle`}
-                className="text-sm text-muted-foreground"
-              >
-                {sequenceView
-                  ? t('cantoLyr.lyricSearch.rhyme.sequenceEnabled', {
-                      defaultValue: 'Contiguous pattern required',
-                    })
-                  : t('cantoLyr.lyricSearch.rhyme.sequenceDisabled', {
-                      defaultValue: 'Inclusive pattern (any order)',
-                    })}
-              </Label>
-              <Switch
-                id={`lyric-${kind}-contiguous-toggle`}
-                checked={sequenceView}
-                onCheckedChange={checked => setSequenceView(Boolean(checked))}
-                aria-label={t('cantoLyr.lyricSearch.rhyme.sequenceToggle', {
-                  defaultValue: 'Toggle contiguous rhyme matching',
-                })}
-              />
-            </div>
-          )}
           <Accordion type="single" collapsible>
             <AccordionItem value="filters">
               <AccordionTrigger className="text-sm font-medium">
                 {t('cantoLyr.lyricSearch.filters.label')}
               </AccordionTrigger>
               <AccordionContent className="space-y-4">
+                {isRhymeSearch && (
+                  <div className="space-y-2">
+                    <Label htmlFor={`lyric-${kind}-rhyme-mode`}>
+                      {t('cantoLyr.lyricSearch.rhyme.modeLabel', {
+                        defaultValue: 'Rhyme matching mode',
+                      })}
+                    </Label>
+                    <Select
+                      value={sequenceView ? 'sequence' : 'inclusive'}
+                      onValueChange={value => {
+                        const isSequence = value === 'sequence';
+                        setSequenceView(isSequence);
+                        updateOption(
+                          'mode',
+                          isSequence ? 'sequence' : 'inclusive'
+                        );
+                      }}
+                    >
+                      <SelectTrigger
+                        id={`lyric-${kind}-rhyme-mode`}
+                        className="w-full"
+                      >
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="inclusive">
+                          {t('cantoLyr.lyricSearch.rhyme.sequenceDisabled', {
+                            defaultValue:
+                              'Contains all rhymes (regardless of position)',
+                          })}
+                        </SelectItem>
+                        <SelectItem value="sequence">
+                          {t('cantoLyr.lyricSearch.rhyme.sequenceEnabled', {
+                            defaultValue: 'Show only consecutive rhymes',
+                          })}
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
                 <div className="grid gap-4 md:grid-cols-2">
                   {filterFields.map(field => {
                     const {
@@ -651,11 +706,7 @@ export function LyricSearchBase({
             </AccordionItem>
           </Accordion>
         </form>
-        {resolvedError && (
-          <p className="text-sm text-destructive" role="alert">
-            {resolvedError}
-          </p>
-        )}
+        {rawError && <ApiErrorDisplay error={rawError} />}
         {(entries.length > 0 || loading || lyricResult || lyricRhymeResult) && (
           <div className="space-y-4" aria-live={loading ? 'polite' : 'off'}>
             {(totalCount > 0 || loading) && (

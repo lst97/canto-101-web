@@ -4,7 +4,7 @@ import { api } from '../lib/api.ts';
 import {
   LyricFilterOptionsResponseSchema,
   type LyricFilterOptions,
-} from '../lib/schemas/lexicon.ts';
+} from '../lib/schemas/lyric.ts';
 import type { AppError } from '../types/errors.ts';
 
 const QUERY_KEY = ['lyrics', 'filter-options'] as const;

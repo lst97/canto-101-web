@@ -28,20 +28,22 @@ function DefaultFallback({
       ? error.message
       : String(error);
   return (
-    <div
-      role="alert"
-      className="mx-auto max-w-2xl rounded-md border border-destructive/40 bg-destructive/5 p-6 space-y-4"
-    >
-      <div className="space-y-1">
-        <h2 className="text-lg font-semibold text-destructive">
-          {t(titleKey)}
-        </h2>
-        <p className="text-sm text-muted-foreground">{message}</p>
-      </div>
-      <div className="flex flex-wrap gap-3">
-        <Button variant="destructive" onClick={reset}>
-          {t('errors.actions.retry')}
-        </Button>
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div
+        role="alert"
+        className="mx-auto max-w-2xl rounded-md border border-destructive/40 bg-destructive/5 p-6 space-y-4"
+      >
+        <div className="space-y-1">
+          <h2 className="text-lg font-semibold text-destructive">
+            {t(titleKey)}
+          </h2>
+          <p className="text-sm text-muted-foreground">{message}</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="destructive" onClick={reset}>
+            {t('errors.actions.retry')}
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
 
 import { LyricSession } from '../components/cantoLyr/lyric-generation/index.ts';
+import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';
 import { Card, CardContent } from '../components/ui/card.tsx';
 import { Separator } from '../components/ui/separator.tsx';
 import { Badge } from '../components/ui/badge.tsx';
@@ -158,7 +159,9 @@ export default function CantoLyrLyricGeneration(): ReactElement {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-        <LyricSession />
+        <QueryErrorBoundary>
+          <LyricSession />
+        </QueryErrorBoundary>
       </section>
     </main>
   );

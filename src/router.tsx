@@ -31,6 +31,7 @@ const CantoLyrAiLyricRhymeSearch = lazy(
   async () => import('./pages/CantoLyrAiLyricRhymeSearch.tsx')
 );
 const CantoCap = lazy(async () => import('./pages/CantoCap.tsx'));
+const NotFound = lazy(async () => import('./pages/global/NotFound.tsx'));
 
 // Development-only routes
 const TranslationEditor = lazy(
@@ -44,6 +45,7 @@ const translationEditorRoute = createRoute({
 
 const rootRoute = createRootRoute({
   component: Root,
+  notFoundComponent: NotFound,
 });
 
 const Home = lazy(async () => import('./pages/Home.tsx'));
