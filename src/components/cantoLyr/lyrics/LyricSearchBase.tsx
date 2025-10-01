@@ -301,7 +301,7 @@ export function LyricSearchBase({
                       {showFieldError && errorKey && (
                         <p
                           id={`lyric-${kind}-query-error`}
-                          className="mt-2 text-xs text-destructive"
+                          className="mt-2 text-xs text-destructive px-2"
                           role="alert"
                         >
                           {t(errorKey)}

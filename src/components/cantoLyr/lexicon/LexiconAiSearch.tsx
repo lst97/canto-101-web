@@ -232,7 +232,7 @@ export function LexiconAiSearch(): ReactElement {
                   (field.state.meta.isTouched || form.state.isSubmitting) && (
                     <p
                       id="ai-lexicon-query-error"
-                      className="text-xs text-destructive"
+                      className="text-xs text-destructive px-2"
                     >
                       {(() => {
                         const err = field.state.meta.errors[0] as
@@ -281,7 +281,7 @@ export function LexiconAiSearch(): ReactElement {
                     (field.state.meta.isTouched || form.state.isSubmitting) && (
                       <p
                         id="ai-lexicon-pronunciation-error"
-                        className="text-xs text-destructive"
+                        className="text-xs text-destructive px-2"
                       >
                         {(() => {
                           const err = field.state.meta.errors[0] as
@@ -329,7 +329,7 @@ export function LexiconAiSearch(): ReactElement {
                     (field.state.meta.isTouched || form.state.isSubmitting) && (
                       <p
                         id="ai-lexicon-limit-error"
-                        className="text-xs text-destructive"
+                        className="text-xs text-destructive px-2"
                       >
                         {(() => {
                           const err = field.state.meta.errors[0] as

@@ -76,6 +76,38 @@ export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
       : null;
 
   const renderHighlightedText = useCallback(() => {
+    // Find all grapheme-based positions of the highlighted token in the normalized text
+    const getTokenHighlightRanges = (): Array<{
+      start: number;
+      end: number;
+    }> => {
+      if (highlightedTokenPosition === null) return [];
+
+      const highlightedToken = tokens.find(
+        t => t.position === highlightedTokenPosition
+      );
+      if (!highlightedToken?.text) return [];
+
+      const tokenText = highlightedToken.text;
+      const textGraphemes = graphemesOf(normalizedText);
+      const tokenGraphemes = graphemesOf(tokenText);
+      const ranges: Array<{ start: number; end: number }> = [];
+
+      for (let i = 0; i <= textGraphemes.length - tokenGraphemes.length; i++) {
+        const candidateSlice = textGraphemes
+          .slice(i, i + tokenGraphemes.length)
+          .join('');
+
+        if (candidateSlice.toLowerCase() === tokenText.toLowerCase()) {
+          ranges.push({ start: i, end: i + tokenGraphemes.length - 1 });
+        }
+      }
+
+      return ranges;
+    };
+
+    const tokenHighlightRanges = getTokenHighlightRanges();
+
     const renderInlineHighlights = (
       slice: string,
       segStart: number,
@@ -101,28 +133,75 @@ export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
           );
         }
       }
-      if (highlightedTokenPosition !== null) {
-        const highlightedToken = tokens.find(
-          t => t.position === highlightedTokenPosition
-        );
-        if (highlightedToken?.text) {
-          const tokenText = highlightedToken.text;
-          const parts = slice.split(new RegExp(`(${tokenText})`, 'gi'));
-          return parts.map((part, i) =>
-            part.toLowerCase() === tokenText.toLowerCase() ? (
-              <HighlightText
-                key={`seg-token-${segStart}-${i}`}
-                text={part}
-                inViewOnce={false}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="inline"
-              />
-            ) : (
-              <span key={`seg-token-${segStart}-${i}-n`}>{part}</span>
-            )
+
+      if (tokenHighlightRanges.length > 0) {
+        const graphemes = graphemesOf(slice);
+        const result: (ReactElement | string)[] = [];
+        let i = 0;
+
+        while (i < graphemes.length) {
+          const globalIndex = segStart + i;
+
+          // Find if this position is part of a highlight range
+          const matchingRange = tokenHighlightRanges.find(
+            range => globalIndex >= range.start && globalIndex <= range.end
           );
+
+          if (matchingRange) {
+            // Calculate how much of this range is within the current segment
+            const rangeStartInSegment = Math.max(matchingRange.start, segStart);
+            const rangeEndInSegment = Math.min(matchingRange.end, segEnd - 1);
+            const lengthInSegment = rangeEndInSegment - rangeStartInSegment + 1;
+
+            // Check if the entire token range is within this segment
+            const isEntireTokenInSegment =
+              matchingRange.start >= segStart &&
+              matchingRange.end <= segEnd - 1;
+
+            if (isEntireTokenInSegment) {
+              // Highlight the entire token as one block
+              const tokenText = graphemes
+                .slice(i, i + lengthInSegment)
+                .join('');
+
+              result.push(
+                <HighlightText
+                  key={`seg-token-${segStart}-${i}`}
+                  text={tokenText}
+                  inViewOnce={false}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="inline"
+                />
+              );
+              i += lengthInSegment;
+            } else {
+              // Token spans boundary - highlight the continuous portion in this segment as one block
+              const tokenText = graphemes
+                .slice(i, i + lengthInSegment)
+                .join('');
+
+              result.push(
+                <HighlightText
+                  key={`seg-token-${segStart}-${i}`}
+                  text={tokenText}
+                  inViewOnce={false}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="inline"
+                />
+              );
+              i += lengthInSegment;
+            }
+          } else {
+            result.push(
+              <span key={`seg-token-${segStart}-${i}-n`}>{graphemes[i]}</span>
+            );
+            i++;
+          }
         }
+
+        return result.length > 0 ? result : slice;
       }
+
       return slice;
     };
 

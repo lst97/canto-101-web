@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from '@tanstack/react-form';
 import { z } from 'zod';
 import { Search, ThumbsDown, ThumbsUp } from 'lucide-react';
+import { Label } from '@/components/ui/label.tsx';
 
 import { useLexiconSearch } from '../../../hooks/useLexiconSearch.ts';
 import { Badge } from '../../ui/badge.tsx';
@@ -22,9 +23,12 @@ import { Input } from '../../ui/input.tsx';
 import { LoadingIndicator } from '../../ui/loading-indicator.tsx';
 import { cn } from '../../../lib/utils.ts';
 import type {
+  LexiconRhymeSearchVariantsResponse,
+  LexiconSearchList,
   ReadingItem,
   SearchResponse,
 } from '../../../lib/schemas/lexicon.ts';
+import { Switch } from '../../ui/switch.tsx';
 
 interface LexiconSearchBaseProps {
   kind: 'pron' | 'rhyme';
@@ -43,6 +47,17 @@ interface DetailEntry {
 }
 
 const DEFAULT_GROUP_SIZE = 50;
+
+function dedupeById(items: ReadingItem[]): ReadingItem[] {
+  const seen = new Set<string>();
+  const result: ReadingItem[] = [];
+  for (const item of items) {
+    if (seen.has(item.id)) continue;
+    seen.add(item.id);
+    result.push(item);
+  }
+  return result;
+}
 
 function formatEntryType(
   t: (k: string, opts?: Record<string, unknown>) => string,
@@ -130,13 +145,37 @@ export function LexiconSearchBase({
   >(null);
   const resultsScrollRef = useRef<HTMLDivElement | null>(null);
   const scrollSnapshotRef = useRef({ top: 0, height: 0, clientHeight: 0 });
+  const isRhymeSearch = kind === 'rhyme';
+  const [sequenceView, setSequenceView] = useState<boolean>(false);
+  const [inclusiveEntries, setInclusiveEntries] = useState<ReadingItem[]>([]);
+  const [sequenceEntries, setSequenceEntries] = useState<ReadingItem[]>([]);
+  const [inclusiveTotal, setInclusiveTotal] = useState<number>(0);
+  const [sequenceTotal, setSequenceTotal] = useState<number>(0);
 
   const readingResult = useMemo<SearchResponse | null>(() => {
     if (!result) return null;
-    return kind === 'pron' || kind === 'rhyme'
-      ? (result as SearchResponse)
-      : null;
+    if (kind === 'pron') {
+      return result as SearchResponse;
+    }
+    if (kind === 'rhyme') {
+      const maybeVariants = result as LexiconRhymeSearchVariantsResponse;
+      if ('inclusive' in maybeVariants || 'sequence' in maybeVariants) {
+        return null;
+      }
+      return result as SearchResponse;
+    }
+    return null;
   }, [result, kind]);
+
+  const rhymeVariantsResult =
+    useMemo<LexiconRhymeSearchVariantsResponse | null>(() => {
+      if (!result || !isRhymeSearch) return null;
+      const maybeVariants = result as LexiconRhymeSearchVariantsResponse;
+      if ('inclusive' in maybeVariants || 'sequence' in maybeVariants) {
+        return maybeVariants;
+      }
+      return null;
+    }, [result, isRhymeSearch]);
 
   const pageSize = useMemo(() => {
     const raw = (options as { pageSize?: string }).pageSize;
@@ -148,6 +187,57 @@ export function LexiconSearchBase({
   }, [options, groupSize]);
 
   useEffect(() => {
+    if (isRhymeSearch) {
+      if (!rhymeVariantsResult) {
+        if (!loading && page === 0) {
+          setInclusiveEntries([]);
+          setSequenceEntries([]);
+          setInclusiveTotal(0);
+          setSequenceTotal(0);
+          setEntries([]);
+          setTotalCount(0);
+          setCurrentQueryText('');
+          setResponseFromCache(false);
+          setLastProcessingTimeMs(null);
+        }
+        return;
+      }
+
+      setCurrentQueryText(rhymeVariantsResult.query);
+      setResponseFromCache(rhymeVariantsResult.fromCache);
+      setLastProcessingTimeMs(rhymeVariantsResult.processingTimeMs);
+
+      const updateVariant = (
+        variant: 'inclusive' | 'sequence',
+        list: LexiconSearchList | undefined
+      ) => {
+        const setEntriesFn =
+          variant === 'inclusive' ? setInclusiveEntries : setSequenceEntries;
+        const setTotalFn =
+          variant === 'inclusive' ? setInclusiveTotal : setSequenceTotal;
+
+        if (!list) {
+          if (page === 0) {
+            setEntriesFn([]);
+            setTotalFn(0);
+          }
+          return;
+        }
+
+        setTotalFn(list.count);
+        setEntriesFn(prevEntries => {
+          const combined =
+            page === 0 ? list.items : [...prevEntries, ...list.items];
+          return dedupeById(combined);
+        });
+      };
+
+      updateVariant('inclusive', rhymeVariantsResult.inclusive);
+      updateVariant('sequence', rhymeVariantsResult.sequence);
+
+      return;
+    }
+
     if (!readingResult) {
       if (!loading && page === 0) {
         setEntries([]);
@@ -165,21 +255,26 @@ export function LexiconSearchBase({
     setLastProcessingTimeMs(readingResult.processingTimeMs);
 
     setEntries(prev => {
-      if (page === 0) {
-        return readingResult.items;
-      }
-
-      if (readingResult.items.length === 0) {
-        return prev;
-      }
-
-      const map = new Map(prev.map(item => [item.id, item]));
-      for (const item of readingResult.items) {
-        map.set(item.id, item);
-      }
-      return Array.from(map.values());
+      const combined =
+        page === 0 ? readingResult.items : [...prev, ...readingResult.items];
+      return dedupeById(combined);
     });
-  }, [readingResult, page, loading]);
+  }, [isRhymeSearch, rhymeVariantsResult, readingResult, page, loading]);
+
+  useEffect(() => {
+    if (!isRhymeSearch) return;
+    const activeEntries = sequenceView ? sequenceEntries : inclusiveEntries;
+    const activeTotal = sequenceView ? sequenceTotal : inclusiveTotal;
+    setEntries(activeEntries);
+    setTotalCount(activeTotal);
+  }, [
+    isRhymeSearch,
+    sequenceView,
+    inclusiveEntries,
+    sequenceEntries,
+    inclusiveTotal,
+    sequenceTotal,
+  ]);
 
   const effectiveGroupSize = useMemo(() => {
     if (pageSize > 0) {
@@ -359,7 +454,7 @@ export function LexiconSearchBase({
                       {showFieldError && errorMessageKey && (
                         <p
                           id={`lexicon-${kind}-query-error`}
-                          className="mt-2 text-xs text-destructive"
+                          className="mt-2 text-xs text-destructive px-2"
                           role="alert"
                         >
                           {t(errorMessageKey)}
@@ -382,6 +477,30 @@ export function LexiconSearchBase({
                 )}
               </Button>
             </div>
+            {isRhymeSearch && (
+              <div className="flex items-center justify-end gap-3">
+                <Label
+                  htmlFor={`lexicon-${kind}-contiguous-toggle`}
+                  className="text-sm text-muted-foreground"
+                >
+                  {sequenceView
+                    ? t('cantoLyr.lexicon.rhyme.sequenceEnabled', {
+                        defaultValue: 'Contiguous pattern required',
+                      })
+                    : t('cantoLyr.lexicon.rhyme.sequenceDisabled', {
+                        defaultValue: 'Inclusive pattern (any order)',
+                      })}
+                </Label>
+                <Switch
+                  id={`lexicon-${kind}-contiguous-toggle`}
+                  checked={sequenceView}
+                  onCheckedChange={checked => setSequenceView(Boolean(checked))}
+                  aria-label={t('cantoLyr.lexicon.rhyme.sequenceToggle', {
+                    defaultValue: 'Toggle contiguous rhyme matching',
+                  })}
+                />
+              </div>
+            )}
           </div>
         </form>
         {resolvedError && (
@@ -446,7 +565,7 @@ export function LexiconSearchBase({
               </div>
             ) : (
               !loading &&
-              !readingResult && (
+              (isRhymeSearch ? !!rhymeVariantsResult : !!readingResult) && (
                 <p className="text-sm text-muted-foreground">
                   {t('cantoLyr.lexicon.messages.noMatches')}
                 </p>
@@ -455,7 +574,7 @@ export function LexiconSearchBase({
             {entries.length > 0 && <ActiveEntryPanel activeItem={activeItem} />}
           </div>
         )}
-        {result && !readingResult && (
+        {result && !readingResult && !rhymeVariantsResult && (
           <div className="rounded-lg border border-border/60 bg-muted/40 p-4 text-sm">
             <pre className="whitespace-pre-wrap break-words text-muted-foreground/90">
               {JSON.stringify(result, null, 2)}

@@ -283,7 +283,10 @@
       "rhyme": {
         "heading": "Rhyme tools",
         "preview": "Build authentic rhyme schemes by discovering syllables that share finals and tone patterns.",
-        "description": "Query the lexicon by rhyme code to group entries with shared finals and tones, making structured rhyme grids fast to assemble."
+        "description": "Query the lexicon by rhyme code to group entries with shared finals and tones, making structured rhyme grids fast to assemble.",
+        "sequenceEnabled": "Contiguous pattern required",
+        "sequenceDisabled": "Inclusive pattern (any order)",
+        "sequenceToggle": "Toggle contiguous rhyme matching"
       },
       "lyrics": {
         "heading": "Lyric tools",
@@ -342,7 +345,7 @@
           "tipsHeading": "AI rhyme search tips",
           "tipsDescription": "Pair a rhyme final with a brief description to focus results.",
           "tips": {
-            "families": "Enter a Jyutping final (e.g. aa, eoi) to surface matching lyrical endings.",
+            "families": "Enter one or more Jyutping finals (e.g. aa or aa,aai for multiple rhymes - comma-separated).",
             "placement": "Use the rhyme position to match the exact slot inside the line.",
             "filters": "Combine lyricist, artist, or year filters to focus on a catalogue segment.",
             "aiQuery": "Add a short description (e.g., scene or theme) to guide semantic retrieval."
@@ -497,7 +500,7 @@
       },
       "rhyme": {
         "missingQuery": "Please enter a rhyme query.",
-        "invalidRhyme": "Please enter a valid rhyme from the Cantonese rhyme table."
+        "invalidRhyme": "Please enter valid rhyme(s) from the Cantonese rhyme table (comma-separated for multiple)."
       },
       "lyrics": {
         "missingPrompt": "Prompt is required to generate lyrics.",
@@ -660,13 +663,13 @@
         "tipsHeading": "Rhyme search tips",
         "tipsDescription": "Identify rhyme families that appear in published Cantonese lyrics.",
         "tips": {
-          "families": "Enter a Jyutping final (e.g. aa, eoi) to surface matching lyrical endings.",
+          "families": "Enter one or more Jyutping finals (e.g. aa or aa,aai for multiple rhymes - comma-separated).",
           "placement": "Use the rhyme position to match the exact slot inside the line.",
           "filters": "Combine lyricist, artist, or year filters to focus on a catalogue segment."
         },
         "formHeading": "Search by rhyme",
         "formDescription": "Provide a Jyutping final and optional filters to inspect how existing lyrics deploy that rhyme.",
-        "placeholder": "Enter Jyutping final (e.g. aa)",
+        "placeholder": "Enter Jyutping final(s) (e.g. aa, aai - comma-separated for multiple)",
         "resultsRegionLabel": "Lyric rhyme search results"
       }
     }

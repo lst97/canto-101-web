@@ -201,7 +201,7 @@
           "tipsHeading": "AI 押韻搜尋提示",
           "tipsDescription": "將韻母與簡短描述配對以聚焦結果。",
           "tips": {
-            "families": "輸入 Jyutping 韻母（例：aa、eoi）即可找到相同結尾的歌詞。",
+            "families": "輸入一個或多個粵拼韻母（例：aa 或 aa,aai 以逗號分隔多個韻母）即可找到相同結尾的歌詞。",
             "placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
             "filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。",
             "aiQuery": "加入簡短描述（如場景或主題）以引導語意檢索。"
@@ -497,7 +497,7 @@
       },
       "rhyme": {
         "missingQuery": "請輸入押韻查詢。",
-        "invalidRhyme": "請輸入粵語韻母表中的有效韻母。"
+        "invalidRhyme": "請輸入有效的粵語韻母（多個韻母以逗號分隔）。"
       },
       "lyrics": {
         "missingPrompt": "請提供歌詞主題。",
@@ -660,13 +660,13 @@
         "tipsHeading": "押韻搜尋提示",
         "tipsDescription": "快速定位已發佈歌詞常用的韻腳組。",
         "tips": {
-          "families": "輸入 Jyutping 韻母（例：aa、eoi）即可找到相同結尾的歌詞。",
+          "families": "輸入一個或多個粵拼韻母（例：aa 或 aa,aai 以逗號分隔多個韻母）即可找到相同結尾的歌詞。",
           "placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
           "filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。"
         },
         "formHeading": "依韻母搜尋",
         "formDescription": "輸入 Jyutping 韻母與可選條件，分析既有歌詞如何運用此韻腳。",
-        "placeholder": "輸入 Jyutping 韻母（例：aa）",
+        "placeholder": "輸入韻碼（例如 aa 或 aa,aai 以逗號分隔多個韻母）",
         "resultsRegionLabel": "歌詞押韻搜尋結果"
       }
     }

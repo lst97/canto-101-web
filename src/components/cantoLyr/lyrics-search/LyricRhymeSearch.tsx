@@ -15,7 +15,18 @@ const LyricRhymeQuerySchema = z.object({
     .trim()
     .min(1, { message: 'cantoLyr.errors.rhyme.missingQuery' })
     .refine(
-      val => (cantonesePinyinTable.rhymes as readonly string[]).includes(val),
+      val => {
+        const rhymes = val
+          .split(',')
+          .map(r => r.trim())
+          .filter(r => r.length > 0);
+        return (
+          rhymes.length > 0 &&
+          rhymes.every(rhyme =>
+            (cantonesePinyinTable.rhymes as readonly string[]).includes(rhyme)
+          )
+        );
+      },
       {
         message: 'cantoLyr.errors.rhyme.invalidRhyme',
       }

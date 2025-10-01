@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const entryModeSchema = z.enum(['all', 'vocab', 'char']);
+const rhymePatternModeSchema = z.enum(['inclusive', 'sequence', 'both']);
 
 export const SearchPronunciationQuerySchema = z.object({
   p: z.string().trim().min(1, { message: 'cantoLyr.errors.pron.missingQuery' }),
@@ -15,7 +16,7 @@ export const SearchRhymeQuerySchema = z.object({
     .string()
     .trim()
     .min(1, { message: 'cantoLyr.errors.rhyme.missingQuery' }),
-  mode: entryModeSchema.optional(),
+  mode: z.union([entryModeSchema, rhymePatternModeSchema]).optional(),
   pageSize: z.coerce.number().int().min(1).max(20480).optional(),
   offset: z.coerce.number().int().min(0).optional(),
 });
@@ -43,6 +44,7 @@ export const LyricsRhymeQuerySchema = z.object({
     .trim()
     .min(1, { message: 'cantoLyr.errors.rhyme.missingQuery' }),
   rhymePosition: z.coerce.number().int().positive().optional(),
+  rhymeSequence: z.coerce.boolean().optional(),
   themes: z.string().optional(),
   keywords: z.string().optional(),
   lyricist: z.string().optional(),
@@ -77,6 +79,19 @@ export const SearchResponseSchema = z.object({
   query: z.string(),
   count: z.number().int().nonnegative(),
   items: z.array(ReadingItemSchema),
+  fromCache: z.boolean(),
+  processingTimeMs: z.number().int().nonnegative(),
+});
+
+export const LexiconSearchListSchema = z.object({
+  count: z.number().int().nonnegative(),
+  items: z.array(ReadingItemSchema),
+});
+
+export const LexiconRhymeSearchVariantsResponseSchema = z.object({
+  query: z.string(),
+  inclusive: LexiconSearchListSchema.optional(),
+  sequence: LexiconSearchListSchema.optional(),
   fromCache: z.boolean(),
   processingTimeMs: z.number().int().nonnegative(),
 });
@@ -127,6 +142,8 @@ export const AiLexiconSearchResponseSchema = z.object({
 const LyricPronunciationBigramSchema = z.object({
   value: z.string(),
   position: z.number().int().nonnegative(),
+  length: z.number().int().positive(),
+  characters: z.string().optional(),
 });
 
 const MatchedSyllableSchema = z.object({
@@ -137,6 +154,7 @@ const MatchedSyllableSchema = z.object({
   rhyme: z.string().min(1).nullable().optional(),
   toneRaw: z.number().int().nullable().optional(),
   toneDigit: z.number().int().nullable().optional(),
+  char: z.string().min(1).nullable().optional(),
 });
 
 export const LyricSongSchema = z.object({
@@ -155,6 +173,19 @@ const LyricTokenSchema = z.object({
   syllables: z.array(MatchedSyllableSchema).optional(),
 });
 
+const LyricRhymeMatchSchema = z.object({
+  value: z.string(),
+  position: z.number().int().nonnegative(),
+  length: z.number().int().positive(),
+  characters: z.string().optional(),
+});
+
+const LyricNormalizationSchema = z.object({
+  isValid: z.boolean(),
+  originalText: z.string().nullable().optional(),
+  notes: z.string().nullable().optional(),
+});
+
 export const LyricLineSchema = z.object({
   id: z.string(),
   lyricId: z.string(),
@@ -166,18 +197,33 @@ export const LyricLineSchema = z.object({
   tokenCount: z.number().int().nonnegative(),
   tonePatternText: z.string(),
   pronunciationBigrams: z.array(LyricPronunciationBigramSchema).optional(),
+  rhymeMatches: z.array(LyricRhymeMatchSchema).optional(),
   matchedSyllables: z.array(MatchedSyllableSchema).optional(),
   tokens: z.array(LyricTokenSchema).optional(),
   syntaxNotes: z.string().nullable().optional(),
   sentiment: z.string().nullable().optional(),
   themes: z.array(z.string()).optional().nullable(),
   keywords: z.array(z.string()).optional().nullable(),
+  normalization: LyricNormalizationSchema.optional(),
 });
 
-export const LyricSearchResponseSchema = z.object({
+export const LyricPronunciationSearchResponseSchema = z.object({
   query: z.string(),
   count: z.number().int().nonnegative(),
   items: z.array(LyricLineSchema),
+  fromCache: z.boolean(),
+  processingTimeMs: z.number().int().nonnegative(),
+});
+
+export const LyricSearchListSchema = z.object({
+  count: z.number().int().nonnegative(),
+  items: z.array(LyricLineSchema),
+});
+
+export const LyricRhymeSearchVariantsResponseSchema = z.object({
+  query: z.string(),
+  inclusive: LyricSearchListSchema.optional(),
+  sequence: LyricSearchListSchema.optional(),
   fromCache: z.boolean(),
   processingTimeMs: z.number().int().nonnegative(),
 });
@@ -206,9 +252,12 @@ export const querySchemaByKind = {
 
 export const responseSchemaByKind = {
   pron: SearchResponseSchema,
-  rhyme: SearchResponseSchema,
-  'lyrics-pron': LyricSearchResponseSchema,
-  'lyrics-rhyme': LyricSearchResponseSchema,
+  rhyme: z.union([
+    SearchResponseSchema,
+    LexiconRhymeSearchVariantsResponseSchema,
+  ]),
+  'lyrics-pron': LyricPronunciationSearchResponseSchema,
+  'lyrics-rhyme': LyricRhymeSearchVariantsResponseSchema,
 } as const;
 
 export type SearchPronunciationQuery = z.infer<
@@ -221,13 +270,23 @@ export type LyricsPronunciationQuery = z.infer<
 export type LyricsRhymeQuery = z.infer<typeof LyricsRhymeQuerySchema>;
 export type ReadingItem = z.infer<typeof ReadingItemSchema>;
 export type SearchResponse = z.infer<typeof SearchResponseSchema>;
+export type LexiconSearchList = z.infer<typeof LexiconSearchListSchema>;
+export type LexiconRhymeSearchVariantsResponse = z.infer<
+  typeof LexiconRhymeSearchVariantsResponseSchema
+>;
 export type AiLexiconSearchQuery = z.infer<typeof AiLexiconSearchQuerySchema>;
 export type AiLexiconSearchItem = z.infer<typeof AiLexiconSearchItemSchema>;
 export type AiLexiconSearchResponse = z.infer<
   typeof AiLexiconSearchResponseSchema
 >;
 export type LyricLine = z.infer<typeof LyricLineSchema>;
-export type LyricSearchResponse = z.infer<typeof LyricSearchResponseSchema>;
+export type LyricSearchResponse = z.infer<
+  typeof LyricPronunciationSearchResponseSchema
+>;
+export type LyricSearchList = z.infer<typeof LyricSearchListSchema>;
+export type LyricRhymeSearchVariantsResponse = z.infer<
+  typeof LyricRhymeSearchVariantsResponseSchema
+>;
 export type MatchedSyllable = z.infer<typeof MatchedSyllableSchema>;
 export type LyricFilterOptions = z.infer<typeof LyricFilterOptionsSchema>;
 export type LyricFilterOptionsResponse = z.infer<

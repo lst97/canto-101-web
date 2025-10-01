@@ -167,7 +167,7 @@ export function LyricGenerationForm({
                   {showError && errKey && (
                     <p
                       id="lyric-generation-prompt-error"
-                      className="text-xs text-destructive"
+                      className="text-xs text-destructive px-2"
                       role="alert"
                     >
                       {t(errKey)}
@@ -219,7 +219,7 @@ export function LyricGenerationForm({
                   {showError && errKey && (
                     <p
                       id="lyric-generation-tone-sequences-error"
-                      className="text-xs text-destructive"
+                      className="text-xs text-destructive px-2"
                       role="alert"
                     >
                       {t(errKey)}
@@ -272,7 +272,7 @@ export function LyricGenerationForm({
                     {showError && errKey && (
                       <p
                         id="lyric-generation-seed-error"
-                        className="text-xs text-destructive"
+                        className="text-xs text-destructive px-2"
                         role="alert"
                       >
                         {t(errKey)}
@@ -324,7 +324,7 @@ export function LyricGenerationForm({
                     {showError && errKey && (
                       <p
                         id="lyric-generation-top-error"
-                        className="text-xs text-destructive"
+                        className="text-xs text-destructive px-2"
                         role="alert"
                       >
                         {t(errKey)}

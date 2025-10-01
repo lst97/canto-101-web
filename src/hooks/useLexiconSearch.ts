@@ -7,6 +7,7 @@ import type { AppError } from '../types/errors.ts';
 import {
   querySchemaByKind,
   responseSchemaByKind,
+  type LexiconRhymeSearchVariantsResponse,
   type SearchPronunciationQuery,
   type SearchResponse,
   type SearchRhymeQuery,
@@ -26,14 +27,14 @@ interface PronOptions extends BaseOptions {
 }
 
 interface RhymeOptions extends BaseOptions {
-  mode: string; // 'all' sentinel
+  patternMode: 'inclusive' | 'sequence' | 'both';
 }
 
 type OptionsState = PronOptions | RhymeOptions;
 
 type QueryParams = SearchPronunciationQuery | SearchRhymeQuery;
 
-type SearchResult = SearchResponse;
+type SearchResult = SearchResponse | LexiconRhymeSearchVariantsResponse;
 
 type NormalizedQueryError = AppError;
 
@@ -71,9 +72,9 @@ function createDefaultOptions(kind: SearchKind): OptionsState {
     return { mode: 'all', pageSize: '50', prefix: false } satisfies PronOptions;
   }
   if (kind === 'rhyme') {
-    return { mode: 'all', pageSize: '50' } satisfies RhymeOptions;
+    return { pageSize: '50', patternMode: 'both' } satisfies RhymeOptions;
   }
-  return { pageSize: '50', mode: 'all' } satisfies RhymeOptions;
+  return { pageSize: '50', patternMode: 'both' } satisfies RhymeOptions;
 }
 
 function createQueryKey(
@@ -117,12 +118,19 @@ function buildParams(
     params.offset = snapshot.page * pageSizeValue;
   }
 
-  const { mode } = snapshot.options as RhymeOptions | PronOptions;
-  if (mode && mode !== 'all') {
-    params.mode = mode;
+  if (kind === 'pron') {
+    const { mode, prefix } = snapshot.options as PronOptions;
+    if (mode && mode !== 'all') {
+      params.mode = mode;
+    }
+    if (prefix) {
+      params.prefix = true;
+    }
   }
-  if (kind === 'pron' && (snapshot.options as PronOptions).prefix) {
-    params.prefix = true;
+
+  if (kind === 'rhyme') {
+    const { patternMode } = snapshot.options as RhymeOptions;
+    params.mode = patternMode ?? 'both';
   }
 
   const schema = querySchemaByKind[kind];

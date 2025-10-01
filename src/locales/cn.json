@@ -201,7 +201,7 @@
           "tipsHeading": "AI 押韵搜寻提示",
           "tipsDescription": "将韵母与简短描述配对以聚焦结果。",
           "tips": {
-            "families": "输入 Jyutping 韵母（例：aa、eoi）即可找到相同结尾的歌词。",
+            "families": "输入一个或多个粤拼韵母（例：aa 或 aa,aai 以逗号分隔多个韵母）即可找到相同结尾的歌词。",
             "placement": "设定韵脚位置锁定歌词行中特定栏位。",
             "filters": "搭配作词人、演唱者或年份筛选，聚焦指定作品。",
             "aiQuery": "加入简短描述（如场景或主题）以引导语意检索。"
@@ -497,7 +497,7 @@
       },
       "rhyme": {
         "missingQuery": "请输入押韵查询。",
-        "invalidRhyme": "请输入粤语韵母表中的有效韵母。"
+        "invalidRhyme": "请输入有效的粤语韵母（多个韵母以逗号分隔）。"
       },
       "lyrics": {
         "missingPrompt": "请提供歌词主题。",
@@ -660,13 +660,13 @@
         "tipsHeading": "押韵搜寻提示",
         "tipsDescription": "快速定位已发布歌词常用的韵脚组。",
         "tips": {
-          "families": "输入 Jyutping 韵母（例：aa、eoi）即可找到相同结尾的歌词。",
+          "families": "输入一个或多个粤拼韵母（例：aa 或 aa,aai 以逗号分隔多个韵母）即可找到相同结尾的歌词。",
           "placement": "设定韵脚位置锁定歌词行中特定栏位。",
           "filters": "搭配作词人、演唱者或年份筛选，聚焦指定作品。"
         },
         "formHeading": "依韵母搜寻",
         "formDescription": "输入 Jyutping 韵母与可选条件，分析既有歌词如何运用此韵脚。",
-        "placeholder": "输入 Jyutping 韵母（例：aa）",
+        "placeholder": "输入韵码（例如 aa 或 aa,aai 以逗号分隔多个韵母）",
         "resultsRegionLabel": "歌词押韵搜寻结果"
       }
     }

@@ -10,6 +10,7 @@ import {
   type LyricSearchResponse,
   type LyricsPronunciationQuery,
   type LyricsRhymeQuery,
+  type LyricRhymeSearchVariantsResponse,
 } from '../lib/schemas/lexicon.ts';
 
 export type AiLyricSearchKind =
@@ -53,13 +54,14 @@ export interface LyricsRhymeOptions extends BaseOptions {
   artist: string;
   sentiment: string;
   year: string;
+  patternMode: 'inclusive' | 'sequence' | 'both';
 }
 
 type OptionsState = LyricsPronOptions | LyricsRhymeOptions;
 
 type QueryParams = LyricsPronunciationQuery | LyricsRhymeQuery;
 
-type SearchResult = LyricSearchResponse;
+type SearchResult = LyricSearchResponse | LyricRhymeSearchVariantsResponse;
 
 type NormalizedQueryError = AppError;
 
@@ -114,6 +116,7 @@ function createDefaultOptions(kind: SearchKind): OptionsState {
     artist: '',
     sentiment: '',
     year: '',
+    patternMode: 'both',
   } satisfies LyricsRhymeOptions;
 }
 
@@ -176,6 +179,7 @@ function buildParams(
       artist,
       sentiment,
       year,
+      patternMode,
     } = snapshot.options as LyricsRhymeOptions;
 
     if (rhymePosition.trim()) params.rhymePosition = rhymePosition.trim();
@@ -185,6 +189,12 @@ function buildParams(
     if (artist.trim()) params.artist = artist.trim();
     if (sentiment.trim()) params.sentiment = sentiment.trim();
     if (year.trim()) params.year = year.trim();
+
+    const normalizedMode = patternMode ?? 'both';
+    params.mode = normalizedMode;
+    if (normalizedMode === 'sequence') {
+      params.rhymeSequence = true;
+    }
   }
 
   const schema = querySchemaByKind[kind];

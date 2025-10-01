@@ -16,7 +16,12 @@ import {
   type LyricsPronOptions,
   type LyricsRhymeOptions,
 } from '@/hooks/useLyricSearch';
-import type { LyricLine, LyricSearchResponse } from '@/lib/schemas/lexicon.ts';
+import type {
+  LyricLine,
+  LyricRhymeSearchVariantsResponse,
+  LyricSearchResponse,
+  LyricSearchList,
+} from '@/lib/schemas/lexicon.ts';
 
 import { stripSpacesPunctAndSymbols } from './base/text-helpers';
 import { LyricSearchProvider } from './base/LyricSearchContext';
@@ -30,6 +35,7 @@ import { Card, CardContent } from '@/components/ui/card.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { Label } from '@/components/ui/label.tsx';
 import { LoadingIndicator } from '@/components/ui/loading-indicator.tsx';
+import { Switch } from '@/components/ui/switch.tsx';
 import {
   Accordion,
   AccordionContent,
@@ -82,6 +88,18 @@ export interface LyricSearchBaseProps {
   aiQueryPlaceholderKey?: string;
 }
 
+function dedupeByNormalizedText(lines: LyricLine[]): LyricLine[] {
+  const seen = new Set<string>();
+  const result: LyricLine[] = [];
+  for (const line of lines) {
+    const normalized = stripSpacesPunctAndSymbols(line.text);
+    if (seen.has(normalized)) continue;
+    seen.add(normalized);
+    result.push(line);
+  }
+  return result;
+}
+
 export function LyricSearchBase({
   kind,
   querySchema,
@@ -116,15 +134,78 @@ export function LyricSearchBase({
   const [responseFromCache, setResponseFromCache] = useState<boolean>(false);
   const [processingTimeMs, setProcessingTimeMs] = useState<number | null>(null);
   const [aiQuery, setAiQuery] = useState<string>('');
+  const isRhymeSearch = kind === 'lyrics-rhyme';
+  const [sequenceView, setSequenceView] = useState<boolean>(false);
+  const [inclusiveEntries, setInclusiveEntries] = useState<LyricLine[]>([]);
+  const [sequenceEntries, setSequenceEntries] = useState<LyricLine[]>([]);
+  const [inclusiveTotal, setInclusiveTotal] = useState<number>(0);
+  const [sequenceTotal, setSequenceTotal] = useState<number>(0);
 
   const initialOptionsRef = useRef(options);
 
   const lyricResult = useMemo<LyricSearchResponse | null>(() => {
-    if (!result) return null;
+    if (!result || isRhymeSearch) return null;
     return result as LyricSearchResponse;
-  }, [result]);
+  }, [result, isRhymeSearch]);
+
+  const lyricRhymeResult =
+    useMemo<LyricRhymeSearchVariantsResponse | null>(() => {
+      if (!result || !isRhymeSearch) return null;
+      return result as LyricRhymeSearchVariantsResponse;
+    }, [result, isRhymeSearch]);
 
   useEffect(() => {
+    if (isRhymeSearch) {
+      if (!lyricRhymeResult) {
+        if (!loading && page === 0) {
+          setInclusiveEntries([]);
+          setSequenceEntries([]);
+          setInclusiveTotal(0);
+          setSequenceTotal(0);
+          setEntries([]);
+          setTotalCount(0);
+          setCurrentQueryText('');
+          setResponseFromCache(false);
+          setProcessingTimeMs(null);
+        }
+        return;
+      }
+
+      setCurrentQueryText(lyricRhymeResult.query);
+      setResponseFromCache(lyricRhymeResult.fromCache);
+      setProcessingTimeMs(lyricRhymeResult.processingTimeMs);
+
+      const updateVariant = (
+        variant: 'inclusive' | 'sequence',
+        list: LyricSearchList | undefined
+      ) => {
+        const setEntriesFn =
+          variant === 'inclusive' ? setInclusiveEntries : setSequenceEntries;
+        const setTotalFn =
+          variant === 'inclusive' ? setInclusiveTotal : setSequenceTotal;
+
+        if (!list) {
+          if (page === 0) {
+            setEntriesFn([]);
+            setTotalFn(0);
+          }
+          return;
+        }
+
+        setTotalFn(list.count);
+        setEntriesFn(prevEntries => {
+          const combined =
+            page === 0 ? list.items : [...prevEntries, ...list.items];
+          return dedupeByNormalizedText(combined);
+        });
+      };
+
+      updateVariant('inclusive', lyricRhymeResult.inclusive);
+      updateVariant('sequence', lyricRhymeResult.sequence);
+
+      return;
+    }
+
     if (!lyricResult) {
       if (!loading && page === 0) {
         setEntries([]);
@@ -142,24 +223,26 @@ export function LyricSearchBase({
     setProcessingTimeMs(lyricResult.processingTimeMs);
 
     setEntries(prev => {
-      let newItems = lyricResult.items;
-
-      // Deduplicate based on normalized lyric text (remove spaces and symbols)
-      const seen = new Set<string>();
-      newItems = newItems.filter(item => {
-        const normalized = stripSpacesPunctAndSymbols(item.text);
-        if (seen.has(normalized)) return false;
-        seen.add(normalized);
-        return true;
-      });
-
-      if (page === 0) return newItems;
-      if (newItems.length === 0) return prev;
-      const map = new Map(prev.map(item => [item.id, item] as const));
-      for (const item of newItems) map.set(item.id, item);
-      return Array.from(map.values());
+      const combined =
+        page === 0 ? lyricResult.items : [...prev, ...lyricResult.items];
+      return dedupeByNormalizedText(combined);
     });
-  }, [lyricResult, loading, page]);
+  }, [isRhymeSearch, lyricRhymeResult, lyricResult, loading, page]);
+
+  useEffect(() => {
+    if (!isRhymeSearch) return;
+    const activeEntries = sequenceView ? sequenceEntries : inclusiveEntries;
+    const activeTotal = sequenceView ? sequenceTotal : inclusiveTotal;
+    setEntries(activeEntries);
+    setTotalCount(activeTotal);
+  }, [
+    isRhymeSearch,
+    sequenceView,
+    inclusiveEntries,
+    sequenceEntries,
+    inclusiveTotal,
+    sequenceTotal,
+  ]);
 
   const hasMore = entries.length < totalCount;
 
@@ -210,6 +293,11 @@ export function LyricSearchBase({
   const handleReset = useCallback(() => {
     setSubmitAttempted(false);
     setAiQuery('');
+    setSequenceView(false);
+    setInclusiveEntries([]);
+    setSequenceEntries([]);
+    setInclusiveTotal(0);
+    setSequenceTotal(0);
     reset();
   }, [reset]);
 
@@ -226,6 +314,7 @@ export function LyricSearchBase({
   const activeFilterValues = useMemo(() => {
     const entries: Array<[string, string]> = [];
     for (const field of filterFields) {
+      if (field.key === 'patternMode') continue;
       const rawValue = typedOptions[field.key as string];
       const value =
         typeof rawValue === 'string' ? rawValue : String(rawValue ?? '');
@@ -275,7 +364,7 @@ export function LyricSearchBase({
                 />
               </div>
             )}
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="space-y-2">
               <form.Field
                 name="query"
                 validators={{
@@ -291,71 +380,103 @@ export function LyricSearchBase({
                       submitAttempted);
                   const errorKey = field.state.meta.errors[0];
                   return (
-                    <div className="flex-1">
-                      <Label
-                        htmlFor={`lyric-${kind}-query`}
-                        className="sr-only"
-                      >
-                        {t('cantoLyr.lyricSearch.labels.query')}
-                      </Label>
-                      <Input
-                        id={`lyric-${kind}-query`}
-                        placeholder={placeholder}
-                        value={field.state.value}
-                        onChange={event => {
-                          const nextValue = event.target.value;
-                          field.handleChange(nextValue);
-                          setQuery(nextValue);
-                        }}
-                        onBlur={field.handleBlur}
-                        aria-invalid={showFieldError}
-                        aria-describedby={
-                          showFieldError
-                            ? `lyric-${kind}-query-error`
-                            : undefined
-                        }
-                        inputMode={inputProps?.inputMode}
-                        pattern={inputProps?.pattern}
-                        autoCapitalize={inputProps?.autoCapitalize}
-                        autoCorrect={inputProps?.autoCorrect}
-                      />
+                    <>
+                      <div className="flex gap-3">
+                        <div className="flex-1">
+                          <Label
+                            htmlFor={`lyric-${kind}-query`}
+                            className="sr-only"
+                          >
+                            {t('cantoLyr.lyricSearch.labels.query')}
+                          </Label>
+                          <Input
+                            id={`lyric-${kind}-query`}
+                            placeholder={placeholder}
+                            value={field.state.value}
+                            onChange={event => {
+                              const nextValue = event.target.value;
+                              field.handleChange(nextValue);
+                              setQuery(nextValue);
+                            }}
+                            onBlur={field.handleBlur}
+                            aria-invalid={showFieldError}
+                            aria-describedby={
+                              showFieldError
+                                ? `lyric-${kind}-query-error`
+                                : undefined
+                            }
+                            inputMode={inputProps?.inputMode}
+                            pattern={inputProps?.pattern}
+                            autoCapitalize={inputProps?.autoCapitalize}
+                            autoCorrect={inputProps?.autoCorrect}
+                          />
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            type="submit"
+                            disabled={loading}
+                            className="px-6"
+                          >
+                            {loading ? (
+                              <LoadingIndicator
+                                size="sm"
+                                label={t('common.loading')}
+                                spinnerClassName="text-primary-foreground"
+                                labelClassName="text-primary-foreground"
+                              />
+                            ) : (
+                              t('common.search')
+                            )}
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            onClick={handleReset}
+                            disabled={loading && page === 0}
+                          >
+                            {t('common.reset', { defaultValue: 'Reset' })}
+                          </Button>
+                        </div>
+                      </div>
                       {showFieldError && errorKey && (
                         <p
                           id={`lyric-${kind}-query-error`}
-                          className="mt-2 text-xs text-destructive"
+                          className="text-xs text-destructive px-2"
                           role="alert"
                         >
                           {t(errorKey)}
                         </p>
                       )}
-                    </div>
+                    </>
                   );
                 }}
               </form.Field>
-              <div className="flex items-center gap-2">
-                <Button type="submit" disabled={loading} className="px-6">
-                  {loading ? (
-                    <LoadingIndicator
-                      size="sm"
-                      label={t('common.loading')}
-                      spinnerClassName="text-primary-foreground"
-                      labelClassName="text-primary-foreground"
-                    />
-                  ) : (
-                    t('common.search')
-                  )}
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  onClick={handleReset}
-                  disabled={loading && page === 0}
-                >
-                  {t('common.reset', { defaultValue: 'Reset' })}
-                </Button>
-              </div>
             </div>
           </div>
+          {isRhymeSearch && (
+            <div className="flex items-center justify-end gap-3">
+              <Label
+                htmlFor={`lyric-${kind}-contiguous-toggle`}
+                className="text-sm text-muted-foreground"
+              >
+                {sequenceView
+                  ? t('cantoLyr.lyricSearch.rhyme.sequenceEnabled', {
+                      defaultValue: 'Contiguous pattern required',
+                    })
+                  : t('cantoLyr.lyricSearch.rhyme.sequenceDisabled', {
+                      defaultValue: 'Inclusive pattern (any order)',
+                    })}
+              </Label>
+              <Switch
+                id={`lyric-${kind}-contiguous-toggle`}
+                checked={sequenceView}
+                onCheckedChange={checked => setSequenceView(Boolean(checked))}
+                aria-label={t('cantoLyr.lyricSearch.rhyme.sequenceToggle', {
+                  defaultValue: 'Toggle contiguous rhyme matching',
+                })}
+              />
+            </div>
+          )}
           <Accordion type="single" collapsible>
             <AccordionItem value="filters">
               <AccordionTrigger className="text-sm font-medium">
@@ -535,7 +656,7 @@ export function LyricSearchBase({
             {resolvedError}
           </p>
         )}
-        {(entries.length > 0 || loading || lyricResult) && (
+        {(entries.length > 0 || loading || lyricResult || lyricRhymeResult) && (
           <div className="space-y-4" aria-live={loading ? 'polite' : 'off'}>
             {(totalCount > 0 || loading) && (
               <ResultsSummary
@@ -556,11 +677,13 @@ export function LyricSearchBase({
                   {entries.map(line => (
                     <LyricResultCard key={line.id} line={line} />
                   ))}
-                  {entries.length === 0 && !loading && lyricResult && (
-                    <p className="text-sm text-muted-foreground">
-                      {t('cantoLyr.lyricSearch.messages.noMatches')}
-                    </p>
-                  )}
+                  {entries.length === 0 &&
+                    !loading &&
+                    (isRhymeSearch ? !!lyricRhymeResult : !!lyricResult) && (
+                      <p className="text-sm text-muted-foreground">
+                        {t('cantoLyr.lyricSearch.messages.noMatches')}
+                      </p>
+                    )}
                 </div>
               </ScrollArea>
             </LyricSearchProvider>

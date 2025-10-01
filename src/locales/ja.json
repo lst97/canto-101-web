@@ -322,7 +322,7 @@
       },
       "rhyme": {
         "missingQuery": "韻クエリを入力してください。",
-        "invalidRhyme": "広東語韻母表から有効な韻を入力してください。"
+        "invalidRhyme": "広東語の韻母として有効な値を入力してください（複数の場合はカンマ区切り）。"
       },
       "lyrics": {
         "missingPrompt": "歌詞生成にはプロンプトが必要です。",
@@ -368,7 +368,7 @@
           "tipsHeading": "AI 韻脚検索のヒント",
           "tipsDescription": "韻母と短い説明を合わせて結果��絞り込みます。",
           "tips": {
-            "families": "Jyutping の韻母（例: aa・eoi）を入力して一致する語尾を探します。",
+            "families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
             "placement": "韻脚位置を使って、行内のスロットを一致させます。",
             "filters": "作詞者・歌手・年代などのフィルターを組み合わせます。",
             "aiQuery": "場面やテーマなどの短い説明を追加して意味検索を誘導します。"
@@ -660,13 +660,13 @@
         "tipsHeading": "韻脚検索のヒント",
         "tipsDescription": "公開済みの歌詞で使われている韻脚ファミリーを素早く確認します。",
         "tips": {
-          "families": "Jyutping の韻母（例: aa・eoi）を入力して、同じ終わり方をする歌詞を探します。",
+          "families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
           "placement": "韻脚位置を指定し、歌詞行の中で韻が置かれる箇所を一致させます。",
           "filters": "作詞者・歌手・年代などを組み合わせると対象作品を絞れます。"
         },
         "formHeading": "韻母で検索",
         "formDescription": "Jyutping の韻母と必要なフィルターを入力し、既存の歌詞がその韻をどう使っているか確認します。",
-        "placeholder": "Jyutping の韻母を入力（例: aa）",
+        "placeholder": "Jyutping の韻母を入力（例: aa または aa,aai のようにカンマ区切りで複数入力可）",
         "resultsRegionLabel": "歌詞・韻脚検索結果"
       }
     }
