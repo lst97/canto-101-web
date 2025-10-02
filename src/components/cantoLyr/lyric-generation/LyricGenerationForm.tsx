@@ -371,7 +371,10 @@ export function LyricGenerationForm({
           </p>
         )}
         {disabled && (
-          <p role="alert" className="text-sm text-amber-600 dark:text-amber-400">
+          <p
+            role="alert"
+            className="text-sm text-amber-600 dark:text-amber-400"
+          >
             {t('cantoLyr.ai.lyrics.form.apiKey.requiredMessage')}
           </p>
         )}

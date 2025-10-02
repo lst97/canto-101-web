@@ -9,7 +9,14 @@ import { Card, CardContent } from '../components/ui/card.tsx';
 import { Separator } from '../components/ui/separator.tsx';
 import { Badge } from '../components/ui/badge.tsx';
 import { Button } from '../components/ui/button.tsx';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog.tsx';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../components/ui/dialog.tsx';
 import { Input } from '../components/ui/input.tsx';
 import { Label } from '../components/ui/label.tsx';
 import {
@@ -71,12 +78,15 @@ export default function CantoLyrLyricGeneration(): ReactElement {
             <DialogTrigger asChild>
               <Button variant="default">
                 <Key className="mr-2 h-4 w-4" />
-                {t('cantoLyr.ai.lyrics.form.apiKey.button')} {!apiKey && <span className="text-red-500">*</span>}
+                {t('cantoLyr.ai.lyrics.form.apiKey.button')}{' '}
+                {!apiKey && <span className="text-red-500">*</span>}
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>{t('cantoLyr.ai.lyrics.form.apiKey.dialogTitle')}</DialogTitle>
+                <DialogTitle>
+                  {t('cantoLyr.ai.lyrics.form.apiKey.dialogTitle')}
+                </DialogTitle>
                 <DialogDescription>
                   {t('cantoLyr.ai.lyrics.form.apiKey.dialogDescriptionPrefix')}
                   <a
@@ -95,19 +105,23 @@ export default function CantoLyrLyricGeneration(): ReactElement {
               </DialogHeader>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="apiKey">{t('cantoLyr.ai.lyrics.form.apiKey.label')}</Label>
+                  <Label htmlFor="apiKey">
+                    {t('cantoLyr.ai.lyrics.form.apiKey.label')}
+                  </Label>
                   <div className="relative">
                     <Input
                       id="apiKey"
                       type={showPassword ? 'text' : 'password'}
                       value={apiKey}
-                      onChange={(e) => {
+                      onChange={e => {
                         setApiKey(e.target.value);
                         if (validationError) {
                           setValidationError(validateApiKey(e.target.value));
                         }
                       }}
-                      placeholder={t('cantoLyr.ai.lyrics.form.apiKey.placeholder')}
+                      placeholder={t(
+                        'cantoLyr.ai.lyrics.form.apiKey.placeholder'
+                      )}
                       className={validationError ? 'pr-10' : 'pr-10'}
                     />
                     <Button
@@ -116,7 +130,11 @@ export default function CantoLyrLyricGeneration(): ReactElement {
                       size="sm"
                       className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                       onClick={() => setShowPassword(!showPassword)}
-                      aria-label={showPassword ? t('cantoLyr.ai.lyrics.form.apiKey.hidePassword') : t('cantoLyr.ai.lyrics.form.apiKey.showPassword')}
+                      aria-label={
+                        showPassword
+                          ? t('cantoLyr.ai.lyrics.form.apiKey.hidePassword')
+                          : t('cantoLyr.ai.lyrics.form.apiKey.showPassword')
+                      }
                     >
                       {showPassword ? (
                         <EyeOff className="h-4 w-4" />
@@ -138,32 +156,34 @@ export default function CantoLyrLyricGeneration(): ReactElement {
                     }
                   }}
                   disabled={!apiKey.trim()}
-                >
-                </Button>
+                ></Button>
               </div>
             </DialogContent>
           </Dialog>
         </div>
-      <header className="space-y-3">
-        <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-          {t('cantoLyr.pages.lyrics.heading')}
-        </p>
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            {t('cantoLyr.lyrics.title')}
-          </h1>
-          <Badge variant="secondary" className="inline-flex items-center gap-1">
-            <FlaskConical className="size-3" />
-            <span className="text-[11px] font-semibold uppercase">
-              {t('cantoLyr.badges.experimental')}
-            </span>
-          </Badge>
-        </div>
-        <p className="text-muted-foreground max-w-prose">
-          {t('cantoLyr.pages.lyrics.description')}
-        </p>
-      </header>
-    </div>
+        <header className="space-y-3">
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            {t('cantoLyr.pages.lyrics.heading')}
+          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-3xl font-semibold tracking-tight">
+              {t('cantoLyr.lyrics.title')}
+            </h1>
+            <Badge
+              variant="secondary"
+              className="inline-flex items-center gap-1"
+            >
+              <FlaskConical className="size-3" />
+              <span className="text-[11px] font-semibold uppercase">
+                {t('cantoLyr.badges.experimental')}
+              </span>
+            </Badge>
+          </div>
+          <p className="text-muted-foreground max-w-prose">
+            {t('cantoLyr.pages.lyrics.description')}
+          </p>
+        </header>
+      </div>
       <section aria-label={t('cantoLyr.lyrics.title')} className="space-y-8">
         {/* Informational / limitations card (mirrors style patterns from lexicon AI & pronunciation pages) */}
         <Accordion type="single" collapsible>

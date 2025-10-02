@@ -61,7 +61,7 @@ export function CantoLyrWorkflowCard({
 
   return (
     <Card className="relative h-full border-border/60 shadow-none">
-      {(badgeConfig || secondBadgeConfig) ? (
+      {badgeConfig || secondBadgeConfig ? (
         <div className="absolute right-3 top-3 z-10 flex gap-1">
           {badgeConfig ? (
             <Badge
