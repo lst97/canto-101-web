@@ -33,7 +33,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '../components/ui/breadcrumb.tsx';
-import { Key, ExternalLink, Eye, EyeOff, FlaskConical } from 'lucide-react';
+import { ExternalLink, Eye, EyeOff, FlaskConical, Key } from 'lucide-react';
 
 export default function CantoLyrLyricGeneration(): ReactElement {
   const { t } = useTranslation();

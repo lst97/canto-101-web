@@ -1,13 +1,13 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import type {
-  AppError,
   ApiError,
+  AppError,
   NetworkError,
   UnexpectedError,
 } from '../types/errors.ts';
 import {
-  ApiErrorResponseSchema,
   ApiDirectErrorResponseSchema,
+  ApiErrorResponseSchema,
 } from './schemas/api-response.ts';
 
 export const API_BASE_URL: string =

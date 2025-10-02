@@ -29,8 +29,9 @@ export function buildNonIgnorableIndexMap(graphemes: string[]): number[] {
 export function mergeRanges(
   ranges: Array<{ start: number; end: number }>
 ): Array<{ start: number; end: number }> {
-  if (ranges.length <= 1)
+  if (ranges.length <= 1) {
     return ranges.slice().sort((a, b) => a.start - b.start);
+  }
   const sorted = [...ranges].sort((a, b) => a.start - b.start);
   const merged: Array<{ start: number; end: number }> = [];
   for (const r of sorted) {

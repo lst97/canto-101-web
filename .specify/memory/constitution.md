@@ -47,43 +47,66 @@ changes.
 ### VIII. Error Handling Architecture (NON-NEGOTIABLE)
 
 1. Rendering / Component Errors:
-  - Must be captured by `react-error-boundary` instances.
-  - Root layout wraps the app with `AppErrorBoundary`.
-  - Data-fetching UI regions (pages, complex widgets) use `QueryErrorBoundary` coupled with `useQueryErrorResetBoundary`.
-2. Async / Network Errors:
-  - All Axios requests flow through a single client (`src/lib/api.ts`).
-  - Response interceptor transforms errors into typed `AppError` variants:
-    - `network` (no response / connectivity)
-    - `api` (HTTP status >= 400)
-    - `unexpected` (anything else)
-3. Error Types:
-  - Defined in `src/types/errors.ts` as a discriminated union.
-  - No `any` in error surfaces; start from `unknown`, then refine.
-4. React Query:
-  - Use built-in error states (`error`, `isError`) instead of wrapping query functions with manual `try/catch`.
-  - Reset flows initiated via boundary `onReset` or the query reset boundary.
-5. User-Facing Messages:
-  - Always internationalized. Raw server strings are never rendered directly unless mapped to a key. Fallback copy lives in `errors.*` namespace.
-6. Logging:
-  - All logging must use Pino via the centralized logger in `src/lib/logger.ts`.
-  - Prohibit direct use of `console.log`, `console.error`, etc.
-  - Use structured logging with levels: debug, info, warn, error, fatal.
-  - Future: Integrate with external reporters (Sentry, OpenTelemetry) via logger configuration.
-7. Prohibited Patterns:
-  - Broad `try/catch` in component render bodies.
-  - Silent error suppression (empty catch blocks or ignored promise rejections).
-8. Future Extension:
-  - Central logging/reporting hook can be injected via boundary `onError` without altering component trees.
 
-All new components must declare how they surface operational errors (boundary, query error UI, or controlled form state) in their PR description per governance rules.
+- Must be captured by `react-error-boundary` instances.
+- Root layout wraps the app with `AppErrorBoundary`.
+- Data-fetching UI regions (pages, complex widgets) use `QueryErrorBoundary`
+  coupled with `useQueryErrorResetBoundary`.
+
+2. Async / Network Errors:
+
+- All Axios requests flow through a single client (`src/lib/api.ts`).
+- Response interceptor transforms errors into typed `AppError` variants:
+  - `network` (no response / connectivity)
+  - `api` (HTTP status >= 400)
+  - `unexpected` (anything else)
+
+3. Error Types:
+
+- Defined in `src/types/errors.ts` as a discriminated union.
+- No `any` in error surfaces; start from `unknown`, then refine.
+
+4. React Query:
+
+- Use built-in error states (`error`, `isError`) instead of wrapping query
+  functions with manual `try/catch`.
+- Reset flows initiated via boundary `onReset` or the query reset boundary.
+
+5. User-Facing Messages:
+
+- Always internationalized. Raw server strings are never rendered directly
+  unless mapped to a key. Fallback copy lives in `errors.*` namespace.
+
+6. Logging:
+
+- All logging must use Pino via the centralized logger in `src/lib/logger.ts`.
+- Prohibit direct use of `console.log`, `console.error`, etc.
+- Use structured logging with levels: debug, info, warn, error, fatal.
+- Future: Integrate with external reporters (Sentry, OpenTelemetry) via logger
+  configuration.
+
+7. Prohibited Patterns:
+
+- Broad `try/catch` in component render bodies.
+- Silent error suppression (empty catch blocks or ignored promise rejections).
+
+8. Future Extension:
+
+- Central logging/reporting hook can be injected via boundary `onError` without
+  altering component trees.
+
+All new components must declare how they surface operational errors (boundary,
+query error UI, or controlled form state) in their PR description per governance
+rules.
 
 ### IX. Schema Validation Contract (NON-NEGOTIABLE)
 
-- Frontend search flows and data hooks (`frontend/src/hooks/`) must validate user
-  inputs and server payloads with `zod@4.1.11`, using shared schemas under
+- Frontend search flows and data hooks (`frontend/src/hooks/`) must validate
+  user inputs and server payloads with `zod@4.1.11`, using shared schemas under
   `frontend/src/lib/schemas/`.
 - `frontend/src/hooks/useLexiconSearch.ts` is the reference implementation:
-  inputs are parsed before requests and responses are parsed before state is mutated.
+  inputs are parsed before requests and responses are parsed before state is
+  mutated.
 - Form surfaces rendered with shadcn/ui components must integrate TanStack Form
   so validation stays centralized, error handling remains type-safe, and
   real-time feedback is delivered to users.

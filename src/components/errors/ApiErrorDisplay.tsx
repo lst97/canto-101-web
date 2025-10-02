@@ -1,14 +1,21 @@
-import { AlertTriangle, ChevronDown, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { AlertTriangle, Check, Copy } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import type { AppError } from '@/types/errors';
 
 interface ApiErrorDisplayProps {
@@ -17,22 +24,60 @@ interface ApiErrorDisplayProps {
   showTechnicalDetails?: boolean;
 }
 
+type CopyStatus = 'idle' | 'success';
+
 export function ApiErrorDisplay({
   error,
   title,
   showTechnicalDetails = true,
 }: ApiErrorDisplayProps) {
   const { t } = useTranslation();
-  const [isTechnicalOpen, setIsTechnicalOpen] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<CopyStatus>('idle');
 
   // Extract error details
   const errorDetails = extractErrorDetails(error);
+  const userMessage = errorDetails?.userMessage ?? '';
+  const technicalDetails = errorDetails?.technicalDetails;
+  const errorCode = errorDetails?.errorCode;
+  const shouldClampDetails =
+    typeof technicalDetails === 'string' &&
+    (technicalDetails.split('\n').length > 10 || technicalDetails.length > 600);
+
+  const handleCopy = useCallback(async () => {
+    if (!technicalDetails) {
+      return;
+    }
+
+    if (
+      !('clipboard' in navigator) ||
+      typeof navigator.clipboard?.writeText !== 'function'
+    ) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(technicalDetails);
+      setCopyStatus('success');
+    } catch {
+      setCopyStatus('idle');
+    }
+  }, [technicalDetails]);
+
+  useEffect(() => {
+    if (copyStatus !== 'success') {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCopyStatus('idle');
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [copyStatus]);
 
   if (!errorDetails) {
     return null;
   }
-
-  const { userMessage, technicalDetails, errorCode } = errorDetails;
 
   return (
     <Alert variant="destructive" className="border-destructive/50">
@@ -50,33 +95,79 @@ export function ApiErrorDisplay({
           <p>{userMessage}</p>
 
           {showTechnicalDetails && technicalDetails && (
-            <Collapsible
-              open={isTechnicalOpen}
-              onOpenChange={setIsTechnicalOpen}
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full overflow-hidden rounded-lg border border-border/60 bg-muted/20"
             >
-              <CollapsibleTrigger className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                {isTechnicalOpen ? (
-                  <ChevronDown className="h-3 w-3" />
-                ) : (
-                  <ChevronRight className="h-3 w-3" />
-                )}
-                {t('errors.technicalDetails', 'Technical Details')}
-              </CollapsibleTrigger>
-              <CollapsibleContent className="mt-2">
-                <Card className="bg-muted/50">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm">
-                      {t('errors.debugInfo', 'Debug Information')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <pre className="text-xs font-mono whitespace-pre-wrap break-all">
-                      {technicalDetails}
-                    </pre>
-                  </CardContent>
-                </Card>
-              </CollapsibleContent>
-            </Collapsible>
+              <AccordionItem value="technical">
+                <AccordionTrigger className="px-4 py-3 text-sm font-medium">
+                  {t('errors.technicalDetails', 'Technical Details')}
+                </AccordionTrigger>
+                <AccordionContent className="px-0 pb-0">
+                  <div className="border-t border-border/60 bg-muted/10 px-4 pb-4 pt-3">
+                    <div className="relative mt-3 w-full">
+                      <ScrollArea
+                        type="auto"
+                        className="w-full rounded-lg border border-border/60 bg-background/80 pr-12"
+                        style={
+                          shouldClampDetails
+                            ? {
+                                maxHeight: '15rem',
+                                height: '15rem',
+                              }
+                            : {
+                                maxHeight: '15rem',
+                              }
+                        }
+                      >
+                        <pre className="px-3 py-3 text-xs font-mono text-muted-foreground whitespace-pre-wrap break-words">
+                          <code className="block">{technicalDetails}</code>
+                        </pre>
+                      </ScrollArea>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="absolute bottom-2 right-2 shadow-sm"
+                            aria-label={
+                              copyStatus === 'success'
+                                ? t(
+                                    'errors.actions.copiedDebug',
+                                    'Copied debug information'
+                                  )
+                                : t(
+                                    'errors.actions.copyDebug',
+                                    'Copy debug information'
+                                  )
+                            }
+                            onClick={handleCopy}
+                          >
+                            {copyStatus === 'success' ? (
+                              <Check className="h-4 w-4" />
+                            ) : (
+                              <Copy className="h-4 w-4" />
+                            )}
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent sideOffset={4}>
+                          {copyStatus === 'success'
+                            ? t(
+                                'errors.actions.copiedDebug',
+                                'Copied debug information'
+                              )
+                            : t(
+                                'errors.actions.copyDebug',
+                                'Copy debug information'
+                              )}
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           )}
         </div>
       </AlertDescription>

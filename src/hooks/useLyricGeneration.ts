@@ -3,8 +3,8 @@ import { useMutation } from '@tanstack/react-query';
 
 import { api } from '../lib/api.ts';
 import {
-  LyricGenerationResponseSchema,
   type LyricGenerationResponse,
+  LyricGenerationResponseSchema,
 } from '../lib/schemas/lyric-generation.ts';
 import type { AppError } from '../types/errors.ts';
 

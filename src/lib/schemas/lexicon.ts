@@ -119,10 +119,10 @@ export const AiLexiconSearchResponseSchema = z
 
 // Import lyric schemas for the schema map
 import {
-  LyricsPronunciationQuerySchema,
-  LyricsRhymeQuerySchema,
   LyricPronunciationSearchResponseSchema,
   LyricRhymeSearchVariantsResponseSchema,
+  LyricsPronunciationQuerySchema,
+  LyricsRhymeQuerySchema,
 } from './lyric.ts';
 
 export const querySchemaByKind = {

@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { z } from 'zod';
 
-import { LyricSearchBase, type FilterFieldConfig } from './LyricSearchBase.tsx';
+import { type FilterFieldConfig, LyricSearchBase } from './LyricSearchBase.tsx';
 
 const LyricRhymeQuerySchema = z.object({
   query: z

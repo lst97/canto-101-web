@@ -7,13 +7,13 @@ import {
   unflattenObject,
 } from '@/components/translations/utils';
 import {
-  SUPPORTED_LANGUAGES,
   type SearchMode,
+  SUPPORTED_LANGUAGES,
 } from '@/components/translations/constants';
 import type {
   FlattenedTranslations,
-  TreeNode,
   TranslationData,
+  TreeNode,
 } from '@/components/translations/types';
 import enTranslations from '@/locales/en.json';
 import zhTranslations from '@/locales/zh.json';
@@ -130,8 +130,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
 
       const nextExpanded = new Set(expanded);
       if (selectedKey) {
-        for (const ancestor of getAncestorPaths(selectedKey))
+        for (const ancestor of getAncestorPaths(selectedKey)) {
           nextExpanded.add(ancestor);
+        }
       }
 
       set({ selectedKey, expandedNodes: nextExpanded });
@@ -142,8 +143,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
       const state = get();
       const nextExpanded = new Set(state.expandedNodes);
       if (key) {
-        for (const ancestor of getAncestorPaths(key))
+        for (const ancestor of getAncestorPaths(key)) {
           nextExpanded.add(ancestor);
+        }
       }
       const selectedKeyChanged = state.selectedKey !== key;
       const expandedChanged = !setsAreEqual(nextExpanded, state.expandedNodes);
@@ -211,8 +213,12 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
     setSourceOfTruth: code => set({ sourceOfTruth: code }),
     commitEditedKey: (language, key) => {
       const allowed = SUPPORTED_LANGUAGES.map(l => l.code);
-      if (!isValidLocaleCode(language, allowed) || !isValidTranslationKey(key))
+      if (
+        !isValidLocaleCode(language, allowed) ||
+        !isValidTranslationKey(key)
+      ) {
         return;
+      }
       set(state => {
         const value = state.editedTranslations[language]?.[key] ?? '';
         const langMap = { ...(state.pendingTranslations[language] ?? {}) };
@@ -254,17 +260,20 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
     hasChanges: language => computeHasChanges(get(), language),
     handleAddKey: inputKey => {
       const trimmedKey = inputKey.trim();
-      if (!trimmedKey)
+      if (!trimmedKey) {
         return { ok: false, error: 'Key cannot be empty' } as const;
-      if (!isValidTranslationKey(trimmedKey))
+      }
+      if (!isValidTranslationKey(trimmedKey)) {
         return {
           ok: false,
           error:
             'Invalid key format. Use only letters, numbers, dots, hyphens, and underscores. No leading/trailing dots, no consecutive dots, no slashes.',
         } as const;
+      }
       const { translations, sourceOfTruth } = get();
-      if (translations[sourceOfTruth]?.[trimmedKey])
+      if (translations[sourceOfTruth]?.[trimmedKey]) {
         return { ok: false, error: 'Key already exists' } as const;
+      }
 
       set(state => {
         const nextTranslations: TranslationsMap = { ...state.translations };
@@ -323,8 +332,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
       if (
         !isValidLocaleCode(targetLanguage, allowed) ||
         !isValidTranslationKey(key)
-      )
+      ) {
         return;
+      }
       get().setSelectedKey(key);
     },
     handleDeleteExtraKey: (targetLanguage, key) => {
@@ -332,8 +342,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
       if (
         !isValidLocaleCode(targetLanguage, allowed) ||
         !isValidTranslationKey(key)
-      )
+      ) {
         return;
+      }
       set(state => {
         const updatedTranslations = {
           ...(state.translations[targetLanguage] ?? {}),
@@ -551,8 +562,9 @@ const computeFilteredTree = (state: TranslationEditorState): TreeNode[] => {
       const filteredChildren = node.children
         .map(filterNode)
         .filter((child): child is TreeNode => child !== null);
-      if (filteredChildren.length > 0 || matchesSearch)
+      if (filteredChildren.length > 0 || matchesSearch) {
         return { ...node, children: filteredChildren };
+      }
     }
     return matchesSearch ? node : null;
   };

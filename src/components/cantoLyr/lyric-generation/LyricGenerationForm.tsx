@@ -70,15 +70,17 @@ export function LyricGenerationForm({
   const validatePrompt = useCallback((value: string): string | undefined => {
     const trimmed = value.trim();
     if (trimmed.length === 0) return 'cantoLyr.errors.lyrics.missingPrompt';
-    if (trimmed.length > PROMPT_MAX)
+    if (trimmed.length > PROMPT_MAX) {
       return 'cantoLyr.errors.lyrics.promptTooLong';
+    }
     return undefined;
   }, []);
 
   const validateSequences = useCallback((value: string): string | undefined => {
     const sequences = parseToneSequences(value);
-    if (sequences.length === 0)
+    if (sequences.length === 0) {
       return 'cantoLyr.errors.lyrics.missingSequences';
+    }
     if (sequences.length > 3) return 'cantoLyr.errors.lyrics.invalidSequences';
     const lineRegex = /^[023459]{3,}$/; // only digits 0,2,3,4,5,9; at least 3 digits per line
     for (const seq of sequences) {
@@ -95,8 +97,9 @@ export function LyricGenerationForm({
     if (!/^[0-9]+$/.test(trimmed)) return 'cantoLyr.errors.lyrics.invalidSeed';
     try {
       const num = Number(trimmed);
-      if (!Number.isSafeInteger(num) || num < 0)
+      if (!Number.isSafeInteger(num) || num < 0) {
         return 'cantoLyr.errors.lyrics.invalidSeed';
+      }
     } catch {
       return 'cantoLyr.errors.lyrics.invalidSeed';
     }
@@ -107,8 +110,9 @@ export function LyricGenerationForm({
     const trimmed = value.trim();
     if (trimmed.length === 0) return undefined; // allow backend default
     const num = Number(trimmed);
-    if (!Number.isInteger(num) || num < 1 || num > 3)
+    if (!Number.isInteger(num) || num < 1 || num > 3) {
       return 'cantoLyr.errors.lyrics.invalidTop';
+    }
     return undefined;
   }, []);
 

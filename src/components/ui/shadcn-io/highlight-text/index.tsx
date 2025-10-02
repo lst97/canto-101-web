@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-  motion,
-  useInView,
   type HTMLMotionProps,
+  motion,
   type Transition,
+  useInView,
   type UseInViewOptions,
 } from 'motion/react';
 

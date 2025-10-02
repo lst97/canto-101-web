@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useThemeStore } from '../stores/themeStore.ts';
 
 interface ThemeProviderProps {
@@ -6,12 +5,9 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const { updateResolvedTheme } = useThemeStore();
-
-  useEffect(() => {
-    // Ensure theme is properly initialized on mount
-    updateResolvedTheme();
-  }, [updateResolvedTheme]);
+  if (typeof window !== 'undefined') {
+    useThemeStore.getState().updateResolvedTheme();
+  }
 
   return <>{children}</>;
 };

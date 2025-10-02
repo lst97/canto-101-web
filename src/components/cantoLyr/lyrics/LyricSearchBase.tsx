@@ -1,24 +1,24 @@
 import {
+  type InputHTMLAttributes,
+  type ReactElement,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
-  type InputHTMLAttributes,
-  type ReactElement,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from '@tanstack/react-form';
 import { z } from 'zod';
 
 import {
-  useAiLyricSearch,
   type LyricsPronOptions,
   type LyricsRhymeOptions,
+  useAiLyricSearch,
 } from '../../../hooks/useLyricSearch.ts';
 import type {
-  LyricSearchResponse,
   LyricLine,
+  LyricSearchResponse,
 } from '../../../lib/schemas/lyric.ts';
 import {
   Accordion,

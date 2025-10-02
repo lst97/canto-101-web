@@ -1,6 +1,6 @@
-import { useMemo, type ReactElement } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 
 import { AiLyricRhymeSearch } from '../components/cantoLyr/lyrics-search/index.ts';
 import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';

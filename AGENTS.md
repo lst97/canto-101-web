@@ -11,27 +11,63 @@ Use Zustand stores for complex state management, with store files organized in
 complete hook dependency arrays. Prettier is configured (.prettierrc.json) for
 consistent formatting with 2-space indentation, single quotes, and semicolons.
 
+### React 19.2 Adoption
+
+- Prefer [`useEffectEvent`](https://react.dev/reference/react/useEffectEvent)
+  when extracting non-reactive logic from `useEffect` / `useLayoutEffect` to
+  avoid over-eager reruns while still consuming fresh props and state. Keep
+  Effect Events scoped to the component that declares them and **do not** place
+  them in dependency arrays.
+- Use [`<Activity>`](https://react.dev/reference/react/Activity) to preserve UI
+  and state for conditionally hidden surfaces. Evaluate drawers (`Header` mobile
+  `Sheet`, `Sidebar` mobile variant) and detail panels (e.g.
+  `TranslationEditorMain`) for Activity boundaries so hidden content rehydrates
+  instantly without remount thrash.
+- eslint-plugin-react-hooks v6 is configured in `eslint.config.js`; never
+  downgrade or disable the new lint rules enforcing Activity / Effect Event best
+  practices.
+
 ### Error Handling (Required Patterns)
 
 1. Render / Component Errors: Must be isolated with `react-error-boundary`.
-  - Global root wrapped in `AppErrorBoundary`.
-  - Data-fetching surfaces additionally wrapped in `QueryErrorBoundary` to leverage React Query reset.
-  - No broad `try/catch` inside React render logic or component bodies for render-time errors.
-2. Async / HTTP Errors: Centralized in Axios interceptors (`src/lib/api.ts`). Interceptors convert failures to typed `AppError` variants (`network | api | unexpected`). Components and hooks consume normalized errors via React Query or hook state.
-3. React Query Errors: Use `useQueryErrorResetBoundary` with `QueryErrorBoundary` for retry flows. Avoid manual `try/catch` around `useQuery`/`mutations`; rely on `error`/`isError` state.
-4. Hook State Errors: For imperative flows (e.g. form submissions not yet migrated to React Query), surface string keys referencing i18n (e.g. `cantoLyr.errors.pron.missingQuery`) or user-safe messages.
-5. Internationalization: All displayed error text must be translation keys. Raw server messages may be logged but must not appear un-sanitized in UI.
-6. Logging (Future): Introduce a pluggable reporter (Sentry, OpenTelemetry) by passing `onError` to `ErrorBoundary`. Keep side effects out of fallback components now.
-7. Centralized Logging: All logging must use the Pino-based logger from `src/lib/logger.ts`. Never use `console.log`, `console.error`, etc. directly. Use structured logging with appropriate levels (debug, info, warn, error, fatal).
-8. Exhaustiveness: Use discriminated unions for error kinds. Prefer type narrowing helpers (`isAppError`) over `instanceof` where cross-bundle concerns may arise.
+   - Global root wrapped in `AppErrorBoundary`.
+   - Data-fetching surfaces additionally wrapped in `QueryErrorBoundary` to
+     leverage React Query reset.
+   - No broad `try/catch` inside React render logic or component bodies for
+     render-time errors.
+2. Async / HTTP Errors: Centralized in Axios interceptors (`src/lib/api.ts`).
+   Interceptors convert failures to typed `AppError` variants
+   (`network | api | unexpected`). Components and hooks consume normalized
+   errors via React Query or hook state.
+3. React Query Errors: Use `useQueryErrorResetBoundary` with
+   `QueryErrorBoundary` for retry flows. Avoid manual `try/catch` around
+   `useQuery`/`mutations`; rely on `error`/`isError` state.
+4. Hook State Errors: For imperative flows (e.g. form submissions not yet
+   migrated to React Query), surface string keys referencing i18n (e.g.
+   `cantoLyr.errors.pron.missingQuery`) or user-safe messages.
+5. Internationalization: All displayed error text must be translation keys. Raw
+   server messages may be logged but must not appear un-sanitized in UI.
+6. Logging (Future): Introduce a pluggable reporter (Sentry, OpenTelemetry) by
+   passing `onError` to `ErrorBoundary`. Keep side effects out of fallback
+   components now.
+7. Centralized Logging: All logging must use the Pino-based logger from
+   `src/lib/logger.ts`. Never use `console.log`, `console.error`, etc. directly.
+   Use structured logging with appropriate levels (debug, info, warn, error,
+   fatal).
+8. Exhaustiveness: Use discriminated unions for error kinds. Prefer type
+   narrowing helpers (`isAppError`) over `instanceof` where cross-bundle
+   concerns may arise.
 
 ### Error Handling Do / Don't
 
-- DO throw inside Axios interceptor so downstream code receives `AppError` without repetitive normalization.
+- DO throw inside Axios interceptor so downstream code receives `AppError`
+  without repetitive normalization.
 - DO reset queries using the provided boundary reset callback.
-- DO NOT swallow errors silently; either handle with UI state or rethrow as `AppError`.
+- DO NOT swallow errors silently; either handle with UI state or rethrow as
+  `AppError`.
 - DO NOT use `any` for error types; prefer `unknown` then narrow.
-- DO NOT catch and immediately rethrow the same error unless adding semantic context.
+- DO NOT catch and immediately rethrow the same error unless adding semantic
+  context.
 
 ## Validation System
 
@@ -58,7 +94,7 @@ belong in `.env.local` with a `VITE_` prefix so Vite exposes them safely.
 
 ### Detailed Directory Structure
 
-```
+```text
 src/
 ├── App.tsx                    # Main app component
 ├── assets/                    # Static media files (images, icons)
@@ -161,11 +197,19 @@ provide fallback text and ensure translations are complete for all supported
 languages (English and Chinese). Language detection is automatic based on
 browser settings, with localStorage persistence for user preferences.
 
-When adding or updating translations, prioritize `zh.json` (Traditional Chinese) first, and it is not necessary to update other translation files. The `locales-fmt.ts` file is used for structural validation of translation files and must pass after any translation updates to ensure consistency and prevent build failures.
+When adding or updating translations, prioritize `zh.json` (Traditional Chinese)
+first, and it is not necessary to update other translation files. The
+`locales-fmt.ts` file is used for structural validation of translation files and
+must pass after any translation updates to ensure consistency and prevent build
+failures.
 
-When adding a new language file (e.g., `fr.json`), update the allowed files list in `plugins/devLocalesApi.ts` to include the new file name for dev-only editing support.
+When adding a new language file (e.g., `fr.json`), update the allowed files list
+in `plugins/devLocalesApi.ts` to include the new file name for dev-only editing
+support.
 
-Error keys live under the `errors.*` namespace (e.g. `errors.network.title`). Feature-specific validation errors stay scoped (e.g. `cantoLyr.errors.pron.missingQuery`).
+Error keys live under the `errors.*` namespace (e.g. `errors.network.title`).
+Feature-specific validation errors stay scoped (e.g.
+`cantoLyr.errors.pron.missingQuery`).
 
 ## Theme Guidelines
 

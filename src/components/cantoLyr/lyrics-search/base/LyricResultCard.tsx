@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, type ReactElement } from 'react';
+import { type ReactElement, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { LyricLine } from '@/lib/schemas/lyric.ts';
 import { Badge } from '@/components/ui/badge.tsx';
@@ -12,11 +12,11 @@ import {
 } from '@/components/ui/popover.tsx';
 import TokenDetailsPopover from './TokenDetailsPopover';
 import {
-  stripPunctAndSymbols,
   findToneDigitRanges,
   graphemesOf,
   isIgnorableChar,
   rangesFromSyllablePositions,
+  stripPunctAndSymbols,
 } from './text-helpers';
 import { useLyricSearchContext } from './lyricSearchContextCore';
 

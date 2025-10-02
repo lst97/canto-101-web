@@ -153,8 +153,9 @@ export const useTranslationEditor = () => {
         const filteredChildren = node.children
           .map(filterNode)
           .filter((child): child is TreeNode => child !== null);
-        if (filteredChildren.length > 0 || matchesSearch)
+        if (filteredChildren.length > 0 || matchesSearch) {
           return { ...node, children: filteredChildren };
+        }
       }
       return matchesSearch ? node : null;
     };

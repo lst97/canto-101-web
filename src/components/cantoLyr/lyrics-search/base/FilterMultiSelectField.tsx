@@ -1,9 +1,10 @@
 import {
+  type ReactElement,
   useCallback,
   useEffect,
+  useEffectEvent,
   useMemo,
   useState,
-  type ReactElement,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Label } from '@/components/ui/label.tsx';
@@ -47,9 +48,13 @@ export function FilterMultiSelectField({
   const [loadedCount, setLoadedCount] = useState(50);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
+  const applyDebouncedSearch = useEffectEvent((value: string) => {
+    setDebouncedSearch(value);
+  });
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedSearch(search);
+      applyDebouncedSearch(search);
     }, 300);
     return () => clearTimeout(timer);
   }, [search]);
@@ -194,7 +199,9 @@ export function FilterMultiSelectField({
               {loading && options.length === 0 ? (
                 <div className="flex justify-center py-6">
                   <LoadingIndicator
-                    label={t('common.loading', { defaultValue: 'Loading...' })}
+                    label={t('common.loading', {
+                      defaultValue: 'Loading...',
+                    })}
                     size="sm"
                   />
                 </div>

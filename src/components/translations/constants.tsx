@@ -1,5 +1,5 @@
 import React from 'react';
-import { US, HK, JP, CN } from 'country-flag-icons/react/3x2';
+import { CN, HK, JP, US } from 'country-flag-icons/react/3x2';
 
 export type SearchMode = 'key' | 'text';
 

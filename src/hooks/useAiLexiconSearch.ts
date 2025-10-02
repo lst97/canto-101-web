@@ -4,10 +4,10 @@ import { ZodError } from 'zod';
 
 import { api } from '../lib/api.ts';
 import {
-  AiLexiconSearchQuerySchema,
-  AiLexiconSearchResponseSchema,
   type AiLexiconSearchQuery,
+  AiLexiconSearchQuerySchema,
   type AiLexiconSearchResponse,
+  AiLexiconSearchResponseSchema,
 } from '../lib/schemas/lexicon.ts';
 import type { AppError } from '../types/errors.ts';
 import { isAppError } from '../types/errors.ts';

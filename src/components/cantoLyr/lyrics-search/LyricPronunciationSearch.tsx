@@ -2,9 +2,9 @@ import type { ReactElement } from 'react';
 import { z } from 'zod';
 
 import {
-  LyricSearchBase,
   type FilterFieldConfig,
   type LyricFilterOptionSets,
+  LyricSearchBase,
 } from './LyricSearchBase.tsx';
 
 const LyricPronunciationQuerySchema = z.object({

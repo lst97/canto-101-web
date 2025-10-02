@@ -1,16 +1,16 @@
-import { useState, useCallback } from 'react';
-import { useQuery, useQueryClient, type QueryKey } from '@tanstack/react-query';
+import { useCallback, useState } from 'react';
+import { type QueryKey, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ZodError } from 'zod';
 
 import { api } from '../lib/api.ts';
 import type { AppError } from '../types/errors.ts';
 import {
-  LyricsPronunciationQuerySchema,
-  LyricsRhymeQuerySchema,
   LyricPronunciationSearchResponseSchema,
   type LyricSearchResponse,
   type LyricsPronunciationQuery,
+  LyricsPronunciationQuerySchema,
   type LyricsRhymeQuery,
+  LyricsRhymeQuerySchema,
 } from '../lib/schemas/lyric.ts';
 
 const querySchemaByKind = {

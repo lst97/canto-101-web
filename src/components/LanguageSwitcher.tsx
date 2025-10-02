@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select.tsx';
-import { US, HK, CN, JP } from 'country-flag-icons/react/3x2';
+import { CN, HK, JP, US } from 'country-flag-icons/react/3x2';
 
 export const LanguageSwitcher = () => {
   const { i18n, t } = useTranslation();

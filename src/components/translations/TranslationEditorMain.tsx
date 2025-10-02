@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Activity, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,9 +18,9 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { File, CheckCircle, RotateCcw, RefreshCcw, Save } from 'lucide-react';
+import { CheckCircle, File, RefreshCcw, RotateCcw, Save } from 'lucide-react';
 import { BreadcrumbForKey, FlagIcon } from './components';
-import { SUPPORTED_LANGUAGES, FLAG_COMPONENTS } from './constants';
+import { FLAG_COMPONENTS, SUPPORTED_LANGUAGES } from './constants';
 import { useTranslationEditor } from './useTranslationEditor';
 
 export const TranslationEditorMain = () => {
@@ -240,68 +240,73 @@ export const TranslationEditorMain = () => {
               </CardContent>
             </Card>
 
-            {selectedKey ? (
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                {SUPPORTED_LANGUAGES.map(({ code }) => {
-                  const Flag = FLAG_COMPONENTS[code];
-                  return (
-                    <Card key={code}>
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <FlagIcon component={Flag} className="w-6 h-4" />
-                            {code}.json
+            <Activity mode={selectedKey ? 'visible' : 'hidden'}>
+              {selectedKey ? (
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                  {SUPPORTED_LANGUAGES.map(({ code }) => {
+                    const Flag = FLAG_COMPONENTS[code];
+                    return (
+                      <Card key={code}>
+                        <CardHeader>
+                          <CardTitle className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <FlagIcon component={Flag} className="w-6 h-4" />
+                              {code}.json
+                            </div>
+                            <div className="flex gap-2">
+                              <Button
+                                onClick={() => resetLanguage(code)}
+                                variant="outline"
+                                size="sm"
+                                disabled={!hasChanges(code)}
+                                title="Reset changes"
+                              >
+                                <RotateCcw className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div className="space-y-2">
+                              <Input
+                                id={`input-${code}-${selectedKey}`}
+                                value={
+                                  editedTranslations[code]?.[selectedKey] || ''
+                                }
+                                onChange={e =>
+                                  handleTranslationChange(
+                                    code,
+                                    selectedKey,
+                                    e.target.value
+                                  )
+                                }
+                                onBlur={() =>
+                                  commitEditedKey(code, selectedKey)
+                                }
+                                className={
+                                  editedTranslations[code]?.[selectedKey] !==
+                                  translations[code]?.[selectedKey]
+                                    ? 'border-orange-500'
+                                    : ''
+                                }
+                              />
+                              {editedTranslations[code]?.[selectedKey] !==
+                                translations[code]?.[selectedKey] && (
+                                <p className="text-xs text-muted-foreground">
+                                  Original: {translations[code]?.[selectedKey]}
+                                </p>
+                              )}
+                            </div>
                           </div>
-                          <div className="flex gap-2">
-                            <Button
-                              onClick={() => resetLanguage(code)}
-                              variant="outline"
-                              size="sm"
-                              disabled={!hasChanges(code)}
-                              title="Reset changes"
-                            >
-                              <RotateCcw className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          <div className="space-y-2">
-                            <Input
-                              id={`input-${code}-${selectedKey}`}
-                              value={
-                                editedTranslations[code]?.[selectedKey] || ''
-                              }
-                              onChange={e =>
-                                handleTranslationChange(
-                                  code,
-                                  selectedKey,
-                                  e.target.value
-                                )
-                              }
-                              onBlur={() => commitEditedKey(code, selectedKey)}
-                              className={
-                                editedTranslations[code]?.[selectedKey] !==
-                                translations[code]?.[selectedKey]
-                                  ? 'border-orange-500'
-                                  : ''
-                              }
-                            />
-                            {editedTranslations[code]?.[selectedKey] !==
-                              translations[code]?.[selectedKey] && (
-                              <p className="text-xs text-muted-foreground">
-                                Original: {translations[code]?.[selectedKey]}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            ) : (
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </Activity>
+            {!selectedKey && (
               <Card>
                 <CardContent className="text-center py-8 text-muted-foreground">
                   <File className="h-8 w-8 mx-auto mb-2 opacity-50" />

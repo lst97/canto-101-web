@@ -32,7 +32,9 @@
     },
     "actions": {
       "retry": "重試",
-      "dismiss": "關閉"
+      "dismiss": "關閉",
+      "copyDebug": "複製偵錯資訊",
+      "copiedDebug": "已複製偵錯資訊"
     }
   },
   "language": {

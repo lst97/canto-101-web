@@ -1,4 +1,4 @@
-import type { TranslationData, FlattenedTranslations } from './types';
+import type { FlattenedTranslations, TranslationData } from './types';
 
 export const flattenObject = (
   obj: TranslationData,

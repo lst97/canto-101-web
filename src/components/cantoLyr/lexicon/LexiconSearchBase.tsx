@@ -1,9 +1,11 @@
 import {
+  Activity,
+  type InputHTMLAttributes,
   memo,
   type ReactElement,
-  type InputHTMLAttributes,
   useCallback,
   useEffect,
+  useEffectEvent,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -153,6 +155,14 @@ export function LexiconSearchBase({
   const [inclusiveTotal, setInclusiveTotal] = useState<number>(0);
   const [sequenceTotal, setSequenceTotal] = useState<number>(0);
 
+  const resetLexiconState = useEffectEvent(() => {
+    setEntries([]);
+    setTotalCount(0);
+    setCurrentQueryText('');
+    setResponseFromCache(false);
+    setLastProcessingTimeMs(null);
+  });
+
   const readingResult = useMemo<SearchResponse | null>(() => {
     if (!result) return null;
     if (kind === 'pron') {
@@ -241,11 +251,7 @@ export function LexiconSearchBase({
 
     if (!readingResult) {
       if (!loading && page === 0) {
-        setEntries([]);
-        setTotalCount(0);
-        setCurrentQueryText('');
-        setResponseFromCache(false);
-        setLastProcessingTimeMs(null);
+        resetLexiconState();
       }
       return;
     }
@@ -585,7 +591,13 @@ export function LexiconSearchBase({
                 </p>
               )
             )}
-            {entries.length > 0 && <ActiveEntryPanel activeItem={activeItem} />}
+            {entries.length > 0 && (
+              <Activity mode={activeItem ? 'visible' : 'hidden'}>
+                {activeItem ? (
+                  <ActiveEntryPanel activeItem={activeItem} />
+                ) : null}
+              </Activity>
+            )}
           </div>
         )}
         {result && !readingResult && !rhymeVariantsResult && (

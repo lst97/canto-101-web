@@ -4,9 +4,9 @@ import { z } from 'zod';
 import { cantonesePinyinTable } from '../../../data/cantonesePinyinTable';
 
 import {
-  LyricSearchBase,
   type FilterFieldConfig,
   type LyricFilterOptionSets,
+  LyricSearchBase,
 } from './LyricSearchBase.tsx';
 
 const LyricRhymeQuerySchema = z.object({

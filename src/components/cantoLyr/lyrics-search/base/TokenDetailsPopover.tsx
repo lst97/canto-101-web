@@ -1,6 +1,6 @@
-import { useMemo, type ReactElement } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { MatchedSyllable, LyricToken } from '@/lib/schemas/lyric.ts';
+import type { LyricToken, MatchedSyllable } from '@/lib/schemas/lyric.ts';
 import { Volume2 } from 'lucide-react';
 import { stripPunctAndSymbols } from './text-helpers';
 

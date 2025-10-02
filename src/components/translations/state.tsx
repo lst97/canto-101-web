@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { type ReactNode, useEffect, useEffectEvent } from 'react';
 import {
   selectHasUnsavedChanges,
   useTranslationEditorStore,
@@ -20,6 +20,16 @@ export const TranslationEditorProvider = ({
   const hasUnsavedChanges = useTranslationEditorStore(selectHasUnsavedChanges);
   const isSaving = useTranslationEditorStore(state => state.isSaving);
 
+  const requestNavigationConfirmation = useEffectEvent(() => {
+    return window.confirm(LEAVE_WARNING);
+  });
+
+  const beforeUnloadHandler = useEffectEvent((event: BeforeUnloadEvent) => {
+    event.preventDefault();
+    event.returnValue = LEAVE_WARNING;
+    return event.returnValue;
+  });
+
   useEffect(() => {
     hydrateFromStorage();
   }, [hydrateFromStorage]);
@@ -34,7 +44,7 @@ export const TranslationEditorProvider = ({
       if (!href || href.startsWith('//') || href === '#') return;
       if (!href.startsWith('/')) return;
       event.preventDefault();
-      const shouldLeave = window.confirm(LEAVE_WARNING);
+      const shouldLeave = requestNavigationConfirmation();
       if (shouldLeave) {
         window.location.href = href;
       }
@@ -46,9 +56,7 @@ export const TranslationEditorProvider = ({
   useEffect(() => {
     if (!hasUnsavedChanges || isSaving) return undefined;
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      event.returnValue = LEAVE_WARNING;
-      return event.returnValue;
+      beforeUnloadHandler(event);
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);

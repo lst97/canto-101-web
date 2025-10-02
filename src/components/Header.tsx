@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Activity, useCallback, useEffect, useRef, useState } from 'react';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -31,6 +31,7 @@ import { Link, useRouterState } from '@tanstack/react-router';
 export function Header(): ReactElement {
   const { t } = useTranslation();
   const [activeId, setActiveId] = useState<string>('');
+  const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
   const productsTriggerRef = useRef<HTMLButtonElement | null>(null);
   const productsScrollPositionRef = useRef<number>(0);
   const pathname = useRouterState({ select: s => s.location.pathname });
@@ -278,77 +279,79 @@ export function Header(): ReactElement {
         <div className="flex items-center gap-3">
           <ModeToggle />
           <LanguageSwitcher />
-          <Sheet>
+          <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="lg:hidden">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Open navigation</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-80">
-              <SheetHeader>
-                <SheetTitle>{t('nav.title')}</SheetTitle>
-              </SheetHeader>
-              <nav className="mt-6 grid gap-2">
-                {links
-                  .filter(l => l.key !== 'products')
-                  .map(l => (
-                    <SheetClose asChild key={l.key}>
-                      <a
-                        href={l.href}
-                        onClick={e => handleNavClick(e, l.href)}
-                        aria-current={
-                          activeId && l.href === `#${activeId}`
-                            ? 'page'
-                            : undefined
-                        }
-                        className={[
-                          'rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                          activeId && l.href === `#${activeId}`
-                            ? 'bg-primary/10 text-foreground'
-                            : 'text-muted-foreground hover:text-foreground hover:bg-muted',
-                        ].join(' ')}
-                      >
-                        {t(`nav.links.${l.key}`)}
-                      </a>
-                    </SheetClose>
-                  ))}
-                <div className="px-3 py-2">
-                  <div className="text-sm font-medium text-muted-foreground mb-2">
-                    {t('nav.links.products')}
+            <SheetContent side="left" className="w-80" forceMount>
+              <Activity mode={mobileNavOpen ? 'visible' : 'hidden'}>
+                <SheetHeader>
+                  <SheetTitle>{t('nav.title')}</SheetTitle>
+                </SheetHeader>
+                <nav className="mt-6 grid gap-2">
+                  {links
+                    .filter(l => l.key !== 'products')
+                    .map(l => (
+                      <SheetClose asChild key={l.key}>
+                        <a
+                          href={l.href}
+                          onClick={e => handleNavClick(e, l.href)}
+                          aria-current={
+                            activeId && l.href === `#${activeId}`
+                              ? 'page'
+                              : undefined
+                          }
+                          className={[
+                            'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                            activeId && l.href === `#${activeId}`
+                              ? 'bg-primary/10 text-foreground'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                          ].join(' ')}
+                        >
+                          {t(`nav.links.${l.key}`)}
+                        </a>
+                      </SheetClose>
+                    ))}
+                  <div className="px-3 py-2">
+                    <div className="text-sm font-medium text-muted-foreground mb-2">
+                      {t('nav.links.products')}
+                    </div>
+                    <div className="ml-4 space-y-1">
+                      <SheetClose asChild>
+                        <Link
+                          to="/canto-lyr"
+                          aria-current={isOnCantoLyr ? 'page' : undefined}
+                          className={[
+                            'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                            isOnCantoLyr
+                              ? 'bg-primary/10 text-foreground'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                          ].join(' ')}
+                        >
+                          {t('homepage.products.items.cantoLyr.label')}
+                        </Link>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <Link
+                          to="/canto-cap"
+                          aria-current={isOnCantoCap ? 'page' : undefined}
+                          className={[
+                            'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                            isOnCantoCap
+                              ? 'bg-primary/10 text-foreground'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                          ].join(' ')}
+                        >
+                          {t('homepage.products.items.cantoCap.label')}
+                        </Link>
+                      </SheetClose>
+                    </div>
                   </div>
-                  <div className="ml-4 space-y-1">
-                    <SheetClose asChild>
-                      <Link
-                        to="/canto-lyr"
-                        aria-current={isOnCantoLyr ? 'page' : undefined}
-                        className={[
-                          'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                          isOnCantoLyr
-                            ? 'bg-primary/10 text-foreground'
-                            : 'text-muted-foreground hover:text-foreground hover:bg-muted',
-                        ].join(' ')}
-                      >
-                        {t('homepage.products.items.cantoLyr.label')}
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        to="/canto-cap"
-                        aria-current={isOnCantoCap ? 'page' : undefined}
-                        className={[
-                          'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                          isOnCantoCap
-                            ? 'bg-primary/10 text-foreground'
-                            : 'text-muted-foreground hover:text-foreground hover:bg-muted',
-                        ].join(' ')}
-                      >
-                        {t('homepage.products.items.cantoCap.label')}
-                      </Link>
-                    </SheetClose>
-                  </div>
-                </div>
-              </nav>
+                </nav>
+              </Activity>
             </SheetContent>
           </Sheet>
         </div>

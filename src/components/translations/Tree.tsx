@@ -65,7 +65,9 @@ const TreeNode: React.FC<{ node: TreeNodeType; level?: number }> = ({
           isActive={isSelected}
           onClick={() => setSelectedKey(node.fullPath)}
           id={`key-${node.fullPath}`}
-          className={`flex-1 justify-start ${isUnsaved ? 'text-[var(--warning)]' : ''}`}
+          className={`flex-1 justify-start ${
+            isUnsaved ? 'text-[var(--warning)]' : ''
+          }`}
           title={
             isUnsaved
               ? `Unsaved changes in: ${changedLangs.join(', ')}`
@@ -131,7 +133,9 @@ const TreeNode: React.FC<{ node: TreeNodeType; level?: number }> = ({
         <CollapsibleTrigger asChild>
           <SidebarMenuButton className="w-full justify-start">
             <ChevronRight
-              className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+              className={`h-4 w-4 transition-transform ${
+                isExpanded ? 'rotate-90' : ''
+              }`}
             />
             <Folder className="h-4 w-4" />
             <span className="truncate">{node.name}</span>

@@ -49,8 +49,9 @@ export default function ProductsShowcase(): ReactElement {
         'Home',
         'End',
       ].includes(event.key)
-    )
+    ) {
       return;
+    }
     event.preventDefault();
     let nextIndex = index;
     if (event.key === 'Home') nextIndex = 0;

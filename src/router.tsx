@@ -1,4 +1,5 @@
 import {
+  type AnyRoute,
   createRootRoute,
   createRoute,
   createRouter,
@@ -37,10 +38,16 @@ const NotFound = lazy(async () => import('./pages/global/NotFound.tsx'));
 const TranslationEditor = lazy(
   async () => import('./pages/dev/TranslationEditor.tsx')
 );
+const TestApiError = lazy(async () => import('./pages/test/TestApiError.tsx'));
 const translationEditorRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/translations',
   component: TranslationEditor,
+});
+const testApiErrorRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/test/api-error',
+  component: TestApiError,
 });
 
 const rootRoute = createRootRoute({
@@ -115,7 +122,7 @@ const cantoCapRoute = createRoute({
   component: CantoCap,
 });
 
-const routeTree = rootRoute.addChildren([
+const baseRoutes: AnyRoute[] = [
   homeRoute,
   cantoLyrRoute,
   cantoLyrPronunciationRoute,
@@ -127,8 +134,13 @@ const routeTree = rootRoute.addChildren([
   cantoLyrAiLyricPronunciationRoute,
   cantoLyrAiLyricRhymeRoute,
   cantoCapRoute,
-  translationEditorRoute,
-]);
+];
+
+const devRoutes: AnyRoute[] = import.meta.env.PROD
+  ? []
+  : [translationEditorRoute, testApiErrorRoute];
+
+const routeTree = rootRoute.addChildren([...baseRoutes, ...devRoutes]);
 
 export const router = createRouter({ routeTree });
 

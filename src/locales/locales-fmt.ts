@@ -424,7 +424,9 @@ function normalizeStructure(
         );
       }
       console.log(
-        `${dryRun ? '[DRY-RUN] ' : ''}🧭 Normalized structure in ${file}: hoisted homepage.pron.cantoLyr to top-level cantoLyr. Backup: ${backupPath}`
+        `${
+          dryRun ? '[DRY-RUN] ' : ''
+        }🧭 Normalized structure in ${file}: hoisted homepage.pron.cantoLyr to top-level cantoLyr. Backup: ${backupPath}`
       );
       changed = true;
     }
@@ -458,7 +460,9 @@ function normalizeStructure(
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
     }
     console.log(
-      `${dryRun ? '[DRY-RUN] ' : ''}🧭 Normalized structure in ${file}: moved homepage.cantoLyr to top-level cantoLyr. Backup: ${backupPath}`
+      `${
+        dryRun ? '[DRY-RUN] ' : ''
+      }🧭 Normalized structure in ${file}: moved homepage.cantoLyr to top-level cantoLyr. Backup: ${backupPath}`
     );
     changed = true;
   }
@@ -542,7 +546,9 @@ function validateLocales(flags: {
               );
             }
             console.log(
-              `${flags.dryRun ? '[DRY-RUN] ' : ''}🛠️  Auto-fixed ${file}. Backup created at: ${backupPath}`
+              `${
+                flags.dryRun ? '[DRY-RUN] ' : ''
+              }🛠️  Auto-fixed ${file}. Backup created at: ${backupPath}`
             );
             if (result.steps.length) {
               console.log('   Steps:');
@@ -577,7 +583,9 @@ function validateLocales(flags: {
           }
         } catch (fixErr) {
           console.error(
-            `   ⚠️  Auto-fix encountered an error for ${file}: ${(fixErr as Error).message}`
+            `   ⚠️  Auto-fix encountered an error for ${file}: ${
+              (fixErr as Error).message
+            }`
           );
           hasDifferences = true;
         }

@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { api } from '../lib/api.ts';
 import {
-  LyricFilterOptionsResponseSchema,
   type LyricFilterOptions,
+  LyricFilterOptionsResponseSchema,
 } from '../lib/schemas/lyric.ts';
 import type { AppError } from '../types/errors.ts';
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Activity, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -21,7 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Plus, Minus, Search, Key, FileText } from 'lucide-react';
+import { FileText, Key, Minus, Plus, Search } from 'lucide-react';
 import { Tree } from './Tree';
 import { useTranslationEditor } from './useTranslationEditor';
 
@@ -68,7 +68,9 @@ export const TranslationEditorSidebar = () => {
           />
           <div className="ml-auto flex items-center gap-2">
             <Toggle
-              aria-label={`Search by ${searchMode === 'key' ? 'translation text' : 'translation key'}`}
+              aria-label={`Search by ${
+                searchMode === 'key' ? 'translation text' : 'translation key'
+              }`}
               pressed={searchMode === 'text'}
               onPressedChange={(pressed: boolean) =>
                 setSearchMode(pressed ? 'text' : 'key')
@@ -106,47 +108,50 @@ export const TranslationEditorSidebar = () => {
               Add Key
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[500px]">
-            <DialogHeader>
-              <DialogTitle>Add Translation Key</DialogTitle>
-              <DialogDescription>
-                Use dot notation for nested keys (e.g., "common.actions.save").
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="new-key-input">Translation Key</Label>
-                <Input
-                  id="new-key-input"
-                  placeholder="e.g., common.welcome or feature.title"
-                  value={newKeyInput}
-                  onChange={e => {
-                    setNewKeyInput(e.target.value);
-                    setNewKeyError('');
-                  }}
-                  onKeyDown={e => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      onAddKey();
-                    }
-                  }}
-                  className={newKeyError ? 'border-destructive' : ''}
-                />
-                {newKeyError && (
-                  <p className="text-sm text-destructive">{newKeyError}</p>
-                )}
-                <p className="text-xs text-muted-foreground">
-                  Valid characters: letters, numbers, dots (.), hyphens (-), and
-                  underscores (_)
-                </p>
+          <DialogContent className="sm:max-w-[500px]" forceMount>
+            <Activity mode={newKeyDialog ? 'visible' : 'hidden'}>
+              <DialogHeader>
+                <DialogTitle>Add Translation Key</DialogTitle>
+                <DialogDescription>
+                  Use dot notation for nested keys (e.g.,
+                  "common.actions.save").
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="new-key-input">Translation Key</Label>
+                  <Input
+                    id="new-key-input"
+                    placeholder="e.g., common.welcome or feature.title"
+                    value={newKeyInput}
+                    onChange={e => {
+                      setNewKeyInput(e.target.value);
+                      setNewKeyError('');
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        onAddKey();
+                      }
+                    }}
+                    className={newKeyError ? 'border-destructive' : ''}
+                  />
+                  {newKeyError && (
+                    <p className="text-sm text-destructive">{newKeyError}</p>
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    Valid characters: letters, numbers, dots (.), hyphens (-),
+                    and underscores (_)
+                  </p>
+                </div>
               </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button onClick={onAddKey}>Add Key</Button>
-            </DialogFooter>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button onClick={onAddKey}>Add Key</Button>
+              </DialogFooter>
+            </Activity>
           </DialogContent>
         </Dialog>
       </div>
