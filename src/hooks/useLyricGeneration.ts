@@ -13,6 +13,7 @@ export interface LyricSessionOptions {
   tones: string[];
   seed?: number;
   top?: number;
+  apiKey?: string;
 }
 
 export interface UseLyricSessionResult {
@@ -41,7 +42,16 @@ export function useLyricSession(): UseLyricSessionResult {
       if (typeof vars.top === 'number' && Number.isFinite(vars.top)) {
         payload.top = vars.top;
       }
-      const { data } = await api.post(`/lyrics/generate`, payload);
+
+      const config: Record<string, unknown> = {};
+      const resolvedKey = vars.apiKey?.trim();
+      if (resolvedKey) {
+        config.headers = {
+          'X-Gemini-API-Key': resolvedKey,
+        };
+      }
+
+      const { data } = await api.post(`/lyrics/generate`, payload, config);
       return LyricGenerationResponseSchema.parse(data);
     },
   });

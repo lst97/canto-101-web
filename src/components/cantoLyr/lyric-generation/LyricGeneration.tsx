@@ -4,14 +4,23 @@ import type { ReactElement } from 'react';
 import { LyricGenerationForm, LyricGenerationResults } from '.';
 import { useLyricSession } from '../../../hooks/useLyricGeneration.ts';
 
-export function LyricSession(): ReactElement {
+interface LyricSessionProps {
+  apiKey: string;
+}
+
+export function LyricSession({ apiKey }: LyricSessionProps): ReactElement {
   const { generate, result, loading, error } = useLyricSession();
 
   const handleSubmit = useCallback(
     async (options: Parameters<typeof generate>[0]) => {
-      await generate(options);
+      const resolvedKey = apiKey.trim();
+      if (!resolvedKey) {
+        // This shouldn't happen since we disable the form, but just in case
+        return;
+      }
+      await generate({ ...options, apiKey: resolvedKey });
     },
-    [generate]
+    [generate, apiKey]
   );
 
   return (
@@ -20,6 +29,7 @@ export function LyricSession(): ReactElement {
         loading={loading}
         onSubmit={handleSubmit}
         serverError={error}
+        disabled={!apiKey}
       />
       {result && <LyricGenerationResults result={result} />}
     </div>

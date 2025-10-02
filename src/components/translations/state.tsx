@@ -1,7 +1,6 @@
 import React, {
   createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -71,7 +70,7 @@ type TranslationEditorContextValue = {
   reloadAllLanguages: () => Promise<void>;
 };
 
-const TranslationEditorContext =
+export const TranslationEditorContext =
   createContext<TranslationEditorContextValue | null>(null);
 
 const LS_SELECTED_KEY = 'translationEditor.selectedKey';
@@ -614,12 +613,3 @@ export const TranslationEditorProvider = ({
   );
 };
 
-export const useTranslationEditor = () => {
-  // eslint-disable-line react-refresh/only-export-components
-  const ctx = useContext(TranslationEditorContext);
-  if (!ctx)
-    throw new Error(
-      'useTranslationEditor must be used within TranslationEditorProvider'
-    );
-  return ctx;
-};

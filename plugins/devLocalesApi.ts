@@ -9,7 +9,32 @@ export function devLocalesApi(): Plugin {
     configureServer(server: ViteDevServer) {
       const rootDir = path.resolve(__dirname, '..');
       const localesDir = path.join(rootDir, 'src', 'locales');
-      const allowedFiles = new Set(fs.readdirSync(localesDir).filter(file => file.endsWith('.json')));
+      const localesDirWithSep = localesDir.endsWith(path.sep) ? localesDir : `${localesDir}${path.sep}`;
+      const allowedFiles = new Set(
+        fs
+          .readdirSync(localesDir)
+          .filter(file => file.endsWith('.json'))
+          .map(file => decodeURIComponent(file)),
+      );
+
+      const resolveLocaleFile = (rawPath: string) => {
+        if (!rawPath) return null;
+
+        let decoded: string;
+        try {
+          decoded = decodeURIComponent(rawPath);
+        } catch {
+          return null;
+        }
+
+        if (decoded.includes('/') || decoded.includes('\\')) return null;
+        if (!allowedFiles.has(decoded)) return null;
+
+        const filePath = path.resolve(localesDir, decoded);
+        if (!filePath.startsWith(localesDirWithSep)) return null;
+
+        return { name: decoded, filePath } as const;
+      };
 
       server.middlewares.use(async (req, res, next) => {
         if (!req.url) return next();
@@ -31,18 +56,20 @@ export function devLocalesApi(): Plugin {
           }
 
           if (url.pathname.startsWith('/api/locales/') && method === 'GET') {
-            const name = url.pathname.split('/').pop() as string;
-            if (!allowedFiles.has(name)) return sendJson(400, { error: 'invalid_file' });
-            const filePath = path.join(localesDir, name);
+            const rawName = url.pathname.slice('/api/locales/'.length);
+            const resolved = resolveLocaleFile(rawName);
+            if (!resolved) return sendJson(400, { error: 'invalid_file' });
+            const { name, filePath } = resolved;
             if (!fs.existsSync(filePath)) return sendJson(404, { error: 'not_found' });
             const content = fs.readFileSync(filePath, 'utf-8');
             return sendJson(200, { name, content: JSON.parse(content) });
           }
 
           if (url.pathname.startsWith('/api/locales/') && method === 'PUT') {
-            const name = url.pathname.split('/').pop() as string;
-            if (!allowedFiles.has(name)) return sendJson(400, { error: 'invalid_file' });
-            const filePath = path.join(localesDir, name);
+            const rawName = url.pathname.slice('/api/locales/'.length);
+            const resolved = resolveLocaleFile(rawName);
+            if (!resolved) return sendJson(400, { error: 'invalid_file' });
+            const { filePath } = resolved;
 
             let raw = '';
             req.on('data', (chunk) => {

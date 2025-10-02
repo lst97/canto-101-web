@@ -315,6 +315,10 @@
         "preview": "Investigate published lyric lines by tone pattern or rhyme family to support your own writing."
       }
     },
+    "badges": {
+      "ai": "AI",
+      "experimental": "Experimental"
+    },
     "lyrics": {
       "title": "Lyric Session",
       "promptLabel": "Lyric prompt",
@@ -407,7 +411,25 @@
           "topCaption": "Number of composed paragraph suggestions to return (1–3).",
           "submit": "Generate lyrics",
           "generating": "Generating lyrics...",
-          "generatingHint": "The system is assembling candidate sentences and ranking them."
+          "generatingHint": "The system is assembling candidate sentences and ranking them.",
+          "apiKey": {
+            "button": "Set API Key",
+            "dialogTitle": "Enter Google Gemini API Key",
+            "dialogDescriptionPrefix": "Get your API key from ",
+            "dialogDescriptionMiddle": ".",
+            "dialogDescriptionSuffix": "Your API key will not be logged and will only be used for this session. It will not be stored or used elsewhere in the system.",
+            "label": "API Key",
+            "placeholder": "Enter your Gemini API key",
+            "save": "Save",
+            "requiredMessage": "Please set your Google Gemini API key to generate lyrics.",
+            "validation": {
+              "required": "API key is required",
+              "invalidFormat": "API key must start with 'AIza'",
+              "invalidLength": "API key must be 39 characters long"
+            },
+            "showPassword": "Show password",
+            "hidePassword": "Hide password"
+          }
         },
         "summary": {
           "title": "Session summary",

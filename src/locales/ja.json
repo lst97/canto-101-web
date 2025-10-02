@@ -433,7 +433,25 @@
           "topCaption": "返す構成済み段落候補の数（1–3）。",
           "submit": "歌詞を生成",
           "generating": "生成中...",
-          "generatingHint": "システムは候補文を組み立て、順位付けを行っています。"
+          "generatingHint": "システムは候補文を組み立て、順位付けを行っています。",
+          "apiKey": {
+            "button": "APIキーを設定",
+            "dialogTitle": "Google Gemini APIキーを入力",
+            "dialogDescriptionPrefix": "",
+            "dialogDescriptionMiddle": " からAPIキーを取得してください。",
+            "dialogDescriptionSuffix": "APIキーは記録されず、このセッションでのみ使用されます。保存されたり、システムの他の場所で使用されたりすることはありません。",
+            "label": "APIキー",
+            "placeholder": "Gemini APIキーを入力",
+            "save": "保存",
+            "requiredMessage": "歌詞を生成するにはGoogle Gemini APIキーを設定してください。",
+            "validation": {
+              "required": "APIキーは必須です",
+              "invalidFormat": "APIキーは 'AIza' で始まる必要があります",
+              "invalidLength": "APIキーは39文字である必要があります"
+            },
+            "showPassword": "パスワードを表示",
+            "hidePassword": "パスワードを隠す"
+          }
         },
         "summary": {
           "title": "セッションの概要",

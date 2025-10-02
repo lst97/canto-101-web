@@ -1,13 +1,16 @@
 import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import CantoLyrWorkflowCard from '../components/cantoLyr/CantoLyrWorkflowCard.tsx';
+import CantoLyrWorkflowCard, {
+  type CantoLyrWorkflowBadgeVariant,
+} from '../components/cantoLyr/CantoLyrWorkflowCard.tsx';
 
 interface WorkflowFeature {
   eyebrow: string;
   title: string;
   description: string;
   to: string;
-  showBadge?: boolean;
+  badgeVariant?: CantoLyrWorkflowBadgeVariant;
+  secondBadgeVariant?: CantoLyrWorkflowBadgeVariant;
 }
 
 export default function CantoLyr(): ReactElement {
@@ -38,7 +41,7 @@ export default function CantoLyr(): ReactElement {
       title: t('cantoLyr.ai.lyricSearch.title'),
       description: t('cantoLyr.pages.ai.lyricSearchPreview'),
       to: '/canto-lyr/ai-lyric-pronunciation-search',
-      showBadge: true,
+      badgeVariant: 'ai',
     },
   ];
   // lyric workflows moved to AI tools section
@@ -48,7 +51,8 @@ export default function CantoLyr(): ReactElement {
       title: t('cantoLyr.ai.lyrics.title'),
       description: t('cantoLyr.pages.ai.lyricsPreview'),
       to: '/canto-lyr/lyric-generation',
-      showBadge: true,
+      badgeVariant: 'ai',
+      secondBadgeVariant: 'experimental',
     },
     {
       // lexicon has a more specific tag
@@ -56,7 +60,7 @@ export default function CantoLyr(): ReactElement {
       title: t('cantoLyr.ai.lexicon.title'),
       description: t('cantoLyr.pages.ai.lexiconPreview'),
       to: '/canto-lyr/ai-lexicon-search',
-      showBadge: true,
+      badgeVariant: 'ai',
     },
   ];
   return (
@@ -115,7 +119,7 @@ export default function CantoLyr(): ReactElement {
               description={feature.description}
               to={feature.to}
               cta={t('cantoLyr.pages.featureCta')}
-              showBadge={Boolean(feature.showBadge)}
+              badgeVariant={feature.badgeVariant}
             />
           ))}
         </div>
@@ -139,7 +143,8 @@ export default function CantoLyr(): ReactElement {
               description={feature.description}
               to={feature.to}
               cta={t('cantoLyr.pages.featureCta')}
-              showBadge={Boolean(feature.showBadge)}
+              badgeVariant={feature.badgeVariant}
+              secondBadgeVariant={feature.secondBadgeVariant}
             />
           ))}
         </div>

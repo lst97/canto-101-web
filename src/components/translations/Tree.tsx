@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslationEditor } from './state';
+import { useTranslationEditor } from './useTranslationEditor';
 import type { TreeNode as TreeNodeType } from './types';
 import {
   SidebarMenuButton,

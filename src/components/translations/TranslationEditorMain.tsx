@@ -21,7 +21,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { File, CheckCircle, RotateCcw, RefreshCcw, Save } from 'lucide-react';
 import { BreadcrumbForKey, FlagIcon } from './components';
 import { SUPPORTED_LANGUAGES, FLAG_COMPONENTS } from './constants';
-import { useTranslationEditor } from './state';
+import { useTranslationEditor } from './useTranslationEditor';
 
 export const TranslationEditorMain = () => {
   const {

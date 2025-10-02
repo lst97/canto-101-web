@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/dialog';
 import { Plus, Minus, Search, Key, FileText } from 'lucide-react';
 import { Tree } from './Tree';
-import { useTranslationEditor } from './state';
+import { useTranslationEditor } from './useTranslationEditor';
 
 export const TranslationEditorSidebar = () => {
   const {

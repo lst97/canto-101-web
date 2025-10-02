@@ -20,6 +20,7 @@ interface LyricGenerationFormProps {
   loading: boolean;
   onSubmit: (options: LyricSessionOptions) => Promise<void>;
   serverError?: string | null;
+  disabled?: boolean;
 }
 
 // (Removed legacy resolveErrorMessage helper; validation now returns i18n keys directly.)
@@ -35,6 +36,7 @@ export function LyricGenerationForm({
   loading,
   onSubmit,
   serverError,
+  disabled = false,
 }: LyricGenerationFormProps) {
   const { t } = useTranslation();
 
@@ -338,7 +340,7 @@ export function LyricGenerationForm({
           <div className="flex items-center gap-3">
             <Button
               type="submit"
-              disabled={loading}
+              disabled={loading || disabled}
               className="px-6"
               onClick={() => setSubmitAttempted(true)}
             >
@@ -366,6 +368,11 @@ export function LyricGenerationForm({
             resolvedServerError.startsWith('errors.')
               ? t(resolvedServerError)
               : resolvedServerError}
+          </p>
+        )}
+        {disabled && (
+          <p role="alert" className="text-sm text-amber-600 dark:text-amber-400">
+            {t('cantoLyr.ai.lyrics.form.apiKey.requiredMessage')}
           </p>
         )}
       </CardContent>

@@ -263,7 +263,25 @@
           "topCaption": "要回傳的段落建議數量（1–3）。",
           "submit": "生成歌詞",
           "generating": "生成中...",
-          "generatingHint": "系統正在組裝候選句並進行排序。"
+          "generatingHint": "系統正在組裝候選句並進行排序。",
+          "apiKey": {
+            "button": "設定 API 金鑰",
+            "dialogTitle": "輸入 Google Gemini API 金鑰",
+            "dialogDescriptionPrefix": "從 ",
+            "dialogDescriptionMiddle": " 取得您的 API 金鑰。",
+            "dialogDescriptionSuffix": "您的 API 金鑰不會被記錄，且僅用於本次工作階段。不會儲存或用於系統其他地方。",
+            "label": "API 金鑰",
+            "placeholder": "輸入您的 Gemini API 金鑰",
+            "save": "儲存",
+            "requiredMessage": "請設定您的 Google Gemini API 金鑰以生成歌詞。",
+            "validation": {
+              "required": "API 金鑰為必填",
+              "invalidFormat": "API 金鑰必須以 'AIza' 開頭",
+              "invalidLength": "API 金鑰長度必須為 39 個字元"
+            },
+            "showPassword": "顯示密碼",
+            "hidePassword": "隱藏密碼"
+          }
         },
         "summary": {
           "title": "會話摘要",
@@ -524,6 +542,10 @@
         "invalidResponse": "無法解析 AI 詞彙回應，請再試一次。",
         "limitRange": "數量必須介於 1 至 25 之間。"
       }
+    },
+    "badges": {
+      "ai": "AI",
+      "experimental": "實驗中"
     },
     "lexicon": {
       "types": {
