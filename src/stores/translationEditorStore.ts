@@ -110,7 +110,7 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
     sourceOfTruth: 'zh',
     isSaving: false,
     hydrateFromStorage: () => {
-      if (typeof window === 'undefined') return;
+      if (typeof globalThis.window === 'undefined') return;
       let selectedKey: string | null = null;
       const expanded = new Set<string>();
       try {
@@ -150,7 +150,7 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
       const selectedKeyChanged = state.selectedKey !== key;
       const expandedChanged = !setsAreEqual(nextExpanded, state.expandedNodes);
       if (!selectedKeyChanged && !expandedChanged) return;
-      if (typeof window !== 'undefined') {
+      if (typeof globalThis.window !== 'undefined') {
         try {
           if (selectedKeyChanged) {
             if (key) window.localStorage.setItem(LS_SELECTED_KEY, key);
@@ -176,7 +176,7 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
           ? (input as ExpandedNodesUpdater)(base)
           : new Set(input as Set<string>);
       if (setsAreEqual(result, state.expandedNodes)) return;
-      if (typeof window !== 'undefined') {
+      if (typeof globalThis.window !== 'undefined') {
         try {
           window.localStorage.setItem(
             LS_EXPANDED_NODES,
@@ -198,7 +198,7 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
         ? new Set<string>()
         : new Set(folderPaths);
       if (setsAreEqual(nextExpanded, state.expandedNodes)) return;
-      if (typeof window !== 'undefined') {
+      if (typeof globalThis.window !== 'undefined') {
         try {
           window.localStorage.setItem(
             LS_EXPANDED_NODES,

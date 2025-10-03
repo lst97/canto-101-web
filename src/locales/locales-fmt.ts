@@ -288,6 +288,34 @@ function tryAutoFixJson(content: string): {
   return { fixed, parsed, steps };
 }
 
+function ensureValidLocaleFileName(
+  name: string,
+  allowedFiles: Set<string>
+): string {
+  const trimmed = name.trim();
+  if (!trimmed) {
+    throw new Error('Source locale filename is required.');
+  }
+
+  if (trimmed !== path.basename(trimmed)) {
+    throw new Error('Source locale filename must not contain directories.');
+  }
+
+  if (!/^[\w.-]+$/.test(trimmed)) {
+    throw new Error('Source locale filename contains invalid characters.');
+  }
+
+  if (!trimmed.endsWith('.json')) {
+    throw new Error('Source locale filename must end with .json.');
+  }
+
+  if (!allowedFiles.has(trimmed)) {
+    throw new Error(`Source locale file ${trimmed} is not available.`);
+  }
+
+  return trimmed;
+}
+
 function backupFile(filePath: string, dryRun: boolean): string {
   if (dryRun) {
     const base = path.basename(filePath);
@@ -479,27 +507,48 @@ function validateLocales(flags: {
   source: string;
 }): void {
   const localesDir = __dirname;
+  const localesDirWithSep = localesDir.endsWith(path.sep)
+    ? localesDir
+    : `${localesDir}${path.sep}`;
+
+  const availableJsonFiles = fs
+    .readdirSync(localesDir)
+    .filter((file: string) => file.endsWith('.json'));
+  const allowedFiles = new Set(availableJsonFiles);
+
+  let sourceFile: string;
+  try {
+    sourceFile = ensureValidLocaleFileName(flags.source, allowedFiles);
+  } catch (validationErr) {
+    console.error(`❌ ${(validationErr as Error).message}`);
+    process.exit(1);
+  }
+
+  const referencePath = path.resolve(localesDir, sourceFile);
+  if (!referencePath.startsWith(localesDirWithSep)) {
+    console.error(
+      '❌ Resolved source locale file is outside the locales directory.'
+    );
+    process.exit(1);
+  }
 
   console.log(
-    `🔍 Validating locale files against ${flags.source} structure...\n`
+    `🔍 Validating locale files against ${sourceFile} structure...\n`
   );
 
   try {
     // Read reference file (source of truth)
-    const referencePath = path.join(localesDir, flags.source);
     const referenceContent = fs.readFileSync(referencePath, 'utf8');
     const reference = JSON.parse(referenceContent) as JSONObject;
 
     console.log(
-      `📋 Using ${flags.source} as the source of truth for structure validation.\n`
+      `📋 Using ${sourceFile} as the source of truth for structure validation.\n`
     );
 
     // Get all JSON files in locales directory, excluding the source file
-    const files = fs
-      .readdirSync(localesDir)
-      .filter(
-        (file: string) => file.endsWith('.json') && file !== flags.source
-      );
+    const files = availableJsonFiles.filter(
+      (file: string) => file !== sourceFile
+    );
 
     if (files.length === 0) {
       console.log(

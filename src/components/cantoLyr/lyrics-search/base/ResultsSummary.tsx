@@ -16,7 +16,7 @@ export function ResultsSummary({
   cached,
   queryText,
   processingTimeMs,
-}: ResultsSummaryProps): ReactElement {
+}: Readonly<ResultsSummaryProps>): ReactElement {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">

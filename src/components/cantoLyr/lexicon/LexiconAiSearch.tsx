@@ -137,10 +137,10 @@ export function LexiconAiSearch(): ReactElement {
     limit: z
       .string()
       .trim()
-      .regex(/^[0-9]+$/, { message: 'cantoLyr.errors.lexicon.invalidDigits' })
+      .regex(/^\d+$/, { message: 'cantoLyr.errors.lexicon.invalidDigits' })
       .refine(
         v => {
-          const n = parseInt(v, 10);
+          const n = Number.parseInt(v, 10);
           return n >= 1 && n <= 25;
         },
         { message: 'cantoLyr.errors.lexicon.limitRange' }
@@ -203,7 +203,7 @@ export function LexiconAiSearch(): ReactElement {
           onSubmit={e => {
             e.preventDefault();
             e.stopPropagation();
-            void form.handleSubmit();
+            form.handleSubmit();
           }}
           noValidate
         >
@@ -312,7 +312,7 @@ export function LexiconAiSearch(): ReactElement {
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={e =>
-                      field.handleChange(e.target.value.replace(/[^0-9]/g, ''))
+                      field.handleChange(e.target.value.replaceAll(/\D/g, ''))
                     }
                     placeholder="10"
                     inputMode="numeric"
@@ -412,27 +412,25 @@ export function LexiconAiSearch(): ReactElement {
             </div>
             {hasItems ? (
               <div className="space-y-4">
-                <div
+                <ul
                   className="flex flex-wrap gap-2"
-                  role="list"
                   aria-label={t('cantoLyr.ai.lexicon.title')}
                 >
                   {items.map(item => (
-                    <Button
-                      key={item.id}
-                      type="button"
-                      role="listitem"
-                      variant={item.id === activeId ? 'secondary' : 'outline'}
-                      size="sm"
-                      className="font-medium"
-                      title={`${item.surface} · ${item.pronunciation}`}
-                      aria-pressed={item.id === activeId}
-                      onClick={() => handleActivate(item.id)}
-                    >
-                      {item.surface}
-                    </Button>
+                    <li key={item.id}>
+                      <Button
+                        type="button"
+                        variant={item.id === activeId ? 'secondary' : 'outline'}
+                        size="sm"
+                        className="font-medium"
+                        title={`${item.surface} · ${item.pronunciation}`}
+                        onClick={() => handleActivate(item.id)}
+                      >
+                        {item.surface}
+                      </Button>
+                    </li>
                   ))}
-                </div>
+                </ul>
                 <AiLexiconActivePanel item={activeItem} />
               </div>
             ) : (

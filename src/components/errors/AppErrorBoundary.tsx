@@ -13,10 +13,10 @@ export interface AppErrorBoundaryProps {
 function DefaultFallback({
   error,
   reset,
-}: {
+}: Readonly<{
   error: unknown;
   reset: () => void;
-}): ReactElement {
+}>): Readonly<ReactElement> {
   const { t } = useTranslation();
   const isApp = isAppError(error);
   const titleKey = isApp
@@ -49,6 +49,22 @@ function DefaultFallback({
   );
 }
 
+function AppErrorBoundaryFallback({
+  error,
+  reset,
+  fallback,
+}: Readonly<{
+  error: unknown;
+  reset: () => void;
+  fallback?: ReactNode;
+}>): Readonly<ReactElement> {
+  if (fallback) {
+    return <>{fallback}</>;
+  }
+
+  return <DefaultFallback error={error} reset={reset} />;
+}
+
 export function AppErrorBoundary({
   children,
   onHardReset,
@@ -56,13 +72,13 @@ export function AppErrorBoundary({
 }: AppErrorBoundaryProps): ReactElement {
   return (
     <ErrorBoundary
-      fallbackRender={({ error, resetErrorBoundary }) =>
-        fallback ? (
-          <>{fallback}</>
-        ) : (
-          <DefaultFallback error={error} reset={resetErrorBoundary} />
-        )
-      }
+      fallbackRender={({ error, resetErrorBoundary }) => (
+        <AppErrorBoundaryFallback
+          error={error}
+          reset={resetErrorBoundary}
+          fallback={fallback}
+        />
+      )}
       onReset={onHardReset}
     >
       {children}

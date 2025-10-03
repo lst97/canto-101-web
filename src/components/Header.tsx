@@ -40,7 +40,10 @@ export function Header(): ReactElement {
   const isOnProducts = isOnCantoLyr || isOnCantoCap;
 
   const smoothScrollToId = useCallback((id: string): void => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
+    if (
+      typeof globalThis.window === 'undefined' ||
+      typeof document === 'undefined'
+    ) {
       return;
     }
     const element = document.getElementById(id);
@@ -66,7 +69,7 @@ export function Header(): ReactElement {
       e.preventDefault();
       const id = href.slice(1);
       if (
-        typeof window !== 'undefined' &&
+        typeof globalThis.window !== 'undefined' &&
         typeof globalThis.requestAnimationFrame === 'function'
       ) {
         globalThis.requestAnimationFrame(() => {
@@ -76,7 +79,7 @@ export function Header(): ReactElement {
         smoothScrollToId(id);
       }
       // Update hash without causing an instant jump
-      if (typeof window !== 'undefined') {
+      if (typeof globalThis.window !== 'undefined') {
         globalThis.history.replaceState(null, '', href);
       }
     },
@@ -85,7 +88,7 @@ export function Header(): ReactElement {
 
   const handleProductsMenuOpenChange = useCallback(
     (nextOpen: boolean): void => {
-      if (typeof window === 'undefined') return;
+      if (typeof globalThis.window === 'undefined') return;
       if (nextOpen) {
         productsScrollPositionRef.current = globalThis.scrollY;
         return;
@@ -123,7 +126,7 @@ export function Header(): ReactElement {
     ];
     const elements = ids
       .map(id => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
+      .filter(Boolean) as HTMLElement[];
 
     if (elements.length === 0) return;
 
@@ -146,13 +149,15 @@ export function Header(): ReactElement {
       }
     );
 
-    elements.forEach(el => observer.observe(el));
+    for (const el of elements) {
+      observer.observe(el);
+    }
     return () => observer.disconnect();
   }, []);
 
   // Measure header height on mount and on resize to update a CSS variable used for offsetting content
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof globalThis.window === 'undefined') return;
     const root = document.documentElement;
     const measure = () => {
       const headerEl = document.querySelector('header[data-app-header]');
@@ -162,7 +167,7 @@ export function Header(): ReactElement {
     measure();
     const ro = new ResizeObserver(measure);
     const headerEl = document.querySelector('header[data-app-header]');
-    if (headerEl) ro.observe(headerEl as Element);
+    if (headerEl) ro.observe(headerEl);
     window.addEventListener('resize', measure);
     return () => {
       window.removeEventListener('resize', measure);

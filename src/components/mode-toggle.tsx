@@ -19,7 +19,7 @@ export default function ModeToggle(): ReactElement {
   const scrollPositionRef = useRef<number>(0);
 
   const handleOpenChange = (nextOpen: boolean): void => {
-    if (typeof window === 'undefined') return;
+    if (typeof globalThis.window === 'undefined') return;
     if (nextOpen) {
       scrollPositionRef.current = globalThis.scrollY;
       return;

@@ -123,7 +123,7 @@ export function LexiconSearchBase({
   querySchema,
   groupSize = DEFAULT_GROUP_SIZE,
   inputProps,
-}: LexiconSearchBaseProps): ReactElement {
+}: Readonly<LexiconSearchBaseProps>): ReactElement {
   const { t } = useTranslation();
   const {
     query,
@@ -349,7 +349,10 @@ export function LexiconSearchBase({
     };
   });
 
-  const hasMore = entriesCount < totalCount;
+  const hasResultData = isRhymeSearch
+    ? Boolean(rhymeVariantsResult)
+    : Boolean(readingResult);
+  const hasMore = entries.length < totalCount;
 
   const activeItem = entries.find(item => item.id === activeItemId) ?? null;
 
@@ -396,11 +399,11 @@ export function LexiconSearchBase({
     setPage(page + 1);
   }, [page, setPage]);
 
-  const resolvedError = error
-    ? error.startsWith('cantoLyr.')
+  const translatedError =
+    typeof error === 'string' && error.startsWith('cantoLyr.')
       ? t(error)
-      : error
-    : null;
+      : error;
+  const resolvedError = error ? translatedError : null;
 
   return (
     <Card className="border-border/60 shadow-none">
@@ -410,7 +413,7 @@ export function LexiconSearchBase({
             event.preventDefault();
             event.stopPropagation();
             setSubmitAttempted(true);
-            void form.handleSubmit();
+            form.handleSubmit();
           }}
           className="space-y-6"
         >
@@ -540,10 +543,9 @@ export function LexiconSearchBase({
               />
             )}
             {entries.length > 0 ? (
-              <div
+              <section
                 ref={resultsScrollRef}
                 className="flex max-h-[420px] flex-col gap-4 overflow-y-auto pr-1"
-                role="region"
                 aria-label={t(`cantoLyr.${kind}.resultsRegionLabel`, {
                   ns: 'translation',
                   defaultValue: 'Search results',
@@ -582,10 +584,10 @@ export function LexiconSearchBase({
                     </p>
                   )
                 )}
-              </div>
+              </section>
             ) : (
               !loading &&
-              (isRhymeSearch ? !!rhymeVariantsResult : !!readingResult) && (
+              hasResultData && (
                 <p className="text-sm text-muted-foreground">
                   {t('cantoLyr.lexicon.messages.noMatches')}
                 </p>
@@ -814,7 +816,7 @@ function LexiconEntryDetails({
   item,
   layout = 'stack',
   className,
-}: LexiconEntryDetailsProps) {
+}: Readonly<LexiconEntryDetailsProps>) {
   const { t } = useTranslation();
   const detailEntries = useMemo(() => createDetailEntries(t, item), [t, item]);
   const containerClass =
@@ -845,21 +847,27 @@ interface LangBadgeWithTooltipProps {
   lang: string;
 }
 
-function LangBadgeWithTooltip({ idBase, lang }: LangBadgeWithTooltipProps) {
+function LangBadgeWithTooltip({
+  idBase,
+  lang,
+}: Readonly<LangBadgeWithTooltipProps>) {
   const { t } = useTranslation();
-  const explanation =
-    lang === 'zh-HK'
-      ? t('cantoLyr.lexicon.langHints.zhHk', {
-          defaultValue: 'Colloquial Cantonese (HK)',
-        })
-      : lang === 'zh-TW'
-        ? t('cantoLyr.lexicon.langHints.zhTw', {
-            defaultValue: 'Standard written Chinese (TW)',
-          })
-        : t('cantoLyr.lexicon.langHints.generic', {
-            code: lang,
-            defaultValue: lang,
-          });
+  let explanation: string;
+
+  if (lang === 'zh-HK') {
+    explanation = t('cantoLyr.lexicon.langHints.zhHk', {
+      defaultValue: 'Colloquial Cantonese (HK)',
+    });
+  } else if (lang === 'zh-TW') {
+    explanation = t('cantoLyr.lexicon.langHints.zhTw', {
+      defaultValue: 'Standard written Chinese (TW)',
+    });
+  } else {
+    explanation = t('cantoLyr.lexicon.langHints.generic', {
+      code: lang,
+      defaultValue: lang,
+    });
+  }
 
   return (
     <button

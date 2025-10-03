@@ -19,7 +19,7 @@ import {
 import type { AppError } from '@/types/errors';
 
 interface ApiErrorDisplayProps {
-  error: AppError | unknown;
+  error: unknown;
   title?: string;
   showTechnicalDetails?: boolean;
 }
@@ -30,7 +30,7 @@ export function ApiErrorDisplay({
   error,
   title,
   showTechnicalDetails = true,
-}: ApiErrorDisplayProps) {
+}: Readonly<ApiErrorDisplayProps>) {
   const { t } = useTranslation();
   const [copyStatus, setCopyStatus] = useState<CopyStatus>('idle');
 
@@ -68,11 +68,11 @@ export function ApiErrorDisplay({
       return;
     }
 
-    const timeoutId = window.setTimeout(() => {
+    const timeoutId = globalThis.setTimeout(() => {
       setCopyStatus('idle');
     }, 2000);
 
-    return () => window.clearTimeout(timeoutId);
+    return () => globalThis.clearTimeout(timeoutId);
   }, [copyStatus]);
 
   if (!errorDetails) {
@@ -181,7 +181,7 @@ interface ErrorDetails {
   errorCode?: string;
 }
 
-function extractErrorDetails(error: AppError | unknown): ErrorDetails | null {
+function extractErrorDetails(error: unknown): ErrorDetails | null {
   if (!error) return null;
 
   // Handle AppError types
@@ -196,10 +196,6 @@ function extractErrorDetails(error: AppError | unknown): ErrorDetails | null {
           errorCode: appError.code || undefined,
         };
       case 'network':
-        return {
-          userMessage: appError.message,
-          technicalDetails: formatTechnicalDetails(appError),
-        };
       case 'unexpected':
         return {
           userMessage: appError.message,
@@ -269,7 +265,7 @@ interface ValidationErrorDisplayProps {
 export function ValidationErrorDisplay({
   errors,
   title,
-}: ValidationErrorDisplayProps) {
+}: Readonly<ValidationErrorDisplayProps>) {
   const { t } = useTranslation();
 
   if (!errors || errors.length === 0) {

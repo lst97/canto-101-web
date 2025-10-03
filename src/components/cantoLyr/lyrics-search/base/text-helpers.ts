@@ -35,7 +35,7 @@ export function mergeRanges(
   const sorted = [...ranges].sort((a, b) => a.start - b.start);
   const merged: Array<{ start: number; end: number }> = [];
   for (const r of sorted) {
-    const last = merged[merged.length - 1];
+    const last = merged.at(-1);
     if (!last || r.start > last.end) {
       merged.push({ ...r });
     } else {

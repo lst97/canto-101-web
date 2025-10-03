@@ -40,7 +40,7 @@ export function FilterMultiSelectField({
   value,
   onChange,
   loading,
-}: FilterMultiSelectFieldProps): ReactElement {
+}: Readonly<FilterMultiSelectFieldProps>): ReactElement {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -139,15 +139,19 @@ export function FilterMultiSelectField({
   }, []);
 
   const handleOpenChange = useCallback((newOpen: boolean) => {
-    if (!newOpen) setTimeout(() => setOpen(false), 150);
-    else setOpen(true);
+    if (newOpen) {
+      setOpen(true);
+      return;
+    }
+    setTimeout(() => setOpen(false), 150);
   }, []);
 
-  const displayValue =
-    selected.length > 0
-      ? selected.slice(0, 3).join(', ') +
-        (selected.length > 3 ? ` +${selected.length - 3}` : '')
-      : placeholder;
+  const selectedPreview = selected.slice(0, 3).join(', ');
+  const formattedSelection =
+    selected.length > 3
+      ? `${selectedPreview} +${selected.length - 3}`
+      : selectedPreview;
+  const displayValue = selected.length > 0 ? formattedSelection : placeholder;
 
   return (
     <div className="space-y-2">
@@ -214,10 +218,20 @@ export function FilterMultiSelectField({
                         key={option}
                         className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-muted"
                         data-checkbox-container
+                        role="button"
+                        tabIndex={0}
+                        aria-pressed={checked}
                         onClick={event => {
                           event.preventDefault();
                           event.stopPropagation();
                           handleToggle(option);
+                        }}
+                        onKeyDown={event => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            handleToggle(option);
+                          }
                         }}
                       >
                         <Checkbox

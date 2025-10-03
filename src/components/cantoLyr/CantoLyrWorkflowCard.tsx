@@ -11,6 +11,7 @@ import {
 } from '../ui/card.tsx';
 import { Button } from '../ui/button.tsx';
 import { Badge } from '../ui/badge.tsx';
+import type { LucideIcon } from 'lucide-react';
 import { Cpu, FlaskConical } from 'lucide-react';
 
 type CantoLyrWorkflowBadgeVariant = 'ai' | 'experimental';
@@ -36,20 +37,30 @@ export function CantoLyrWorkflowCard({
 }: CantoLyrWorkflowCardProps): ReactElement {
   const { t } = useTranslation();
 
-  const badgeConfig =
-    badgeVariant === 'experimental'
-      ? {
-          Icon: FlaskConical,
-          variant: 'secondary' as const,
-          label: t('cantoLyr.badges.experimental'),
-        }
-      : badgeVariant === 'ai'
-        ? {
-            Icon: Cpu,
-            variant: 'outline' as const,
-            label: t('cantoLyr.badges.ai'),
-          }
-        : undefined;
+  type BadgeConfig = {
+    Icon: LucideIcon;
+    variant: 'secondary' | 'outline';
+    label: string;
+  };
+
+  const isExperimentalBadge = badgeVariant === 'experimental';
+  const isAiBadge = badgeVariant === 'ai';
+
+  let badgeConfig: BadgeConfig | undefined;
+
+  if (isExperimentalBadge) {
+    badgeConfig = {
+      Icon: FlaskConical,
+      variant: 'secondary',
+      label: t('cantoLyr.badges.experimental'),
+    };
+  } else if (isAiBadge) {
+    badgeConfig = {
+      Icon: Cpu,
+      variant: 'outline',
+      label: t('cantoLyr.badges.ai'),
+    };
+  }
 
   const secondBadgeConfig =
     secondBadgeVariant === 'experimental'

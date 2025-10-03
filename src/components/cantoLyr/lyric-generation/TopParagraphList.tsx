@@ -6,7 +6,9 @@ interface TopParagraphListProps {
   paragraphs: string[];
 }
 
-export function TopParagraphList({ paragraphs }: TopParagraphListProps) {
+export function TopParagraphList({
+  paragraphs,
+}: Readonly<TopParagraphListProps>) {
   const { t } = useTranslation();
 
   if (!paragraphs.length) {
@@ -21,14 +23,14 @@ export function TopParagraphList({ paragraphs }: TopParagraphListProps) {
 
   return (
     <div className="space-y-3">
-      {paragraphs.map((text, idx) => (
+      {paragraphs.map(text => (
         <article
-          key={`paragraph-${idx}`}
+          key={text}
           className="space-y-2 rounded-lg border border-border/60 bg-muted/10 p-4"
         >
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Badge variant="secondary" className="uppercase tracking-wide">
-              {t('cantoLyr.ai.lyrics.topParagraphs.badge', { index: idx + 1 })}
+              {t('cantoLyr.ai.lyrics.topParagraphs.badge')}
             </Badge>
           </div>
           <p className="text-sm leading-relaxed text-foreground">{text}</p>

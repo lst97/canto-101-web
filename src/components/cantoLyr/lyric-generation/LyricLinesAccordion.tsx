@@ -16,7 +16,9 @@ interface LyricLinesAccordionProps {
   lines: LyricLineResult[];
 }
 
-export function LyricLinesAccordion({ lines }: LyricLinesAccordionProps) {
+export function LyricLinesAccordion({
+  lines,
+}: Readonly<LyricLinesAccordionProps>) {
   const { t } = useTranslation();
   const accordionItems = useMemo(
     () =>

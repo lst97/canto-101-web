@@ -37,7 +37,7 @@ export function LyricGenerationForm({
   onSubmit,
   serverError,
   disabled = false,
-}: LyricGenerationFormProps) {
+}: Readonly<LyricGenerationFormProps>) {
   const { t } = useTranslation();
 
   const form = useForm({
@@ -94,7 +94,7 @@ export function LyricGenerationForm({
   const validateSeed = useCallback((value: string): string | undefined => {
     const trimmed = value.trim();
     if (trimmed.length === 0) return undefined; // optional
-    if (!/^[0-9]+$/.test(trimmed)) return 'cantoLyr.errors.lyrics.invalidSeed';
+    if (!/^\d+$/.test(trimmed)) return 'cantoLyr.errors.lyrics.invalidSeed';
     try {
       const num = Number(trimmed);
       if (!Number.isSafeInteger(num) || num < 0) {
@@ -136,7 +136,7 @@ export function LyricGenerationForm({
           onSubmit={event => {
             event.preventDefault();
             event.stopPropagation();
-            void form.handleSubmit();
+            form.handleSubmit();
           }}
         >
           <form.Field
@@ -262,7 +262,7 @@ export function LyricGenerationForm({
                       onBlur={field.handleBlur}
                       onChange={event =>
                         field.handleChange(
-                          event.target.value.replace(/[^0-9]/g, '')
+                          event.target.value.replaceAll(/\D/g, '')
                         )
                       }
                       placeholder={t('cantoLyr.ai.lyrics.form.seedPlaceholder')}

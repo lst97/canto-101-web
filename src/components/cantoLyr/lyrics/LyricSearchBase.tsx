@@ -178,10 +178,10 @@ export function LyricSearchBase({
       string,
       unknown
     >;
-    Object.keys(defaults).forEach(key => {
+    for (const key of Object.keys(defaults)) {
       const value = defaults[key];
       updateOption(key, value ?? '');
-    });
+    }
   }, [updateOption]);
 
   const handleReset = useCallback(() => {
@@ -250,7 +250,7 @@ export function LyricSearchBase({
             event.preventDefault();
             event.stopPropagation();
             setSubmitAttempted(true);
-            void form.handleSubmit();
+            form.handleSubmit();
           }}
         >
           <div className="space-y-2">
@@ -485,7 +485,7 @@ function ResultsSummary({
   cached,
   queryText,
   processingTimeMs,
-}: ResultsSummaryProps): ReactElement {
+}: Readonly<ResultsSummaryProps>): ReactElement {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
@@ -533,7 +533,7 @@ interface LyricResultCardProps {
 function LyricResultCard({
   line,
   renderBigrams,
-}: LyricResultCardProps): ReactElement {
+}: Readonly<LyricResultCardProps>): ReactElement {
   const { t } = useTranslation();
   const hasThemes =
     Array.isArray(line.themes) && line.themes && line.themes.length > 0;

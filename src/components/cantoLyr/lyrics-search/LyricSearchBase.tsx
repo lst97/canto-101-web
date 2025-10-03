@@ -120,7 +120,7 @@ export function LyricSearchBase({
   filterOptionsLoading = false,
   isAiSearch = false,
   aiQueryPlaceholderKey,
-}: LyricSearchBaseProps): ReactElement {
+}: Readonly<LyricSearchBaseProps>): ReactElement {
   const { t } = useTranslation();
   const {
     query,
@@ -306,7 +306,7 @@ export function LyricSearchBase({
   const form = useForm({
     defaultValues: { query },
     onSubmit: async () => {
-      await search(isAiSearch ? { aiQuery } : undefined);
+      await search();
     },
   });
 
@@ -386,7 +386,7 @@ export function LyricSearchBase({
             event.preventDefault();
             event.stopPropagation();
             setSubmitAttempted(true);
-            void form.handleSubmit();
+            form.handleSubmit();
           }}
         >
           <div className="space-y-2">
@@ -727,22 +727,16 @@ export function LyricSearchBase({
             <LyricSearchProvider value={{ kind, queryText: currentQueryText }}>
               <ScrollArea className="h-[900px]">
                 <Activity mode={entries.length > 0 ? 'visible' : 'hidden'}>
-                  <div
-                    className="space-y-4"
-                    role="region"
-                    aria-label={resultsAriaLabel}
-                  >
+                  <section className="space-y-4" aria-label={resultsAriaLabel}>
                     {entries.map(line => (
                       <LyricResultCard key={line.id} line={line} />
                     ))}
-                    {entries.length === 0 &&
-                      !loading &&
-                      (isRhymeSearch ? !!lyricRhymeResult : !!lyricResult) && (
-                        <p className="text-sm text-muted-foreground">
-                          {t('cantoLyr.lyricSearch.messages.noMatches')}
-                        </p>
-                      )}
-                  </div>
+                    {entries.length === 0 && !loading && lyricResult && (
+                      <p className="text-sm text-muted-foreground">
+                        {t('cantoLyr.lyricSearch.messages.noMatches')}
+                      </p>
+                    )}
+                  </section>
                 </Activity>
               </ScrollArea>
             </LyricSearchProvider>

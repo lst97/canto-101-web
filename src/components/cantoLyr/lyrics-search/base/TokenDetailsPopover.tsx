@@ -10,15 +10,13 @@ interface TokenDetailsPopoverProps {
 
 export function TokenDetailsPopover({
   token,
-}: TokenDetailsPopoverProps): ReactElement {
+}: Readonly<TokenDetailsPopoverProps>): ReactElement {
   const { t } = useTranslation();
 
   const syllables = useMemo(
     () =>
       Array.isArray(token.syllables)
-        ? token.syllables.filter((syllable): syllable is MatchedSyllable =>
-            Boolean(syllable)
-          )
+        ? (token.syllables.filter(Boolean) as MatchedSyllable[])
         : [],
     [token.syllables]
   );

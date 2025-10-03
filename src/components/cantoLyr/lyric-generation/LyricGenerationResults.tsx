@@ -29,7 +29,7 @@ function formatDate(value: string): string {
 
 export function LyricGenerationResults({
   result,
-}: LyricGenerationResultsProps) {
+}: Readonly<LyricGenerationResultsProps>) {
   const { t } = useTranslation();
   const metaEntries = useMemo(() => {
     const items: Array<{ label: string; value: string }> = [

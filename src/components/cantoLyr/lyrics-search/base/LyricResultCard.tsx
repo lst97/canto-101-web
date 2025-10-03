@@ -1,6 +1,6 @@
 import { type ReactElement, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { LyricLine } from '@/lib/schemas/lyric.ts';
+import type { LyricLine, MatchedSyllable } from '@/lib/schemas/lyric.ts';
 import { Badge } from '@/components/ui/badge.tsx';
 import { Separator } from '@/components/ui/separator.tsx';
 import { HighlightText } from '@/components/ui/shadcn-io/highlight-text/index.tsx';
@@ -24,7 +24,9 @@ export interface LyricResultCardProps {
   line: LyricLine;
 }
 
-export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
+export function LyricResultCard({
+  line,
+}: Readonly<LyricResultCardProps>): ReactElement {
   const { t } = useTranslation();
   const { kind, queryText } = useLyricSearchContext();
 
@@ -41,17 +43,13 @@ export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
   const hasThemes = Array.isArray(line.themes) && Boolean(line.themes?.length);
   const hasKeywords =
     Array.isArray(line.keywords) && Boolean(line.keywords?.length);
-  const matchedSyllables = useMemo(
-    () =>
-      Array.isArray(line.matchedSyllables)
-        ? line.matchedSyllables
-            .filter((syllable): syllable is NonNullable<typeof syllable> =>
-              Boolean(syllable)
-            )
-            .sort((a, b) => a.position - b.position)
-        : [],
-    [line.matchedSyllables]
-  );
+  const matchedSyllables = useMemo(() => {
+    if (!Array.isArray(line.matchedSyllables)) {
+      return [];
+    }
+    const filtered = line.matchedSyllables.filter(Boolean) as MatchedSyllable[];
+    return filtered.sort((a, b) => a.position - b.position);
+  }, [line.matchedSyllables]);
   const showMatchedSyllables =
     kind === 'lyrics-rhyme' && matchedSyllables.length > 0;
   const primaryRhyme = showMatchedSyllables
@@ -154,43 +152,18 @@ export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
             const lengthInSegment = rangeEndInSegment - rangeStartInSegment + 1;
 
             // Check if the entire token range is within this segment
-            const isEntireTokenInSegment =
-              matchingRange.start >= segStart &&
-              matchingRange.end <= segEnd - 1;
-
-            if (isEntireTokenInSegment) {
-              // Highlight the entire token as one block
-              const tokenText = graphemes
-                .slice(i, i + lengthInSegment)
-                .join('');
-
-              result.push(
-                <HighlightText
-                  key={`seg-token-${segStart}-${i}`}
-                  text={tokenText}
-                  inViewOnce={false}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="inline"
-                />
-              );
-              i += lengthInSegment;
-            } else {
-              // Token spans boundary - highlight the continuous portion in this segment as one block
-              const tokenText = graphemes
-                .slice(i, i + lengthInSegment)
-                .join('');
-
-              result.push(
-                <HighlightText
-                  key={`seg-token-${segStart}-${i}`}
-                  text={tokenText}
-                  inViewOnce={false}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="inline"
-                />
-              );
-              i += lengthInSegment;
-            }
+            // Highlight the portion of the token that lies within this segment
+            const tokenText = graphemes.slice(i, i + lengthInSegment).join('');
+            result.push(
+              <HighlightText
+                key={`seg-token-${segStart}-${i}`}
+                text={tokenText}
+                inViewOnce={false}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="inline"
+              />
+            );
+            i += lengthInSegment;
           } else {
             result.push(
               <span key={`seg-token-${segStart}-${i}-n`}>{graphemes[i]}</span>
@@ -206,10 +179,10 @@ export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
     };
 
     if (kind === 'lyrics-pron') {
-      const queryDigits = (queryText || '').replace(/\D+/g, '');
+      const queryDigits = (queryText || '').replaceAll(/\D+/g, '');
       if (queryDigits.length > 0 && typeof line.tonePatternText === 'string') {
         const text = normalizedText;
-        const toneDigits = line.tonePatternText.replace(/\D+/g, '');
+        const toneDigits = line.tonePatternText.replaceAll(/\D+/g, '');
         const merged = findToneDigitRanges(text, toneDigits, queryDigits, true);
         if (merged.length > 0) {
           const segments: ReactElement[] = [];
@@ -337,7 +310,7 @@ export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
       const highlightedToken = tokens.find(
         token => token.position === highlightedTokenPosition
       );
-      if (!highlightedToken || !highlightedToken.text) return normalizedText;
+      if (!highlightedToken?.text) return normalizedText;
       const tokenText = highlightedToken.text;
       const parts = normalizedText.split(new RegExp(`(${tokenText})`, 'gi'));
       return parts.map((part, index) =>
@@ -371,9 +344,9 @@ export function LyricResultCard({ line }: LyricResultCardProps): ReactElement {
   // Pronunciation bigrams section moved inside card to avoid prop drilling
   const bigramSection = useMemo(() => {
     if (kind !== 'lyrics-pron') return null;
-    const queryDigits = (queryText || '').replace(/\D+/g, '');
+    const queryDigits = (queryText || '').replaceAll(/\D+/g, '');
     if (!queryDigits) return null;
-    const toneDigits = (line.tonePatternText || '').replace(/\D+/g, '');
+    const toneDigits = (line.tonePatternText || '').replaceAll(/\D+/g, '');
     const merged = findToneDigitRanges(
       normalizedText,
       toneDigits,

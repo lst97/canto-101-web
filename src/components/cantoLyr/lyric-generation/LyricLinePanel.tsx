@@ -21,7 +21,7 @@ function formatNumber(value: number): string {
   return value.toLocaleString();
 }
 
-export function LyricLinePanel({ line }: LyricLinePanelProps) {
+export function LyricLinePanel({ line }: Readonly<LyricLinePanelProps>) {
   const { t } = useTranslation();
 
   const primarySentence = line.topSentences[0] ?? null;
@@ -124,7 +124,7 @@ export function LyricLinePanel({ line }: LyricLinePanelProps) {
           </p>
         )}
         {line.warnings.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2" role="status">
+          <output className="flex flex-wrap items-center gap-2">
             {line.warnings.map((warning, idx) => (
               <Badge
                 key={`${line.lineIndex}-warning-${idx}`}
@@ -134,7 +134,7 @@ export function LyricLinePanel({ line }: LyricLinePanelProps) {
                 {warning}
               </Badge>
             ))}
-          </div>
+          </output>
         )}
       </div>
 

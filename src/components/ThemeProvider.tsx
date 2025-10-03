@@ -5,7 +5,7 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  if (typeof window !== 'undefined') {
+  if (typeof globalThis.window !== 'undefined') {
     useThemeStore.getState().updateResolvedTheme();
   }
 
