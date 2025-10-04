@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { ZodError } from 'zod';
 
-import { api } from '../lib/api.ts';
+import { api, AppUnexpectedError } from '../lib/api.ts';
 import {
   type AiLexiconSearchQuery,
   AiLexiconSearchQuerySchema,
@@ -48,15 +48,14 @@ export function useAiLexiconSearch(): UseAiLexiconSearchResult {
       });
       try {
         return AiLexiconSearchResponseSchema.parse(response.data);
-      } catch (cause) {
-        if (cause instanceof ZodError) {
-          throw {
-            kind: 'unexpected',
-            message: 'cantoLyr.errors.lexicon.invalidResponse',
-            cause,
-          } satisfies AppError;
+      } catch (error) {
+        if (error instanceof ZodError) {
+          throw new AppUnexpectedError(
+            'cantoLyr.errors.lexicon.invalidResponse',
+            error
+          );
         }
-        throw cause;
+        throw error;
       }
     },
     onSuccess: data => {
@@ -98,8 +97,8 @@ export function useAiLexiconSearch(): UseAiLexiconSearchResult {
       }
 
       setError(null);
-      await mutation.mutateAsync(parsed.data).catch(cause => {
-        if (!isAppError(cause)) {
+      await mutation.mutateAsync(parsed.data).catch(error => {
+        if (!isAppError(error)) {
           setError('errors.unexpected.message');
         }
       });

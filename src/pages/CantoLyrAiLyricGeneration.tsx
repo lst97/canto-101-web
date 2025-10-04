@@ -122,7 +122,7 @@ export default function CantoLyrLyricGeneration(): ReactElement {
                       placeholder={t(
                         'cantoLyr.ai.lyrics.form.apiKey.placeholder'
                       )}
-                      className={validationError ? 'pr-10' : 'pr-10'}
+                      className="pr-10"
                     />
                     <Button
                       type="button"

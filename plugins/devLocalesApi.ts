@@ -1,4 +1,4 @@
-import type { IncomingMessage } from "http";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import type { Plugin, ViteDevServer } from "vite";
@@ -41,6 +41,9 @@ export function devLocalesApi(): Plugin {
           let totalBytes = 0;
           request.setEncoding("utf8");
 
+          const handleEnd = () => resolve(accumulated);
+          const handleError = (error: Error) => reject(error);
+
           const handleData = (chunk: string) => {
             totalBytes += Buffer.byteLength(chunk, "utf8");
             if (totalBytes > limitBytes) {
@@ -52,9 +55,6 @@ export function devLocalesApi(): Plugin {
             }
             accumulated += chunk;
           };
-
-          const handleEnd = () => resolve(accumulated);
-          const handleError = (error: Error) => reject(error);
 
           request.on("data", handleData);
           request.once("end", handleEnd);
@@ -76,82 +76,179 @@ export function devLocalesApi(): Plugin {
 
         if (!allowedFiles.has(decoded)) return null;
 
+        const baseName = path.basename(decoded);
+        if (baseName !== decoded || baseName === "" || baseName === "." || baseName === "..") {
+          return null;
+        }
+
         const filePath = localeFileMap.get(decoded);
         if (!filePath) return null;
+
+        if (!filePath.startsWith(localesDirWithSep)) {
+          return null;
+        }
 
         return { name: decoded, filePath } as const;
       };
 
-      server.middlewares.use(async (req, res, next) => {
-        if (!req.url) return next();
-        if (!req.url.startsWith("/api/locales")) return next();
+      type SendJson = (status: number, body: unknown) => void;
 
-        const url = new URL(req.url, "http://localhost");
-        const method = req.method || "GET";
+      const createSendJson = (res: ServerResponse): SendJson => {
         res.setHeader("Content-Type", "application/json; charset=utf-8");
-
-        const sendJson = (status: number, body: unknown) => {
+        return (status, body) => {
           res.statusCode = status;
           res.end(JSON.stringify(body, null, 2));
         };
+      };
+
+      const fileExists = async (filePath: string): Promise<boolean> => {
+        try {
+          await fsPromises.access(filePath, fs.constants.F_OK);
+          return true;
+        } catch {
+          return false;
+        }
+      };
+
+      type ReadBodyResult =
+        | { ok: true; raw: string }
+        | { ok: false; status: number; error: string };
+
+      const readBodySafe = async (
+        request: IncomingMessage,
+      ): Promise<ReadBodyResult> => {
+        try {
+          const raw = await readRequestBody(request, MAX_BODY_SIZE_BYTES);
+          return { ok: true, raw };
+        } catch (bodyError) {
+          const message = (bodyError as Error).message;
+          if (message === "payload_too_large") {
+            return { ok: false, status: 413, error: "payload_too_large" };
+          }
+          return { ok: false, status: 400, error: "invalid_body_stream" };
+        }
+      };
+
+      type ParsedContentResult =
+        | { ok: true; content: unknown }
+        | { ok: false; status: number; error: string };
+
+      const parseLocalePayload = (raw: string): ParsedContentResult => {
+        try {
+          const body = JSON.parse(raw || "{}") as { content?: unknown };
+          if (!body || typeof body !== "object" || !("content" in body)) {
+            return { ok: false, status: 400, error: "invalid_body" };
+          }
+          return { ok: true, content: body.content };
+        } catch {
+          return { ok: false, status: 400, error: "invalid_json" };
+        }
+      };
+
+      const handleListLocales = (sendJson: SendJson) => {
+        const files = Array.from(allowedFiles);
+        sendJson(200, { files });
+      };
+
+      const handleGetLocale = async (
+        rawName: string,
+        sendJson: SendJson,
+      ): Promise<void> => {
+        const resolved = resolveLocaleFile(rawName);
+        if (!resolved) {
+          sendJson(400, { error: "invalid_file" });
+          return;
+        }
+
+        const { name, filePath } = resolved;
+        if (!(await fileExists(filePath))) {
+          sendJson(404, { error: "not_found" });
+          return;
+        }
+
+        const content = await fsPromises.readFile(filePath, "utf-8");
+        sendJson(200, { name, content: JSON.parse(content) });
+      };
+
+      const handleUpdateLocale = async (
+        request: IncomingMessage,
+        rawName: string,
+        sendJson: SendJson,
+      ): Promise<void> => {
+        const resolved = resolveLocaleFile(rawName);
+        if (!resolved) {
+          sendJson(400, { error: "invalid_file" });
+          return;
+        }
+
+        const readResult = await readBodySafe(request);
+        if (!readResult.ok) {
+          sendJson(readResult.status, { error: readResult.error });
+          return;
+        }
+
+        const parsed = parseLocalePayload(readResult.raw);
+        if (!parsed.ok) {
+          sendJson(parsed.status, { error: parsed.error });
+          return;
+        }
+
+        await fsPromises.writeFile(
+          resolved.filePath,
+          `${JSON.stringify(parsed.content, null, 2)}\n`,
+          "utf-8",
+        );
+        sendJson(200, { status: "ok" });
+      };
+
+      const isLocalesIndexRequest = (url: URL, method: string) => {
+        return method === "GET" && url.pathname === "/api/locales";
+      };
+
+      const isLocaleItemRequest = (url: URL) => {
+        return url.pathname.startsWith("/api/locales/");
+      };
+
+      server.middlewares.use(async (req, res, next) => {
+        if (!req.url) {
+          next();
+          return;
+        }
+
+        if (!req.url.startsWith("/api/locales")) {
+          next();
+          return;
+        }
+
+        const url = new URL(req.url, "http://localhost");
+        const method = req.method || "GET";
+        const sendJson = createSendJson(res);
 
         try {
-          if (method === "GET" && url.pathname === "/api/locales") {
-            const files = Array.from(allowedFiles);
-            return sendJson(200, { files });
+          if (isLocalesIndexRequest(url, method)) {
+            handleListLocales(sendJson);
+            return;
           }
 
-          if (url.pathname.startsWith("/api/locales/") && method === "GET") {
-            const rawName = url.pathname.slice("/api/locales/".length);
-            const resolved = resolveLocaleFile(rawName);
-            if (!resolved) return sendJson(400, { error: "invalid_file" });
-            const { name, filePath } = resolved;
-            try {
-              await fsPromises.access(filePath, fs.constants.F_OK);
-            } catch {
-              return sendJson(404, { error: "not_found" });
-            }
-            const content = await fsPromises.readFile(filePath, "utf-8");
-            return sendJson(200, { name, content: JSON.parse(content) });
+          if (!isLocaleItemRequest(url)) {
+            next();
+            return;
           }
 
-          if (url.pathname.startsWith("/api/locales/") && method === "PUT") {
-            const rawName = url.pathname.slice("/api/locales/".length);
-            const resolved = resolveLocaleFile(rawName);
-            if (!resolved) return sendJson(400, { error: "invalid_file" });
-            const { filePath } = resolved;
-
-            let raw = "";
-            try {
-              raw = await readRequestBody(req, MAX_BODY_SIZE_BYTES);
-            } catch (bodyError) {
-              if ((bodyError as Error).message === "payload_too_large") {
-                return sendJson(413, { error: "payload_too_large" });
-              }
-              return sendJson(400, { error: "invalid_body_stream" });
-            }
-
-            try {
-              const body = JSON.parse(raw || "{}") as { content?: unknown };
-              if (!body || typeof body !== "object" || !("content" in body)) {
-                return sendJson(400, { error: "invalid_body" });
-              }
-              await fsPromises.writeFile(
-                filePath,
-                `${JSON.stringify(body.content, null, 2)}\n`,
-                "utf-8",
-              );
-              return sendJson(200, { status: "ok" });
-            } catch {
-              return sendJson(400, { error: "invalid_json" });
-            }
+          const rawName = url.pathname.slice("/api/locales/".length);
+          if (method === "GET") {
+            await handleGetLocale(rawName, sendJson);
+            return;
           }
 
-          return next();
+          if (method === "PUT") {
+            await handleUpdateLocale(req, rawName, sendJson);
+            return;
+          }
+
+          next();
         } catch {
-          return sendJson(500, {
-            error: "unexpected",
-          });
+          sendJson(500, { error: "unexpected" });
         }
       });
     },

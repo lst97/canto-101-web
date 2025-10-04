@@ -81,7 +81,7 @@ function SidebarProvider({
         _setOpen(openState);
       }
 
-      if (typeof document !== 'undefined') {
+      if (document !== undefined) {
         const cookieSegments = [
           `${SIDEBAR_COOKIE_NAME}=${openState}`,
           'path=/',
@@ -90,8 +90,8 @@ function SidebarProvider({
         ];
 
         if (
-          typeof globalThis.window !== 'undefined' &&
-          window.location.protocol === 'https:'
+          globalThis.window !== undefined &&
+          globalThis.window.location.protocol === 'https:'
         ) {
           cookieSegments.push('Secure');
         }
@@ -119,8 +119,9 @@ function SidebarProvider({
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    globalThis.window.addEventListener('keydown', handleKeyDown);
+    return () =>
+      globalThis.window.removeEventListener('keydown', handleKeyDown);
   }, [toggleSidebar]);
 
   // We add a state so that we can do data-state="expanded" or "collapsed".

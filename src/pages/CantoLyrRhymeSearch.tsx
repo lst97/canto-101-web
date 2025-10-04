@@ -52,7 +52,7 @@ export default function CantoLyrRhymeSearch(): ReactElement {
   const consonants = cantonesePinyinTable.consonants;
   const rhymeRows = chunkArray(cantonesePinyinTable.rhymes, 6).map(group => ({
     start: group[0] ?? '',
-    end: group[group.length - 1] ?? '',
+    end: group.at(-1) ?? '',
     finals: group,
   }));
   const referenceLinks: Array<{ href: string; label: string }> = [

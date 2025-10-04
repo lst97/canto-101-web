@@ -7,7 +7,7 @@ import { Badge } from '../ui/badge.tsx';
 
 const toDomId = (translationKey: string): string => {
   const tail = translationKey.split('.').pop() ?? translationKey;
-  return tail.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+  return tail.replaceAll(/[A-Z]/g, match => `-${match.toLowerCase()}`);
 };
 
 const productItems = [
@@ -53,7 +53,7 @@ export default function ProductsShowcase(): ReactElement {
       return;
     }
     event.preventDefault();
-    let nextIndex = index;
+    let nextIndex;
     if (event.key === 'Home') nextIndex = 0;
     else if (event.key === 'End') nextIndex = productItems.length - 1;
     else {

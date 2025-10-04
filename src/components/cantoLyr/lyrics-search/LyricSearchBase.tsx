@@ -36,7 +36,7 @@ import { Button } from '@/components/ui/button.tsx';
 import { Card, CardContent } from '@/components/ui/card.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { Label } from '@/components/ui/label.tsx';
-import { LoadingIndicator } from '@/components/ui/loading-indicator.tsx';
+import { LoadingIndicator } from '@/components/ui/loading-indicator';
 import { ApiErrorDisplay } from '@/components/errors/ApiErrorDisplay';
 import {
   Accordion,
@@ -335,10 +335,10 @@ export function LyricSearchBase({
       string,
       unknown
     >;
-    Object.keys(defaults).forEach(key => {
+    for (const key of Object.keys(defaults)) {
       const value = defaults[key];
       updateOption(key, value ?? '');
-    });
+    }
   }, [updateOption]);
 
   const handleReset = useCallback(() => {

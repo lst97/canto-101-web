@@ -25,7 +25,7 @@ function SearchableSelect({
   disabled = false,
   loading = false,
   className,
-}: SearchableSelectProps) {
+}: Readonly<SearchableSelectProps>) {
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
   const [debouncedSearch, setDebouncedSearch] = React.useState('');
@@ -70,13 +70,56 @@ function SearchableSelect({
   );
 
   const handleOpenChange = React.useCallback((newOpen: boolean) => {
-    if (!newOpen) {
+    if (newOpen) {
+      setOpen(true);
+    } else {
       // Small delay to allow click events to propagate
       setTimeout(() => setOpen(false), 150);
-    } else {
-      setOpen(true);
     }
   }, []);
+
+  const handleOptionKeyDown = React.useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>, optionValue: string) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        handleSelect(optionValue);
+      }
+    },
+    [handleSelect]
+  );
+
+  let optionsContent: React.ReactNode;
+  if (loading) {
+    optionsContent = (
+      <div className="flex justify-center py-6">
+        <div className="text-sm text-muted-foreground">Loading...</div>
+      </div>
+    );
+  } else if (filteredOptions.length > 0) {
+    optionsContent = filteredOptions.map(option => (
+      <div
+        key={option}
+        className={cn(
+          'flex cursor-pointer items-center justify-between rounded-md px-2 py-1.5 text-sm hover:bg-muted',
+          value === option && 'bg-muted'
+        )}
+        onClick={() => handleSelect(option)}
+        onKeyDown={event => handleOptionKeyDown(event, option)}
+        tabIndex={0}
+        role="option"
+        aria-selected={value === option}
+      >
+        <span className="truncate">{option}</span>
+        {value === option && <CheckIcon className="size-4 text-primary" />}
+      </div>
+    ));
+  } else {
+    optionsContent = (
+      <div className="py-6 text-center text-sm text-muted-foreground">
+        No results found
+      </div>
+    );
+  }
 
   return (
     <Popover open={open} onOpenChange={handleOpenChange}>
@@ -137,35 +180,7 @@ function SearchableSelect({
             onChange={e => setSearch(e.target.value)}
             className="mb-2"
           />
-          <ScrollArea className="h-60">
-            {loading ? (
-              <div className="flex justify-center py-6">
-                <div className="text-sm text-muted-foreground">Loading...</div>
-              </div>
-            ) : filteredOptions.length > 0 ? (
-              filteredOptions.map(option => (
-                <div
-                  key={option}
-                  className={cn(
-                    'flex cursor-pointer items-center justify-between rounded-md px-2 py-1.5 text-sm hover:bg-muted',
-                    value === option && 'bg-muted'
-                  )}
-                  onClick={() => handleSelect(option)}
-                  role="option"
-                  aria-selected={value === option}
-                >
-                  <span className="truncate">{option}</span>
-                  {value === option && (
-                    <CheckIcon className="size-4 text-primary" />
-                  )}
-                </div>
-              ))
-            ) : (
-              <div className="py-6 text-center text-sm text-muted-foreground">
-                No results found
-              </div>
-            )}
-          </ScrollArea>
+          <ScrollArea className="h-60">{optionsContent}</ScrollArea>
         </div>
       </PopoverContent>
     </Popover>

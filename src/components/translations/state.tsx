@@ -21,13 +21,11 @@ export const TranslationEditorProvider = ({
   const isSaving = useTranslationEditorStore(state => state.isSaving);
 
   const requestNavigationConfirmation = useEffectEvent(() => {
-    return window.confirm(LEAVE_WARNING);
+    return globalThis.window.confirm(LEAVE_WARNING);
   });
 
   const beforeUnloadHandler = useEffectEvent((event: BeforeUnloadEvent) => {
     event.preventDefault();
-    event.returnValue = LEAVE_WARNING;
-    return event.returnValue;
   });
 
   useEffect(() => {
@@ -46,7 +44,7 @@ export const TranslationEditorProvider = ({
       event.preventDefault();
       const shouldLeave = requestNavigationConfirmation();
       if (shouldLeave) {
-        window.location.href = href;
+        globalThis.window.location.href = href;
       }
     };
     document.addEventListener('click', handleClick, true);
@@ -58,8 +56,9 @@ export const TranslationEditorProvider = ({
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       beforeUnloadHandler(event);
     };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    globalThis.window.addEventListener('beforeunload', handleBeforeUnload);
+    return () =>
+      globalThis.window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [hasUnsavedChanges, isSaving]);
 
   return <>{children}</>;

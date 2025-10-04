@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -106,8 +106,10 @@ function collectKeys(obj: JSONObject, prefix = ''): Set<string> {
     keys.add(fullKey);
 
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      const nestedKeys = collectKeys(value as JSONObject, fullKey);
-      nestedKeys.forEach(k => keys.add(k));
+      const nestedKeys = collectKeys(value, fullKey);
+      for (const k of nestedKeys) {
+        keys.add(k);
+      }
     }
   }
 
@@ -146,12 +148,16 @@ function compareStructures(
 
   if (missingInTarget.size > 0) {
     console.log('\n❌ Missing keys in target:');
-    missingInTarget.forEach(key => console.log(`  - ${key}`));
+    for (const key of missingInTarget) {
+      console.log(`  - ${key}`);
+    }
   }
 
   if (extraInTarget.size > 0) {
     console.log('\n⚠️  Extra keys in target:');
-    extraInTarget.forEach(key => console.log(`  + ${key}`));
+    for (const key of extraInTarget) {
+      console.log(`  + ${key}`);
+    }
   }
 }
 
@@ -168,7 +174,7 @@ function tryAutoFixJson(content: string): {
   const steps: string[] = [];
 
   // Strip BOM if present
-  if (fixed.charCodeAt(0) === 0xfeff) {
+  if (fixed.codePointAt(0) === 0xfeff) {
     fixed = fixed.slice(1);
     steps.push('Removed BOM');
   }
@@ -189,9 +195,9 @@ function tryAutoFixJson(content: string): {
   }
 
   // Remove trailing commas before } or ]
-  const trailingCommaRegex = /,\s*(\}|\])/g;
+  const trailingCommaRegex = /,\s*([}\]])/g;
   if (trailingCommaRegex.test(fixed)) {
-    fixed = fixed.replace(trailingCommaRegex, '$1');
+    fixed = fixed.replaceAll(trailingCommaRegex, '$1');
     steps.push('Removed trailing commas before } or ]');
   }
 
@@ -202,16 +208,13 @@ function tryAutoFixJson(content: string): {
 
   // Insert missing commas between object properties when a value is followed by a new key on next line
   // Matches: (value)(newline + indent)"key":  -> ensures colon exists to avoid arrays of strings
-  const missingCommaBetweenProps = new RegExp(
-    // value may end with } or ] or a JSON literal/string
-    String.raw`(\}|\]|"[^"\\]*(?:\\.[^"\\])*"|-?\d+(?:\.\d+)?|true|false|null)\s*\n(\s*)(?="[^"\n]+"\s*:)`,
-    'g'
-  );
+  const missingCommaBetweenProps =
+    /(\}|\]|"[^"\\]*(?:\\.[^"\\])*"|-?\d+(?:\.\d+)?|true|false|null)\s*\n(\s*)(?="[^"\n]+"\s*:)/g;
   let prevFixed: string;
   let insertedCommaCount = 0;
   do {
     prevFixed = fixed;
-    fixed = fixed.replace(missingCommaBetweenProps, (_m, v, indent) => {
+    fixed = fixed.replaceAll(missingCommaBetweenProps, (_m, v, indent) => {
       insertedCommaCount++;
       return `${v},\n${indent}`;
     });
@@ -228,7 +231,14 @@ function tryAutoFixJson(content: string): {
   }
 
   // Balance braces/brackets by appending/removing at the end when counts mismatch
-  const count = (s: string, re: RegExp) => (s.match(re) || []).length;
+  const count = (s: string, re: RegExp) => {
+    re.lastIndex = 0; // Reset for safety
+    let count = 0;
+    while (re.exec(s) !== null) {
+      count++;
+    }
+    return count;
+  };
   const openCurly = count(fixed, /\{/g);
   const closeCurly = count(fixed, /\}/g);
   const openSquare = count(fixed, /\[/g);
@@ -242,7 +252,7 @@ function tryAutoFixJson(content: string): {
     const diff = closeCurly - openCurly;
     let removed = 0;
     for (let i = 0; i < diff; i++) {
-      const next = fixed.replace(/\}\s*$/m, '');
+      const next = fixed.replaceAll(/\}\s*$/m, '');
       if (next !== fixed) {
         fixed = next;
         removed++;
@@ -259,7 +269,7 @@ function tryAutoFixJson(content: string): {
     const diff = closeSquare - openSquare;
     let removed = 0;
     for (let i = 0; i < diff; i++) {
-      const next = fixed.replace(/\]\s*$/m, '');
+      const next = fixed.replaceAll(/\]\s*$/m, '');
       if (next !== fixed) {
         fixed = next;
         removed++;
@@ -321,18 +331,18 @@ function backupFile(filePath: string, dryRun: boolean): string {
     const base = path.basename(filePath);
     const stamp = new Date()
       .toISOString()
-      .replace(/[-:]/g, '')
-      .replace('T', '-')
-      .replace(/\..+$/, '');
+      .replaceAll(/[-:]/g, '')
+      .replaceAll('T', '-')
+      .replaceAll(/\..+$/, '');
     return path.join(path.dirname(filePath), `${base}.bak-${stamp}`); // Return path but don't create
   }
   const dir = path.dirname(filePath);
   const base = path.basename(filePath);
   const stamp = new Date()
     .toISOString()
-    .replace(/[-:]/g, '')
-    .replace('T', '-')
-    .replace(/\..+$/, '');
+    .replaceAll(/[-:]/g, '')
+    .replaceAll('T', '-')
+    .replaceAll(/\..+$/, '');
   const backupPath = path.join(dir, `${base}.bak-${stamp}`);
   fs.writeFileSync(backupPath, fs.readFileSync(filePath, 'utf8'), 'utf8');
   return backupPath;
@@ -348,7 +358,7 @@ function deepGet(obj: JSONValue, pathStr: string): JSONValue | undefined {
       typeof acc === 'object' &&
       !Array.isArray(acc)
     ) {
-      acc = (acc as JSONObject)[key];
+      acc = acc[key];
     } else {
       return undefined;
     }
@@ -368,7 +378,7 @@ function deepDelete(obj: JSONValue, pathStr: string): void {
       typeof parent === 'object' &&
       !Array.isArray(parent)
     ) {
-      parent = (parent as JSONObject)[key];
+      parent = parent[key];
     } else {
       parent = undefined;
       break;
@@ -380,7 +390,7 @@ function deepDelete(obj: JSONValue, pathStr: string): void {
     !Array.isArray(parent) &&
     Object.prototype.hasOwnProperty.call(parent, last)
   ) {
-    delete (parent as JSONObject)[last];
+    delete parent[last];
   }
 }
 
@@ -418,30 +428,30 @@ function normalizeStructure(
   if (fixOnly) return false; // Skip normalization if fix-only mode
   let changed = false;
   // Hoist homepage.pron.cantoLyr -> cantoLyr if missing
-  if (!(data as JSONObject).cantoLyr) {
+  if (!data.cantoLyr) {
     const misplaced = deepGet(data, 'homepage.pron.cantoLyr');
     if (misplaced && typeof misplaced === 'object') {
       const backupPath = backupFile(filePath, dryRun);
-      (data as JSONObject).cantoLyr = misplaced as JSONValue;
+      data.cantoLyr = misplaced;
       deepDelete(data, 'homepage.pron.cantoLyr');
       // Clean up empties when safe
-      const homepage = (data as JSONObject).homepage;
+      const homepage = data.homepage;
       if (
         homepage &&
         typeof homepage === 'object' &&
         !Array.isArray(homepage)
       ) {
-        const pron = (homepage as JSONObject).pron as JSONValue | undefined;
+        const pron = homepage.pron;
         if (
           pron &&
           typeof pron === 'object' &&
           !Array.isArray(pron) &&
-          Object.keys(pron as JSONObject).length === 0
+          Object.keys(pron).length === 0
         ) {
-          delete (homepage as JSONObject).pron;
+          delete homepage.pron;
         }
-        if (Object.keys(homepage as JSONObject).length === 0) {
-          delete (data as JSONObject).homepage;
+        if (Object.keys(homepage).length === 0) {
+          delete data.homepage;
         }
       }
       if (!dryRun) {
@@ -463,26 +473,20 @@ function normalizeStructure(
   const homepageCanto = deepGet(data, 'homepage.cantoLyr');
   if (homepageCanto && typeof homepageCanto === 'object') {
     const backupPath = backupFile(filePath, dryRun);
-    if (
-      (data as JSONObject).cantoLyr &&
-      typeof (data as JSONObject).cantoLyr === 'object'
-    ) {
-      (data as JSONObject).cantoLyr = deepMerge(
-        (data as JSONObject).cantoLyr as JSONValue,
-        homepageCanto as JSONValue
-      ) as JSONValue;
+    if (data.cantoLyr && typeof data.cantoLyr === 'object') {
+      data.cantoLyr = deepMerge(data.cantoLyr, homepageCanto);
     } else {
-      (data as JSONObject).cantoLyr = homepageCanto as JSONValue;
+      data.cantoLyr = homepageCanto;
     }
     deepDelete(data, 'homepage.cantoLyr');
-    const homepage = (data as JSONObject).homepage as JSONValue | undefined;
+    const homepage = data.homepage;
     if (
       homepage &&
       typeof homepage === 'object' &&
       !Array.isArray(homepage) &&
-      Object.keys(homepage as JSONObject).length === 0
+      Object.keys(homepage).length === 0
     ) {
-      delete (data as JSONObject).homepage;
+      delete data.homepage;
     }
     if (!dryRun) {
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
@@ -539,7 +543,7 @@ function validateLocales(flags: {
   try {
     // Read reference file (source of truth)
     const referenceContent = fs.readFileSync(referencePath, 'utf8');
-    const reference = JSON.parse(referenceContent) as JSONObject;
+    const reference = JSON.parse(referenceContent);
 
     console.log(
       `📋 Using ${sourceFile} as the source of truth for structure validation.\n`
@@ -563,7 +567,7 @@ function validateLocales(flags: {
       const filePath = path.join(localesDir, file);
       try {
         const content = fs.readFileSync(filePath, 'utf8');
-        const data = JSON.parse(content) as JSONObject;
+        const data = JSON.parse(content);
         // Normalize common structural mistakes
         normalizeStructure(file, data, filePath, flags.dryRun, flags.fixOnly);
         compareStructures(reference, data, file, flags.source);

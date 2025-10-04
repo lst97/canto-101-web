@@ -27,7 +27,7 @@ export function ContainerTextFlip({
   animationDuration = 700,
   renderContent,
   widthPadding = 10,
-}: ContainerTextFlipProps) {
+}: Readonly<ContainerTextFlipProps>) {
   const id = useId();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [width, setWidth] = useState(widthPadding);
@@ -99,7 +99,7 @@ export function ContainerTextFlip({
           <motion.div className="inline-block">
             {words[currentWordIndex].split('').map((letter, index) => (
               <motion.span
-                key={index}
+                key={`${words[currentWordIndex]}-${index}`}
                 initial={{
                   opacity: 0,
                   filter: 'blur(10px)',

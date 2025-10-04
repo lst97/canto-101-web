@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { type QueryKey, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ZodError } from 'zod';
 
-import { api } from '../lib/api.ts';
+import { api, AppUnexpectedError } from '../lib/api.ts';
 import type { AppError } from '../types/errors.ts';
 import {
   LyricPronunciationSearchResponseSchema,
@@ -236,11 +236,10 @@ async function fetchLyricSearch(
     return schema.parse(response.data);
   } catch (error) {
     if (error instanceof ZodError) {
-      throw {
-        kind: 'unexpected',
-        message: 'Invalid server response',
-        cause: error,
-      } satisfies AppError;
+      throw new AppUnexpectedError(
+        'cantoLyr.errors.lyrics.invalidResponse',
+        error
+      );
     }
     throw error;
   }
@@ -276,10 +275,9 @@ export function useAiLyricSearch(
     queryKey: baseQueryKey,
     queryFn: () => {
       if (!submitted) {
-        throw {
-          message: 'Query attempted without snapshot',
-          kind: 'unexpected',
-        } as NormalizedQueryError;
+        throw new AppUnexpectedError(
+          'cantoLyr.errors.lyrics.queryWithoutSnapshot'
+        );
       }
       return fetchLyricSearch(kind, submitted);
     },
@@ -328,7 +326,7 @@ export function useAiLyricSearch(
     setPageState(0);
     setQuery('');
     setOptions(createDefaultOptions(kind));
-    void queryClient.removeQueries({ queryKey: [QUERY_KEY_PREFIX, kind] });
+    queryClient.removeQueries({ queryKey: [QUERY_KEY_PREFIX, kind] });
   }, [kind, queryClient, setQuery]);
 
   const setPage = useCallback(
@@ -351,7 +349,7 @@ export function useAiLyricSearch(
           };
           setValidationError(null);
           setPageState(nextPageValue);
-          void queryClient.prefetchQuery({
+          queryClient.prefetchQuery({
             queryKey: createQueryKey(kind, nextSnapshot),
             queryFn: () => fetchLyricSearch(kind, nextSnapshot),
           });

@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button.tsx';
 import { Card, CardContent } from '@/components/ui/card.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { Label } from '@/components/ui/label.tsx';
-import { LoadingIndicator } from '@/components/ui/loading-indicator.tsx';
+import { LoadingIndicator } from '@/components/ui/loading-indicator';
 
 interface DetailEntry {
   label: string;

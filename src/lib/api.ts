@@ -28,6 +28,41 @@ export interface NormalizedApiError {
   cause?: unknown;
 }
 
+function formatMessageValue(value: unknown): string | undefined {
+  if (value === null || value === undefined) {
+    return undefined;
+  }
+  if (typeof value === 'string') {
+    return value;
+  }
+  if (typeof value === 'number' || typeof value === 'boolean') {
+    return String(value);
+  }
+  if (Array.isArray(value)) {
+    const segments = value
+      .map(item => formatMessageValue(item))
+      .filter(
+        (segment): segment is string =>
+          typeof segment === 'string' && segment.length > 0
+      );
+    return segments.length > 0 ? segments.join('; ') : undefined;
+  }
+  if (typeof value === 'object') {
+    const record = value as Record<string, unknown>;
+    const nested = formatMessageValue(record.message);
+    if (nested) {
+      return nested;
+    }
+    try {
+      const serialized = JSON.stringify(value);
+      return serialized === '{}' ? undefined : serialized;
+    } catch {
+      return undefined;
+    }
+  }
+  return undefined;
+}
+
 function extractMessage(data: unknown): string | undefined {
   if (typeof data === 'string') {
     return data;
@@ -67,16 +102,18 @@ function extractMessage(data: unknown): string | undefined {
       return errorValue;
     }
     if (typeof errorValue === 'object' && errorValue !== null) {
-      const nestedMessage = (errorValue as Record<string, unknown>).message;
+      const nestedMessage = formatMessageValue(
+        (errorValue as Record<string, unknown>).message
+      );
       if (nestedMessage !== undefined) {
-        return String(nestedMessage);
+        return nestedMessage;
       }
     }
 
     // Check for direct message field
-    const messageValue = record.message;
+    const messageValue = formatMessageValue(record.message);
     if (messageValue !== undefined) {
-      return String(messageValue);
+      return messageValue;
     }
 
     // Check if the entire response is an error object
@@ -85,21 +122,10 @@ function extractMessage(data: unknown): string | undefined {
         return record.message;
       }
       if (Array.isArray(record.message)) {
-        return record.message
-          .map(m => {
-            if (typeof m === 'string') return m;
-            if (typeof m === 'object' && m !== null && 'message' in m) {
-              const value = (m as { message?: unknown }).message;
-              return typeof value === 'string'
-                ? value
-                : value !== undefined
-                  ? String(value)
-                  : '';
-            }
-            return String(m);
-          })
-          .filter(segment => segment.length > 0)
-          .join('; ');
+        const segments = record.message
+          .map(m => formatMessageValue(m))
+          .filter((segment): segment is string => typeof segment === 'string');
+        return segments.length > 0 ? segments.join('; ') : undefined;
       }
     }
   }

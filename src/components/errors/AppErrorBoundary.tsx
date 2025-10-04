@@ -10,6 +10,12 @@ export interface AppErrorBoundaryProps {
   fallback?: ReactNode;
 }
 
+interface AppErrorBoundaryFallbackRenderProps {
+  error: unknown;
+  resetErrorBoundary: () => void;
+  fallback?: ReactNode;
+}
+
 function DefaultFallback({
   error,
   reset,
@@ -22,11 +28,14 @@ function DefaultFallback({
   const titleKey = isApp
     ? `errors.${error.kind}.title`
     : 'errors.unexpected.title';
-  const message = isApp
-    ? error.message
-    : error instanceof Error
-      ? error.message
-      : String(error);
+  let message: string;
+  if (isApp) {
+    message = error.message;
+  } else if (error instanceof Error) {
+    message = error.message;
+  } else {
+    message = String(error);
+  }
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div
@@ -65,17 +74,31 @@ function AppErrorBoundaryFallback({
   return <DefaultFallback error={error} reset={reset} />;
 }
 
+function AppErrorBoundaryFallbackRender({
+  error,
+  resetErrorBoundary,
+  fallback,
+}: Readonly<AppErrorBoundaryFallbackRenderProps>): Readonly<ReactElement> {
+  return (
+    <AppErrorBoundaryFallback
+      error={error}
+      reset={resetErrorBoundary}
+      fallback={fallback}
+    />
+  );
+}
+
 export function AppErrorBoundary({
   children,
   onHardReset,
   fallback,
-}: AppErrorBoundaryProps): ReactElement {
+}: Readonly<AppErrorBoundaryProps>): ReactElement {
   return (
     <ErrorBoundary
       fallbackRender={({ error, resetErrorBoundary }) => (
-        <AppErrorBoundaryFallback
+        <AppErrorBoundaryFallbackRender
           error={error}
-          reset={resetErrorBoundary}
+          resetErrorBoundary={resetErrorBoundary}
           fallback={fallback}
         />
       )}

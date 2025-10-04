@@ -73,7 +73,7 @@ export function LyricSearchBase({
   resultsLabelKey,
   filterFields,
   inputProps,
-}: LyricSearchBaseProps): ReactElement {
+}: Readonly<LyricSearchBaseProps>): ReactElement {
   const { t } = useTranslation();
   const {
     query,
@@ -422,11 +422,7 @@ export function LyricSearchBase({
                 processingTimeMs={processingTimeMs}
               />
             )}
-            <div
-              className="space-y-4"
-              role="region"
-              aria-label={resultsAriaLabel}
-            >
+            <section className="space-y-4" aria-label={resultsAriaLabel}>
               {entries.map(line => (
                 <LyricResultCard
                   key={line.id}
@@ -439,7 +435,7 @@ export function LyricSearchBase({
                   {t('cantoLyr.lyricSearch.messages.noMatches')}
                 </p>
               )}
-            </div>
+            </section>
             {hasMore && (
               <Button
                 type="button"

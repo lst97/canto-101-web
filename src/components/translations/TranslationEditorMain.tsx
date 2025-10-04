@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { Activity, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,154 @@ import { CheckCircle, File, RefreshCcw, RotateCcw, Save } from 'lucide-react';
 import { BreadcrumbForKey, FlagIcon } from './components';
 import { FLAG_COMPONENTS, SUPPORTED_LANGUAGES } from './constants';
 import { useTranslationEditor } from './useTranslationEditor';
+
+interface ValidationSummaryProps {
+  sourceOfTruth: string;
+  validationByLanguage: Record<string, { missing: string[]; extra: string[] }>;
+  setSelectedKey: (key: string) => void;
+}
+
+function ValidationSummary({
+  sourceOfTruth,
+  validationByLanguage,
+  setSelectedKey,
+}: Readonly<ValidationSummaryProps>): Readonly<ReactElement> {
+  const focusLanguageInput = (
+    languageCode: string,
+    targetKey: string
+  ): void => {
+    setSelectedKey(targetKey);
+    setTimeout(() => {
+      const input = document.getElementById(
+        `input-${languageCode}-${targetKey}`
+      );
+      if (input instanceof HTMLInputElement) {
+        input.focus();
+        return;
+      }
+
+      const fallback = document.querySelector(
+        `[id^="input-${languageCode}-"][id$="-${CSS.escape(targetKey)}"]`
+      );
+      if (fallback instanceof HTMLInputElement) {
+        fallback.focus();
+      }
+    }, 0);
+  };
+
+  const hasIssues = Object.values(validationByLanguage).some(
+    ({ missing, extra }) => missing.length > 0 || extra.length > 0
+  );
+
+  if (!hasIssues) {
+    return (
+      <div className="text-center py-4 text-muted-foreground">
+        <CheckCircle className="h-8 w-8 mx-auto mb-2 text-green-500" />
+        <p>All languages are in sync with the source of truth.</p>
+      </div>
+    );
+  }
+
+  return (
+    <Accordion type="multiple" className="w-full space-y-2">
+      {SUPPORTED_LANGUAGES.filter(
+        language => language.code !== sourceOfTruth
+      ).map(({ code, name }) => {
+        const Flag = FLAG_COMPONENTS[code];
+        const validation = validationByLanguage[code] ?? {
+          missing: [],
+          extra: [],
+        };
+        const issues = validation.missing.length + validation.extra.length;
+
+        return (
+          <AccordionItem key={code} value={code} className="border rounded-lg">
+            <AccordionTrigger className="px-4 py-3 hover:no-underline">
+              <div className="flex items-center gap-2">
+                <FlagIcon component={Flag} className="w-5 h-3" />
+                <span className="font-medium">
+                  {name} ({code}.json)
+                </span>
+                <Badge
+                  className={
+                    issues === 0
+                      ? 'bg-[var(--success)] text-[var(--success-foreground)] border-[var(--success)]'
+                      : 'bg-secondary text-secondary-foreground border border-gray-400'
+                  }
+                >
+                  {issues === 0 ? (
+                    <>
+                      <CheckCircle className="h-3 w-3 mr-1" />
+                      PASS
+                    </>
+                  ) : (
+                    `${issues} issues`
+                  )}
+                </Badge>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-4 pb-4">
+              <div className="space-y-4">
+                {validation.missing.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Badge className="bg-[var(--error)] text-[var(--error-foreground)] text-xs">
+                        Missing: {validation.missing.length}
+                      </Badge>
+                    </div>
+                    <div className="h-40 w-full rounded border p-2 overflow-auto">
+                      <div className="space-y-2">
+                        {validation.missing.map(key => (
+                          <div
+                            key={key}
+                            className="flex items-center justify-between bg-red-50 dark:bg-red-900/20 p-2 rounded border"
+                          >
+                            <code className="text-sm font-mono flex-1 mr-2 break-all">
+                              {key}
+                            </code>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => focusLanguageInput(code, key)}
+                              className="h-7 px-2 shrink-0"
+                            >
+                              Add
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {validation.extra.length > 0 && (
+                  <div className="space-y-2">
+                    <Badge className="bg-[var(--warning)] text-[var(--warning-foreground)] text-xs">
+                      Extra: {validation.extra.length}
+                    </Badge>
+                    <div className="h-40 w-full rounded border p-2 overflow-auto">
+                      <div className="space-y-2">
+                        {validation.extra.map(key => (
+                          <div
+                            key={key}
+                            className="flex items-center justify-between bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded border"
+                          >
+                            <code className="text-sm font-mono flex-1 mr-2 break-all">
+                              {key}
+                            </code>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        );
+      })}
+    </Accordion>
+  );
+}
 
 export const TranslationEditorMain = () => {
   const {
@@ -48,12 +197,12 @@ export const TranslationEditorMain = () => {
     const preferredLang = SUPPORTED_LANGUAGES[0]?.code;
     const input = document.getElementById(
       `input-${preferredLang}-${selectedKey}`
-    ) as HTMLInputElement | null;
+    );
     (
       input ??
-      (document.querySelector(
+      document.querySelector(
         `[id^="input-"][id$="-${CSS.escape(selectedKey)}"]`
-      ) as HTMLInputElement | null)
+      )
     )?.focus?.();
   }, [selectedKey]);
 
@@ -106,137 +255,11 @@ export const TranslationEditorMain = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {(() => {
-                  const hasIssues = Object.values(validationByLanguage).some(
-                    ({ missing, extra }) =>
-                      missing.length > 0 || extra.length > 0
-                  );
-                  if (!hasIssues) {
-                    return (
-                      <div className="text-center py-4 text-muted-foreground">
-                        <CheckCircle className="h-8 w-8 mx-auto mb-2 text-green-500" />
-                        <p>
-                          All languages are in sync with the source of truth.
-                        </p>
-                      </div>
-                    );
-                  }
-                  return (
-                    <Accordion type="multiple" className="w-full space-y-2">
-                      {SUPPORTED_LANGUAGES.filter(
-                        l => l.code !== sourceOfTruth
-                      ).map(({ code, name }) => {
-                        const Flag = FLAG_COMPONENTS[code];
-                        const v = validationByLanguage[code] ?? {
-                          missing: [],
-                          extra: [],
-                        };
-                        const issues = v.missing.length + v.extra.length;
-                        return (
-                          <AccordionItem
-                            key={code}
-                            value={code}
-                            className="border rounded-lg"
-                          >
-                            <AccordionTrigger className="px-4 py-3 hover:no-underline">
-                              <div className="flex items-center gap-2">
-                                <FlagIcon
-                                  component={Flag}
-                                  className="w-5 h-3"
-                                />
-                                <span className="font-medium">
-                                  {name} ({code}.json)
-                                </span>
-                                <Badge
-                                  className={
-                                    issues === 0
-                                      ? 'bg-[var(--success)] text-[var(--success-foreground)] border-[var(--success)]'
-                                      : 'bg-secondary text-secondary-foreground border border-gray-400'
-                                  }
-                                >
-                                  {issues === 0 ? (
-                                    <>
-                                      <CheckCircle className="h-3 w-3 mr-1" />
-                                      PASS
-                                    </>
-                                  ) : (
-                                    `${issues} issues`
-                                  )}
-                                </Badge>
-                              </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="px-4 pb-4">
-                              <div className="space-y-4">
-                                {v.missing.length > 0 && (
-                                  <div className="space-y-2">
-                                    <div className="flex items-center gap-2">
-                                      <Badge className="bg-[var(--error)] text-[var(--error-foreground)] text-xs">
-                                        Missing: {v.missing.length}
-                                      </Badge>
-                                    </div>
-                                    <div className="h-40 w-full rounded border p-2 overflow-auto">
-                                      <div className="space-y-2">
-                                        {v.missing.map(key => (
-                                          <div
-                                            key={key}
-                                            className="flex items-center justify-between bg-red-50 dark:bg-red-900/20 p-2 rounded border"
-                                          >
-                                            <code className="text-sm font-mono flex-1 mr-2 break-all">
-                                              {key}
-                                            </code>
-                                            <Button
-                                              size="sm"
-                                              variant="outline"
-                                              onClick={() => {
-                                                // navigate to key and focus input of that language
-                                                setSelectedKey(key);
-                                                setTimeout(() => {
-                                                  const input =
-                                                    document.getElementById(
-                                                      `input-${code}-${key}`
-                                                    ) as HTMLInputElement | null;
-                                                  input?.focus?.();
-                                                }, 0);
-                                              }}
-                                              className="h-7 px-2 shrink-0"
-                                            >
-                                              Add
-                                            </Button>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-                                {v.extra.length > 0 && (
-                                  <div className="space-y-2">
-                                    <Badge className="bg-[var(--warning)] text-[var(--warning-foreground)] text-xs">
-                                      Extra: {v.extra.length}
-                                    </Badge>
-                                    <div className="h-40 w-full rounded border p-2 overflow-auto">
-                                      <div className="space-y-2">
-                                        {v.extra.map(key => (
-                                          <div
-                                            key={key}
-                                            className="flex items-center justify-between bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded border"
-                                          >
-                                            <code className="text-sm font-mono flex-1 mr-2 break-all">
-                                              {key}
-                                            </code>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            </AccordionContent>
-                          </AccordionItem>
-                        );
-                      })}
-                    </Accordion>
-                  );
-                })()}
+                <ValidationSummary
+                  sourceOfTruth={sourceOfTruth}
+                  validationByLanguage={validationByLanguage}
+                  setSelectedKey={setSelectedKey}
+                />
               </CardContent>
             </Card>
 
@@ -285,10 +308,10 @@ export const TranslationEditorMain = () => {
                                   commitEditedKey(code, selectedKey)
                                 }
                                 className={
-                                  editedTranslations[code]?.[selectedKey] !==
+                                  editedTranslations[code]?.[selectedKey] ===
                                   translations[code]?.[selectedKey]
-                                    ? 'border-orange-500'
-                                    : ''
+                                    ? ''
+                                    : 'border-orange-500'
                                 }
                               />
                               {editedTranslations[code]?.[selectedKey] !==

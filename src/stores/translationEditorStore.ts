@@ -110,18 +110,19 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
     sourceOfTruth: 'zh',
     isSaving: false,
     hydrateFromStorage: () => {
-      if (typeof globalThis.window === 'undefined') return;
+      if (globalThis.window === undefined) return;
       let selectedKey: string | null = null;
       const expanded = new Set<string>();
       try {
-        selectedKey = window.localStorage.getItem(LS_SELECTED_KEY);
-        const storedExpanded = window.localStorage.getItem(LS_EXPANDED_NODES);
+        selectedKey = globalThis.window.localStorage.getItem(LS_SELECTED_KEY);
+        const storedExpanded =
+          globalThis.window.localStorage.getItem(LS_EXPANDED_NODES);
         if (storedExpanded) {
           const parsed = JSON.parse(storedExpanded) as unknown;
           if (Array.isArray(parsed)) {
-            parsed.forEach(value => {
+            for (const value of parsed) {
               if (typeof value === 'string') expanded.add(value);
-            });
+            }
           }
         }
       } catch {
@@ -150,14 +151,15 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
       const selectedKeyChanged = state.selectedKey !== key;
       const expandedChanged = !setsAreEqual(nextExpanded, state.expandedNodes);
       if (!selectedKeyChanged && !expandedChanged) return;
-      if (typeof globalThis.window !== 'undefined') {
+      if (globalThis.window !== undefined) {
         try {
           if (selectedKeyChanged) {
-            if (key) window.localStorage.setItem(LS_SELECTED_KEY, key);
-            else window.localStorage.removeItem(LS_SELECTED_KEY);
+            if (key) {
+              globalThis.window.localStorage.setItem(LS_SELECTED_KEY, key);
+            } else globalThis.window.localStorage.removeItem(LS_SELECTED_KEY);
           }
           if (expandedChanged) {
-            window.localStorage.setItem(
+            globalThis.window.localStorage.setItem(
               LS_EXPANDED_NODES,
               JSON.stringify(Array.from(nextExpanded))
             );
@@ -176,9 +178,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
           ? (input as ExpandedNodesUpdater)(base)
           : new Set(input as Set<string>);
       if (setsAreEqual(result, state.expandedNodes)) return;
-      if (typeof globalThis.window !== 'undefined') {
+      if (globalThis.window !== undefined) {
         try {
-          window.localStorage.setItem(
+          globalThis.window.localStorage.setItem(
             LS_EXPANDED_NODES,
             JSON.stringify(Array.from(result))
           );
@@ -198,9 +200,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
         ? new Set<string>()
         : new Set(folderPaths);
       if (setsAreEqual(nextExpanded, state.expandedNodes)) return;
-      if (typeof globalThis.window !== 'undefined') {
+      if (globalThis.window !== undefined) {
         try {
-          window.localStorage.setItem(
+          globalThis.window.localStorage.setItem(
             LS_EXPANDED_NODES,
             JSON.stringify(Array.from(nextExpanded))
           );
@@ -221,9 +223,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
       }
       set(state => {
         const value = state.editedTranslations[language]?.[key] ?? '';
-        const langMap = { ...(state.pendingTranslations[language] ?? {}) };
-        if (value !== '') langMap[key] = value;
-        else delete langMap[key];
+        const langMap = { ...state.pendingTranslations[language] };
+        if (value === '') delete langMap[key];
+        else langMap[key] = value;
         return {
           pendingTranslations: {
             ...state.pendingTranslations,
@@ -239,7 +241,7 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
             editedTranslations: {
               ...state.editedTranslations,
               [language]: {
-                ...(state.editedTranslations[language] ?? {}),
+                ...state.editedTranslations[language],
                 [key]: value,
               },
             },
@@ -279,20 +281,20 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
         const nextTranslations: TranslationsMap = { ...state.translations };
         const nextEdited: TranslationsMap = { ...state.editedTranslations };
         const nextPending: TranslationsMap = { ...state.pendingTranslations };
-        SUPPORTED_LANGUAGES.forEach(({ code }) => {
+        for (const { code } of SUPPORTED_LANGUAGES) {
           nextTranslations[code] = {
-            ...(nextTranslations[code] ?? {}),
+            ...nextTranslations[code],
             [trimmedKey]: '',
           };
           nextEdited[code] = {
-            ...(nextEdited[code] ?? {}),
+            ...nextEdited[code],
             [trimmedKey]: '',
           };
           nextPending[code] = {
-            ...(nextPending[code] ?? {}),
+            ...nextPending[code],
             [trimmedKey]: '',
           };
-        });
+        }
         return {
           translations: nextTranslations,
           editedTranslations: nextEdited,
@@ -307,17 +309,17 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
         const nextTranslations: TranslationsMap = { ...state.translations };
         const nextEdited: TranslationsMap = { ...state.editedTranslations };
         const nextPending: TranslationsMap = { ...state.pendingTranslations };
-        SUPPORTED_LANGUAGES.forEach(({ code }) => {
-          const updatedTranslations = { ...(nextTranslations[code] ?? {}) };
-          const updatedEdited = { ...(nextEdited[code] ?? {}) };
-          const updatedPending = { ...(nextPending[code] ?? {}) };
+        for (const { code } of SUPPORTED_LANGUAGES) {
+          const updatedTranslations = { ...nextTranslations[code] };
+          const updatedEdited = { ...nextEdited[code] };
+          const updatedPending = { ...nextPending[code] };
           delete updatedTranslations[keyToDelete];
           delete updatedEdited[keyToDelete];
           delete updatedPending[keyToDelete];
           nextTranslations[code] = updatedTranslations;
           nextEdited[code] = updatedEdited;
           nextPending[code] = updatedPending;
-        });
+        }
         return {
           translations: nextTranslations,
           editedTranslations: nextEdited,
@@ -347,13 +349,13 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
       }
       set(state => {
         const updatedTranslations = {
-          ...(state.translations[targetLanguage] ?? {}),
+          ...state.translations[targetLanguage],
         };
         const updatedEdited = {
-          ...(state.editedTranslations[targetLanguage] ?? {}),
+          ...state.editedTranslations[targetLanguage],
         };
         const updatedPending = {
-          ...(state.pendingTranslations[targetLanguage] ?? {}),
+          ...state.pendingTranslations[targetLanguage],
         };
         delete updatedTranslations[key];
         delete updatedEdited[key];
@@ -385,9 +387,9 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
         const { editedTranslations, sourceOfTruth, translations } = get();
         const edited = editedTranslations[code];
         const nested = unflattenObject(edited);
-        const sourceFlat = translations[sourceOfTruth] ?? {};
+        const sourceFlat = translations[sourceOfTruth];
         const sourceKeys = new Set(Object.keys(sourceFlat));
-        const targetKeys = new Set(Object.keys(edited ?? {}));
+        const targetKeys = new Set(Object.keys(edited));
         const missing = [...sourceKeys].filter(k => !targetKeys.has(k));
         const extra = [...targetKeys].filter(k => !sourceKeys.has(k));
         if (missing.length > 0 || extra.length > 0) {
@@ -469,16 +471,16 @@ export const useTranslationEditorStore = create<TranslationEditorStore>(
 );
 
 const computeBuildTree = (state: TranslationEditorState): TreeNode[] => {
-  const sourceFlat = state.translations[state.sourceOfTruth] ?? {};
+  const sourceFlat = state.translations[state.sourceOfTruth];
   const keys = Object.keys(sourceFlat);
   const nodeMap = new Map<string, TreeNode>();
 
-  keys.forEach(key => {
+  for (const key of keys) {
     const parts = key.split('.');
     let currentPath = '';
-    parts.forEach((part, index) => {
+    for (const part of parts) {
       const path = currentPath ? `${currentPath}.${part}` : part;
-      const isLeaf = index === parts.length - 1;
+      const isLeaf = parts.length === 1;
       if (!nodeMap.has(path)) {
         nodeMap.set(path, {
           name: part,
@@ -488,11 +490,11 @@ const computeBuildTree = (state: TranslationEditorState): TreeNode[] => {
         });
       }
       currentPath = path;
-    });
-  });
+    }
+  }
 
   const rootNodes: TreeNode[] = [];
-  nodeMap.forEach((node, path) => {
+  for (const [path, node] of nodeMap) {
     if (path.includes('.')) {
       const parentPath = path.substring(0, path.lastIndexOf('.'));
       const parent = nodeMap.get(parentPath);
@@ -500,17 +502,17 @@ const computeBuildTree = (state: TranslationEditorState): TreeNode[] => {
     } else {
       rootNodes.push(node);
     }
-  });
+  }
 
   const sortNodes = (nodes: TreeNode[]): TreeNode[] =>
     nodes
-      .sort((a, b) =>
-        a.isLeaf !== b.isLeaf
-          ? a.isLeaf
-            ? 1
-            : -1
-          : a.name.localeCompare(b.name)
-      )
+      .toSorted((a, b) => {
+        if (a.isLeaf === b.isLeaf) {
+          return a.name.localeCompare(b.name);
+        } else {
+          return a.isLeaf ? -1 : 1;
+        }
+      })
       .map(node => ({
         ...node,
         children: node.children ? sortNodes(node.children) : undefined,
@@ -527,7 +529,7 @@ const computeFilteredTree = (state: TranslationEditorState): TreeNode[] => {
 
   const leafMatches = (path: string): boolean => {
     if (textMatchCache.has(path)) return textMatchCache.get(path) ?? false;
-    const src = state.pendingTranslations[state.sourceOfTruth] ?? {};
+    const src = state.pendingTranslations[state.sourceOfTruth];
     const prefix = path ? `${path}.` : '';
     const checkPaths = Object.keys(src).filter(
       k => k === path || k.startsWith(prefix)
@@ -535,7 +537,7 @@ const computeFilteredTree = (state: TranslationEditorState): TreeNode[] => {
     let match = false;
     if (state.searchMode === 'text') {
       for (const { code } of SUPPORTED_LANGUAGES) {
-        const flat = state.pendingTranslations[code] ?? {};
+        const flat = state.pendingTranslations[code];
         for (const key of checkPaths) {
           const value = (flat[key] ?? '').toLowerCase();
           if (value.includes(term)) {
@@ -576,12 +578,12 @@ const computeAllFolderPaths = (state: TranslationEditorState): string[] => {
   const filteredTree = computeFilteredTree(state);
   const paths: string[] = [];
   const collect = (nodes: TreeNode[]) => {
-    nodes.forEach(node => {
+    for (const node of nodes) {
       if (!node.isLeaf) {
         paths.push(node.fullPath);
         if (node.children) collect(node.children);
       }
-    });
+    }
   };
   collect(filteredTree);
   return paths;
@@ -590,12 +592,12 @@ const computeAllFolderPaths = (state: TranslationEditorState): string[] => {
 const computeValidationByLanguage = (
   state: TranslationEditorState
 ): ValidationSummary => {
-  const sourceFlat = state.pendingTranslations[state.sourceOfTruth] ?? {};
+  const sourceFlat = state.pendingTranslations[state.sourceOfTruth];
   const sourceKeys = new Set(Object.keys(sourceFlat));
   const result: ValidationSummary = {};
   for (const { code } of SUPPORTED_LANGUAGES) {
     if (code === state.sourceOfTruth) continue;
-    const targetFlat = state.pendingTranslations[code] ?? {};
+    const targetFlat = state.pendingTranslations[code];
     const targetKeys = new Set(Object.keys(targetFlat));
     const missing = [...sourceKeys].filter(key => !targetKeys.has(key));
     const extra = [...targetKeys].filter(key => !sourceKeys.has(key));
@@ -608,8 +610,8 @@ const computeHasChanges = (
   state: TranslationEditorState,
   language: string
 ): boolean => {
-  const original = state.translations[language] ?? {};
-  const edited = state.editedTranslations[language] ?? {};
+  const original = state.translations[language];
+  const edited = state.editedTranslations[language];
   const keys = new Set([...Object.keys(original), ...Object.keys(edited)]);
   for (const key of keys) {
     if (edited[key] !== original[key]) return true;

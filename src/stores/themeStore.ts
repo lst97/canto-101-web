@@ -11,7 +11,7 @@ interface ThemeState {
 }
 
 const getSystemTheme = (): 'light' | 'dark' => {
-  if (typeof globalThis.window === 'undefined') return 'light';
+  if (globalThis.window === undefined) return 'light';
   return globalThis.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light';
@@ -55,7 +55,7 @@ export const useThemeStore = create<ThemeState>()(
 );
 
 // Initialize theme on client side
-if (typeof globalThis.window !== 'undefined') {
+if (globalThis.window !== undefined) {
   const store = useThemeStore.getState();
   const resolvedTheme =
     store.theme === 'system' ? getSystemTheme() : store.theme;

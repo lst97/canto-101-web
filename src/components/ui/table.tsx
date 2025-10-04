@@ -1,21 +1,7 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '../../lib/utils.ts';
-
-const Table = React.forwardRef<
-  HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(function Table({ className, ...props }, ref) {
-  return (
-    <div className="relative w-full overflow-auto">
-      <table
-        ref={ref}
-        className={cn('w-full caption-bottom text-sm', className)}
-        {...props}
-      />
-    </div>
-  );
-});
 
 const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
@@ -23,6 +9,54 @@ const TableHeader = React.forwardRef<
 >(function TableHeader({ className, ...props }, ref) {
   return (
     <thead ref={ref} className={cn('[&_tr]:border-b', className)} {...props} />
+  );
+});
+
+const containsHeaderElement = (node: React.ReactNode): boolean => {
+  return React.Children.toArray(node).some(child => {
+    if (!React.isValidElement(child)) return false;
+    if (child.type === 'thead' || child.type === TableHeader) {
+      return true;
+    }
+    const childProps = child.props as { children?: React.ReactNode };
+    if (childProps.children) {
+      return containsHeaderElement(childProps.children);
+    }
+    return false;
+  });
+};
+
+const Table = React.forwardRef<
+  HTMLTableElement,
+  React.HTMLAttributes<HTMLTableElement>
+>(function Table({ className, children, ...props }, ref) {
+  const { t } = useTranslation();
+  const hasHeader = React.useMemo(
+    () => containsHeaderElement(children),
+    [children]
+  );
+
+  return (
+    <div className="relative w-full overflow-auto">
+      <table
+        ref={ref}
+        className={cn('w-full caption-bottom text-sm', className)}
+        {...props}
+      >
+        {hasHeader ? (
+          children
+        ) : (
+          <>
+            <thead className="sr-only">
+              <tr>
+                <th scope="col">{t('table.fallbackHeader')}</th>
+              </tr>
+            </thead>
+            {children}
+          </>
+        )}
+      </table>
+    </div>
   );
 });
 

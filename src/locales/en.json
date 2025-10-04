@@ -47,17 +47,30 @@
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
-    "system": "System",
-    "switchTheme": "Toggle theme"
+    "system": "System"
   },
   "nav": {
     "title": "Canto101",
     "links": {
       "programOverview": "Overview",
-      "gettingStarted": "Getting Started",
+      "gettingStarted": "Getting started",
       "resources": "Resources",
       "community": "Community",
       "products": "Products"
+    },
+    "loading": {
+      "title": "Preparing your next view",
+      "description": "Fetching fresh content and keeping your progress in sync.",
+      "status": "Routing"
+    }
+  },
+  "test": {
+    "navigation": {
+      "loading": {
+        "title": "Simulating test navigation",
+        "description": "Spinning up fixtures and verifying mock contracts.",
+        "status": "Testing"
+      }
     }
   },
   "footer": {

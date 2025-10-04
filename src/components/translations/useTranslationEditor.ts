@@ -65,10 +65,10 @@ export const useTranslationEditor = () => {
     const keys = Object.keys(sourceFlat);
     const nodeMap = new Map<string, TreeNode>();
 
-    keys.forEach(key => {
+    for (const key of keys) {
       const parts = key.split('.');
       let currentPath = '';
-      parts.forEach((part, index) => {
+      for (const [index, part] of parts.entries()) {
         const path = currentPath ? `${currentPath}.${part}` : part;
         const isLeaf = index === parts.length - 1;
         if (!nodeMap.has(path)) {
@@ -80,11 +80,11 @@ export const useTranslationEditor = () => {
           });
         }
         currentPath = path;
-      });
-    });
+      }
+    }
 
     const rootNodes: TreeNode[] = [];
-    nodeMap.forEach((node, path) => {
+    for (const [path, node] of nodeMap.entries()) {
       if (path.includes('.')) {
         const parentPath = path.substring(0, path.lastIndexOf('.'));
         const parent = nodeMap.get(parentPath);
@@ -92,21 +92,21 @@ export const useTranslationEditor = () => {
       } else {
         rootNodes.push(node);
       }
-    });
+    }
+
+    const compareNodes = (a: TreeNode, b: TreeNode): number => {
+      if (a.isLeaf === b.isLeaf) {
+        return a.name.localeCompare(b.name);
+      } else {
+        return a.isLeaf ? 1 : -1;
+      }
+    };
 
     const sortNodes = (nodes: TreeNode[]): TreeNode[] =>
-      nodes
-        .sort((a, b) =>
-          a.isLeaf !== b.isLeaf
-            ? a.isLeaf
-              ? 1
-              : -1
-            : a.name.localeCompare(b.name)
-        )
-        .map(node => ({
-          ...node,
-          children: node.children ? sortNodes(node.children) : undefined,
-        }));
+      nodes.toSorted(compareNodes).map(node => ({
+        ...node,
+        children: node.children ? sortNodes(node.children) : undefined,
+      }));
 
     return sortNodes(rootNodes);
   }, [translations, sourceOfTruth]);
@@ -166,12 +166,12 @@ export const useTranslationEditor = () => {
   const allFolderPaths = useMemo<string[]>(() => {
     const paths: string[] = [];
     const collect = (nodes: TreeNode[]) => {
-      nodes.forEach(node => {
+      for (const node of nodes) {
         if (!node.isLeaf) {
           paths.push(node.fullPath);
           if (node.children) collect(node.children);
         }
-      });
+      }
     };
     collect(filteredTree);
     return paths;

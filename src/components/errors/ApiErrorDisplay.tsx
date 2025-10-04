@@ -280,8 +280,8 @@ export function ValidationErrorDisplay({
       </AlertTitle>
       <AlertDescription>
         <ul className="list-disc list-inside space-y-1 mt-2">
-          {errors.map((error, index) => (
-            <li key={index} className="text-sm">
+          {errors.map(error => (
+            <li key={error} className="text-sm">
               {error.startsWith('cantoLyr.') ? t(error) : error}
             </li>
           ))}

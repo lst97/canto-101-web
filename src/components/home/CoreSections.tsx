@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '../ui/card.tsx';
 
 const toDomId = (translationKey: string): string => {
   const tail = translationKey.split('.').pop() ?? translationKey;
-  return tail.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+  return tail.replaceAll(/[A-Z]/g, match => `-${match.toLowerCase()}`);
 };
 
 const coreSections = [

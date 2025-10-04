@@ -8,7 +8,9 @@ interface LyricSessionProps {
   apiKey: string;
 }
 
-export function LyricSession({ apiKey }: LyricSessionProps): ReactElement {
+export function LyricSession({
+  apiKey,
+}: Readonly<LyricSessionProps>): ReactElement {
   const { generate, result, loading, error } = useLyricSession();
 
   const handleSubmit = useCallback(

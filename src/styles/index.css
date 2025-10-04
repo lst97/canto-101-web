@@ -65,7 +65,6 @@ html {
     scroll-behavior: auto;
   }
 }
-
 /* Ensure in-page anchors don’t hide under header */
 :where(section, article, header, div, main)[id] {
   scroll-margin-top: var(--app-header-height, 4.5rem);
@@ -168,4 +167,18 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes ripple {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+.animate-ripple {
+  animation: ripple var(--duration, 2s) ease calc(var(--i, 0) * 0.2s) infinite;
 }

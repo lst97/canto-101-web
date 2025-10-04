@@ -34,7 +34,7 @@ export function CantoLyrWorkflowCard({
   cta,
   badgeVariant,
   secondBadgeVariant,
-}: CantoLyrWorkflowCardProps): ReactElement {
+}: Readonly<CantoLyrWorkflowCardProps>): ReactElement {
   const { t } = useTranslation();
 
   type BadgeConfig = {

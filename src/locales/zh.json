@@ -144,6 +144,23 @@
       "resources": "資源",
       "community": "社群",
       "products": "產品"
+    },
+    "loading": {
+      "title": "正在準備下一個頁面",
+      "description": "同步最新內容並保持你的進度。",
+      "status": "頁面導向中"
+    }
+  },
+  "table": {
+    "fallbackHeader": "資料"
+  },
+  "test": {
+    "navigation": {
+      "loading": {
+        "title": "正在模擬測試導覽",
+        "description": "啟動測試樣本並驗證模擬 API 回應。",
+        "status": "測試進行中"
+      }
     }
   },
   "footer": {
@@ -534,6 +551,8 @@
         "invalidSequences": "每行至少 3 位，僅可包含 0 2 3 4 5 9，最多 3 行。",
         "invalidSeed": "種子必須為非負整數。",
         "invalidTop": "段落輸出數必須介於 1 至 3。",
+        "invalidResponse": "歌詞搜尋結果格式不正確。",
+        "queryWithoutSnapshot": "在提交前無法執行搜尋。",
         "unexpected": "歌詞生成失敗，請稍後再試。"
       },
       "lexicon": {
@@ -542,6 +561,7 @@
         "missingQuery": "請描述想要查找的語意。",
         "missingPronunciation": "請輸入 394052 式的聲調數字。",
         "invalidResponse": "無法解析 AI 詞彙回應，請再試一次。",
+        "queryWithoutSnapshot": "在提交前無法執行搜尋。",
         "limitRange": "數量必須介於 1 至 25 之間。"
       }
     },

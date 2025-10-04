@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 
 import { ApiErrorDisplay } from '@/components/errors/ApiErrorDisplay';
+import { TestNavigationLoader } from '@/components/test/TestNavigationLoader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import type { AppError } from '@/types/errors';
@@ -95,6 +96,22 @@ export default function TestApiError(): ReactElement {
           styling adjustments before wiring live data.
         </p>
       </header>
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-lg font-medium leading-tight">
+            Navigation Loader Preview
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Validate the dedicated test navigation loading indicator styling and
+            translations.
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <TestNavigationLoader className="max-w-lg" />
+        </div>
+        <Separator className="mt-4" />
+      </section>
 
       {errorExamples.map(({ heading, description, error }) => (
         <section key={heading} className="space-y-3">

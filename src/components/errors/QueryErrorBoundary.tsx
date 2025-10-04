@@ -11,13 +11,16 @@ export interface QueryErrorBoundaryProps {
   fallback?: ReactNode;
 }
 
+interface QueryErrorBoundaryFallbackRenderProps {
+  error: unknown;
+  resetErrorBoundary: () => void;
+  fallback?: ReactNode;
+}
+
 function DefaultQueryFallback({
   error,
   reset,
-}: {
-  error: unknown;
-  reset: () => void;
-}): ReactElement {
+}: Readonly<{ error: unknown; reset: () => void }>): ReactElement {
   const { t } = useTranslation();
 
   return (
@@ -41,21 +44,33 @@ function DefaultQueryFallback({
   );
 }
 
+function QueryErrorBoundaryFallbackRender({
+  error,
+  resetErrorBoundary,
+  fallback,
+}: Readonly<QueryErrorBoundaryFallbackRenderProps>): Readonly<ReactElement> {
+  if (fallback) {
+    return <>{fallback}</>;
+  }
+
+  return <DefaultQueryFallback error={error} reset={resetErrorBoundary} />;
+}
+
 export function QueryErrorBoundary({
   children,
   fallback,
-}: QueryErrorBoundaryProps): ReactElement {
+}: Readonly<QueryErrorBoundaryProps>): ReactElement {
   const { reset } = useQueryErrorResetBoundary();
   return (
     <ErrorBoundary
       onReset={reset}
-      fallbackRender={({ error, resetErrorBoundary }) =>
-        fallback ? (
-          <>{fallback}</>
-        ) : (
-          <DefaultQueryFallback error={error} reset={resetErrorBoundary} />
-        )
-      }
+      fallbackRender={({ error, resetErrorBoundary }) => (
+        <QueryErrorBoundaryFallbackRender
+          error={error}
+          resetErrorBoundary={resetErrorBoundary}
+          fallback={fallback}
+        />
+      )}
     >
       {children}
     </ErrorBoundary>

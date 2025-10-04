@@ -40,10 +40,7 @@ export function Header(): ReactElement {
   const isOnProducts = isOnCantoLyr || isOnCantoCap;
 
   const smoothScrollToId = useCallback((id: string): void => {
-    if (
-      typeof globalThis.window === 'undefined' ||
-      typeof document === 'undefined'
-    ) {
+    if (globalThis.window === undefined || globalThis.document === undefined) {
       return;
     }
     const element = document.getElementById(id);
@@ -69,8 +66,8 @@ export function Header(): ReactElement {
       e.preventDefault();
       const id = href.slice(1);
       if (
-        typeof globalThis.window !== 'undefined' &&
-        typeof globalThis.requestAnimationFrame === 'function'
+        globalThis.window !== undefined &&
+        globalThis.requestAnimationFrame !== undefined
       ) {
         globalThis.requestAnimationFrame(() => {
           smoothScrollToId(id);
@@ -79,7 +76,7 @@ export function Header(): ReactElement {
         smoothScrollToId(id);
       }
       // Update hash without causing an instant jump
-      if (typeof globalThis.window !== 'undefined') {
+      if (globalThis.window !== undefined) {
         globalThis.history.replaceState(null, '', href);
       }
     },
@@ -88,7 +85,7 @@ export function Header(): ReactElement {
 
   const handleProductsMenuOpenChange = useCallback(
     (nextOpen: boolean): void => {
-      if (typeof globalThis.window === 'undefined') return;
+      if (globalThis.window === undefined) return;
       if (nextOpen) {
         productsScrollPositionRef.current = globalThis.scrollY;
         return;
@@ -99,7 +96,7 @@ export function Header(): ReactElement {
         globalThis.scrollTo({ top: previousScrollTop });
       };
 
-      if (typeof globalThis.requestAnimationFrame === 'function') {
+      if (globalThis.requestAnimationFrame !== undefined) {
         globalThis.requestAnimationFrame(restoreScroll);
       } else {
         restoreScroll();
@@ -157,7 +154,7 @@ export function Header(): ReactElement {
 
   // Measure header height on mount and on resize to update a CSS variable used for offsetting content
   useEffect(() => {
-    if (typeof globalThis.window === 'undefined') return;
+    if (globalThis.window === undefined) return;
     const root = document.documentElement;
     const measure = () => {
       const headerEl = document.querySelector('header[data-app-header]');
@@ -168,9 +165,9 @@ export function Header(): ReactElement {
     const ro = new ResizeObserver(measure);
     const headerEl = document.querySelector('header[data-app-header]');
     if (headerEl) ro.observe(headerEl);
-    window.addEventListener('resize', measure);
+    globalThis.window.addEventListener('resize', measure);
     return () => {
-      window.removeEventListener('resize', measure);
+      globalThis.window.removeEventListener('resize', measure);
       ro.disconnect();
     };
   }, []);

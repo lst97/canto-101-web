@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { ChevronRight, MoreHorizontal } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 import { cn } from '../../lib/utils.ts';
 
@@ -49,14 +49,16 @@ function BreadcrumbLink({
   );
 }
 
-function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
+function BreadcrumbPage({ className, ...props }: React.ComponentProps<'a'>) {
   return (
-    <span
+    <a
       data-slot="breadcrumb-page"
-      role="link"
-      aria-disabled="true"
+      href="#"
       aria-current="page"
-      className={cn('text-foreground font-normal', className)}
+      className={cn(
+        'text-foreground font-normal pointer-events-none',
+        className
+      )}
       {...props}
     />
   );
@@ -70,8 +72,7 @@ function BreadcrumbSeparator({
   return (
     <li
       data-slot="breadcrumb-separator"
-      role="presentation"
-      aria-hidden="true"
+      aria-label="breadcrumb separator"
       className={cn('[&>svg]:size-3.5', className)}
       {...props}
     >
@@ -80,6 +81,9 @@ function BreadcrumbSeparator({
   );
 }
 
+const ELLIPSIS_ICON_SRC =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="8" r="1"/><circle cx="8" cy="8" r="1"/><circle cx="12" cy="8" r="1"/></svg>';
+
 function BreadcrumbEllipsis({
   className,
   ...props
@@ -87,13 +91,14 @@ function BreadcrumbEllipsis({
   return (
     <span
       data-slot="breadcrumb-ellipsis"
-      role="presentation"
-      aria-hidden="true"
       className={cn('flex size-9 items-center justify-center', className)}
       {...props}
     >
-      <MoreHorizontal className="size-4" />
-      <span className="sr-only">More</span>
+      <img
+        src={ELLIPSIS_ICON_SRC}
+        alt="More breadcrumb levels"
+        className="size-4"
+      />
     </span>
   );
 }

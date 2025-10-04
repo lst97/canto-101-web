@@ -39,6 +39,9 @@ const TranslationEditor = lazy(
   async () => import('./pages/dev/TranslationEditor.tsx')
 );
 const TestApiError = lazy(async () => import('./pages/test/TestApiError.tsx'));
+const TestNavigationLoaderPreview = lazy(
+  async () => import('./pages/test/TestNavigationLoaderPreview.tsx')
+);
 const translationEditorRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/translations',
@@ -48,6 +51,11 @@ const testApiErrorRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/test/api-error',
   component: TestApiError,
+});
+const testNavigationLoaderRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/test/navigation-loader',
+  component: TestNavigationLoaderPreview,
 });
 
 const rootRoute = createRootRoute({
@@ -138,7 +146,7 @@ const baseRoutes: AnyRoute[] = [
 
 const devRoutes: AnyRoute[] = import.meta.env.PROD
   ? []
-  : [translationEditorRoute, testApiErrorRoute];
+  : [translationEditorRoute, testApiErrorRoute, testNavigationLoaderRoute];
 
 const routeTree = rootRoute.addChildren([...baseRoutes, ...devRoutes]);
 

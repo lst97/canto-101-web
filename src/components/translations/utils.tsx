@@ -20,15 +20,15 @@ export const unflattenObject = (
   flat: FlattenedTranslations
 ): Record<string, unknown> => {
   const nested: Record<string, unknown> = {};
-  Object.entries(flat).forEach(([k, v]) => {
+  for (const [k, v] of Object.entries(flat)) {
     const parts = k.split('.');
     let curr: Record<string, unknown> = nested;
     for (let i = 0; i < parts.length - 1; i++) {
       if (!curr[parts[i]]) curr[parts[i]] = {};
       curr = curr[parts[i]] as Record<string, unknown>;
     }
-    curr[parts[parts.length - 1]] = v;
-  });
+    curr[parts.at(-1)!] = v;
+  }
   return nested;
 };
 

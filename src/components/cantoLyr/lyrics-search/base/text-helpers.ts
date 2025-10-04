@@ -3,11 +3,11 @@ export const IGNORABLE_RE = /[\s\p{P}\p{S}]/u; // spaces + punctuation + symbols
 export const PUNCT_OR_SYMBOL_RE = /[\p{P}\p{S}]/gu; // punctuation + symbols (keeps spaces)
 
 export function stripSpacesPunctAndSymbols(s: string): string {
-  return s.replace(/[\s\p{P}\p{S}]/gu, '');
+  return s.replaceAll(/[\s\p{P}\p{S}]/gu, '');
 }
 
 export function stripPunctAndSymbols(s: string): string {
-  return s.replace(PUNCT_OR_SYMBOL_RE, '');
+  return s.replaceAll(PUNCT_OR_SYMBOL_RE, '');
 }
 
 export function isIgnorableChar(ch: string): boolean {

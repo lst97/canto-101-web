@@ -16,7 +16,7 @@ import {
 import { Button } from '@/components/ui/button.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { Separator } from '@/components/ui/separator.tsx';
-import { LoadingIndicator } from '@/components/ui/loading-indicator.tsx';
+import { LoadingIndicator } from '@/components/ui/loading-indicator';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { ScrollArea } from '@/components/ui/scroll-area.tsx';
 
@@ -153,6 +153,94 @@ export function FilterMultiSelectField({
       : selectedPreview;
   const displayValue = selected.length > 0 ? formattedSelection : placeholder;
 
+  const optionsContent = (() => {
+    if (loading && options.length === 0) {
+      return (
+        <div className="flex justify-center py-6">
+          <LoadingIndicator
+            label={t('common.loading', {
+              defaultValue: 'Loading...',
+            })}
+            size="sm"
+          />
+        </div>
+      );
+    }
+
+    if (filteredOptions.length > 0) {
+      return (
+        <>
+          {filteredOptions.map(option => {
+            const checked = selected.includes(option);
+            return (
+              <button
+                key={option}
+                type="button"
+                className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-muted"
+                data-checkbox-container
+                aria-pressed={checked}
+                onClick={event => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  handleToggle(option);
+                }}
+              >
+                <Checkbox
+                  checked={checked}
+                  onCheckedChange={checked => {
+                    if (checked !== undefined) handleToggle(option);
+                  }}
+                  onClick={event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }}
+                  onMouseDown={event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }}
+                />
+                <span className="flex-1 truncate">{option}</span>
+              </button>
+            );
+          })}
+          {hasMoreOptions && (
+            <div className="pt-2 border-t">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleLoadMore}
+                disabled={isLoadingMore}
+                className="w-full text-xs"
+              >
+                {isLoadingMore ? (
+                  <LoadingIndicator
+                    size="sm"
+                    label={t('common.loading', {
+                      defaultValue: 'Loading...',
+                    })}
+                    spinnerClassName="text-primary-foreground"
+                    labelClassName="text-primary-foreground"
+                  />
+                ) : (
+                  t('common.loadMore', {
+                    count: Math.min(500, totalFilteredCount - loadedCount),
+                  })
+                )}
+              </Button>
+            </div>
+          )}
+        </>
+      );
+    }
+
+    return (
+      <p className="py-2 text-sm text-muted-foreground">
+        {t('common.noResults', { defaultValue: 'No results' })}
+      </p>
+    );
+  })();
+
   return (
     <div className="space-y-2">
       <Label htmlFor={id}>{label}</Label>
@@ -199,96 +287,7 @@ export function FilterMultiSelectField({
             <Separator />
           </div>
           <ScrollArea className="h-60">
-            <div className="space-y-1">
-              {loading && options.length === 0 ? (
-                <div className="flex justify-center py-6">
-                  <LoadingIndicator
-                    label={t('common.loading', {
-                      defaultValue: 'Loading...',
-                    })}
-                    size="sm"
-                  />
-                </div>
-              ) : filteredOptions.length > 0 ? (
-                <>
-                  {filteredOptions.map(option => {
-                    const checked = selected.includes(option);
-                    return (
-                      <div
-                        key={option}
-                        className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-muted"
-                        data-checkbox-container
-                        role="button"
-                        tabIndex={0}
-                        aria-pressed={checked}
-                        onClick={event => {
-                          event.preventDefault();
-                          event.stopPropagation();
-                          handleToggle(option);
-                        }}
-                        onKeyDown={event => {
-                          if (event.key === 'Enter' || event.key === ' ') {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            handleToggle(option);
-                          }
-                        }}
-                      >
-                        <Checkbox
-                          checked={checked}
-                          onCheckedChange={checked => {
-                            if (checked !== undefined) handleToggle(option);
-                          }}
-                          onClick={event => {
-                            event.preventDefault();
-                            event.stopPropagation();
-                          }}
-                          onMouseDown={event => {
-                            event.preventDefault();
-                            event.stopPropagation();
-                          }}
-                        />
-                        <span className="flex-1 truncate">{option}</span>
-                      </div>
-                    );
-                  })}
-                  {hasMoreOptions && (
-                    <div className="pt-2 border-t">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={handleLoadMore}
-                        disabled={isLoadingMore}
-                        className="w-full text-xs"
-                      >
-                        {isLoadingMore ? (
-                          <LoadingIndicator
-                            size="sm"
-                            label={t('common.loading', {
-                              defaultValue: 'Loading...',
-                            })}
-                            spinnerClassName="text-primary-foreground"
-                            labelClassName="text-primary-foreground"
-                          />
-                        ) : (
-                          t('common.loadMore', {
-                            count: Math.min(
-                              500,
-                              totalFilteredCount - loadedCount
-                            ),
-                          })
-                        )}
-                      </Button>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <p className="py-2 text-sm text-muted-foreground">
-                  {t('common.noResults', { defaultValue: 'No results' })}
-                </p>
-              )}
-            </div>
+            <div className="space-y-1">{optionsContent}</div>
           </ScrollArea>
           <div className="flex items-center justify-between">
             <span className="text-xs text-muted-foreground">

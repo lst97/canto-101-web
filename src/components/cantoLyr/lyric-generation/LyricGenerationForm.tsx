@@ -314,7 +314,7 @@ export function LyricGenerationForm({
                       onBlur={field.handleBlur}
                       onChange={event =>
                         field.handleChange(
-                          event.target.value.replace(/[^0-9]/g, '')
+                          event.target.value.replaceAll(/\D/g, '')
                         )
                       }
                       placeholder="3"
