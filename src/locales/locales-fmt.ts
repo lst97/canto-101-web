@@ -211,7 +211,7 @@ function isStandaloneValue(value: string): boolean {
 }
 
 function lineEndsPropertyValue(line: string): boolean {
-  const withoutTrailingSpaces = line.replace(/\s+$/u, '');
+  const withoutTrailingSpaces = line.trimEnd();
   if (withoutTrailingSpaces.length === 0) return false;
 
   const lastChar = withoutTrailingSpaces.at(-1);
@@ -286,11 +286,8 @@ function insertMissingCommasBetweenProperties(source: string): {
       lineEndsPropertyValue(lines[i]) &&
       isLikelyPropertyStart(lines[i + 1])
     ) {
-      const trailingMatch = lines[i].match(/\s*$/u);
-      const trailingWhitespace = trailingMatch ? trailingMatch[0] : '';
-      const base = trailingWhitespace
-        ? lines[i].slice(0, lines[i].length - trailingWhitespace.length)
-        : lines[i];
+      const base = lines[i].trimEnd();
+      const trailingWhitespace = lines[i].slice(base.length);
 
       if (!base.endsWith(',')) {
         lines[i] = `${base},${trailingWhitespace}`;
