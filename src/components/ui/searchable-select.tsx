@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react';
+import { ChevronDownIcon, XIcon } from 'lucide-react';
 
 import { cn } from '../../lib/utils.ts';
 import { Button } from './button.tsx';
 import { Input } from './input.tsx';
 import { Popover, PopoverContent, PopoverTrigger } from './popover.tsx';
-import { ScrollArea } from './scroll-area.tsx';
 
 interface SearchableSelectProps {
   options: string[];
@@ -78,16 +77,6 @@ function SearchableSelect({
     }
   }, []);
 
-  const handleOptionKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>, optionValue: string) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        handleSelect(optionValue);
-      }
-    },
-    [handleSelect]
-  );
-
   let optionsContent: React.ReactNode;
   if (loading) {
     optionsContent = (
@@ -96,23 +85,27 @@ function SearchableSelect({
       </div>
     );
   } else if (filteredOptions.length > 0) {
-    optionsContent = filteredOptions.map(option => (
-      <div
-        key={option}
-        className={cn(
-          'flex cursor-pointer items-center justify-between rounded-md px-2 py-1.5 text-sm hover:bg-muted',
-          value === option && 'bg-muted'
-        )}
-        onClick={() => handleSelect(option)}
-        onKeyDown={event => handleOptionKeyDown(event, option)}
-        tabIndex={0}
-        role="option"
-        aria-selected={value === option}
+    const selectSize = Math.min(filteredOptions.length, 6) || 1;
+    optionsContent = (
+      <select
+        className="w-full cursor-pointer rounded-md border border-input bg-background py-1.5 pl-2 pr-8 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
+        value={value ?? ''}
+        onChange={event => handleSelect(event.target.value)}
+        size={selectSize}
+        aria-label="Available options"
       >
-        <span className="truncate">{option}</span>
-        {value === option && <CheckIcon className="size-4 text-primary" />}
-      </div>
-    ));
+        {!value && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
+        {filteredOptions.map(option => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    );
   } else {
     optionsContent = (
       <div className="py-6 text-center text-sm text-muted-foreground">
@@ -166,7 +159,8 @@ function SearchableSelect({
           const target = event.target as HTMLElement;
           if (
             target.closest('[data-searchable-select]') ||
-            target.closest('[role="option"]') ||
+            target.closest('select') ||
+            target.tagName === 'OPTION' ||
             target.tagName === 'INPUT'
           ) {
             event.preventDefault();
@@ -180,7 +174,7 @@ function SearchableSelect({
             onChange={e => setSearch(e.target.value)}
             className="mb-2"
           />
-          <ScrollArea className="h-60">{optionsContent}</ScrollArea>
+          {optionsContent}
         </div>
       </PopoverContent>
     </Popover>

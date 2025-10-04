@@ -13,6 +13,11 @@ type JSONValue = JSONPrimitive | JSONObject | JSONArray;
 interface JSONObject {
   [key: string]: JSONValue;
 }
+
+function trimFractionalSeconds(timestamp: string): string {
+  const dotIndex = timestamp.indexOf('.');
+  return dotIndex === -1 ? timestamp : timestamp.slice(0, dotIndex);
+}
 type JSONArray = JSONValue[];
 
 /**
@@ -161,6 +166,142 @@ function compareStructures(
   }
 }
 
+const JSON_NUMBER_PATTERN = /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$/;
+
+function isWhitespaceChar(char: string | undefined): boolean {
+  return char === ' ' || char === '\t' || char === '\r';
+}
+
+function isCompleteJsonString(value: string): boolean {
+  if (!value.startsWith('"') || !value.endsWith('"')) return false;
+  let escaped = false;
+  for (let i = 1; i < value.length - 1; i++) {
+    const char = value[i];
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if (char === '\\') {
+      escaped = true;
+      continue;
+    }
+    if (char === '"') {
+      return false;
+    }
+  }
+  return !escaped;
+}
+
+function isNumberValue(value: string): boolean {
+  return JSON_NUMBER_PATTERN.test(value);
+}
+
+function isStandaloneValue(value: string): boolean {
+  if (value.length === 0) return false;
+  if (value === 'true' || value === 'false' || value === 'null') return true;
+  if (isNumberValue(value)) return true;
+  if (value.startsWith('"') && isCompleteJsonString(value)) return true;
+  if (
+    (value.startsWith('{') && value.endsWith('}')) ||
+    (value.startsWith('[') && value.endsWith(']'))
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function lineEndsPropertyValue(line: string): boolean {
+  const withoutTrailingSpaces = line.replace(/\s+$/u, '');
+  if (withoutTrailingSpaces.length === 0) return false;
+
+  const lastChar = withoutTrailingSpaces.at(-1);
+  if (
+    lastChar === ',' ||
+    lastChar === ':' ||
+    lastChar === '{' ||
+    lastChar === '['
+  ) {
+    return false;
+  }
+
+  if (lastChar === '}' || lastChar === ']') {
+    return true;
+  }
+
+  const colonIndex = withoutTrailingSpaces.lastIndexOf(':');
+  if (colonIndex !== -1) {
+    const valuePart = withoutTrailingSpaces.slice(colonIndex + 1).trim();
+    if (valuePart.length === 0) {
+      return false;
+    }
+    return isStandaloneValue(valuePart);
+  }
+
+  const trimmedLeft = withoutTrailingSpaces.trimStart();
+  return isStandaloneValue(trimmedLeft);
+}
+
+function isLikelyPropertyStart(line: string): boolean {
+  let index = 0;
+  while (index < line.length && isWhitespaceChar(line[index])) {
+    index++;
+  }
+  if (line[index] !== '"') return false;
+  index++;
+
+  let escaped = false;
+  while (index < line.length) {
+    const char = line[index];
+    if (escaped) {
+      escaped = false;
+    } else if (char === '\\') {
+      escaped = true;
+    } else if (char === '"') {
+      index++;
+      break;
+    }
+    index++;
+  }
+
+  if (index > line.length) {
+    return false;
+  }
+
+  while (index < line.length && isWhitespaceChar(line[index])) {
+    index++;
+  }
+
+  return line[index] === ':';
+}
+
+function insertMissingCommasBetweenProperties(source: string): {
+  text: string;
+  inserted: number;
+} {
+  const lines = source.split('\n');
+  let inserted = 0;
+
+  for (let i = 0; i < lines.length - 1; i++) {
+    if (
+      lineEndsPropertyValue(lines[i]) &&
+      isLikelyPropertyStart(lines[i + 1])
+    ) {
+      const trailingMatch = lines[i].match(/\s*$/u);
+      const trailingWhitespace = trailingMatch ? trailingMatch[0] : '';
+      const base = trailingWhitespace
+        ? lines[i].slice(0, lines[i].length - trailingWhitespace.length)
+        : lines[i];
+
+      if (!base.endsWith(',')) {
+        lines[i] = `${base},${trailingWhitespace}`;
+        inserted++;
+      }
+    }
+  }
+
+  return { text: lines.join('\n'), inserted };
+}
+
 /**
  * Try to auto-fix common JSON issues: trailing commas, missing commas between properties,
  * and unbalanced braces/brackets. Returns parsed object if success; otherwise undefined.
@@ -208,18 +349,10 @@ function tryAutoFixJson(content: string): {
 
   // Insert missing commas between object properties when a value is followed by a new key on next line
   // Matches: (value)(newline + indent)"key":  -> ensures colon exists to avoid arrays of strings
-  const missingCommaBetweenProps =
-    /(\}|\]|"[^"\\]*(?:\\.[^"\\])*"|-?\d+(?:\.\d+)?|true|false|null)\s*\n(\s*)(?="[^"\n]+"\s*:)/g;
-  let prevFixed: string;
-  let insertedCommaCount = 0;
-  do {
-    prevFixed = fixed;
-    fixed = fixed.replaceAll(missingCommaBetweenProps, (_m, v, indent) => {
-      insertedCommaCount++;
-      return `${v},\n${indent}`;
-    });
-  } while (fixed !== prevFixed && insertedCommaCount < 1000);
+  const commaInsertionResult = insertMissingCommasBetweenProperties(fixed);
+  const insertedCommaCount = commaInsertionResult.inserted;
   if (insertedCommaCount > 0) {
+    fixed = commaInsertionResult.text;
     steps.push(
       `Inserted ${insertedCommaCount} missing comma(s) between properties`
     );
@@ -329,20 +462,14 @@ function ensureValidLocaleFileName(
 function backupFile(filePath: string, dryRun: boolean): string {
   if (dryRun) {
     const base = path.basename(filePath);
-    const stamp = new Date()
-      .toISOString()
-      .replaceAll(/[-:]/g, '')
-      .replaceAll('T', '-')
-      .replaceAll(/\..+$/, '');
+    const isoTimestamp = trimFractionalSeconds(new Date().toISOString());
+    const stamp = isoTimestamp.replaceAll(/[-:]/g, '').replaceAll('T', '-');
     return path.join(path.dirname(filePath), `${base}.bak-${stamp}`); // Return path but don't create
   }
   const dir = path.dirname(filePath);
   const base = path.basename(filePath);
-  const stamp = new Date()
-    .toISOString()
-    .replaceAll(/[-:]/g, '')
-    .replaceAll('T', '-')
-    .replaceAll(/\..+$/, '');
+  const isoTimestamp = trimFractionalSeconds(new Date().toISOString());
+  const stamp = isoTimestamp.replaceAll(/[-:]/g, '').replaceAll('T', '-');
   const backupPath = path.join(dir, `${base}.bak-${stamp}`);
   fs.writeFileSync(backupPath, fs.readFileSync(filePath, 'utf8'), 'utf8');
   return backupPath;
@@ -388,7 +515,7 @@ function deepDelete(obj: JSONValue, pathStr: string): void {
     parent &&
     typeof parent === 'object' &&
     !Array.isArray(parent) &&
-    Object.prototype.hasOwnProperty.call(parent, last)
+    Object.hasOwn(parent, last)
   ) {
     delete parent[last];
   }
@@ -405,14 +532,11 @@ function deepMerge<T extends JSONValue>(target: T, source: T): T {
   }
 
   const out: JSONObject = { ...(target as JSONObject) };
-  for (const key of Object.keys(source as JSONObject)) {
+  for (const key of Object.keys(source)) {
     if (key in out) {
-      out[key] = deepMerge(
-        out[key] as JSONValue,
-        (source as JSONObject)[key] as JSONValue
-      );
+      out[key] = deepMerge(out[key], (source as JSONObject)[key]);
     } else {
-      out[key] = (source as JSONObject)[key] as JSONValue;
+      out[key] = (source as JSONObject)[key];
     }
   }
   return out as T;
@@ -523,8 +647,8 @@ function validateLocales(flags: {
   let sourceFile: string;
   try {
     sourceFile = ensureValidLocaleFileName(flags.source, allowedFiles);
-  } catch (validationErr) {
-    console.error(`❌ ${(validationErr as Error).message}`);
+  } catch (error) {
+    console.error(`❌ ${(error as Error).message}`);
     process.exit(1);
   }
 
@@ -634,10 +758,10 @@ function validateLocales(flags: {
             console.error(`   ⚠️  Auto-fix attempt failed for ${file}.`);
             hasDifferences = true;
           }
-        } catch (fixErr) {
+        } catch (error) {
           console.error(
             `   ⚠️  Auto-fix encountered an error for ${file}: ${
-              (fixErr as Error).message
+              (error as Error).message
             }`
           );
           hasDifferences = true;
@@ -664,9 +788,9 @@ function validateLocales(flags: {
               `${flags.dryRun ? '[DRY-RUN] ' : ''}🗑️  Removed backup: ${backup}`
             );
           }
-        } catch (cleanupErr) {
+        } catch (error) {
           console.warn(
-            `⚠️  Failed to clean up backups: ${(cleanupErr as Error).message}`
+            `⚠️  Failed to clean up backups: ${(error as Error).message}`
           );
         }
       }

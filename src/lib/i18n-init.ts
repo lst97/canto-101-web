@@ -4,17 +4,18 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 
 import en from '../locales/en.json';
+import { useI18nLoadingStore } from '../stores/i18nLoadingStore.ts';
+import { log } from './logger.ts';
 
 // Initialize i18n synchronously with bundled resources first
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .use(
-    resourcesToBackend(async (language: string, _namespace: string) => {
-      void _namespace; // mark as used to satisfy eslint no-unused-vars
+    resourcesToBackend(async (language: string) => {
       if (language === 'en') {
         // English is bundled for immediate availability
-        return Promise.resolve(en);
+        return en;
       }
       if (language === 'zh') {
         const mod = await import('../locales/zh.json');
@@ -29,7 +30,7 @@ i18n
         return mod.default || mod;
       }
       // Fallback for any other languages - return en as default
-      return Promise.resolve(en);
+      return en;
     })
   )
   .init({
@@ -106,7 +107,7 @@ const preloadDetectedLanguage = async () => {
       }
     }
   } catch (error) {
-    console.warn('Failed to preload detected language:', error);
+    log.warn('Failed to preload detected language', { error });
   }
 };
 
@@ -114,43 +115,79 @@ const preloadDetectedLanguage = async () => {
 preloadDetectedLanguage();
 
 // Optional: proactively load resources on language change to ensure UI updates without reload
+const finishTranslationLoading = () => {
+  const { finishLoading } = useI18nLoadingStore.getState();
+  finishLoading();
+};
+
+const cancelTranslationLoading = (context?: Record<string, unknown>) => {
+  const { cancelLoading } = useI18nLoadingStore.getState();
+  cancelLoading();
+  if (context) {
+    log.warn('Translation loading cancelled', context);
+  }
+};
+
 i18n.on('languageChanged', async lng => {
   try {
-    if (!i18n.hasResourceBundle(lng, 'translation')) {
-      if (lng === 'en') {
-        i18n.addResourceBundle(lng, 'translation', en, true, true);
-      } else if (lng === 'ja') {
-        const module = await import('../locales/ja.json');
-        i18n.addResourceBundle(
-          lng,
-          'translation',
-          module.default || module,
-          true,
-          true
-        );
-      } else if (lng === 'zh') {
-        const mod = await import('../locales/zh.json');
-        i18n.addResourceBundle(
-          lng,
-          'translation',
-          mod.default || mod,
-          true,
-          true
-        );
-      } else if (lng === 'cn') {
-        const mod = await import('../locales/cn.json');
-        i18n.addResourceBundle(
-          lng,
-          'translation',
-          mod.default || mod,
-          true,
-          true
-        );
-      }
+    if (i18n.hasResourceBundle(lng, 'translation')) {
+      finishTranslationLoading();
+      return;
     }
+
+    if (lng === 'en') {
+      i18n.addResourceBundle(lng, 'translation', en, true, true);
+      finishTranslationLoading();
+      return;
+    }
+
+    if (lng === 'ja') {
+      const module = await import('../locales/ja.json');
+      i18n.addResourceBundle(
+        lng,
+        'translation',
+        module.default || module,
+        true,
+        true
+      );
+      finishTranslationLoading();
+      return;
+    }
+
+    if (lng === 'zh') {
+      const mod = await import('../locales/zh.json');
+      i18n.addResourceBundle(
+        lng,
+        'translation',
+        mod.default || mod,
+        true,
+        true
+      );
+      finishTranslationLoading();
+      return;
+    }
+
+    if (lng === 'cn') {
+      const mod = await import('../locales/cn.json');
+      i18n.addResourceBundle(
+        lng,
+        'translation',
+        mod.default || mod,
+        true,
+        true
+      );
+      finishTranslationLoading();
+      return;
+    }
+
+    finishTranslationLoading();
   } catch (err) {
-    console.warn('languageChanged preload failed', err);
+    cancelTranslationLoading({ error: err, language: lng });
   }
 });
 
-export default i18n;
+i18n.on('failedLoading', (lng, ns, msg) => {
+  cancelTranslationLoading({ language: lng, namespace: ns, message: msg });
+});
+
+export { default } from 'i18next';

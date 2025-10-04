@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Languages } from 'lucide-react';
+import { useCallback } from 'react';
+
 import {
   Select,
   SelectContent,
@@ -8,9 +10,14 @@ import {
   SelectValue,
 } from './ui/select.tsx';
 import { CN, HK, JP, US } from 'country-flag-icons/react/3x2';
+import { useI18nLoadingStore } from '../stores/i18nLoadingStore.ts';
+import { log } from '../lib/logger.ts';
 
 export const LanguageSwitcher = () => {
   const { i18n, t } = useTranslation();
+  const startLoading = useI18nLoadingStore(state => state.startLoading);
+
+  const MIN_LOADING_DURATION_MS = 320;
 
   const languages = [
     { code: 'en', name: t('language.english'), flag: US },
@@ -19,9 +26,22 @@ export const LanguageSwitcher = () => {
     { code: 'ja', name: t('language.japanese'), flag: JP },
   ];
 
-  const handleLanguageChange = (languageCode: string) => {
-    i18n.changeLanguage(languageCode);
-  };
+  const handleLanguageChange = useCallback(
+    (languageCode: string) => {
+      if (languageCode === i18n.language) {
+        return;
+      }
+
+      startLoading(MIN_LOADING_DURATION_MS);
+      void i18n.changeLanguage(languageCode).catch((error: unknown) => {
+        log.error('language change failed', {
+          error,
+          languageCode,
+        });
+      });
+    },
+    [MIN_LOADING_DURATION_MS, i18n, startLoading]
+  );
 
   return (
     <div className="flex items-center gap-2">

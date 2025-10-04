@@ -19,7 +19,7 @@ function normalize(
   ctx: LogContext
 ): [Record<string, unknown>, string] {
   if (ctx && typeof ctx === 'object') {
-    return [ctx as Record<string, unknown>, message];
+    return [ctx, message];
   }
   return [{}, message];
 }

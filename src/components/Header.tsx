@@ -96,10 +96,10 @@ export function Header(): ReactElement {
         globalThis.scrollTo({ top: previousScrollTop });
       };
 
-      if (globalThis.requestAnimationFrame !== undefined) {
-        globalThis.requestAnimationFrame(restoreScroll);
-      } else {
+      if (globalThis.requestAnimationFrame === undefined) {
         restoreScroll();
+      } else {
+        globalThis.requestAnimationFrame(restoreScroll);
       }
     },
     []

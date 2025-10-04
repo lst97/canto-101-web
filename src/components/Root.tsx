@@ -6,9 +6,11 @@ import { Header } from './Header.tsx';
 import { Footer } from './Footer.tsx';
 import { LoadingIndicator } from './ui/loading-indicator.tsx';
 import { ScrollArea } from './ui/scroll-area.tsx';
+import { useI18nLoadingStore } from '../stores/i18nLoadingStore.ts';
 
 export function Root(): ReactElement {
   const routerState = useRouterState();
+  const isI18nLoading = useI18nLoadingStore(state => state.isLoading);
 
   const [activeFallbacks, setActiveFallbacks] = useState(0);
   const [overlayVisible, setOverlayVisible] = useState(false);
@@ -44,10 +46,10 @@ export function Root(): ReactElement {
     (routerState.pendingMatches?.length ?? 0) > 0 ||
     locationKey !== resolvedLocationKey;
 
-  const shouldShowOverlay = navigationPending || activeFallbacks > 0;
+  const navigationOverlayActive = navigationPending || activeFallbacks > 0;
 
   useEffect(() => {
-    if (shouldShowOverlay) {
+    if (navigationOverlayActive) {
       setOverlayVisible(true);
       return;
     }
@@ -64,7 +66,7 @@ export function Root(): ReactElement {
     return () => {
       globalThis.window.clearTimeout(timeout);
     };
-  }, [shouldShowOverlay]);
+  }, [navigationOverlayActive]);
 
   return (
     <div className="relative flex flex-col min-h-screen bg-background text-foreground">
@@ -82,12 +84,17 @@ export function Root(): ReactElement {
           </AppErrorBoundary>
         </ScrollArea>
         {overlayVisible ? (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
             <LoadingIndicator variant="navigation" className="max-w-2xl" />
           </div>
         ) : null}
       </main>
       <Footer />
+      {isI18nLoading ? (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-background/85 backdrop-blur">
+          <LoadingIndicator variant="navigation" className="max-w-2xl" />
+        </div>
+      ) : null}
     </div>
   );
 }

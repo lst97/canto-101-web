@@ -77,7 +77,10 @@ export function devLocalesApi(): Plugin {
         if (!allowedFiles.has(decoded)) return null;
 
         const baseName = path.basename(decoded);
-        if (baseName !== decoded || baseName === "" || baseName === "." || baseName === "..") {
+        if (
+          baseName !== decoded || baseName === "" || baseName === "." ||
+          baseName === ".."
+        ) {
           return null;
         }
 

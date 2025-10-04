@@ -49,7 +49,11 @@ function BreadcrumbLink({
   );
 }
 
-function BreadcrumbPage({ className, ...props }: React.ComponentProps<'a'>) {
+function BreadcrumbPage({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<'a'>) {
   return (
     <a
       data-slot="breadcrumb-page"
@@ -60,7 +64,9 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<'a'>) {
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </a>
   );
 }
 
