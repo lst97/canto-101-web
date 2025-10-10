@@ -1,5 +1,5 @@
 import { useForm } from '@tanstack/react-form';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useId, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { LyricSessionOptions } from '../../../hooks/useLyricGeneration.ts';
 import { Button } from '../../ui/button.tsx';
@@ -38,6 +38,15 @@ export function LyricGenerationForm({
 	disabled = false,
 }: Readonly<LyricGenerationFormProps>) {
 	const { t } = useTranslation();
+
+	const promptId = useId();
+	const promptErrorId = useId();
+	const sequencesId = useId();
+	const sequencesErrorId = useId();
+	const seedId = useId();
+	const seedErrorId = useId();
+	const topId = useId();
+	const topErrorId = useId();
 
 	const form = useForm({
 		defaultValues: {
@@ -155,23 +164,21 @@ export function LyricGenerationForm({
 							const errKey = field.state.meta.errors[0];
 							return (
 								<div className="space-y-2">
-									<Label htmlFor="lyric-generation-prompt">
+									<Label htmlFor={promptId}>
 										{t('cantoLyr.ai.lyrics.form.promptLabel')}
 									</Label>
 									<Textarea
-										id="lyric-generation-prompt"
+										id={promptId}
 										value={field.state.value}
 										onBlur={field.handleBlur}
 										onChange={(event) => field.handleChange(event.target.value)}
 										placeholder={t('cantoLyr.ai.lyrics.form.promptPlaceholder')}
 										aria-invalid={showError}
-										aria-describedby={
-											showError ? 'lyric-generation-prompt-error' : undefined
-										}
+										aria-describedby={showError ? promptErrorId : undefined}
 									/>
 									{showError && errKey && (
 										<p
-											id="lyric-generation-prompt-error"
+											id={promptErrorId}
 											className="text-xs text-destructive px-2"
 											role="alert"
 										>
@@ -199,11 +206,11 @@ export function LyricGenerationForm({
 							const errKey = field.state.meta.errors[0];
 							return (
 								<div className="space-y-2">
-									<Label htmlFor="lyric-generation-tone-sequences">
+									<Label htmlFor={sequencesId}>
 										{t('cantoLyr.ai.lyrics.form.sequencesLabel')}
 									</Label>
 									<Textarea
-										id="lyric-generation-tone-sequences"
+										id={sequencesId}
 										value={field.state.value}
 										onBlur={field.handleBlur}
 										onChange={(event) => field.handleChange(event.target.value)}
@@ -211,11 +218,7 @@ export function LyricGenerationForm({
 											'cantoLyr.ai.lyrics.form.sequencesPlaceholder',
 										)}
 										aria-invalid={showError}
-										aria-describedby={
-											showError
-												? 'lyric-generation-tone-sequences-error'
-												: undefined
-										}
+										aria-describedby={showError ? sequencesErrorId : undefined}
 										className="min-h-[100px]"
 									/>
 									<p className="text-xs text-muted-foreground">
@@ -223,7 +226,7 @@ export function LyricGenerationForm({
 									</p>
 									{showError && errKey && (
 										<p
-											id="lyric-generation-tone-sequences-error"
+											id={sequencesErrorId}
 											className="text-xs text-destructive px-2"
 											role="alert"
 										>
@@ -252,11 +255,11 @@ export function LyricGenerationForm({
 								const errKey = field.state.meta.errors[0];
 								return (
 									<div className="space-y-2">
-										<Label htmlFor="lyric-generation-seed">
+										<Label htmlFor={seedId}>
 											{t('cantoLyr.ai.lyrics.form.seedLabel')}
 										</Label>
 										<Input
-											id="lyric-generation-seed"
+											id={seedId}
 											value={field.state.value}
 											onBlur={field.handleBlur}
 											onChange={(event) =>
@@ -267,16 +270,14 @@ export function LyricGenerationForm({
 											placeholder={t('cantoLyr.ai.lyrics.form.seedPlaceholder')}
 											inputMode="numeric"
 											aria-invalid={showError}
-											aria-describedby={
-												showError ? 'lyric-generation-seed-error' : undefined
-											}
+											aria-describedby={showError ? seedErrorId : undefined}
 										/>
 										<p className="text-xs text-muted-foreground">
 											{t('cantoLyr.ai.lyrics.form.seedCaption')}
 										</p>
 										{showError && errKey && (
 											<p
-												id="lyric-generation-seed-error"
+												id={seedErrorId}
 												className="text-xs text-destructive px-2"
 												role="alert"
 											>
@@ -304,11 +305,11 @@ export function LyricGenerationForm({
 								const errKey = field.state.meta.errors[0];
 								return (
 									<div className="space-y-2">
-										<Label htmlFor="lyric-generation-top">
+										<Label htmlFor={topId}>
 											{t('cantoLyr.ai.lyrics.form.topLabel')}
 										</Label>
 										<Input
-											id="lyric-generation-top"
+											id={topId}
 											value={field.state.value}
 											onBlur={field.handleBlur}
 											onChange={(event) =>
@@ -319,16 +320,14 @@ export function LyricGenerationForm({
 											placeholder="3"
 											inputMode="numeric"
 											aria-invalid={showError}
-											aria-describedby={
-												showError ? 'lyric-generation-top-error' : undefined
-											}
+											aria-describedby={showError ? topErrorId : undefined}
 										/>
 										<p className="text-xs text-muted-foreground">
 											{t('cantoLyr.ai.lyrics.form.topCaption')}
 										</p>
 										{showError && errKey && (
 											<p
-												id="lyric-generation-top-error"
+												id={topErrorId}
 												className="text-xs text-destructive px-2"
 												role="alert"
 											>

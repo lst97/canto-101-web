@@ -216,21 +216,15 @@ export function useLexiconSearch(
 
 	const queryClient = useQueryClient();
 
-	const setQuery = useCallback(
-		(value: string) => {
-			setValidationError(null);
-			setQueryState(value);
-		},
-		[setValidationError],
-	);
+	const setQuery = useCallback((value: string) => {
+		setValidationError(null);
+		setQueryState(value);
+	}, []);
 
-	const updateOption = useCallback(
-		(key: string, value: unknown) => {
-			setValidationError(null);
-			setOptions((prev) => ({ ...prev, [key]: value }));
-		},
-		[setValidationError],
-	);
+	const updateOption = useCallback((key: string, value: unknown) => {
+		setValidationError(null);
+		setOptions((prev) => ({ ...prev, [key]: value }));
+	}, []);
 
 	const baseQueryKey = createQueryKey(kind, submitted);
 
@@ -326,7 +320,7 @@ export function useLexiconSearch(
 				}
 			});
 		},
-		[kind, queryClient, setValidationError],
+		[kind, queryClient],
 	);
 
 	const error =

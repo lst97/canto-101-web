@@ -98,7 +98,7 @@ export const useTranslationEditor = () => {
 			if (path.includes('.')) {
 				const parentPath = path.substring(0, path.lastIndexOf('.'));
 				const parent = nodeMap.get(parentPath);
-				if (parent && !parent.isLeaf) parent.children!.push(node);
+				if (parent && !parent.isLeaf) parent.children?.push(node);
 			} else {
 				rootNodes.push(node);
 			}

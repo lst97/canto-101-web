@@ -39,7 +39,7 @@ export const LanguageSwitcher = () => {
 				});
 			});
 		},
-		[MIN_LOADING_DURATION_MS, i18n, startLoading],
+		[i18n, startLoading],
 	);
 
 	return (

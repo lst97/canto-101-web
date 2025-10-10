@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '../ui/badge.tsx';
 import { Button } from '../ui/button.tsx';
@@ -8,8 +9,9 @@ const heroMetricKeys = ['lessons', 'drills', 'community'] as const;
 
 export default function Hero(): ReactElement {
 	const { t } = useTranslation();
+	const heroId = useId();
 	return (
-		<header id="hero" className="relative">
+		<header id={heroId} className="relative">
 			<Badge
 				variant="outline"
 				className="inline-flex items-center gap-2 rounded-full border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-primary"

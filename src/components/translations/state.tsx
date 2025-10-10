@@ -49,7 +49,7 @@ export const TranslationEditorProvider = ({
 		};
 		document.addEventListener('click', handleClick, true);
 		return () => document.removeEventListener('click', handleClick, true);
-	}, [hasUnsavedChanges, isSaving]);
+	}, [hasUnsavedChanges, isSaving, requestNavigationConfirmation]);
 
 	useEffect(() => {
 		if (!hasUnsavedChanges || isSaving) return undefined;
@@ -59,7 +59,7 @@ export const TranslationEditorProvider = ({
 		globalThis.window.addEventListener('beforeunload', handleBeforeUnload);
 		return () =>
 			globalThis.window.removeEventListener('beforeunload', handleBeforeUnload);
-	}, [hasUnsavedChanges, isSaving]);
+	}, [hasUnsavedChanges, isSaving, beforeUnloadHandler]);
 
 	return <>{children}</>;
 };

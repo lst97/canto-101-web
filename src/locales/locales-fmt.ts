@@ -376,13 +376,14 @@ function tryAutoFixJson(content: string): {
 
 	if (openCurly > closeCurly) {
 		const diff = openCurly - closeCurly;
-		fixed = fixed + '\n' + '}'.repeat(diff) + '\n';
+		const closingBraces = '}'.repeat(diff);
+		fixed = `${fixed}\n${closingBraces}\n`;
 		steps.push(`Appended ${diff} missing }`);
 	} else if (closeCurly > openCurly) {
 		const diff = closeCurly - openCurly;
 		let removed = 0;
 		for (let i = 0; i < diff; i++) {
-			const next = fixed.replaceAll(/\}\s*$/m, '');
+			const next = fixed.replace(/\}\s*$/gm, '');
 			if (next !== fixed) {
 				fixed = next;
 				removed++;
@@ -393,13 +394,13 @@ function tryAutoFixJson(content: string): {
 
 	if (openSquare > closeSquare) {
 		const diff = openSquare - closeSquare;
-		fixed = fixed + '\n' + ']'.repeat(diff) + '\n';
+		fixed = `${fixed}\n${']'.repeat(diff)}\n`;
 		steps.push(`Appended ${diff} missing ]`);
 	} else if (closeSquare > openSquare) {
 		const diff = closeSquare - openSquare;
 		let removed = 0;
 		for (let i = 0; i < diff; i++) {
-			const next = fixed.replaceAll(/\]\s*$/m, '');
+			const next = fixed.replace(/\]\s*$/gm, '');
 			if (next !== fixed) {
 				fixed = next;
 				removed++;
@@ -420,7 +421,7 @@ function tryAutoFixJson(content: string): {
 		!trimmed.endsWith('}') &&
 		/"[^"\n]+"\s*:/.test(trimmed)
 	) {
-		fixed = '{\n' + fixed + '\n}\n';
+		fixed = `{\n${fixed}\n}\n`;
 		steps.push('Wrapped content with top-level {}');
 	}
 
@@ -578,7 +579,7 @@ function normalizeStructure(
 			if (!dryRun) {
 				fs.writeFileSync(
 					filePath,
-					JSON.stringify(data, null, 2) + '\n',
+					`${JSON.stringify(data, null, 2)}\n`,
 					'utf8',
 				);
 			}
@@ -610,7 +611,7 @@ function normalizeStructure(
 			delete data.homepage;
 		}
 		if (!dryRun) {
-			fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
+			fs.writeFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 		}
 		console.log(
 			`${
@@ -717,7 +718,7 @@ function validateLocales(flags: {
 						if (!flags.dryRun) {
 							fs.writeFileSync(
 								filePath,
-								JSON.stringify(result.parsed, null, 2) + '\n',
+								`${JSON.stringify(result.parsed, null, 2)}\n`,
 								'utf8',
 							);
 						}

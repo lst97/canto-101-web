@@ -31,6 +31,7 @@ export const ThemeToggle = () => {
 				{themes.map(({ value, label, icon }) => (
 					<button
 						key={value}
+						type="button"
 						onClick={() => setTheme(value)}
 						className={`flex items-center gap-1 px-3 py-1.5 rounded-md text-sm transition-colors ${
 							theme === value

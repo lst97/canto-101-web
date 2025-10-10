@@ -119,14 +119,14 @@ export function LyricResultCard({
 					return chars.map((ch, i) =>
 						i === offset ? (
 							<HighlightText
-								key={`seg-syll-${segStart}-${i}`}
+								key={`seg-syll-${segStart}-${i}-${ch}`}
 								text={ch}
 								inViewOnce={false}
 								transition={{ duration: 0.5, ease: 'easeOut' }}
 								className="inline"
 							/>
 						) : (
-							<span key={`seg-syll-${segStart}-${i}-n`}>{ch}</span>
+							<span key={`seg-syll-${segStart}-${i}-${ch}-n`}>{ch}</span>
 						),
 					);
 				}
@@ -294,7 +294,7 @@ export function LyricResultCard({
 			return graphemes.map((g, i) =>
 				i === idx ? (
 					<HighlightText
-						key={`highlight-syllable-${highlightedSyllablePosition}-${i}`}
+						key={`highlight-syllable-${highlightedSyllablePosition}-${i}-${g}`}
 						text={g}
 						inViewOnce={false}
 						transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -316,7 +316,7 @@ export function LyricResultCard({
 			return parts.map((part, index) =>
 				part.toLowerCase() === tokenText.toLowerCase() ? (
 					<HighlightText
-						key={`highlight-token-${highlightedTokenPosition}-${index}`}
+						key={`highlight-token-${highlightedTokenPosition}-${index}-${part}`}
 						text={part}
 						inViewOnce={false}
 						transition={{ duration: 0.5, ease: 'easeOut' }}

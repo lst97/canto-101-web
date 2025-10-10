@@ -45,7 +45,7 @@ export function ContainerTextFlip({
 	useEffect(() => {
 		// Update width whenever the word changes
 		updateWidthForWord();
-	}, [currentWordIndex, updateWidthForWord]);
+	}, [updateWidthForWord]);
 
 	// Recalculate width on resize of the content (e.g., font load/size change)
 	useEffect(() => {
@@ -55,7 +55,7 @@ export function ContainerTextFlip({
 		// Initial measure in case
 		updateWidthForWord();
 		return () => ro.disconnect();
-	}, [words, widthPadding, updateWidthForWord]);
+	}, [updateWidthForWord]);
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {

@@ -275,7 +275,15 @@ export function LyricSearchBase({
 				page === 0 ? lyricResult.items : [...prev, ...lyricResult.items];
 			return dedupeByNormalizedText(combined);
 		});
-	}, [isRhymeSearch, lyricRhymeResult, lyricResult, loading, page]);
+	}, [
+		isRhymeSearch,
+		lyricRhymeResult,
+		lyricResult,
+		loading,
+		page,
+		resetSharedState,
+		resetVariantState,
+	]);
 
 	useEffect(() => {
 		if (!isRhymeSearch) return;
@@ -753,7 +761,7 @@ export function LyricSearchBase({
 									/>
 								) : (
 									t('common.loadMore', {
-										count: Number(typedOptions['pageSize']) || 25,
+										count: Number(typedOptions.pageSize) || 25,
 									})
 								)}
 							</Button>

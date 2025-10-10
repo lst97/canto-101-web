@@ -4,6 +4,7 @@ import {
 	type ReactElement,
 	useCallback,
 	useEffect,
+	useId,
 	useMemo,
 	useState,
 } from 'react';
@@ -113,6 +114,13 @@ export function LexiconAiSearch(): ReactElement {
 	} = useAiLexiconSearch();
 	const [activeId, setActiveId] = useState<string | null>(null);
 
+	const queryId = useId();
+	const queryErrorId = useId();
+	const pronunciationId = useId();
+	const pronunciationErrorId = useId();
+	const limitId = useId();
+	const limitErrorId = useId();
+
 	// Zod schema mirroring pronunciation constraints from LexiconPronunciationSearch.tsx
 	const pronunciationSchema = z
 		.string()
@@ -182,7 +190,7 @@ export function LexiconAiSearch(): ReactElement {
 
 	useEffect(() => {
 		setActiveId(null);
-	}, [result?.query, result?.pronunciation]);
+	}, []);
 
 	const handleActivate = useCallback((identifier: string) => {
 		setActiveId((prev) => (prev === identifier ? prev : identifier));
@@ -210,11 +218,11 @@ export function LexiconAiSearch(): ReactElement {
 					<form.Field name="query">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor="ai-lexicon-query">
+								<Label htmlFor={queryId}>
 									{t('cantoLyr.ai.lexicon.form.queryLabel')}
 								</Label>
 								<Input
-									id="ai-lexicon-query"
+									id={queryId}
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
@@ -222,15 +230,13 @@ export function LexiconAiSearch(): ReactElement {
 									autoComplete="off"
 									aria-invalid={field.state.meta.errors.length > 0}
 									aria-describedby={
-										field.state.meta.errors.length
-											? 'ai-lexicon-query-error'
-											: undefined
+										field.state.meta.errors.length ? queryErrorId : undefined
 									}
 								/>
 								{field.state.meta.errors[0] &&
 									(field.state.meta.isTouched || form.state.isSubmitting) && (
 										<p
-											id="ai-lexicon-query-error"
+											id={queryErrorId}
 											className="text-xs text-destructive px-2"
 										>
 											{(() => {
@@ -255,11 +261,11 @@ export function LexiconAiSearch(): ReactElement {
 						<form.Field name="pronunciation">
 							{(field) => (
 								<div className="flex-1 space-y-2">
-									<Label htmlFor="ai-lexicon-pronunciation">
+									<Label htmlFor={pronunciationId}>
 										{t('cantoLyr.ai.lexicon.form.pronunciationLabel')}
 									</Label>
 									<Input
-										id="ai-lexicon-pronunciation"
+										id={pronunciationId}
 										value={field.state.value}
 										onBlur={field.handleBlur}
 										onChange={(e) => field.handleChange(e.target.value)}
@@ -272,14 +278,14 @@ export function LexiconAiSearch(): ReactElement {
 										aria-invalid={field.state.meta.errors.length > 0}
 										aria-describedby={
 											field.state.meta.errors.length
-												? 'ai-lexicon-pronunciation-error'
+												? pronunciationErrorId
 												: undefined
 										}
 									/>
 									{field.state.meta.errors[0] &&
 										(field.state.meta.isTouched || form.state.isSubmitting) && (
 											<p
-												id="ai-lexicon-pronunciation-error"
+												id={pronunciationErrorId}
 												className="text-xs text-destructive px-2"
 											>
 												{(() => {
@@ -303,11 +309,11 @@ export function LexiconAiSearch(): ReactElement {
 						<form.Field name="limit">
 							{(field) => (
 								<div className="sm:w-36 space-y-2">
-									<Label htmlFor="ai-lexicon-limit">
+									<Label htmlFor={limitId}>
 										{t('cantoLyr.ai.lexicon.form.limitLabel')}
 									</Label>
 									<Input
-										id="ai-lexicon-limit"
+										id={limitId}
 										value={field.state.value}
 										onBlur={field.handleBlur}
 										onChange={(e) =>
@@ -319,15 +325,13 @@ export function LexiconAiSearch(): ReactElement {
 										autoComplete="off"
 										aria-invalid={field.state.meta.errors.length > 0}
 										aria-describedby={
-											field.state.meta.errors.length
-												? 'ai-lexicon-limit-error'
-												: undefined
+											field.state.meta.errors.length ? limitErrorId : undefined
 										}
 									/>
 									{field.state.meta.errors[0] &&
 										(field.state.meta.isTouched || form.state.isSubmitting) && (
 											<p
-												id="ai-lexicon-limit-error"
+												id={limitErrorId}
 												className="text-xs text-destructive px-2"
 											>
 												{(() => {

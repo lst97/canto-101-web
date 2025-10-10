@@ -16,7 +16,9 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
 				className,
 			)}
 			{...props}
-		/>
+		>
+			{props.children}
+		</label>
 	),
 );
 

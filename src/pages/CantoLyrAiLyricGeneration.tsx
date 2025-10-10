@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { ExternalLink, Eye, EyeOff, FlaskConical, Key } from 'lucide-react';
 import type { ReactElement } from 'react';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LyricSession } from '../components/cantoLyr/lyric-generation/index.ts';
 import QueryErrorBoundary from '../components/errors/QueryErrorBoundary.tsx';
@@ -36,6 +36,7 @@ import { Separator } from '../components/ui/separator.tsx';
 
 export default function CantoLyrLyricGeneration(): ReactElement {
 	const { t } = useTranslation();
+	const apiKeyId = useId();
 	const [apiKey, setApiKey] = useState('');
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
@@ -104,12 +105,12 @@ export default function CantoLyrLyricGeneration(): ReactElement {
 							</DialogHeader>
 							<div className="space-y-4">
 								<div className="space-y-2">
-									<Label htmlFor="apiKey">
+									<Label htmlFor={apiKeyId}>
 										{t('cantoLyr.ai.lyrics.form.apiKey.label')}
 									</Label>
 									<div className="relative">
 										<Input
-											id="apiKey"
+											id={apiKeyId}
 											type={showPassword ? 'text' : 'password'}
 											value={apiKey}
 											onChange={(e) => {

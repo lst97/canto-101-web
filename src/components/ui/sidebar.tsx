@@ -21,6 +21,7 @@ import {
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { log } from '@/lib/logger';
 import { cn } from '@/lib/utils';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
@@ -29,6 +30,20 @@ const SIDEBAR_WIDTH = '20rem';
 const SIDEBAR_WIDTH_MOBILE = '22rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
+
+type CookieStoreSetInput = {
+	name: string;
+	value: string;
+	expires?: number;
+	domain?: string;
+	path?: string;
+	secure?: boolean;
+	sameSite?: 'Strict' | 'Lax' | 'None';
+};
+
+type CookieStoreLike = {
+	set: (input: CookieStoreSetInput) => Promise<void>;
+};
 
 type SidebarContextProps = {
 	state: 'expanded' | 'collapsed';
@@ -71,6 +86,63 @@ function SidebarProvider({
 	// We use openProp and setOpenProp for control from outside the component.
 	const [_open, _setOpen] = React.useState(defaultOpen);
 	const open = openProp ?? _open;
+
+	const persistSidebarPreference = React.useCallback(
+		async (openState: boolean) => {
+			if (typeof globalThis.document === 'undefined') {
+				return;
+			}
+
+			const cookieValue = String(openState);
+			const isSecure =
+				globalThis.window !== undefined &&
+				globalThis.window.location.protocol === 'https:';
+			const expiresAt = Date.now() + SIDEBAR_COOKIE_MAX_AGE * 1000;
+
+			const windowWithCookieStore = globalThis.window as
+				| (typeof window & {
+						cookieStore?: CookieStoreLike;
+				  })
+				| undefined;
+			const cookieStore = windowWithCookieStore?.cookieStore;
+
+			if (cookieStore) {
+				try {
+					await cookieStore.set({
+						name: SIDEBAR_COOKIE_NAME,
+						value: cookieValue,
+						expires: expiresAt,
+						path: '/',
+						sameSite: 'Lax',
+						secure: isSecure,
+					});
+					return;
+				} catch (error: unknown) {
+					log.warn('sidebar.cookieStore.set_failed', {
+						error:
+							error instanceof Error
+								? { name: error.name, message: error.message }
+								: { value: error },
+					});
+				}
+			}
+
+			const cookieSegments = [
+				`${SIDEBAR_COOKIE_NAME}=${cookieValue}`,
+				'path=/',
+				`max-age=${SIDEBAR_COOKIE_MAX_AGE}`,
+				'SameSite=Lax',
+			];
+
+			if (isSecure) {
+				cookieSegments.push('Secure');
+			}
+
+			// FALLBACK for chrome < 127, Firefox < 140
+			globalThis.document.cookie = cookieSegments.join('; ');
+		},
+		[],
+	);
 	const setOpen = React.useCallback(
 		(value: boolean | ((value: boolean) => boolean)) => {
 			const openState = typeof value === 'function' ? value(open) : value;
@@ -80,31 +152,15 @@ function SidebarProvider({
 				_setOpen(openState);
 			}
 
-			if (document !== undefined) {
-				const cookieSegments = [
-					`${SIDEBAR_COOKIE_NAME}=${openState}`,
-					'path=/',
-					`max-age=${SIDEBAR_COOKIE_MAX_AGE}`,
-					'SameSite=Lax',
-				];
-
-				if (
-					globalThis.window !== undefined &&
-					globalThis.window.location.protocol === 'https:'
-				) {
-					cookieSegments.push('Secure');
-				}
-
-				document.cookie = cookieSegments.join('; ');
-			}
+			void persistSidebarPreference(openState);
 		},
-		[setOpenProp, open],
+		[setOpenProp, open, persistSidebarPreference],
 	);
 
 	// Helper to toggle the sidebar.
 	const toggleSidebar = React.useCallback(() => {
 		return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
-	}, [isMobile, setOpen, setOpenMobile]);
+	}, [isMobile, setOpen]);
 
 	// Adds a keyboard shortcut to toggle the sidebar.
 	React.useEffect(() => {
@@ -137,7 +193,7 @@ function SidebarProvider({
 			setOpenMobile,
 			toggleSidebar,
 		}),
-		[state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar],
+		[state, open, setOpen, isMobile, openMobile, toggleSidebar],
 	);
 
 	return (

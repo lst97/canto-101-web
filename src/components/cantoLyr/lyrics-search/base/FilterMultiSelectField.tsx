@@ -57,7 +57,7 @@ export function FilterMultiSelectField({
 			applyDebouncedSearch(search);
 		}, 300);
 		return () => clearTimeout(timer);
-	}, [search]);
+	}, [search, applyDebouncedSearch]);
 
 	useEffect(() => {
 		if (!open) {

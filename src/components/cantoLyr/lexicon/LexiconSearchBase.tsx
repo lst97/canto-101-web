@@ -266,7 +266,14 @@ export function LexiconSearchBase({
 				page === 0 ? readingResult.items : [...prev, ...readingResult.items];
 			return dedupeById(combined);
 		});
-	}, [isRhymeSearch, rhymeVariantsResult, readingResult, page, loading]);
+	}, [
+		isRhymeSearch,
+		rhymeVariantsResult,
+		readingResult,
+		page,
+		loading,
+		resetLexiconState,
+	]);
 
 	useEffect(() => {
 		if (!isRhymeSearch) return;
@@ -306,7 +313,7 @@ export function LexiconSearchBase({
 		setGroups(computedGroups);
 	}, [entries, effectiveGroupSize]);
 
-	const entriesCount = entries.length;
+	const _entriesCount = entries.length;
 
 	useLayoutEffect(() => {
 		const el = resultsScrollRef.current;
@@ -337,7 +344,7 @@ export function LexiconSearchBase({
 		if (heightDelta !== 0) {
 			el.scrollTop = Math.max(0, previousTop + heightDelta);
 		}
-	}, [entriesCount, page]);
+	}, [page]);
 
 	useLayoutEffect(() => {
 		const el = resultsScrollRef.current;

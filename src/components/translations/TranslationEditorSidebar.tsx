@@ -1,5 +1,5 @@
 import { FileText, Key, Minus, Plus, Search } from 'lucide-react';
-import { Activity, useState } from 'react';
+import { Activity, useId, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -38,6 +38,7 @@ export const TranslationEditorSidebar = () => {
 	} = useTranslationEditor();
 	const [newKeyDialog, setNewKeyDialog] = useState(false);
 	const [newKeyInput, setNewKeyInput] = useState('');
+	const newKeyInputId = useId();
 	const [newKeyError, setNewKeyError] = useState('');
 
 	const onAddKey = () => {
@@ -119,9 +120,9 @@ export const TranslationEditorSidebar = () => {
 							</DialogHeader>
 							<div className="grid gap-4">
 								<div className="grid gap-2">
-									<Label htmlFor="new-key-input">Translation Key</Label>
+									<Label htmlFor={newKeyInputId}>Translation Key</Label>
 									<Input
-										id="new-key-input"
+										id={newKeyInputId}
 										placeholder="e.g., common.welcome or feature.title"
 										value={newKeyInput}
 										onChange={(e) => {

@@ -6,10 +6,13 @@ Observe the constitution's TypeScript-strict mandate: no `any`, explicit return
 types, and exhaustive discriminated unions. React components use PascalCase,
 helpers use camelCase, hooks start with `use`, and Tailwind utility groupings
 stay inline unless a variant fits better alongside the component in `src/lib/`.
-Use Zustand stores for complex state management, with store files organized in
-`src/stores/`. ESLint (see `eslint.config.js`) expects 2-space indentation and
-complete hook dependency arrays. Prettier is configured (.prettierrc.json) for
-consistent formatting with 2-space indentation, single quotes, and semicolons.
+Use the React `useId` hook in a component to generate a unique and stable ID string,
+so that multiple instances on the same page do not have conflicting IDs, especially
+for accessibility attributes and form labeling. Use Zustand stores for complex state
+management, with store files organized in `src/stores/`. ESLint (see `eslint.config.js`)
+expects 2-space indentation and complete hook dependency arrays. Prettier is
+configured (.prettierrc.json) for consistent formatting with 2-space indentation,
+single quotes, and semicolons.
 
 ### React 19.2 Adoption
 

@@ -27,7 +27,7 @@ export const unflattenObject = (
 			if (!curr[parts[i]]) curr[parts[i]] = {};
 			curr = curr[parts[i]] as Record<string, unknown>;
 		}
-		curr[parts.at(-1)!] = v;
+		curr[parts[parts.length - 1]] = v;
 	}
 	return nested;
 };

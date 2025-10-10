@@ -14,7 +14,8 @@
 			"!**/build",
 			"!**/coverage",
 			"!**/.turbo",
-			"!**/.yarn"
+			"!**/.yarn",
+			"!**/*.css"
 		]
 	},
 	"formatter": {

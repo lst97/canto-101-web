@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '../ui/badge.tsx';
 import { Card, CardContent, CardHeader } from '../ui/card.tsx';
@@ -68,9 +68,10 @@ export default function ProductsShowcase(): ReactElement {
 		};
 	}, [carouselApi]);
 
+	const productsId = useId();
 	return (
 		<section
-			id="products"
+			id={productsId}
 			className="mt-24 rounded-[2.5rem] border border-border/80 bg-card/70 px-8 py-12 backdrop-blur-sm md:px-12"
 		>
 			<div className="flex flex-col gap-10 sm:gap-12">
@@ -82,18 +83,16 @@ export default function ProductsShowcase(): ReactElement {
 						{t('homepage.products.description')}
 					</p>
 				</div>
-				<div
-					role="list"
+				<ul
 					aria-label={t('homepage.products.title')}
-					className="grid w-full max-w-4xl gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-10 mx-auto"
+					className="grid w-full max-w-4xl gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-10 mx-auto list-none p-0 m-0"
 				>
 					{productItems.map((product) => {
 						const productId = toDomId(product.translationKey);
 						const isActive = product.translationKey === activeProductKey;
 						return (
-							<div
+							<li
 								key={product.translationKey}
-								role="listitem"
 								id={`${productId}-summary`}
 								className={[
 									'group relative flex aspect-square w-full min-w-[10rem] flex-col justify-between overflow-hidden rounded-2xl border px-5 py-6 text-left transition-all',
@@ -111,10 +110,10 @@ export default function ProductsShowcase(): ReactElement {
 								<span className="absolute inset-x-5 bottom-4 text-xs font-medium text-muted-foreground">
 									{t('homepage.products.items.viewDetails', 'View details')}
 								</span>
-							</div>
+							</li>
 						);
 					})}
-				</div>
+				</ul>
 				<Carousel
 					opts={{ align: 'start' }}
 					setApi={setCarouselApi}

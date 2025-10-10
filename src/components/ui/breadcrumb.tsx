@@ -53,11 +53,10 @@ function BreadcrumbPage({
 	className,
 	children,
 	...props
-}: React.ComponentProps<'a'>) {
+}: React.ComponentProps<'span'>) {
 	return (
-		<a
+		<span
 			data-slot="breadcrumb-page"
-			href="#"
 			aria-current="page"
 			className={cn(
 				'text-foreground font-normal pointer-events-none',
@@ -66,7 +65,7 @@ function BreadcrumbPage({
 			{...props}
 		>
 			{children}
-		</a>
+		</span>
 	);
 }
 
