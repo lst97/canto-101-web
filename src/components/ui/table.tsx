@@ -4,147 +4,147 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '../../lib/utils.ts';
 
 const TableHeader = React.forwardRef<
-  HTMLTableSectionElement,
-  React.HTMLAttributes<HTMLTableSectionElement>
+	HTMLTableSectionElement,
+	React.HTMLAttributes<HTMLTableSectionElement>
 >(function TableHeader({ className, ...props }, ref) {
-  return (
-    <thead ref={ref} className={cn('[&_tr]:border-b', className)} {...props} />
-  );
+	return (
+		<thead ref={ref} className={cn('[&_tr]:border-b', className)} {...props} />
+	);
 });
 
 const containsHeaderElement = (node: React.ReactNode): boolean => {
-  return React.Children.toArray(node).some(child => {
-    if (!React.isValidElement(child)) return false;
-    if (child.type === 'thead' || child.type === TableHeader) {
-      return true;
-    }
-    const childProps = child.props as { children?: React.ReactNode };
-    if (childProps.children) {
-      return containsHeaderElement(childProps.children);
-    }
-    return false;
-  });
+	return React.Children.toArray(node).some((child) => {
+		if (!React.isValidElement(child)) return false;
+		if (child.type === 'thead' || child.type === TableHeader) {
+			return true;
+		}
+		const childProps = child.props as { children?: React.ReactNode };
+		if (childProps.children) {
+			return containsHeaderElement(childProps.children);
+		}
+		return false;
+	});
 };
 
 const Table = React.forwardRef<
-  HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
+	HTMLTableElement,
+	React.HTMLAttributes<HTMLTableElement>
 >(function Table({ className, children, ...props }, ref) {
-  const { t } = useTranslation();
-  const hasHeader = React.useMemo(
-    () => containsHeaderElement(children),
-    [children]
-  );
+	const { t } = useTranslation();
+	const hasHeader = React.useMemo(
+		() => containsHeaderElement(children),
+		[children],
+	);
 
-  return (
-    <div className="relative w-full overflow-auto">
-      <table
-        ref={ref}
-        className={cn('w-full caption-bottom text-sm', className)}
-        {...props}
-      >
-        {hasHeader ? (
-          children
-        ) : (
-          <>
-            <thead className="sr-only">
-              <tr>
-                <th scope="col">{t('table.fallbackHeader')}</th>
-              </tr>
-            </thead>
-            {children}
-          </>
-        )}
-      </table>
-    </div>
-  );
+	return (
+		<div className="relative w-full overflow-auto">
+			<table
+				ref={ref}
+				className={cn('w-full caption-bottom text-sm', className)}
+				{...props}
+			>
+				{hasHeader ? (
+					children
+				) : (
+					<>
+						<thead className="sr-only">
+							<tr>
+								<th scope="col">{t('table.fallbackHeader')}</th>
+							</tr>
+						</thead>
+						{children}
+					</>
+				)}
+			</table>
+		</div>
+	);
 });
 
 const TableBody = React.forwardRef<
-  HTMLTableSectionElement,
-  React.HTMLAttributes<HTMLTableSectionElement>
+	HTMLTableSectionElement,
+	React.HTMLAttributes<HTMLTableSectionElement>
 >(function TableBody({ className, ...props }, ref) {
-  return (
-    <tbody
-      ref={ref}
-      className={cn('[&_tr:last-child]:border-0', className)}
-      {...props}
-    />
-  );
+	return (
+		<tbody
+			ref={ref}
+			className={cn('[&_tr:last-child]:border-0', className)}
+			{...props}
+		/>
+	);
 });
 
 const TableFooter = React.forwardRef<
-  HTMLTableSectionElement,
-  React.HTMLAttributes<HTMLTableSectionElement>
+	HTMLTableSectionElement,
+	React.HTMLAttributes<HTMLTableSectionElement>
 >(function TableFooter({ className, ...props }, ref) {
-  return (
-    <tfoot
-      ref={ref}
-      className={cn(
-        'bg-muted/50 font-medium [&>tr]:last:border-b-0',
-        className
-      )}
-      {...props}
-    />
-  );
+	return (
+		<tfoot
+			ref={ref}
+			className={cn(
+				'bg-muted/50 font-medium [&>tr]:last:border-b-0',
+				className,
+			)}
+			{...props}
+		/>
+	);
 });
 
 const TableRow = React.forwardRef<
-  HTMLTableRowElement,
-  React.HTMLAttributes<HTMLTableRowElement>
+	HTMLTableRowElement,
+	React.HTMLAttributes<HTMLTableRowElement>
 >(function TableRow({ className, ...props }, ref) {
-  return (
-    <tr
-      ref={ref}
-      className={cn('border-b transition-colors hover:bg-muted/50', className)}
-      {...props}
-    />
-  );
+	return (
+		<tr
+			ref={ref}
+			className={cn('border-b transition-colors hover:bg-muted/50', className)}
+			{...props}
+		/>
+	);
 });
 
 const TableHead = React.forwardRef<
-  HTMLTableCellElement,
-  React.ThHTMLAttributes<HTMLTableCellElement>
+	HTMLTableCellElement,
+	React.ThHTMLAttributes<HTMLTableCellElement>
 >(function TableHead({ className, ...props }, ref) {
-  return (
-    <th
-      ref={ref}
-      className={cn(
-        'h-12 px-4 text-left align-middle font-medium text-muted-foreground',
-        className
-      )}
-      {...props}
-    />
-  );
+	return (
+		<th
+			ref={ref}
+			className={cn(
+				'h-12 px-4 text-left align-middle font-medium text-muted-foreground',
+				className,
+			)}
+			{...props}
+		/>
+	);
 });
 
 const TableCell = React.forwardRef<
-  HTMLTableCellElement,
-  React.TdHTMLAttributes<HTMLTableCellElement>
+	HTMLTableCellElement,
+	React.TdHTMLAttributes<HTMLTableCellElement>
 >(function TableCell({ className, ...props }, ref) {
-  return <td ref={ref} className={cn('p-4 align-top', className)} {...props} />;
+	return <td ref={ref} className={cn('p-4 align-top', className)} {...props} />;
 });
 
 const TableCaption = React.forwardRef<
-  HTMLTableCaptionElement,
-  React.HTMLAttributes<HTMLTableCaptionElement>
+	HTMLTableCaptionElement,
+	React.HTMLAttributes<HTMLTableCaptionElement>
 >(function TableCaption({ className, ...props }, ref) {
-  return (
-    <caption
-      ref={ref}
-      className={cn('mt-4 text-sm text-muted-foreground', className)}
-      {...props}
-    />
-  );
+	return (
+		<caption
+			ref={ref}
+			className={cn('mt-4 text-sm text-muted-foreground', className)}
+			{...props}
+		/>
+	);
 });
 
 export {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
+	Table,
+	TableBody,
+	TableCaption,
+	TableCell,
+	TableFooter,
+	TableHead,
+	TableHeader,
+	TableRow,
 };

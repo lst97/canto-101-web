@@ -1,4 +1,5 @@
 onlyBuiltDependencies:
-  - "@tailwindcss/oxide"
+  - '@biomejs/biome'
+  - '@tailwindcss/oxide'
   - esbuild
   - msw

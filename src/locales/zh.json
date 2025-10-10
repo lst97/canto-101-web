@@ -1,741 +1,741 @@
 {
-  "common": {
-    "loading": "載入中...",
-    "error": "錯誤",
-    "save": "儲存",
-    "cancel": "取消",
-    "delete": "刪除",
-    "edit": "編輯",
-    "search": "搜尋",
-    "close": "關閉",
-    "loadMore": "載入另外 {{count}} 個",
-    "showMore": "顯示另外 {{count}} 個",
-    "reset": "重置"
-  },
-  "notFound": {
-    "title": "頁面未找到",
-    "description": "您尋找的頁面不存在。",
-    "goHome": "返回首頁"
-  },
-  "errors": {
-    "network": {
-      "title": "網絡連線問題",
-      "message": "無法連線伺服器，請檢查網路。"
-    },
-    "api": {
-      "title": "請求失敗",
-      "message": "伺服器回傳錯誤。"
-    },
-    "unexpected": {
-      "title": "發生未預期錯誤",
-      "message": "系統遇到未預期的情況。"
-    },
-    "actions": {
-      "retry": "重試",
-      "dismiss": "關閉",
-      "copyDebug": "複製偵錯資訊",
-      "copiedDebug": "已複製偵錯資訊"
-    }
-  },
-  "language": {
-    "english": "英語",
-    "chineseSimplified": "简体中文",
-    "chineseTraditional": "繁体中文",
-    "japanese": "日语",
-    "switchLanguage": "切換語言",
-    "selectLanguage": "選擇語言"
-  },
-  "theme": {
-    "theme": "主題",
-    "light": "淺色",
-    "dark": "深色",
-    "system": "系統",
-    "switchTheme": "切換主題"
-  },
-  "homepage": {
-    "ai": "AI",
-    "hero": {
-      "eyebrow": "粵語 101",
-      "title": "找到屬於你的粵語聲線",
-      "subtitle": "大膽、現代的學習空間，讓你從聲調基礎走到自然對話，並以音樂引導沉浸式練習。",
-      "primaryCta": "開始旅程",
-      "secondaryCta": "查看課程地圖",
-      "metrics": {
-        "lessons": "超過 60 節引導課程",
-        "drills": "聲調優先的微練習",
-        "community": "每週社群共修"
-      }
-    },
-    "programOverview": {
-      "title": "首頁／課程總覽",
-      "description": "了解 Canto101 的學習節奏、每個階段的重點，以及如何善用平台功能。",
-      "highlights": {
-        "roadmap": "由語音到敘事的循序進階路線圖。",
-        "playlists": "自動調整的歌詞播放清單，結合文化注釋。",
-        "checkpoints": "里程碑提醒自我檢測並串接導師回饋。"
-      }
-    },
-    "gettingStarted": {
-      "title": "入門指南／認識粵語",
-      "description": "從歷史脈絡、地域使用到聲調系統，建立穩固基礎讓每個音節都自信。",
-      "highlights": {
-        "tones": "互動聲調遊樂場視覺化曲線走向。",
-        "dialects": "比較香港、澳門與海外華人社群的差異。",
-        "romanization": "粵拼速成班連結聲音、文字與聲調符號。"
-      }
-    },
-    "resources": {
-      "title": "資源與加值內容",
-      "description": "額外素材讓你在線上線下都能持續練習。",
-      "highlights": {
-        "downloads": "可列印的速查表、聲調圖與書寫格線。",
-        "integrations": "透過夥伴 App 將練習同步到手機。",
-        "media": "精選 Podcast、劇集與閱讀清單，涵蓋不同程度。"
-      }
-    },
-    "community": {
-      "title": "社群與導師",
-      "description": "加入互相支持的網絡，獲得問答、督導與即時指導。",
-      "highlights": {
-        "forums": "同儕論壇即時分享問題與學習成果。",
-        "events": "每週母語導師與業界來賓的線上諮詢。",
-        "booking": "在平台內直接預訂一對一或小組實驗課。"
-      }
-    },
-    "products": {
-      "title": "產品工具",
-      "description": "專為加速粵語學習而設計的數位夥伴。",
-      "items": {
-        "viewDetails": "查看詳情",
-        "cantoLyr": {
-          "label": "CantoLyr",
-          "description": "以歌詞驅動的課程，連結發音、文字與文化。",
-          "features": {
-            "romanization": "粵拼引導配合母語音檔，逐步拆解發音。",
-            "vocabulary": "核心詞彙卡片搭配間隔重複提醒。",
-            "phrases": "實用情境對話，幫你記住常用語。",
-            "grammar": "語法藍圖拆解助詞與時態標記。",
-            "pronunciation": "聲調實驗室以圖像呈現音高曲線，強化準確度。"
-          }
-        },
-        "cantoCap": {
-          "label": "CantoCap",
-          "description": "自動產生粵語字幕，跟讀真實語料。",
-          "features": {
-            "captions": "為劇集、Vlog 與活動提供精準時間軸字幕。",
-            "annotations": "即時標註變調與口語化用法。",
-            "export": "輸出字幕檔作為字幕、字卡或卡拉 OK 教材。",
-            "mobile": "將字幕包同步到手機，隨時複習。"
-          }
-        }
-      }
-    },
-    "cta": {
-      "title": "準備好踏進 Canto101 嗎？",
-      "description": "解鎖完整指導體驗、自訂學習地圖，讓粵語成為生活日常。",
-      "button": "建立學習者檔案"
-    }
-  },
-  "nav": {
-    "title": "Canto101",
-    "links": {
-      "programOverview": "總覽",
-      "gettingStarted": "入門指南",
-      "resources": "資源",
-      "community": "社群",
-      "products": "產品"
-    },
-    "loading": {
-      "title": "正在準備下一個頁面",
-      "description": "同步最新內容並保持你的進度。",
-      "status": "頁面導向中"
-    }
-  },
-  "table": {
-    "fallbackHeader": "資料"
-  },
-  "test": {
-    "navigation": {
-      "loading": {
-        "title": "正在模擬測試導覽",
-        "description": "啟動測試樣本並驗證模擬 API 回應。",
-        "status": "測試進行中"
-      }
-    }
-  },
-  "footer": {
-    "title": "Canto101",
-    "summary": "總結學習目標、課程結構，以及如何在平台上有效導航以取得最佳成果。",
-    "sections": {
-      "gettingStarted": {
-        "title": "入門 / 關於粵語",
-        "about": "關於粵語",
-        "background": "粵語的重要性、方言特點、聲調運作及地區背景。"
-      },
-      "resources": {
-        "title": "資源與額外教材",
-        "downloads": "可列印/下載的教材連結",
-        "integrations": "行動裝置整合，隨時學習",
-        "media": "推薦的 Podcast、媒體與閱讀"
-      },
-      "community": {
-        "title": "社群與導師連結",
-        "qa": "問答論壇、學習社群，或預約導師上課的地方",
-        "tutors": "預約導師課程"
-      },
-      "products": {
-        "title": "產品",
-        "cantoLyr": "CantoLyr - 歌詞生成，學習工具",
-        "cantoCap": "CantoCap - 粤语字幕生成應用"
-      },
-      "legal": {
-        "title": "法律",
-        "terms": "條款與條件",
-        "privacy": "隱私",
-        "accessibility": "無障礙"
-      }
-    },
-    "disclaimer": "本平台提供學習資料與社群資源，以支援粵語學習。",
-    "copyright": "© 版權 2025 - Canto101"
-  },
-  "cantoLyr": {
-    "ai": {
-      "lyricSearch": {
-        "title": "歌詞搜尋",
-        "pron": {
-          "nav": "AI 聲調搜尋",
-          "heading": "AI 歌詞聲調搜尋",
-          "description": "結合聲調數字與可選語意提示，更聰明地搜尋歌詞行。",
-          "tipsHeading": "AI 聲調搜尋提示",
-          "tipsDescription": "將聲調數字與簡短描述結合，可提升召回品質。",
-          "tips": {
-            "digits": "以 394052 式聲調數字標記需要的輪廓。",
-            "position": "設定聲調位置鎖定特定雙字欄位。",
-            "filters": "結合作詞人、年份、主題或關鍵詞篩選較小的資料範圍。",
-            "aiQuery": "加入簡短描述（如情緒或場景）以引導語意召回。"
-          },
-          "formHeading": "以聲調數字 + 語意搜尋",
-          "formDescription": "輸入聲調數字與可選的語意描述，再配合篩選條件精煉結果。",
-          "placeholder": "描述情緒或場景（選填）"
-        },
-        "rhyme": {
-          "nav": "AI 押韻搜尋",
-          "heading": "AI 歌詞押韻搜尋",
-          "description": "搭配可選語意提示，依韻母探索歌詞行。",
-          "tipsHeading": "AI 押韻搜尋提示",
-          "tipsDescription": "將韻母與簡短描述配對以聚焦結果。",
-          "tips": {
-            "families": "輸入一個或多個粵拼韻母（例：aa 或 aa,aai 以逗號分隔多個韻母）即可找到相同結尾的歌詞。",
-            "placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
-            "filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。",
-            "aiQuery": "加入簡短描述（如場景或主題）以引導語意檢索。"
-          },
-          "formHeading": "以韻母 + 語意搜尋",
-          "formDescription": "輸入 Jyutping 韻母與可選語意描述，必要時再加入篩選。",
-          "placeholder": "描述情緒或用法（選填）"
-        }
-      },
-      "lyrics": {
-        "title": "歌詞生成",
-        "description": "用創作提示和目標聲調格指引生成器，以獲得結構化的粵語歌詞建議。",
-        "formHeading": "說明本次操作",
-        "formDescription": "定義場景、聲調格與選填的隨機種子，再開始生成歌詞行草稿。",
-        "page": {
-          "overview": "功能說明",
-          "shortOverview": "限制與提示",
-          "limitationsHeading": "目前限制",
-          "limitations": {
-            "lexiconCoverage": "輸出品質受限於目前匯入的詞彙資料庫範圍（coverage）。當詞條不足時，語意或押韻可能不夠精準。",
-            "modelRetrieval": "語意檢索與向量召回依賴現行模型；若嵌入表徵不足，可能遺漏更貼合語境的候選。",
-            "queryGeneration": "查詢與聲調序列的組合策略仍在優化，複雜場景下可能出現不穩定排序。",
-            "grammarPron": "生成句子可能含語法、搭配或聲調（發音）錯誤，需人工後期潤飾。",
-            "limitedParagraphs": "段落組合採樣目前僅限少量候選（top-N），可能未涵蓋更多具潛力的混合。",
-            "slowGeneration": "當聲調序列較長或需要重新排序多組候選時，生成速度會顯著放緩。",
-            "toneSequenceRange": "支援的聲調序列長度與分組仍在調整，過長序列可能被截斷或降低品質。"
-          },
-          "improveHeading": "演進與改進",
-          "improvements": {
-            "lexiconGrowth": "擴充與清理詞彙資料庫（含頻率、詞性、語域標記）以提升候選詞質量。",
-            "retrievalRerank": "優化語意檢索、分階段 rerank 與多特徵打分（MMR / pattern fit / frequency）。",
-            "patternScoring": "改良聲調模式與句法結構的評估，減少不自然停頓與語序錯置。",
-            "feedbackLoop": "引入人工標註與使用者回饋循環，增強錯誤識別與排序精準度。"
-          },
-          "tipsHeading": "使用技巧",
-          "tips": {
-            "expandLines": "展開每一行查看候選句與模式統計，萃取靈感或替換片段。",
-            "refineSequences": "調整聲調序列長度與結構（例如把長句拆成兩行）可提升匹配穩定度。",
-            "lexiconSemantic": "若某行詞彙過於生硬，可切換到詞彙語意搜尋工具，輸入相同場景描述尋找替代表達。",
-            "manualPolish": "將生成草稿視為骨架：再行優化語序、情感層次、以及真實口語感。"
-          },
-          "disclaimer": "輸出為實驗性草稿，請以人工審校為準"
-        },
-        "form": {
-          "promptLabel": "歌詞提示",
-          "promptPlaceholder": "描述場景、情緒或故事片段",
-          "sequencesLabel": "聲調序列",
-          "sequencesPlaceholder": "以逗號或換行分隔輸入聲調數字序列",
-          "sequencesCaption": "使用粵語聲調數字（例如: 394052）。每一行會成為一個生成的歌詞行。",
-          "seedLabel": "種子（選填）",
-          "seedPlaceholder": "隨機",
-          "seedCaption": "鎖定隨機種子以生成可比較的輸出。",
-          "topLabel": "段落輸出數",
-          "topCaption": "要回傳的段落建議數量（1–3）。",
-          "submit": "生成歌詞",
-          "generating": "生成中...",
-          "generatingHint": "系統正在組裝候選句並進行排序。",
-          "apiKey": {
-            "button": "設定 API 金鑰",
-            "dialogTitle": "輸入 Google Gemini API 金鑰",
-            "dialogDescriptionPrefix": "從 ",
-            "dialogDescriptionMiddle": " 取得您的 API 金鑰。",
-            "dialogDescriptionSuffix": "您的 API 金鑰不會被記錄，且僅用於本次工作階段。不會儲存或用於系統其他地方。",
-            "label": "API 金鑰",
-            "placeholder": "輸入您的 Gemini API 金鑰",
-            "save": "儲存",
-            "requiredMessage": "請設定您的 Google Gemini API 金鑰以生成歌詞。",
-            "validation": {
-              "required": "API 金鑰為必填",
-              "invalidFormat": "API 金鑰必須以 'AIza' 開頭",
-              "invalidLength": "API 金鑰長度必須為 39 個字元"
-            },
-            "showPassword": "顯示密碼",
-            "hidePassword": "隱藏密碼"
-          }
-        },
-        "summary": {
-          "title": "會話摘要",
-          "description": "功能 {{feature}} · 引擎 v{{version}}",
-          "feature": "功能: {{feature}}",
-          "version": "引擎版本 {{version}}",
-          "seed": "種子",
-          "createdAt": "建立時間",
-          "lineCount": "行數",
-          "processingTime": "處理時間",
-          "processingTimeValue": "{{ms}} ms"
-        },
-        "topParagraphs": {
-          "title": "組合段落",
-          "count": "{{count}} 則建議",
-          "badge": "第 {{index}} 名",
-          "empty": "未產生段落建議。增加段落輸出數或再試一次。"
-        },
-        "lines": {
-          "sectionTitle": "逐行細節",
-          "count": "{{count}} 行",
-          "title": "第 {{index}} 行 · 聲調 {{tone}}",
-          "previewFallback": "尚無先導句。展開以查看診斷細節。",
-          "warningsCount": "{{count}} 則警告",
-          "empty": "目前尚無行資料。",
-          "toneSequence": "聲調 {{tone}}",
-          "lineIndex": "行 {{index}}",
-          "digitSet": "數字集合",
-          "primaryPattern": "主模式 {{pattern}}",
-          "primaryRank": "名次 {{rank}}",
-          "primaryMmr": "MMR {{score}}",
-          "noPrimary": "此行未產生排名句子。",
-          "error": "生成錯誤: {{message}}",
-          "candidateStats": {
-            "heading": "候選集",
-            "total": "候選總數",
-            "semantic": "語意匹配",
-            "freqTop": "高頻",
-            "freqRandom": "探索型"
-          },
-          "topSentences": {
-            "heading": "頂級句子",
-            "columns": {
-              "text": "句子",
-              "pattern": "模式",
-              "rank": "名次",
-              "mmr": "MMR"
-            },
-            "empty": "未返回任何排名句子。"
-          },
-          "patterns": {
-            "heading": "聲調模式",
-            "groups": "群組: {{groups}}",
-            "empty": "未返回聲調模式。"
-          },
-          "allCandidates": {
-            "heading": "完整候選集",
-            "pattern": "模式 {{pattern}}",
-            "empty": "未返回其他候選項目。"
-          },
-          "additional": {
-            "heading": "其他排名句子",
-            "rank": "名次 {{rank}}",
-            "mmr": "MMR {{score}}"
-          },
-          "paragraphs": {
-            "heading": "使用此行的段落混合",
-            "label": "段落 {{index}}"
-          }
-        }
-      },
-      "lexicon": {
-        "title": "詞彙搜尋",
-        "description": "利用語意提示與聲調數字，找到符合你提示的詞語與字詞。",
-        "form": {
-          "queryLabel": "描述使用情境",
-          "queryPlaceholder": "例如：關於新開始的希望副歌",
-          "pronunciationLabel": "目標聲調數字",
-          "pronunciationPlaceholder": "輸入 394 等聲調數字",
-          "limitLabel": "建議數量",
-          "limitCaption": "可輸入 1 至 25 筆結果。"
-        },
-        "summary": {
-          "query": "語意：{{query}}",
-          "pronunciation": "聲調：{{pronunciation}}",
-          "timing": "{{ms}} 毫秒"
-        },
-        "similarityBadge": "{{percentage}}% 語意相似",
-        "noResults": "目前沒有 AI 建議，可嘗試放寬描述或調整聲調數字。"
-      }
-    },
-    "pron": {
-      "title": "發音搜尋",
-      "placeholder": "輸入發音（例如 02）",
-      "resultsRegionLabel": "發音搜尋結果"
-    },
-    "rhyme": {
-      "title": "押韻搜尋",
-      "placeholder": "輸入韻碼（例如 aa）",
-      "resultsRegionLabel": "押韻搜尋結果"
-    },
-    "pages": {
-      "overview": {
-        "title": "CantoLyr 詞彙工具",
-        "description": "探索專注於發音與押韻的詞彙工具，先釐清聲調與韻母，再開始創作歌詞。",
-        "featuresLabel": "詞彙工具",
-        "lexiconTitle": "詞彙工具",
-        "lexiconDescription": "在正式寫詞之前，透過專用搜尋先確認發音或押韻的對應詞彙。",
-        "lyricsTitle": "歌詞生成",
-        "lyricsDescription": "將聲調排列與創作提示結合，生成符合粵語韻律的初稿句子。",
-        "lyricSearchTitle": "歌詞工具",
-        "lyricSearchDescription": "透過聲調數字或韻母搜尋現有粵語歌詞行，作為寫作前的參考。"
-      },
-      "ai": {
-        "title": "填詞工具",
-        "description": "由 AI 協助的工具，加速歌詞草擬與詞彙發現。",
-        "heading": "填詞工具",
-        "lyricsPreview": "使用 AI 協助，從聲調序列與創作提示產生歌詞草稿。",
-        "lexiconPreview": "AI 驅動的詞彙搜尋，為歌詞創作建議匹配與用例。",
-        "lexiconTag": "學習/填詞工具",
-        "lyricSearchPreview": "使用語意提示結合聲調或韻腳的查詢，探索既有歌詞行。"
-      },
-      "featureCta": "開啟工具",
-      "backToOverview": "回到 CantoLyr 總覽",
-      "pron": {
-        "heading": "發音工具",
-        "preview": "在定稿旋律前先驗證粵拼、檢視聲調走向，快速找到對應的詞彙結果。",
-        "description": "使用粵拼或聲調代碼搜尋詞彙，確認音節是否精準，並整理用法備註支援歌詞創作。",
-        "numericHeading": "數字聲調口訣",
-        "numericAccordionTrigger": "394052 → 開音節一至六調對應",
-        "numericIntro": "粵語詞作者會把六個開音節聲調索引（1–6）轉成「394052」，因為讀成 saam1、gau2、sei3、ling4、ng5、ji6 時便對應該調的實際音高。",
-        "numericDescription": "延伸口訣「394052786」記錄於多份粵語語音資料，為創作旋律時的基準；以下表格整理進入旋律前最常用的六個開音節調值與數字對應。",
-        "numericCheckedNote": "數字 7-8-6（chat1、baat3、luk6）雖然與一、三、六調的音高輪廓相同，但只會出現在以 -p／-t／-k 收尾的入聲音節。",
-        "numericSourcesLabel": "參考資料",
-        "numericSourceEnglishLabel": "英文資料：《Cantonese phonology》（Wikipedia）— 說明「394052786」口訣。",
-        "numericSourceChineseLabel": "中文資料：《粵語聲調》維基百科 — 收錄「三九四零五二」九聲口訣。",
-        "numericTable": {
-          "caption": "粵語聲調索引與詞作者常用數字口訣對照",
-          "columns": {
-            "toneIndex": "聲調索引",
-            "mnemonicDigit": "口訣數字",
-            "toneName": "傳統調名",
-            "example": "粵拼示例",
-            "audio": "音頻"
-          },
-          "rows": {
-            "tone1": {
-              "toneName": "陰平（高平調）",
-              "example": "saam1 — 「三」"
-            },
-            "tone2": {
-              "toneName": "陰上（中升調）",
-              "example": "gau2 — 「九」"
-            },
-            "tone3": {
-              "toneName": "陰去（中平調）",
-              "example": "sei3 — 「四」"
-            },
-            "tone4": {
-              "toneName": "陽平（低降調）",
-              "example": "ling4 — 「零」"
-            },
-            "tone5": {
-              "toneName": "陽上（低升調）",
-              "example": "ng5 — 「五」"
-            },
-            "tone6": {
-              "toneName": "陽去（低平調）",
-              "example": "ji6 — 「二」"
-            }
-          }
-        },
-        "jyutpingHeading": "粵拼音節基礎",
-        "jyutpingIntro": "每個粵語音節都可以拆解成可選的聲母、韻母，以及聲調。香港語言學學會的粵拼以「聲母 + 韻母 + 聲調數字」記錄結構，方便對齊實際語調。",
-        "jyutpingDetails": {
-          "structure": "書寫順序為「聲母 + 韻母 + 聲調數字」。例如 ngo5 = 聲母 \"ng\"、韻母 \"o\"、第五調；aa3 則沒有聲母，直接以前置的韻母開首。",
-          "onset": "粵拼有 19 個聲母；若音節沒有聲母（即所謂零聲母），拼寫會直接從韻母開始，例如 aa3、oeng2。",
-          "tones": "聲調數字 1–6 對應粵語六個調值；以 -p／-t／-k 結尾的入聲音節會共用 1、3、6 號，而不是另設新數字。",
-          "rhymeLink": "韻母（韻）承載母音與韻尾。下列表格整理的粵拼韻母與押韻搜尋使用的代碼相同。"
-        },
-        "jyutpingConsonantsLabel": "粵拼聲母",
-        "jyutpingConsonantsDescription": "聲母位於音節開頭，可與韻母與聲調數字組合成完整的粵拼拼寫；元音開頭的音節則可省略聲母。",
-        "rhymeHeading": "韻母（韻）參考",
-        "rhymeDescription": "在粵語語音學裡，韻（韻母）由母音核與韻尾組成；共享同一韻的字自然形成押韻族。使用押韻搜尋時，輸入下列任一粵拼韻母即可鎖定對應詞彙。",
-        "rhymeTable": {
-          "caption": "押韻搜尋常用的粵拼韻母",
-          "columns": {
-            "range": "範圍",
-            "finals": "韻母"
-          }
-        },
-        "rhymeListNote": "韻母代碼區分大小寫，請以小寫輸入以符合粵拼慣例。",
-        "rhymeSourcesLabel": "參考資料",
-        "rhymeSourceJyutping": "粵拼聲母韻母概覽（維基百科）",
-        "rhymeSourceRime": "粵語音節結構與韻母說明（維基百科）"
-      },
-      "rhyme": {
-        "heading": "押韻工具",
-        "preview": "尋找共享韻尾與聲調的音節，打造自然貼合的押韻結構。",
-        "description": "輸入韻碼即可群組同韻同調的詞彙，迅速建立具有節奏感的押韻網格。",
-        "sequenceEnabled": "僅顯示連續押韻",
-        "sequenceDisabled": "包含所有押韻（不限位置）",
-        "sequenceToggle": "切換連續押韻模式"
-      },
-      "lyrics": {
-        "heading": "填詞工具",
-        "preview": "把聲調表格與創作提案連結，寫出貼合粵語節奏的歌句。",
-        "description": "輸入創作主題與聲調序列，生成具結構的歌詞草稿，方便後續調整。"
-      },
-      "aiLexicon": {
-        "description": "將語意描述與聲調數字結合，獲得 AI 排序的粵語詞彙建議。",
-        "stepsHeading": "使用方式",
-        "steps": {
-          "one": "用自然語言描述場景或歌詞意圖。",
-          "two": "輸入你想套用的 394052 式聲調數字。",
-          "three": "送出後檢視具相似度分數的詞彙建議。"
-        },
-        "notice": "結果由語料頻率與 AI 相似度組合，套用前請再確認聲調是否合適。",
-        "formHeading": "啟動語意詞彙搜尋",
-        "formDescription": "系統會依據描述與聲調匹配詞彙，調整任一欄位即可重新排序結果。"
-      },
-      "lyricSearch": {
-        "heading": "歌詞工具",
-        "preview": "以聲調或韻腳探索已發佈的歌詞行，支援你的創作分析。"
-      }
-    },
-    "lyrics": {
-      "title": "歌詞生成",
-      "promptLabel": "歌詞主題",
-      "promptPlaceholder": "描述場景或主題",
-      "sequencesLabel": "聲調序列",
-      "sequencesPlaceholder": "以逗號分隔的聲調序列（例如 123,456）",
-      "generate": "生成",
-      "generating": "生成中..."
-    },
-    "errors": {
-      "pron": {
-        "missingQuery": "請輸入發音查詢。"
-      },
-      "rhyme": {
-        "missingQuery": "請輸入押韻查詢。",
-        "invalidRhyme": "請輸入有效的粵語韻母（多個韻母以逗號分隔）。"
-      },
-      "lyrics": {
-        "missingPrompt": "請提供歌詞主題。",
-        "missingSequences": "至少輸入一組聲調序列（以逗號或換行分隔）。",
-        "promptTooLong": "主題描述過長（超過 200 字元）。",
-        "invalidSequences": "每行至少 3 位，僅可包含 0 2 3 4 5 9，最多 3 行。",
-        "invalidSeed": "種子必須為非負整數。",
-        "invalidTop": "段落輸出數必須介於 1 至 3。",
-        "invalidResponse": "歌詞搜尋結果格式不正確。",
-        "queryWithoutSnapshot": "在提交前無法執行搜尋。",
-        "unexpected": "歌詞生成失敗，請稍後再試。"
-      },
-      "lexicon": {
-        "invalidDigits": "僅可輸入數字 0、2、3、4、5、9。",
-        "tooLong": "查詢不得超過 4 位數字。",
-        "missingQuery": "請描述想要查找的語意。",
-        "missingPronunciation": "請輸入 394052 式的聲調數字。",
-        "invalidResponse": "無法解析 AI 詞彙回應，請再試一次。",
-        "queryWithoutSnapshot": "在提交前無法執行搜尋。",
-        "limitRange": "數量必須介於 1 至 25 之間。"
-      }
-    },
-    "badges": {
-      "ai": "AI",
-      "experimental": "實驗中"
-    },
-    "lexicon": {
-      "types": {
-        "char": "字",
-        "vocab": "詞彙"
-      },
-      "details": {
-        "pronunciation": "發音",
-        "tone": "聲調",
-        "jyutping": "粵拼",
-        "consonants": "聲母",
-        "rhymes": "韻",
-        "syllables": "音節數",
-        "frequency": "頻率",
-        "pos": "詞性",
-        "register": "語域",
-        "gloss": "註釋",
-        "source": "來源",
-        "position": "位置"
-      },
-      "badges": {
-        "cached": "快取"
-      },
-      "messages": {
-        "noMatches": "尚無結果，試試其他查詢。",
-        "endOfResults": "已到結果結尾。",
-        "hoverHint": "點擊詞面以檢視細節。"
-      },
-      "counts": {
-        "showing": "顯示 {{shown}} / {{total}} 筆"
-      },
-      "group": {
-        "label": "第 {{index}} 組",
-        "range": "{{start}}–{{end}}"
-      },
-      "langHints": {
-        "zhHk": "標記為「zh-HK」的詞語通常用於日常對話、流行文化、網絡語言等，屬於粵語的口語層面。這個標籤僅作為參考，實際用法可能會有重疊或變化，未來會持續優化。與「書面語」相比，口語詞彙更貼近日常生活語境。",
-        "zhTw": "標記為「zh-TW」的詞語多見於正式文本、新聞、書籍、官方文件等，屬於中文的書面層面。這個標籤僅作為參考，實際用法可能會有重疊或變化，未來會持續優化。與「口語」相比，書面語詞彙更偏向正式、規範的語境。",
-        "generic": "{{code}}"
-      },
-      "feedback": {
-        "up": "有幫助",
-        "down": "沒有幫助"
-      },
-      "options": {
-        "label": "選項"
-      },
-      "rhyme": {
-        "modeLabel": "押韻匹配模式",
-        "sequenceEnabled": "僅顯示連續押韻",
-        "sequenceDisabled": "包含所有押韻（不限位置）",
-        "sequenceLabel": "連續",
-        "inclusiveLabel": "全部",
-        "sequenceToggle": "切換連續押韻模式"
-      }
-    },
-    "lyricSearch": {
-      "title": "歌詞搜尋",
-      "nav": {
-        "pron": "歌詞聲調搜尋",
-        "rhyme": "歌詞押韻搜尋"
-      },
-      "placeholders": {
-        "aiQuery": "以自然語言描述場景或用法"
-      },
-      "filters": {
-        "label": "篩選與選項",
-        "reset": "重設篩選",
-        "pageSize": {
-          "label": "每頁筆數",
-          "description": "每次請求要擷取的歌詞行數量（1–200）。"
-        },
-        "position": {
-          "label": "聲調位置",
-          "placeholder": "例：2",
-          "description": "鎖定特定聲調雙字的位置（1 = 第一組數字）。"
-        },
-        "rhymePosition": {
-          "label": "韻腳位置",
-          "placeholder": "例：5",
-          "description": "鎖定歌詞行中的韻腳欄位（自 1 起算）。"
-        },
-        "themes": {
-          "label": "主題",
-          "placeholder": "以逗號分隔的主題"
-        },
-        "keywords": {
-          "label": "關鍵詞",
-          "placeholder": "以逗號分隔的關鍵詞"
-        },
-        "lyricist": {
-          "label": "作詞人",
-          "placeholder": "例：黃霑"
-        },
-        "artist": {
-          "label": "演唱者",
-          "placeholder": "例：梅艷芳"
-        },
-        "id": {
-          "label": "歌詞 ID",
-          "placeholder": "內部識別碼"
-        },
-        "sentiment": {
-          "label": "情緒",
-          "placeholder": "例：充滿希望"
-        },
-        "year": {
-          "label": "年份",
-          "placeholder": "例：1993"
-        }
-      },
-      "labels": {
-        "query": "歌詞搜尋查詢",
-        "aiQuery": "語意查詢（選填）",
-        "bigrams": "聲調雙字",
-        "song": "歌曲",
-        "metadata": "行內統計",
-        "lineIndex": "第 {{index}} 行",
-        "counts": "字數 {{chars}} · 音節 {{syllables}} · 詞數 {{tokens}}",
-        "sentiment": "情緒",
-        "syntaxNotes": "定義",
-        "artists": "藝人",
-        "lyricists": "作詞人",
-        "tokens": "詞彙"
-      },
-      "results": {
-        "count": "顯示 {{shown}} / {{total}} 行",
-        "cached": "快取",
-        "timing": "{{ms}} 毫秒"
-      },
-      "messages": {
-        "noMatches": "暫無符合的歌詞行，請嘗試其他條件或調整篩選。",
-        "endOfResults": "已到結果列表結尾。"
-      },
-      "pron": {
-        "heading": "歌詞聲調搜尋",
-        "description": "輸入聲調數字，檢視不同歌曲中具有相同聲調模式的歌詞行。",
-        "tipsHeading": "聲調搜尋提示",
-        "tipsDescription": "善用數字記憶法，更快鎖定目標輪廓。",
-        "tips": {
-          "digits": "以 394052 式聲調數字標記需要的輪廓。",
-          "position": "設定聲調位置鎖定特定雙字欄位。",
-          "filters": "結合作詞人、年份、主題或關鍵詞篩選較小的資料範圍。"
-        },
-        "formHeading": "根據聲調數字搜尋",
-        "formDescription": "輸入聲調數字與可選條件，找出符合輪廓的既有歌詞行。",
-        "placeholder": "輸入聲調數字，例如 394052",
-        "resultsRegionLabel": "歌詞聲調搜尋結果"
-      },
-      "rhyme": {
-        "heading": "歌詞押韻搜尋",
-        "description": "找出共用同一韻母的歌詞行，以建立押韻表或參考案例。",
-        "tipsHeading": "押韻搜尋提示",
-        "tipsDescription": "快速定位已發佈歌詞常用的韻腳組。",
-        "tips": {
-          "families": "輸入一個或多個粵拼韻母（例：aa 或 aa,aai 以逗號分隔多個韻母）即可找到相同結尾的歌詞。",
-          "placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
-          "filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。"
-        },
-        "formHeading": "依韻母搜尋",
-        "formDescription": "輸入 Jyutping 韻母與可選條件，分析既有歌詞如何運用此韻腳。",
-        "placeholder": "輸入韻碼（例如 aa 或 aa,aai 以逗號分隔多個韻母）",
-        "modeLabel": "押韻匹配模式",
-        "resultsRegionLabel": "歌詞押韻搜尋結果",
-        "sequenceEnabled": "僅顯示連續押韻",
-        "sequenceDisabled": "包含所有押韻（不限位置）",
-        "sequenceToggle": "切換連續押韻模式"
-      }
-    }
-  }
+	"common": {
+		"loading": "載入中...",
+		"error": "錯誤",
+		"save": "儲存",
+		"cancel": "取消",
+		"delete": "刪除",
+		"edit": "編輯",
+		"search": "搜尋",
+		"close": "關閉",
+		"loadMore": "載入另外 {{count}} 個",
+		"showMore": "顯示另外 {{count}} 個",
+		"reset": "重置"
+	},
+	"notFound": {
+		"title": "頁面未找到",
+		"description": "您尋找的頁面不存在。",
+		"goHome": "返回首頁"
+	},
+	"errors": {
+		"network": {
+			"title": "網絡連線問題",
+			"message": "無法連線伺服器，請檢查網路。"
+		},
+		"api": {
+			"title": "請求失敗",
+			"message": "伺服器回傳錯誤。"
+		},
+		"unexpected": {
+			"title": "發生未預期錯誤",
+			"message": "系統遇到未預期的情況。"
+		},
+		"actions": {
+			"retry": "重試",
+			"dismiss": "關閉",
+			"copyDebug": "複製偵錯資訊",
+			"copiedDebug": "已複製偵錯資訊"
+		}
+	},
+	"language": {
+		"english": "英語",
+		"chineseSimplified": "简体中文",
+		"chineseTraditional": "繁体中文",
+		"japanese": "日语",
+		"switchLanguage": "切換語言",
+		"selectLanguage": "選擇語言"
+	},
+	"theme": {
+		"theme": "主題",
+		"light": "淺色",
+		"dark": "深色",
+		"system": "系統",
+		"switchTheme": "切換主題"
+	},
+	"homepage": {
+		"ai": "AI",
+		"hero": {
+			"eyebrow": "粵語 101",
+			"title": "找到屬於你的粵語聲線",
+			"subtitle": "大膽、現代的學習空間，讓你從聲調基礎走到自然對話，並以音樂引導沉浸式練習。",
+			"primaryCta": "開始旅程",
+			"secondaryCta": "查看課程地圖",
+			"metrics": {
+				"lessons": "超過 60 節引導課程",
+				"drills": "聲調優先的微練習",
+				"community": "每週社群共修"
+			}
+		},
+		"programOverview": {
+			"title": "首頁／課程總覽",
+			"description": "了解 Canto101 的學習節奏、每個階段的重點，以及如何善用平台功能。",
+			"highlights": {
+				"roadmap": "由語音到敘事的循序進階路線圖。",
+				"playlists": "自動調整的歌詞播放清單，結合文化注釋。",
+				"checkpoints": "里程碑提醒自我檢測並串接導師回饋。"
+			}
+		},
+		"gettingStarted": {
+			"title": "入門指南／認識粵語",
+			"description": "從歷史脈絡、地域使用到聲調系統，建立穩固基礎讓每個音節都自信。",
+			"highlights": {
+				"tones": "互動聲調遊樂場視覺化曲線走向。",
+				"dialects": "比較香港、澳門與海外華人社群的差異。",
+				"romanization": "粵拼速成班連結聲音、文字與聲調符號。"
+			}
+		},
+		"resources": {
+			"title": "資源與加值內容",
+			"description": "額外素材讓你在線上線下都能持續練習。",
+			"highlights": {
+				"downloads": "可列印的速查表、聲調圖與書寫格線。",
+				"integrations": "透過夥伴 App 將練習同步到手機。",
+				"media": "精選 Podcast、劇集與閱讀清單，涵蓋不同程度。"
+			}
+		},
+		"community": {
+			"title": "社群與導師",
+			"description": "加入互相支持的網絡，獲得問答、督導與即時指導。",
+			"highlights": {
+				"forums": "同儕論壇即時分享問題與學習成果。",
+				"events": "每週母語導師與業界來賓的線上諮詢。",
+				"booking": "在平台內直接預訂一對一或小組實驗課。"
+			}
+		},
+		"products": {
+			"title": "產品工具",
+			"description": "專為加速粵語學習而設計的數位夥伴。",
+			"items": {
+				"viewDetails": "查看詳情",
+				"cantoLyr": {
+					"label": "CantoLyr",
+					"description": "以歌詞驅動的課程，連結發音、文字與文化。",
+					"features": {
+						"romanization": "粵拼引導配合母語音檔，逐步拆解發音。",
+						"vocabulary": "核心詞彙卡片搭配間隔重複提醒。",
+						"phrases": "實用情境對話，幫你記住常用語。",
+						"grammar": "語法藍圖拆解助詞與時態標記。",
+						"pronunciation": "聲調實驗室以圖像呈現音高曲線，強化準確度。"
+					}
+				},
+				"cantoCap": {
+					"label": "CantoCap",
+					"description": "自動產生粵語字幕，跟讀真實語料。",
+					"features": {
+						"captions": "為劇集、Vlog 與活動提供精準時間軸字幕。",
+						"annotations": "即時標註變調與口語化用法。",
+						"export": "輸出字幕檔作為字幕、字卡或卡拉 OK 教材。",
+						"mobile": "將字幕包同步到手機，隨時複習。"
+					}
+				}
+			}
+		},
+		"cta": {
+			"title": "準備好踏進 Canto101 嗎？",
+			"description": "解鎖完整指導體驗、自訂學習地圖，讓粵語成為生活日常。",
+			"button": "建立學習者檔案"
+		}
+	},
+	"nav": {
+		"title": "Canto101",
+		"links": {
+			"programOverview": "總覽",
+			"gettingStarted": "入門指南",
+			"resources": "資源",
+			"community": "社群",
+			"products": "產品"
+		},
+		"loading": {
+			"title": "正在準備下一個頁面",
+			"description": "同步最新內容並保持你的進度。",
+			"status": "頁面導向中"
+		}
+	},
+	"table": {
+		"fallbackHeader": "資料"
+	},
+	"test": {
+		"navigation": {
+			"loading": {
+				"title": "正在模擬測試導覽",
+				"description": "啟動測試樣本並驗證模擬 API 回應。",
+				"status": "測試進行中"
+			}
+		}
+	},
+	"footer": {
+		"title": "Canto101",
+		"summary": "總結學習目標、課程結構，以及如何在平台上有效導航以取得最佳成果。",
+		"sections": {
+			"gettingStarted": {
+				"title": "入門 / 關於粵語",
+				"about": "關於粵語",
+				"background": "粵語的重要性、方言特點、聲調運作及地區背景。"
+			},
+			"resources": {
+				"title": "資源與額外教材",
+				"downloads": "可列印/下載的教材連結",
+				"integrations": "行動裝置整合，隨時學習",
+				"media": "推薦的 Podcast、媒體與閱讀"
+			},
+			"community": {
+				"title": "社群與導師連結",
+				"qa": "問答論壇、學習社群，或預約導師上課的地方",
+				"tutors": "預約導師課程"
+			},
+			"products": {
+				"title": "產品",
+				"cantoLyr": "CantoLyr - 歌詞生成，學習工具",
+				"cantoCap": "CantoCap - 粤语字幕生成應用"
+			},
+			"legal": {
+				"title": "法律",
+				"terms": "條款與條件",
+				"privacy": "隱私",
+				"accessibility": "無障礙"
+			}
+		},
+		"disclaimer": "本平台提供學習資料與社群資源，以支援粵語學習。",
+		"copyright": "© 版權 2025 - Canto101"
+	},
+	"cantoLyr": {
+		"ai": {
+			"lyricSearch": {
+				"title": "歌詞搜尋",
+				"pron": {
+					"nav": "AI 聲調搜尋",
+					"heading": "AI 歌詞聲調搜尋",
+					"description": "結合聲調數字與可選語意提示，更聰明地搜尋歌詞行。",
+					"tipsHeading": "AI 聲調搜尋提示",
+					"tipsDescription": "將聲調數字與簡短描述結合，可提升召回品質。",
+					"tips": {
+						"digits": "以 394052 式聲調數字標記需要的輪廓。",
+						"position": "設定聲調位置鎖定特定雙字欄位。",
+						"filters": "結合作詞人、年份、主題或關鍵詞篩選較小的資料範圍。",
+						"aiQuery": "加入簡短描述（如情緒或場景）以引導語意召回。"
+					},
+					"formHeading": "以聲調數字 + 語意搜尋",
+					"formDescription": "輸入聲調數字與可選的語意描述，再配合篩選條件精煉結果。",
+					"placeholder": "描述情緒或場景（選填）"
+				},
+				"rhyme": {
+					"nav": "AI 押韻搜尋",
+					"heading": "AI 歌詞押韻搜尋",
+					"description": "搭配可選語意提示，依韻母探索歌詞行。",
+					"tipsHeading": "AI 押韻搜尋提示",
+					"tipsDescription": "將韻母與簡短描述配對以聚焦結果。",
+					"tips": {
+						"families": "輸入一個或多個粵拼韻母（例：aa 或 aa,aai 以逗號分隔多個韻母）即可找到相同結尾的歌詞。",
+						"placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
+						"filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。",
+						"aiQuery": "加入簡短描述（如場景或主題）以引導語意檢索。"
+					},
+					"formHeading": "以韻母 + 語意搜尋",
+					"formDescription": "輸入 Jyutping 韻母與可選語意描述，必要時再加入篩選。",
+					"placeholder": "描述情緒或用法（選填）"
+				}
+			},
+			"lyrics": {
+				"title": "歌詞生成",
+				"description": "用創作提示和目標聲調格指引生成器，以獲得結構化的粵語歌詞建議。",
+				"formHeading": "說明本次操作",
+				"formDescription": "定義場景、聲調格與選填的隨機種子，再開始生成歌詞行草稿。",
+				"page": {
+					"overview": "功能說明",
+					"shortOverview": "限制與提示",
+					"limitationsHeading": "目前限制",
+					"limitations": {
+						"lexiconCoverage": "輸出品質受限於目前匯入的詞彙資料庫範圍（coverage）。當詞條不足時，語意或押韻可能不夠精準。",
+						"modelRetrieval": "語意檢索與向量召回依賴現行模型；若嵌入表徵不足，可能遺漏更貼合語境的候選。",
+						"queryGeneration": "查詢與聲調序列的組合策略仍在優化，複雜場景下可能出現不穩定排序。",
+						"grammarPron": "生成句子可能含語法、搭配或聲調（發音）錯誤，需人工後期潤飾。",
+						"limitedParagraphs": "段落組合採樣目前僅限少量候選（top-N），可能未涵蓋更多具潛力的混合。",
+						"slowGeneration": "當聲調序列較長或需要重新排序多組候選時，生成速度會顯著放緩。",
+						"toneSequenceRange": "支援的聲調序列長度與分組仍在調整，過長序列可能被截斷或降低品質。"
+					},
+					"improveHeading": "演進與改進",
+					"improvements": {
+						"lexiconGrowth": "擴充與清理詞彙資料庫（含頻率、詞性、語域標記）以提升候選詞質量。",
+						"retrievalRerank": "優化語意檢索、分階段 rerank 與多特徵打分（MMR / pattern fit / frequency）。",
+						"patternScoring": "改良聲調模式與句法結構的評估，減少不自然停頓與語序錯置。",
+						"feedbackLoop": "引入人工標註與使用者回饋循環，增強錯誤識別與排序精準度。"
+					},
+					"tipsHeading": "使用技巧",
+					"tips": {
+						"expandLines": "展開每一行查看候選句與模式統計，萃取靈感或替換片段。",
+						"refineSequences": "調整聲調序列長度與結構（例如把長句拆成兩行）可提升匹配穩定度。",
+						"lexiconSemantic": "若某行詞彙過於生硬，可切換到詞彙語意搜尋工具，輸入相同場景描述尋找替代表達。",
+						"manualPolish": "將生成草稿視為骨架：再行優化語序、情感層次、以及真實口語感。"
+					},
+					"disclaimer": "輸出為實驗性草稿，請以人工審校為準"
+				},
+				"form": {
+					"promptLabel": "歌詞提示",
+					"promptPlaceholder": "描述場景、情緒或故事片段",
+					"sequencesLabel": "聲調序列",
+					"sequencesPlaceholder": "以逗號或換行分隔輸入聲調數字序列",
+					"sequencesCaption": "使用粵語聲調數字（例如: 394052）。每一行會成為一個生成的歌詞行。",
+					"seedLabel": "種子（選填）",
+					"seedPlaceholder": "隨機",
+					"seedCaption": "鎖定隨機種子以生成可比較的輸出。",
+					"topLabel": "段落輸出數",
+					"topCaption": "要回傳的段落建議數量（1–3）。",
+					"submit": "生成歌詞",
+					"generating": "生成中...",
+					"generatingHint": "系統正在組裝候選句並進行排序。",
+					"apiKey": {
+						"button": "設定 API 金鑰",
+						"dialogTitle": "輸入 Google Gemini API 金鑰",
+						"dialogDescriptionPrefix": "從 ",
+						"dialogDescriptionMiddle": " 取得您的 API 金鑰。",
+						"dialogDescriptionSuffix": "您的 API 金鑰不會被記錄，且僅用於本次工作階段。不會儲存或用於系統其他地方。",
+						"label": "API 金鑰",
+						"placeholder": "輸入您的 Gemini API 金鑰",
+						"save": "儲存",
+						"requiredMessage": "請設定您的 Google Gemini API 金鑰以生成歌詞。",
+						"validation": {
+							"required": "API 金鑰為必填",
+							"invalidFormat": "API 金鑰必須以 'AIza' 開頭",
+							"invalidLength": "API 金鑰長度必須為 39 個字元"
+						},
+						"showPassword": "顯示密碼",
+						"hidePassword": "隱藏密碼"
+					}
+				},
+				"summary": {
+					"title": "會話摘要",
+					"description": "功能 {{feature}} · 引擎 v{{version}}",
+					"feature": "功能: {{feature}}",
+					"version": "引擎版本 {{version}}",
+					"seed": "種子",
+					"createdAt": "建立時間",
+					"lineCount": "行數",
+					"processingTime": "處理時間",
+					"processingTimeValue": "{{ms}} ms"
+				},
+				"topParagraphs": {
+					"title": "組合段落",
+					"count": "{{count}} 則建議",
+					"badge": "第 {{index}} 名",
+					"empty": "未產生段落建議。增加段落輸出數或再試一次。"
+				},
+				"lines": {
+					"sectionTitle": "逐行細節",
+					"count": "{{count}} 行",
+					"title": "第 {{index}} 行 · 聲調 {{tone}}",
+					"previewFallback": "尚無先導句。展開以查看診斷細節。",
+					"warningsCount": "{{count}} 則警告",
+					"empty": "目前尚無行資料。",
+					"toneSequence": "聲調 {{tone}}",
+					"lineIndex": "行 {{index}}",
+					"digitSet": "數字集合",
+					"primaryPattern": "主模式 {{pattern}}",
+					"primaryRank": "名次 {{rank}}",
+					"primaryMmr": "MMR {{score}}",
+					"noPrimary": "此行未產生排名句子。",
+					"error": "生成錯誤: {{message}}",
+					"candidateStats": {
+						"heading": "候選集",
+						"total": "候選總數",
+						"semantic": "語意匹配",
+						"freqTop": "高頻",
+						"freqRandom": "探索型"
+					},
+					"topSentences": {
+						"heading": "頂級句子",
+						"columns": {
+							"text": "句子",
+							"pattern": "模式",
+							"rank": "名次",
+							"mmr": "MMR"
+						},
+						"empty": "未返回任何排名句子。"
+					},
+					"patterns": {
+						"heading": "聲調模式",
+						"groups": "群組: {{groups}}",
+						"empty": "未返回聲調模式。"
+					},
+					"allCandidates": {
+						"heading": "完整候選集",
+						"pattern": "模式 {{pattern}}",
+						"empty": "未返回其他候選項目。"
+					},
+					"additional": {
+						"heading": "其他排名句子",
+						"rank": "名次 {{rank}}",
+						"mmr": "MMR {{score}}"
+					},
+					"paragraphs": {
+						"heading": "使用此行的段落混合",
+						"label": "段落 {{index}}"
+					}
+				}
+			},
+			"lexicon": {
+				"title": "詞彙搜尋",
+				"description": "利用語意提示與聲調數字，找到符合你提示的詞語與字詞。",
+				"form": {
+					"queryLabel": "描述使用情境",
+					"queryPlaceholder": "例如：關於新開始的希望副歌",
+					"pronunciationLabel": "目標聲調數字",
+					"pronunciationPlaceholder": "輸入 394 等聲調數字",
+					"limitLabel": "建議數量",
+					"limitCaption": "可輸入 1 至 25 筆結果。"
+				},
+				"summary": {
+					"query": "語意：{{query}}",
+					"pronunciation": "聲調：{{pronunciation}}",
+					"timing": "{{ms}} 毫秒"
+				},
+				"similarityBadge": "{{percentage}}% 語意相似",
+				"noResults": "目前沒有 AI 建議，可嘗試放寬描述或調整聲調數字。"
+			}
+		},
+		"pron": {
+			"title": "發音搜尋",
+			"placeholder": "輸入發音（例如 02）",
+			"resultsRegionLabel": "發音搜尋結果"
+		},
+		"rhyme": {
+			"title": "押韻搜尋",
+			"placeholder": "輸入韻碼（例如 aa）",
+			"resultsRegionLabel": "押韻搜尋結果"
+		},
+		"pages": {
+			"overview": {
+				"title": "CantoLyr 詞彙工具",
+				"description": "探索專注於發音與押韻的詞彙工具，先釐清聲調與韻母，再開始創作歌詞。",
+				"featuresLabel": "詞彙工具",
+				"lexiconTitle": "詞彙工具",
+				"lexiconDescription": "在正式寫詞之前，透過專用搜尋先確認發音或押韻的對應詞彙。",
+				"lyricsTitle": "歌詞生成",
+				"lyricsDescription": "將聲調排列與創作提示結合，生成符合粵語韻律的初稿句子。",
+				"lyricSearchTitle": "歌詞工具",
+				"lyricSearchDescription": "透過聲調數字或韻母搜尋現有粵語歌詞行，作為寫作前的參考。"
+			},
+			"ai": {
+				"title": "填詞工具",
+				"description": "由 AI 協助的工具，加速歌詞草擬與詞彙發現。",
+				"heading": "填詞工具",
+				"lyricsPreview": "使用 AI 協助，從聲調序列與創作提示產生歌詞草稿。",
+				"lexiconPreview": "AI 驅動的詞彙搜尋，為歌詞創作建議匹配與用例。",
+				"lexiconTag": "學習/填詞工具",
+				"lyricSearchPreview": "使用語意提示結合聲調或韻腳的查詢，探索既有歌詞行。"
+			},
+			"featureCta": "開啟工具",
+			"backToOverview": "回到 CantoLyr 總覽",
+			"pron": {
+				"heading": "發音工具",
+				"preview": "在定稿旋律前先驗證粵拼、檢視聲調走向，快速找到對應的詞彙結果。",
+				"description": "使用粵拼或聲調代碼搜尋詞彙，確認音節是否精準，並整理用法備註支援歌詞創作。",
+				"numericHeading": "數字聲調口訣",
+				"numericAccordionTrigger": "394052 → 開音節一至六調對應",
+				"numericIntro": "粵語詞作者會把六個開音節聲調索引（1–6）轉成「394052」，因為讀成 saam1、gau2、sei3、ling4、ng5、ji6 時便對應該調的實際音高。",
+				"numericDescription": "延伸口訣「394052786」記錄於多份粵語語音資料，為創作旋律時的基準；以下表格整理進入旋律前最常用的六個開音節調值與數字對應。",
+				"numericCheckedNote": "數字 7-8-6（chat1、baat3、luk6）雖然與一、三、六調的音高輪廓相同，但只會出現在以 -p／-t／-k 收尾的入聲音節。",
+				"numericSourcesLabel": "參考資料",
+				"numericSourceEnglishLabel": "英文資料：《Cantonese phonology》（Wikipedia）— 說明「394052786」口訣。",
+				"numericSourceChineseLabel": "中文資料：《粵語聲調》維基百科 — 收錄「三九四零五二」九聲口訣。",
+				"numericTable": {
+					"caption": "粵語聲調索引與詞作者常用數字口訣對照",
+					"columns": {
+						"toneIndex": "聲調索引",
+						"mnemonicDigit": "口訣數字",
+						"toneName": "傳統調名",
+						"example": "粵拼示例",
+						"audio": "音頻"
+					},
+					"rows": {
+						"tone1": {
+							"toneName": "陰平（高平調）",
+							"example": "saam1 — 「三」"
+						},
+						"tone2": {
+							"toneName": "陰上（中升調）",
+							"example": "gau2 — 「九」"
+						},
+						"tone3": {
+							"toneName": "陰去（中平調）",
+							"example": "sei3 — 「四」"
+						},
+						"tone4": {
+							"toneName": "陽平（低降調）",
+							"example": "ling4 — 「零」"
+						},
+						"tone5": {
+							"toneName": "陽上（低升調）",
+							"example": "ng5 — 「五」"
+						},
+						"tone6": {
+							"toneName": "陽去（低平調）",
+							"example": "ji6 — 「二」"
+						}
+					}
+				},
+				"jyutpingHeading": "粵拼音節基礎",
+				"jyutpingIntro": "每個粵語音節都可以拆解成可選的聲母、韻母，以及聲調。香港語言學學會的粵拼以「聲母 + 韻母 + 聲調數字」記錄結構，方便對齊實際語調。",
+				"jyutpingDetails": {
+					"structure": "書寫順序為「聲母 + 韻母 + 聲調數字」。例如 ngo5 = 聲母 \"ng\"、韻母 \"o\"、第五調；aa3 則沒有聲母，直接以前置的韻母開首。",
+					"onset": "粵拼有 19 個聲母；若音節沒有聲母（即所謂零聲母），拼寫會直接從韻母開始，例如 aa3、oeng2。",
+					"tones": "聲調數字 1–6 對應粵語六個調值；以 -p／-t／-k 結尾的入聲音節會共用 1、3、6 號，而不是另設新數字。",
+					"rhymeLink": "韻母（韻）承載母音與韻尾。下列表格整理的粵拼韻母與押韻搜尋使用的代碼相同。"
+				},
+				"jyutpingConsonantsLabel": "粵拼聲母",
+				"jyutpingConsonantsDescription": "聲母位於音節開頭，可與韻母與聲調數字組合成完整的粵拼拼寫；元音開頭的音節則可省略聲母。",
+				"rhymeHeading": "韻母（韻）參考",
+				"rhymeDescription": "在粵語語音學裡，韻（韻母）由母音核與韻尾組成；共享同一韻的字自然形成押韻族。使用押韻搜尋時，輸入下列任一粵拼韻母即可鎖定對應詞彙。",
+				"rhymeTable": {
+					"caption": "押韻搜尋常用的粵拼韻母",
+					"columns": {
+						"range": "範圍",
+						"finals": "韻母"
+					}
+				},
+				"rhymeListNote": "韻母代碼區分大小寫，請以小寫輸入以符合粵拼慣例。",
+				"rhymeSourcesLabel": "參考資料",
+				"rhymeSourceJyutping": "粵拼聲母韻母概覽（維基百科）",
+				"rhymeSourceRime": "粵語音節結構與韻母說明（維基百科）"
+			},
+			"rhyme": {
+				"heading": "押韻工具",
+				"preview": "尋找共享韻尾與聲調的音節，打造自然貼合的押韻結構。",
+				"description": "輸入韻碼即可群組同韻同調的詞彙，迅速建立具有節奏感的押韻網格。",
+				"sequenceEnabled": "僅顯示連續押韻",
+				"sequenceDisabled": "包含所有押韻（不限位置）",
+				"sequenceToggle": "切換連續押韻模式"
+			},
+			"lyrics": {
+				"heading": "填詞工具",
+				"preview": "把聲調表格與創作提案連結，寫出貼合粵語節奏的歌句。",
+				"description": "輸入創作主題與聲調序列，生成具結構的歌詞草稿，方便後續調整。"
+			},
+			"aiLexicon": {
+				"description": "將語意描述與聲調數字結合，獲得 AI 排序的粵語詞彙建議。",
+				"stepsHeading": "使用方式",
+				"steps": {
+					"one": "用自然語言描述場景或歌詞意圖。",
+					"two": "輸入你想套用的 394052 式聲調數字。",
+					"three": "送出後檢視具相似度分數的詞彙建議。"
+				},
+				"notice": "結果由語料頻率與 AI 相似度組合，套用前請再確認聲調是否合適。",
+				"formHeading": "啟動語意詞彙搜尋",
+				"formDescription": "系統會依據描述與聲調匹配詞彙，調整任一欄位即可重新排序結果。"
+			},
+			"lyricSearch": {
+				"heading": "歌詞工具",
+				"preview": "以聲調或韻腳探索已發佈的歌詞行，支援你的創作分析。"
+			}
+		},
+		"lyrics": {
+			"title": "歌詞生成",
+			"promptLabel": "歌詞主題",
+			"promptPlaceholder": "描述場景或主題",
+			"sequencesLabel": "聲調序列",
+			"sequencesPlaceholder": "以逗號分隔的聲調序列（例如 123,456）",
+			"generate": "生成",
+			"generating": "生成中..."
+		},
+		"errors": {
+			"pron": {
+				"missingQuery": "請輸入發音查詢。"
+			},
+			"rhyme": {
+				"missingQuery": "請輸入押韻查詢。",
+				"invalidRhyme": "請輸入有效的粵語韻母（多個韻母以逗號分隔）。"
+			},
+			"lyrics": {
+				"missingPrompt": "請提供歌詞主題。",
+				"missingSequences": "至少輸入一組聲調序列（以逗號或換行分隔）。",
+				"promptTooLong": "主題描述過長（超過 200 字元）。",
+				"invalidSequences": "每行至少 3 位，僅可包含 0 2 3 4 5 9，最多 3 行。",
+				"invalidSeed": "種子必須為非負整數。",
+				"invalidTop": "段落輸出數必須介於 1 至 3。",
+				"invalidResponse": "歌詞搜尋結果格式不正確。",
+				"queryWithoutSnapshot": "在提交前無法執行搜尋。",
+				"unexpected": "歌詞生成失敗，請稍後再試。"
+			},
+			"lexicon": {
+				"invalidDigits": "僅可輸入數字 0、2、3、4、5、9。",
+				"tooLong": "查詢不得超過 4 位數字。",
+				"missingQuery": "請描述想要查找的語意。",
+				"missingPronunciation": "請輸入 394052 式的聲調數字。",
+				"invalidResponse": "無法解析 AI 詞彙回應，請再試一次。",
+				"queryWithoutSnapshot": "在提交前無法執行搜尋。",
+				"limitRange": "數量必須介於 1 至 25 之間。"
+			}
+		},
+		"badges": {
+			"ai": "AI",
+			"experimental": "實驗中"
+		},
+		"lexicon": {
+			"types": {
+				"char": "字",
+				"vocab": "詞彙"
+			},
+			"details": {
+				"pronunciation": "發音",
+				"tone": "聲調",
+				"jyutping": "粵拼",
+				"consonants": "聲母",
+				"rhymes": "韻",
+				"syllables": "音節數",
+				"frequency": "頻率",
+				"pos": "詞性",
+				"register": "語域",
+				"gloss": "註釋",
+				"source": "來源",
+				"position": "位置"
+			},
+			"badges": {
+				"cached": "快取"
+			},
+			"messages": {
+				"noMatches": "尚無結果，試試其他查詢。",
+				"endOfResults": "已到結果結尾。",
+				"hoverHint": "點擊詞面以檢視細節。"
+			},
+			"counts": {
+				"showing": "顯示 {{shown}} / {{total}} 筆"
+			},
+			"group": {
+				"label": "第 {{index}} 組",
+				"range": "{{start}}–{{end}}"
+			},
+			"langHints": {
+				"zhHk": "標記為「zh-HK」的詞語通常用於日常對話、流行文化、網絡語言等，屬於粵語的口語層面。這個標籤僅作為參考，實際用法可能會有重疊或變化，未來會持續優化。與「書面語」相比，口語詞彙更貼近日常生活語境。",
+				"zhTw": "標記為「zh-TW」的詞語多見於正式文本、新聞、書籍、官方文件等，屬於中文的書面層面。這個標籤僅作為參考，實際用法可能會有重疊或變化，未來會持續優化。與「口語」相比，書面語詞彙更偏向正式、規範的語境。",
+				"generic": "{{code}}"
+			},
+			"feedback": {
+				"up": "有幫助",
+				"down": "沒有幫助"
+			},
+			"options": {
+				"label": "選項"
+			},
+			"rhyme": {
+				"modeLabel": "押韻匹配模式",
+				"sequenceEnabled": "僅顯示連續押韻",
+				"sequenceDisabled": "包含所有押韻（不限位置）",
+				"sequenceLabel": "連續",
+				"inclusiveLabel": "全部",
+				"sequenceToggle": "切換連續押韻模式"
+			}
+		},
+		"lyricSearch": {
+			"title": "歌詞搜尋",
+			"nav": {
+				"pron": "歌詞聲調搜尋",
+				"rhyme": "歌詞押韻搜尋"
+			},
+			"placeholders": {
+				"aiQuery": "以自然語言描述場景或用法"
+			},
+			"filters": {
+				"label": "篩選與選項",
+				"reset": "重設篩選",
+				"pageSize": {
+					"label": "每頁筆數",
+					"description": "每次請求要擷取的歌詞行數量（1–200）。"
+				},
+				"position": {
+					"label": "聲調位置",
+					"placeholder": "例：2",
+					"description": "鎖定特定聲調雙字的位置（1 = 第一組數字）。"
+				},
+				"rhymePosition": {
+					"label": "韻腳位置",
+					"placeholder": "例：5",
+					"description": "鎖定歌詞行中的韻腳欄位（自 1 起算）。"
+				},
+				"themes": {
+					"label": "主題",
+					"placeholder": "以逗號分隔的主題"
+				},
+				"keywords": {
+					"label": "關鍵詞",
+					"placeholder": "以逗號分隔的關鍵詞"
+				},
+				"lyricist": {
+					"label": "作詞人",
+					"placeholder": "例：黃霑"
+				},
+				"artist": {
+					"label": "演唱者",
+					"placeholder": "例：梅艷芳"
+				},
+				"id": {
+					"label": "歌詞 ID",
+					"placeholder": "內部識別碼"
+				},
+				"sentiment": {
+					"label": "情緒",
+					"placeholder": "例：充滿希望"
+				},
+				"year": {
+					"label": "年份",
+					"placeholder": "例：1993"
+				}
+			},
+			"labels": {
+				"query": "歌詞搜尋查詢",
+				"aiQuery": "語意查詢（選填）",
+				"bigrams": "聲調雙字",
+				"song": "歌曲",
+				"metadata": "行內統計",
+				"lineIndex": "第 {{index}} 行",
+				"counts": "字數 {{chars}} · 音節 {{syllables}} · 詞數 {{tokens}}",
+				"sentiment": "情緒",
+				"syntaxNotes": "定義",
+				"artists": "藝人",
+				"lyricists": "作詞人",
+				"tokens": "詞彙"
+			},
+			"results": {
+				"count": "顯示 {{shown}} / {{total}} 行",
+				"cached": "快取",
+				"timing": "{{ms}} 毫秒"
+			},
+			"messages": {
+				"noMatches": "暫無符合的歌詞行，請嘗試其他條件或調整篩選。",
+				"endOfResults": "已到結果列表結尾。"
+			},
+			"pron": {
+				"heading": "歌詞聲調搜尋",
+				"description": "輸入聲調數字，檢視不同歌曲中具有相同聲調模式的歌詞行。",
+				"tipsHeading": "聲調搜尋提示",
+				"tipsDescription": "善用數字記憶法，更快鎖定目標輪廓。",
+				"tips": {
+					"digits": "以 394052 式聲調數字標記需要的輪廓。",
+					"position": "設定聲調位置鎖定特定雙字欄位。",
+					"filters": "結合作詞人、年份、主題或關鍵詞篩選較小的資料範圍。"
+				},
+				"formHeading": "根據聲調數字搜尋",
+				"formDescription": "輸入聲調數字與可選條件，找出符合輪廓的既有歌詞行。",
+				"placeholder": "輸入聲調數字，例如 394052",
+				"resultsRegionLabel": "歌詞聲調搜尋結果"
+			},
+			"rhyme": {
+				"heading": "歌詞押韻搜尋",
+				"description": "找出共用同一韻母的歌詞行，以建立押韻表或參考案例。",
+				"tipsHeading": "押韻搜尋提示",
+				"tipsDescription": "快速定位已發佈歌詞常用的韻腳組。",
+				"tips": {
+					"families": "輸入一個或多個粵拼韻母（例：aa 或 aa,aai 以逗號分隔多個韻母）即可找到相同結尾的歌詞。",
+					"placement": "設定韻腳位置鎖定歌詞行中特定欄位。",
+					"filters": "搭配作詞人、演唱者或年份篩選，聚焦指定作品。"
+				},
+				"formHeading": "依韻母搜尋",
+				"formDescription": "輸入 Jyutping 韻母與可選條件，分析既有歌詞如何運用此韻腳。",
+				"placeholder": "輸入韻碼（例如 aa 或 aa,aai 以逗號分隔多個韻母）",
+				"modeLabel": "押韻匹配模式",
+				"resultsRegionLabel": "歌詞押韻搜尋結果",
+				"sequenceEnabled": "僅顯示連續押韻",
+				"sequenceDisabled": "包含所有押韻（不限位置）",
+				"sequenceToggle": "切換連續押韻模式"
+			}
+		}
+	}
 }

@@ -1,715 +1,715 @@
 {
-  "common": {
-    "loading": "読み込み中...",
-    "error": "エラー",
-    "save": "保存",
-    "cancel": "キャンセル",
-    "delete": "削除",
-    "edit": "編集",
-    "search": "検索",
-    "close": "閉じる",
-    "loadMore": "もっと読み込む",
-    "showMore": "もっと表示",
-    "reset": "リセット"
-  },
-  "notFound": {
-    "title": "ページが見つかりません",
-    "description": "お探しのページは存在しません。",
-    "goHome": "ホームに戻る"
-  },
-  "errors": {
-    "network": {
-      "title": "ネットワークの問題",
-      "message": "サーバーに接続できません。接続を確認してください。"
-    },
-    "api": {
-      "title": "リクエスト失敗",
-      "message": "サーバーからエラーが返されました。"
-    },
-    "unexpected": {
-      "title": "予期しないエラー",
-      "message": "予期しない問題が発生しました。"
-    },
-    "actions": {
-      "retry": "再試行",
-      "dismiss": "閉じる"
-    }
-  },
-  "language": {
-    "english": "英語",
-    "chineseSimplified": "簡体字中国語",
-    "chineseTraditional": "繁体字中国語",
-    "japanese": "日本語",
-    "switchLanguage": "言語を切り替え",
-    "selectLanguage": "言語を選択"
-  },
-  "theme": {
-    "theme": "テーマ",
-    "light": "ライト",
-    "dark": "ダーク",
-    "system": "システム",
-    "switchTheme": "テーマを切り替え"
-  },
-  "homepage": {
-    "ai": "AI",
-    "hero": {
-      "eyebrow": "広東語 101",
-      "title": "あなたの広東語ボイスを見つけよう",
-      "subtitle": "トーンの基礎から自信を持った会話まで、音楽主導の練習で現代的に学べるスタジオ。",
-      "primaryCta": "旅を始める",
-      "secondaryCta": "カリキュラムを見る",
-      "metrics": {
-        "lessons": "60以上のガイド付きレッスン",
-        "drills": "トーン重視のミニ練習",
-        "community": "毎週のコミュニティセッション"
-      }
-    },
-    "programOverview": {
-      "title": "ホーム／プログラム概要",
-      "description": "Canto101の進行、各段階のポイント、最適な使い方を確認しましょう。",
-      "highlights": {
-        "roadmap": "音声からストーリーテリングまでの段階的なロードマップ。",
-        "playlists": "文化的な注釈付きの適応型プレイリスト。",
-        "checkpoints": "マイルストーンで自己チェックとチューターのフィードバックを促進。"
-      }
-    },
-    "gettingStarted": {
-      "title": "はじめに／広東語について",
-      "description": "広東語の歴史、地域での使われ方、トーンシステムを学び、自信を持って発音できる基礎を作ります。",
-      "highlights": {
-        "tones": "インタラクティブなトーンプレイグラウンドで音のパターンを可視化。",
-        "dialects": "香港、マカオ、ディアスポラの違いを比較。",
-        "romanization": "音、文字、トーン記号をつなぐローマ字入門。"
-      }
-    },
-    "resources": {
-      "title": "リソースと追加教材",
-      "description": "オンライン・オフラインで練習を続けるための追加素材。",
-      "highlights": {
-        "downloads": "印刷可能なチートシート、トーンチャート、書き取りグリッド。",
-        "integrations": "連携アプリで練習をモバイルに同期。",
-        "media": "レベル別の厳選ポッドキャスト、ドラマ、読書リスト。"
-      }
-    },
-    "community": {
-      "title": "コミュニティとチューター",
-      "description": "Q&Aやライブ指導のためのサポートネットワークに参加しましょう。",
-      "highlights": {
-        "forums": "ピアフォーラムでリアルタイムに質問や成果を共有。",
-        "events": "毎週のネイティブチューターやゲストによるオフィスアワー。",
-        "booking": "プラットフォーム内で1対1やグループレッスンを予約。"
-      }
-    },
-    "products": {
-      "title": "プロダクト",
-      "description": "広東語学習を加速するための専用ツール。",
-      "items": {
-        "viewDetails": "詳細を見る",
-        "cantoLyr": {
-          "label": "CantoLyr",
-          "description": "歌詞を通じて発音・文字・文化を結びつけるレッスン。",
-          "features": {
-            "romanization": "ローマ字ガイドとネイティブ音声の組み合わせ。",
-            "vocabulary": "コア語彙デッキと間隔反復リマインダー。",
-            "phrases": "日常会話に役立つフレーズ。",
-            "grammar": "文法設計図で助詞やアスペクトマーカーを解説。",
-            "pronunciation": "トーンラボでピッチカーブを可視化し正確さを強化。"
-          }
-        },
-        "cantoCap": {
-          "label": "CantoCap",
-          "description": "広東語字幕を自動生成し、本物の音声をシャドーイング。",
-          "features": {
-            "captions": "ドラマやVlog、ライブイベントのタイムシンク字幕。",
-            "annotations": "トーン変化や口語表現をインラインで注釈。",
-            "export": "字幕ファイルをエクスポートして教材やカラオケに。",
-            "mobile": "字幕パックをモバイルに送信し、いつでも復習。"
-          }
-        }
-      }
-    },
-    "cta": {
-      "title": "Canto101を始める準備はできましたか？",
-      "description": "完全なガイド体験をアンロックし、学習ロードマップをパーソナライズして、広東語を日常に取り入れましょう。",
-      "button": "学習者プロフィールを作成"
-    }
-  },
-  "nav": {
-    "title": "Canto101",
-    "links": {
-      "programOverview": "概要",
-      "gettingStarted": "はじめに",
-      "resources": "リソース",
-      "community": "コミュニティ",
-      "products": "プロダクト"
-    }
-  },
-  "footer": {
-    "title": "Canto101",
-    "summary": "学習目標、カリキュラム構成、最適なナビゲーション方法をまとめています。",
-    "sections": {
-      "gettingStarted": {
-        "title": "はじめに／広東語について",
-        "about": "広東語について",
-        "background": "広東語の重要性、方言の特徴、トーンの仕組み、地域的背景。"
-      },
-      "resources": {
-        "title": "リソースと追加教材",
-        "downloads": "印刷・ダウンロード可能な教材リンク",
-        "integrations": "アプリ連携でどこでも学習",
-        "media": "おすすめのポッドキャスト、メディア、読書"
-      },
-      "community": {
-        "title": "コミュニティとチューター",
-        "qa": "Q&Aフォーラム、学習コミュニティ、またはチューター予約の場所",
-        "tutors": "チューターのレッスンを予約"
-      },
-      "products": {
-        "title": "プロダクト",
-        "cantoLyr": "CantoLyr - 歌詞生成ツール",
-        "cantoCap": "CantoCap - 広東語字幕生成アプリケーション"
-      },
-      "legal": {
-        "title": "法的事項",
-        "terms": "利用規約",
-        "privacy": "プライバシー",
-        "accessibility": "アクセシビリティ"
-      }
-    },
-    "disclaimer": "本プラットフォームは広東語学習を支援する教育資料とコミュニティリソースを提供します。",
-    "copyright": "© 著作権 2025 - Canto101"
-  },
-  "cantoLyr": {
-    "pron": {
-      "title": "発音検索",
-      "placeholder": "発音を入力（例: ngo5）",
-      "resultsRegionLabel": "発音検索結果"
-    },
-    "rhyme": {
-      "title": "韻検索",
-      "placeholder": "韻コードを入力（例: aa）",
-      "resultsRegionLabel": "韻検索結果"
-    },
-    "pages": {
-      "overview": {
-        "title": "CantoLyr レキシコン",
-        "description": "発音や韻を検証し、歌詞作成前に韻ファミリーを作るためのツールを探索。",
-        "featuresLabel": "レキシコンツール",
-        "lexiconTitle": "レキシコンツール",
-        "lexiconDescription": "アイデアを下書きする前に、発音や韻の一致を専用検索で特定。",
-        "lyricsTitle": "歌詞生成",
-        "lyricsDescription": "トーンシーケンスと創作プロンプトをマッピングし、広東語の韻律に沿った下書き歌詞を生成。",
-        "lyricSearchTitle": "歌詞検索",
-        "lyricSearchDescription": "声調数字や韻母で既存の広東語歌詞行を検索し、作詞の参考にします。"
-      },
-      "ai": {
-        "title": "AIツール",
-        "description": "歌詞下書きと語彙発見を加速するAI支援ツールです。",
-        "heading": "AIツール",
-        "lexiconTag": "学習／作詞ツール",
-        "lyricsPreview": "AI支援でトーン配列と創作プロンプトから下書き歌詞を生成します。",
-        "lexiconPreview": "歌詞作成向けに候補と用例を提案するAI搭載の語彙検索。",
-        "lyricSearchPreview": "意味ヒントを添えたトーンまたは韻の検索で、歌詞行を調査します。"
-      },
-      "featureCta": "ツールを開く",
-      "backToOverview": "CantoLyr概要に戻る",
-      "pron": {
-        "heading": "発音ツール",
-        "preview": "Jyutpingの検証、トーンカーブの確認、歌声ラインを決める前にレキシコン一致を表示。",
-        "description": "Jyutpingやトーンコードで検索し、音節の正確さを確認。歌詞作成のための一致エントリや用法メモを整理。",
-        "numericHeading": "数値トーン記憶法",
-        "numericAccordionTrigger": "394052 → 開音節トーンマッピング（1–6）",
-        "numericIntro": "広東語作詞家は6つの開音節トーン（1–6）を「394052」として記憶し、saam1, gau2, sei3, ling4, ng5, ji6の発音が各トーンに対応します。",
-        "numericDescription": "拡張記憶法「394052786」は広東語音韻学で記録され、各数字がメロディ前の基準となります。下表はチェックトーン前に使われる主要な対応をまとめています。",
-        "numericCheckedNote": "7-8-6（chat1, baat3, luk6）は1,3,6トーンと同じピッチですが、-p/-t/-kで終わるチェック音節のみに現れます。",
-        "numericSourcesLabel": "参考文献",
-        "numericSourceEnglishLabel": "英語:『Cantonese phonology』（Wikipedia）—「394052786」記憶法を解説。",
-        "numericSourceChineseLabel": "中国語:『広東語声調』Wikipedia —「三九四零五二」九声記憶法を収録。",
-        "numericTable": {
-          "caption": "広東語トーンインデックスと作詞家の記憶数字対応表",
-          "columns": {
-            "toneIndex": "トーンインデックス",
-            "mnemonicDigit": "記憶数字",
-            "toneName": "伝統的トーン名",
-            "example": "Jyutping例",
-            "audio": "音声"
-          },
-          "rows": {
-            "tone1": {
-              "toneName": "トーン1・陰平（高平調）",
-              "example": "saam1 —「三」"
-            },
-            "tone2": {
-              "toneName": "トーン2・陰上（上昇調）",
-              "example": "gau2 —「九」"
-            },
-            "tone3": {
-              "toneName": "トーン3・陰去（中平調）",
-              "example": "sei3 —「四」"
-            },
-            "tone4": {
-              "toneName": "トーン4・陽平（低下降調）",
-              "example": "ling4 —「零」"
-            },
-            "tone5": {
-              "toneName": "トーン5・陽上（低上昇調）",
-              "example": "ng5 —「五」"
-            },
-            "tone6": {
-              "toneName": "トーン6・陽去（低平調）",
-              "example": "ji6 —「二」"
-            }
-          }
-        },
-        "jyutpingHeading": "Jyutping音節の基礎",
-        "jyutpingIntro": "広東語の各音節は任意の声母・韻母・声調で構成されます。LSHK 粵拼はこの構造を <声母><韻母><声調数字> で表記し、実際の抑揚と歌詞を合わせやすくします。",
-        "jyutpingDetails": {
-          "structure": "表記は常に <声母><韻母><声調数字> の順。例えば ngo5 = 声母 \"ng\" + 韻母 \"o\" + 第5声、aa3 は声母なしで韻母から始まります。",
-          "onset": "粵拼には 19 の声母があります。零声母の音節は韻母から書き出し、aa3 や oeng2 のように記述します。",
-          "tones": "声調数字 1〜6 は広東語の6種類の調値に対応します。-p/-t/-k で終わる入声音節も 1・3・6 を共有し、追加の数字は使いません。",
-          "rhymeLink": "韻母（韻）は母音核と語尾子音を担います。下の表は LSHK 粵拼と韻検索で使用する正規の韻母一覧です。"
-        },
-        "jyutpingConsonantsLabel": "Jyutping声母",
-        "jyutpingConsonantsDescription": "声母は音節の冒頭に現れる子音で、韻母と声調数字を組み合わせて完全なJyutping表記になります。母音から始まる音節は声母を付けずに韻母から書き始めます。",
-        "rhymeHeading": "韻母（韻）リファレンス",
-        "rhymeDescription": "広東語の音韻論では、韻（韻母）は母音核と語尾から成り、同じ韻を共有する語は自然な押韻を形成します。韻検索には下記のJyutping韻母コードを入力してください。",
-        "rhymeTable": {
-          "caption": "韻検索で使える主なJyutping韻母",
-          "columns": {
-            "range": "範囲",
-            "finals": "韻母"
-          }
-        },
-        "rhymeListNote": "韻母コードは小文字で入力し、Jyutpingの綴りと同じ大小文字を守ってください。",
-        "rhymeSourcesLabel": "参考資料",
-        "rhymeSourceJyutping": "Jyutpingの声母・韻母表（Wikipedia）",
-        "rhymeSourceRime": "広東語の音節構造と韻母の説明（Wikipedia）"
-      },
-      "rhyme": {
-        "heading": "韻ツール",
-        "preview": "同じ韻尾とトーンパターンを持つ音節を見つけて、本格的な韻構造を作成。",
-        "description": "韻コードでレキシコンを検索し、同じ韻とトーンを持つエントリをグループ化。韻グリッドを素早く作成。",
-        "sequenceEnabled": "連続した韻のみを表示",
-        "sequenceDisabled": "すべての韻を含む（位置に関係なく）",
-        "sequenceToggle": "連続韻モードを切り替える"
-      },
-      "lyrics": {
-        "heading": "歌詞ツール",
-        "preview": "トーングリッドと創作ブリーフを組み合わせて、広東語リズムに合った歌詞を生成。",
-        "description": "創作プロンプトとトーンシーケンスを入力し、構造化された歌詞案を受け取って調整できます。"
-      },
-      "aiLexicon": {
-        "description": "意味の説明と声調数字を組み合わせて、AI が順位付けした広東語語彙を取得します。",
-        "stepsHeading": "使い方",
-        "steps": {
-          "one": "自然な言葉でシーンや歌詞の狙いを説明します。",
-          "two": "希望する 394052 形式の声調数字を入力します。",
-          "three": "送信して類似度スコア付きの語彙候補を確認します。"
-        },
-        "notice": "結果は頻度と AI 類似度を組み合わせています。利用前に声調が目的に合うか再確認してください。",
-        "formHeading": "意味ベースの語彙検索を実行",
-        "formDescription": "説明と声調に基づいて語彙を照合します。いずれかを調整すると順位が更新されます。"
-      },
-      "lyricSearch": {
-        "heading": "歌詞検索",
-        "preview": "声調や韻脚で公開済みの歌詞行を調べ、作詞・分析を支援します。"
-      }
-    },
-    "lyrics": {
-      "title": "歌詞セッション",
-      "promptLabel": "歌詞プロンプト",
-      "promptPlaceholder": "シーンやテーマを記述",
-      "sequencesLabel": "トーンシーケンス",
-      "sequencesPlaceholder": "カンマ区切りのトーンシーケンス（例: 02,452）",
-      "generate": "生成",
-      "generating": "生成中..."
-    },
-    "errors": {
-      "pron": {
-        "missingQuery": "発音クエリを入力してください。"
-      },
-      "rhyme": {
-        "missingQuery": "韻クエリを入力してください。",
-        "invalidRhyme": "広東語の韻母として有効な値を入力してください（複数の場合はカンマ区切り）。"
-      },
-      "lyrics": {
-        "missingPrompt": "歌詞生成にはプロンプトが必要です。",
-        "missingSequences": "少なくとも1つのトーンシーケンスを入力してください（カンマまたは改行区切り）。",
-        "promptTooLong": "プロンプトが長すぎます（200文字以内）。",
-        "invalidSequences": "各行3桁以上・使用可能数字は 0 2 3 4 5 9 のみ・最大3行まで。",
-        "invalidSeed": "シードは0以上の整数で入力してください。",
-        "invalidTop": "段落出力数は 1〜3 の範囲で指定してください。",
-        "unexpected": "歌詞生成に失敗しました。しばらくしてから再試行してください。"
-      },
-      "lexicon": {
-        "invalidDigits": "0・2・3・4・5・9 の数字のみ使用できます。",
-        "tooLong": "クエリは4桁以内で入力してください。",
-        "missingQuery": "AI に探してほしい内容を説明してください。",
-        "missingPronunciation": "394052 方式の声調数字を入力してください。",
-        "invalidResponse": "AI 語彙検索の結果を処理できませんでした。もう一度お試しください。",
-        "limitRange": "制限は1から25の間で設定してください。"
-      }
-    },
-    "ai": {
-      "lyricSearch": {
-        "title": "歌詞検索",
-        "pron": {
-          "nav": "AI・声調検索",
-          "heading": "AI 歌詞・声調検索",
-          "description": "声調数字に意味のヒントを加えて、より賢く歌詞行を検索します。",
-          "tipsHeading": "AI 声調検索のヒント",
-          "tipsDescription": "数字と短い説明を組み合わせると再現率が向上します。",
-          "tips": {
-            "digits": "394052 型の数字で必要な輪郭を固定します。",
-            "position": "声調位置を指定して、行内の特定のビグラムにフォーカスします。",
-            "filters": "作詞者・年代・テーマ・キーワードで対象を絞り込みます。",
-            "aiQuery": "ムードや場面などの短い説明を追加して、意味検索を誘導します。"
-          },
-          "formHeading": "声調数字 + 意味で検索",
-          "formDescription": "声調数字と任意の意味説明を入力し、必要に応じてフィルターを追加します。",
-          "placeholder": "ムードや場面を説明（任意）"
-        },
-        "rhyme": {
-          "nav": "AI・韻脚検索",
-          "heading": "AI 歌詞・韻脚検索",
-          "description": "韻母に意味のヒントを組み合わせて歌詞行を見つけます。",
-          "tipsHeading": "AI 韻脚検索のヒント",
-          "tipsDescription": "韻母と短い説明を合わせて結果��絞り込みます。",
-          "tips": {
-            "families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
-            "placement": "韻脚位置を使って、行内のスロットを一致させます。",
-            "filters": "作詞者・歌手・年代などのフィルターを組み合わせます。",
-            "aiQuery": "場面やテーマなどの短い説明を追加して意味検索を誘導します。"
-          },
-          "formHeading": "韻母 + 意味で検索",
-          "formDescription": "Jyutping の韻母と任意の意味説明を入力し、必要ならフィルターを追加します。",
-          "placeholder": "ムードや使い方を説明（任意）"
-        }
-      },
-      "lyrics": {
-        "title": "歌詞生成",
-        "description": "創作のプロンプトと目標となる声調グリッドを指定して、構造化された広東語の歌詞アイデアを受け取ります。",
-        "page": {
-          "overview": "機能説明",
-          "shortOverview": "制限とヒント",
-          "limitationsHeading": "現在の制限",
-          "limitations": {
-            "lexiconCoverage": "出力品質は現在のレキシコンデータベースの範囲に制限されます。エントリが不十分な場合、意味的または韻の一致が不正確になる可能性があります。",
-            "modelRetrieval": "意味的検索とベクトル検索は現在のモデルに依存します。不十分な埋め込みは文脈的に関連する候補を見逃す可能性があります。",
-            "queryGeneration": "クエリとトーンシーケンスの組み合わせ戦略はまだ最適化されており、複雑なシナリオで不安定なソートを引き起こす可能性があります。",
-            "grammarPron": "生成された文には文法、コロケーション、またはトーン（発音）のエラーが含まれる可能性があり、手動での後編集が必要です。",
-            "limitedParagraphs": "段落組み合わせのサンプリングは現在少数の候補（top-N）に制限されており、より有望な組み合わせを見逃す可能性があります。",
-            "slowGeneration": "長いトーンシーケンスや複数の候補グループの再ランキング時に生成速度が大幅に低下します。",
-            "toneSequenceRange": "サポートされるトーンシーケンスの長さとグループ化はまだ調整中です。過度に長いシーケンスは切り詰められたり品質が低下したりする可能性があります。"
-          },
-          "improveHeading": "進化と改善",
-          "improvements": {
-            "lexiconGrowth": "レキシコンデータベースを拡張およびクリーンアップ（頻度、品詞、レジスタタグを含む）して候補の品質を向上させます。",
-            "retrievalRerank": "意味的検索、段階的再ランキング、多機能スコアリング（MMR / パターンフィット / 頻度）を最適化します。",
-            "patternScoring": "トーンパターンと構文構造の評価を改善して、不自然な休止と語順エラーを減らします。",
-            "feedbackLoop": "手動注釈とユーザーフィードバックループを導入して、エラー検出とランキングの正確性を強化します。"
-          },
-          "tipsHeading": "使用のヒント",
-          "tips": {
-            "expandLines": "各行を展開して候補文とパターン統計を表示し、インスピレーションを抽出したりセグメントを置き換えたりします。",
-            "refineSequences": "トーンシーケンスの長さと構造を調整（例: 長い行を2つに分割）してマッチングの安定性を向上させます。",
-            "lexiconSemantic": "行の語彙が硬すぎる場合、同じシーン説明を入力して代替表現を見つけるために意味的レキシコン検索ツールに切り替えます。",
-            "manualPolish": "生成された下書きをフレームワークとして扱います：語順、感情層、本物の話された広東語をさらに洗練します。"
-          },
-          "disclaimer": "出力は実験的な下書きです。手動でレビューしてください"
-        },
-        "formHeading": "セッションの説明",
-        "formDescription": "シーン、声調グリッド、および任意のシードを設定して歌詞行の下書きを開始します。",
-        "form": {
-          "promptLabel": "歌詞プロンプト",
-          "promptPlaceholder": "シーン、感情、または物語の場面を記述",
-          "sequencesLabel": "声調シーケンス",
-          "sequencesPlaceholder": "カンマまたは改行で区切って声調数字の列を入力",
-          "sequencesCaption": "広東語の声調数字を使用してください（例: 394052）。各行が生成される歌詞の一行になります。",
-          "seedLabel": "シード（任意）",
-          "seedPlaceholder": "ランダム",
-          "seedCaption": "ランダムシードを固定して再現可能な出力を得ます。",
-          "topLabel": "段落出力数",
-          "topCaption": "返す構成済み段落候補の数（1–3）。",
-          "submit": "歌詞を生成",
-          "generating": "生成中...",
-          "generatingHint": "システムは候補文を組み立て、順位付けを行っています。",
-          "apiKey": {
-            "button": "APIキーを設定",
-            "dialogTitle": "Google Gemini APIキーを入力",
-            "dialogDescriptionPrefix": "",
-            "dialogDescriptionMiddle": " からAPIキーを取得してください。",
-            "dialogDescriptionSuffix": "APIキーは記録されず、このセッションでのみ使用されます。保存されたり、システムの他の場所で使用されたりすることはありません。",
-            "label": "APIキー",
-            "placeholder": "Gemini APIキーを入力",
-            "save": "保存",
-            "requiredMessage": "歌詞を生成するにはGoogle Gemini APIキーを設定してください。",
-            "validation": {
-              "required": "APIキーは必須です",
-              "invalidFormat": "APIキーは 'AIza' で始まる必要があります",
-              "invalidLength": "APIキーは39文字である必要があります"
-            },
-            "showPassword": "パスワードを表示",
-            "hidePassword": "パスワードを隠す"
-          }
-        },
-        "summary": {
-          "title": "セッションの概要",
-          "description": "機能 {{feature}} · エンジン v{{version}}",
-          "feature": "機能: {{feature}}",
-          "version": "エンジンバージョン {{version}}",
-          "seed": "シード",
-          "createdAt": "作成日",
-          "lineCount": "行数",
-          "processingTime": "処理時間",
-          "processingTimeValue": "{{ms}} ms"
-        },
-        "topParagraphs": {
-          "title": "構成された段落",
-          "count": "{{count}} 件の提案",
-          "badge": "トップ {{index}}",
-          "empty": "段落の提案は生成されませんでした。段落出力数を増やすか、もう一度お試しください。"
-        },
-        "lines": {
-          "sectionTitle": "行ごとの内訳",
-          "count": "{{count}} 行",
-          "title": "行 {{index}} · 声調 {{tone}}",
-          "previewFallback": "先頭文がまだありません。診断情報を表示するには展開してください。",
-          "warningsCount": "{{count}} 件の警告",
-          "empty": "まだ行データがありません。",
-          "toneSequence": "声調 {{tone}}",
-          "lineIndex": "行 {{index}}",
-          "digitSet": "数字セット",
-          "primaryPattern": "パターン {{pattern}}",
-          "primaryRank": "ランク {{rank}}",
-          "primaryMmr": "MMR {{score}}",
-          "noPrimary": "この行のランク付けされた文は生成されませんでした。",
-          "error": "生成エラー: {{message}}",
-          "candidateStats": {
-            "heading": "候補プール",
-            "total": "候補総数",
-            "semantic": "意味一致",
-            "freqTop": "高頻度",
-            "freqRandom": "探索的"
-          },
-          "topSentences": {
-            "heading": "上位ランクの文",
-            "columns": {
-              "text": "文",
-              "pattern": "パターン",
-              "rank": "ランク",
-              "mmr": "MMR"
-            },
-            "empty": "ランク付けされた文は返されませんでした。"
-          },
-          "patterns": {
-            "heading": "声調パターン",
-            "groups": "グループ: {{groups}}",
-            "empty": "声調パターンは返されませんでした。"
-          },
-          "allCandidates": {
-            "heading": "全候補プール",
-            "pattern": "パターン {{pattern}}",
-            "empty": "追加の候補は返されませんでした。"
-          },
-          "additional": {
-            "heading": "追加のランク付けされた文",
-            "rank": "ランク {{rank}}",
-            "mmr": "MMR {{score}}"
-          },
-          "paragraphs": {
-            "heading": "この行を使った段落ブレンド",
-            "label": "段落 {{index}}"
-          }
-        }
-      },
-      "lexicon": {
-        "title": "語彙検索",
-        "description": "意味のヒントと声調数字を組み合わせることで、プロンプトに合う語彙や漢字候補を提案します。",
-        "form": {
-          "queryLabel": "利用シーンを説明",
-          "queryPlaceholder": "例：新しい始まりを歌う希望のサビ",
-          "pronunciationLabel": "目標の声調数字",
-          "pronunciationPlaceholder": "394 などの声調数字を入力",
-          "limitLabel": "候補数",
-          "limitCaption": "1〜25 件の範囲で設定できます。"
-        },
-        "summary": {
-          "query": "意味: {{query}}",
-          "pronunciation": "声調: {{pronunciation}}",
-          "timing": "{{ms}} ms"
-        },
-        "similarityBadge": "{{percentage}}% 意味的マッチ",
-        "noResults": "AI の候補が見つかりませんでした。説明を広げるか声調数字を調整してください。"
-      }
-    },
-    "lexicon": {
-      "types": {
-        "char": "文字",
-        "vocab": "語彙"
-      },
-      "details": {
-        "pronunciation": "発音",
-        "tone": "トーン",
-        "jyutping": "Jyutping",
-        "consonants": "子音",
-        "rhymes": "押韻",
-        "syllables": "音節数",
-        "frequency": "頻度",
-        "pos": "品詞",
-        "register": "レジスター",
-        "gloss": "語釈",
-        "source": "出典",
-        "position": "位置"
-      },
-      "badges": {
-        "cached": "キャッシュ"
-      },
-      "messages": {
-        "noMatches": "まだ結果がありません。別のクエリをお試しください。",
-        "endOfResults": "結果の末尾です。",
-        "hoverHint": "クリックして詳細を表示。"
-      },
-      "counts": {
-        "showing": "{{shown}} / {{total}} 件を表示"
-      },
-      "group": {
-        "label": "グループ {{index}}",
-        "range": "{{start}}–{{end}}"
-      },
-      "langHints": {
-        "zhHk": "「zh-HK」としてラベル付けされた語彙は、日常会話、ポップカルチャー、ネット言語などでよく使われます。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「書面語」と比べて、口語語彙は日常的な話し言葉に近い傾向があります。",
-        "zhTw": "「zh-TW」としてラベル付けされた語彙は、正式な文章、ニュース、本、公的文書などで多く見られ、中国語の書き言葉のレジスターに属します。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「口語」と比べて、書面語語彙はよりフォーマルで規範的な文脈に使われる傾向があります。",
-        "generic": "{{code}}"
-      },
-      "feedback": {
-        "up": "役に立った",
-        "down": "役に立たなかった"
-      },
-      "options": {
-        "label": "オプション"
-      },
-      "rhyme": {
-        "modeLabel": "押韻マッチングモード",
-        "sequenceEnabled": "連続した韻のみを表示",
-        "sequenceDisabled": "すべての韻を含む（位置に関係なく）",
-        "sequenceToggle": "連続押韻モードを切り替え",
-        "sequenceLabel": "連続",
-        "inclusiveLabel": "全て"
-      }
-    },
-    "lyricSearch": {
-      "title": "歌詞検索",
-      "nav": {
-        "pron": "歌詞・声調検索",
-        "rhyme": "歌詞・韻脚検索"
-      },
-      "rhyme": {
-        "heading": "歌詞・韻脚検索",
-        "description": "同じ韻母を共有する歌詞行を探し、押韻パターンづくりに役立てます。",
-        "tipsHeading": "韻脚検索のヒント",
-        "tipsDescription": "公開済みの歌詞で使われている韻脚ファミリーを素早く確認します。",
-        "tips": {
-          "families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
-          "placement": "韻脚位置を指定し、歌詞行の中で韻が置かれる箇所を一致させます。",
-          "filters": "作詞者・歌手・年代などを組み合わせると対象作品を絞れます。"
-        },
-        "formHeading": "韻母で検索",
-        "formDescription": "Jyutping の韻母と必要なフィルターを入力し、既存の歌詞がその韻をどう使っているか確認します。",
-        "placeholder": "Jyutping の韻母を入力（例: aa または aa,aai のようにカンマ区切りで複数入力可）",
-        "modeLabel": "押韻マッチングモード",
-        "resultsRegionLabel": "歌詞・韻脚検索結果",
-        "sequenceEnabled": "連続した韻のみを表示",
-        "sequenceDisabled": "すべての韻を含む（位置に関係なく）",
-        "sequenceToggle": "連続韻モードを切り替える"
-      },
-      "placeholders": {
-        "aiQuery": "場面や使い方を自然な言葉で説明"
-      },
-      "filters": {
-        "label": "フィルターとオプション",
-        "reset": "フィルターをリセット",
-        "pageSize": {
-          "label": "取得件数",
-          "description": "1 回の取得で読み込む歌詞行の件数（1〜200）。"
-        },
-        "position": {
-          "label": "声調位置",
-          "placeholder": "例: 2",
-          "description": "指定した声調ビグラム（1 = 先頭ペア）だけに絞り込みます。"
-        },
-        "rhymePosition": {
-          "label": "韻脚位置",
-          "placeholder": "例: 5",
-          "description": "歌詞行の中で韻が置かれるインデックス（1始まり）を指定します。"
-        },
-        "themes": {
-          "label": "テーマ",
-          "placeholder": "カンマ区切りのテーマ"
-        },
-        "keywords": {
-          "label": "キーワード",
-          "placeholder": "カンマ区切りのキーワード"
-        },
-        "lyricist": {
-          "label": "作詞者",
-          "placeholder": "例: 黄霑"
-        },
-        "artist": {
-          "label": "歌手",
-          "placeholder": "例: 梅艷芳"
-        },
-        "id": {
-          "label": "歌詞ID",
-          "placeholder": "内部識別子"
-        },
-        "sentiment": {
-          "label": "感情",
-          "placeholder": "例: 希望に満ちた"
-        },
-        "year": {
-          "label": "年代",
-          "placeholder": "例: 1993"
-        }
-      },
-      "labels": {
-        "query": "歌詞検索クエリ",
-        "aiQuery": "意味クエリ（任意）",
-        "bigrams": "声調ビグラム",
-        "song": "楽曲",
-        "metadata": "行メタデータ",
-        "lineIndex": "{{index}} 行目",
-        "counts": "文字数 {{chars}}・音節 {{syllables}}・単語 {{tokens}}",
-        "sentiment": "感情",
-        "syntaxNotes": "定義",
-        "artists": "アーティスト",
-        "lyricists": "作詞者",
-        "tokens": "レキシコン"
-      },
-      "results": {
-        "count": "表示 {{shown}} / {{total}} 行",
-        "cached": "キャッシュ",
-        "timing": "{{ms}} ms"
-      },
-      "messages": {
-        "noMatches": "該当する歌詞行が見つかりません。条件を変更して再検索してください。",
-        "endOfResults": "結果はここまでです。"
-      },
-      "pron": {
-        "heading": "歌詞・声調検索",
-        "description": "声調数字を入力し、異なる楽曲で同じ声調パターンを持つ歌詞行を探します。",
-        "tipsHeading": "声調検索のヒント",
-        "tipsDescription": "394052 の数字記憶を使って素早く目的の輪郭を探しましょう。",
-        "tips": {
-          "digits": "394052 型の数字で探したい声調の輪郭を指定します。",
-          "position": "声調位置を指定すると特定のビグラムに絞り込めます。",
-          "filters": "作詞者・年代・テーマ・キーワードを組み合わせると分析対象を狭められます。"
-        },
-        "formHeading": "声調数字で検索",
-        "formDescription": "声調数字と必要なフィルターを入力し、輪郭が一致する既存の歌詞行を確認します。",
-        "placeholder": "声調数字を入力（例: 394052）",
-        "resultsRegionLabel": "歌詞・声調検索結果"
-      }
-    }
-  }
+	"common": {
+		"loading": "読み込み中...",
+		"error": "エラー",
+		"save": "保存",
+		"cancel": "キャンセル",
+		"delete": "削除",
+		"edit": "編集",
+		"search": "検索",
+		"close": "閉じる",
+		"loadMore": "もっと読み込む",
+		"showMore": "もっと表示",
+		"reset": "リセット"
+	},
+	"notFound": {
+		"title": "ページが見つかりません",
+		"description": "お探しのページは存在しません。",
+		"goHome": "ホームに戻る"
+	},
+	"errors": {
+		"network": {
+			"title": "ネットワークの問題",
+			"message": "サーバーに接続できません。接続を確認してください。"
+		},
+		"api": {
+			"title": "リクエスト失敗",
+			"message": "サーバーからエラーが返されました。"
+		},
+		"unexpected": {
+			"title": "予期しないエラー",
+			"message": "予期しない問題が発生しました。"
+		},
+		"actions": {
+			"retry": "再試行",
+			"dismiss": "閉じる"
+		}
+	},
+	"language": {
+		"english": "英語",
+		"chineseSimplified": "簡体字中国語",
+		"chineseTraditional": "繁体字中国語",
+		"japanese": "日本語",
+		"switchLanguage": "言語を切り替え",
+		"selectLanguage": "言語を選択"
+	},
+	"theme": {
+		"theme": "テーマ",
+		"light": "ライト",
+		"dark": "ダーク",
+		"system": "システム",
+		"switchTheme": "テーマを切り替え"
+	},
+	"homepage": {
+		"ai": "AI",
+		"hero": {
+			"eyebrow": "広東語 101",
+			"title": "あなたの広東語ボイスを見つけよう",
+			"subtitle": "トーンの基礎から自信を持った会話まで、音楽主導の練習で現代的に学べるスタジオ。",
+			"primaryCta": "旅を始める",
+			"secondaryCta": "カリキュラムを見る",
+			"metrics": {
+				"lessons": "60以上のガイド付きレッスン",
+				"drills": "トーン重視のミニ練習",
+				"community": "毎週のコミュニティセッション"
+			}
+		},
+		"programOverview": {
+			"title": "ホーム／プログラム概要",
+			"description": "Canto101の進行、各段階のポイント、最適な使い方を確認しましょう。",
+			"highlights": {
+				"roadmap": "音声からストーリーテリングまでの段階的なロードマップ。",
+				"playlists": "文化的な注釈付きの適応型プレイリスト。",
+				"checkpoints": "マイルストーンで自己チェックとチューターのフィードバックを促進。"
+			}
+		},
+		"gettingStarted": {
+			"title": "はじめに／広東語について",
+			"description": "広東語の歴史、地域での使われ方、トーンシステムを学び、自信を持って発音できる基礎を作ります。",
+			"highlights": {
+				"tones": "インタラクティブなトーンプレイグラウンドで音のパターンを可視化。",
+				"dialects": "香港、マカオ、ディアスポラの違いを比較。",
+				"romanization": "音、文字、トーン記号をつなぐローマ字入門。"
+			}
+		},
+		"resources": {
+			"title": "リソースと追加教材",
+			"description": "オンライン・オフラインで練習を続けるための追加素材。",
+			"highlights": {
+				"downloads": "印刷可能なチートシート、トーンチャート、書き取りグリッド。",
+				"integrations": "連携アプリで練習をモバイルに同期。",
+				"media": "レベル別の厳選ポッドキャスト、ドラマ、読書リスト。"
+			}
+		},
+		"community": {
+			"title": "コミュニティとチューター",
+			"description": "Q&Aやライブ指導のためのサポートネットワークに参加しましょう。",
+			"highlights": {
+				"forums": "ピアフォーラムでリアルタイムに質問や成果を共有。",
+				"events": "毎週のネイティブチューターやゲストによるオフィスアワー。",
+				"booking": "プラットフォーム内で1対1やグループレッスンを予約。"
+			}
+		},
+		"products": {
+			"title": "プロダクト",
+			"description": "広東語学習を加速するための専用ツール。",
+			"items": {
+				"viewDetails": "詳細を見る",
+				"cantoLyr": {
+					"label": "CantoLyr",
+					"description": "歌詞を通じて発音・文字・文化を結びつけるレッスン。",
+					"features": {
+						"romanization": "ローマ字ガイドとネイティブ音声の組み合わせ。",
+						"vocabulary": "コア語彙デッキと間隔反復リマインダー。",
+						"phrases": "日常会話に役立つフレーズ。",
+						"grammar": "文法設計図で助詞やアスペクトマーカーを解説。",
+						"pronunciation": "トーンラボでピッチカーブを可視化し正確さを強化。"
+					}
+				},
+				"cantoCap": {
+					"label": "CantoCap",
+					"description": "広東語字幕を自動生成し、本物の音声をシャドーイング。",
+					"features": {
+						"captions": "ドラマやVlog、ライブイベントのタイムシンク字幕。",
+						"annotations": "トーン変化や口語表現をインラインで注釈。",
+						"export": "字幕ファイルをエクスポートして教材やカラオケに。",
+						"mobile": "字幕パックをモバイルに送信し、いつでも復習。"
+					}
+				}
+			}
+		},
+		"cta": {
+			"title": "Canto101を始める準備はできましたか？",
+			"description": "完全なガイド体験をアンロックし、学習ロードマップをパーソナライズして、広東語を日常に取り入れましょう。",
+			"button": "学習者プロフィールを作成"
+		}
+	},
+	"nav": {
+		"title": "Canto101",
+		"links": {
+			"programOverview": "概要",
+			"gettingStarted": "はじめに",
+			"resources": "リソース",
+			"community": "コミュニティ",
+			"products": "プロダクト"
+		}
+	},
+	"footer": {
+		"title": "Canto101",
+		"summary": "学習目標、カリキュラム構成、最適なナビゲーション方法をまとめています。",
+		"sections": {
+			"gettingStarted": {
+				"title": "はじめに／広東語について",
+				"about": "広東語について",
+				"background": "広東語の重要性、方言の特徴、トーンの仕組み、地域的背景。"
+			},
+			"resources": {
+				"title": "リソースと追加教材",
+				"downloads": "印刷・ダウンロード可能な教材リンク",
+				"integrations": "アプリ連携でどこでも学習",
+				"media": "おすすめのポッドキャスト、メディア、読書"
+			},
+			"community": {
+				"title": "コミュニティとチューター",
+				"qa": "Q&Aフォーラム、学習コミュニティ、またはチューター予約の場所",
+				"tutors": "チューターのレッスンを予約"
+			},
+			"products": {
+				"title": "プロダクト",
+				"cantoLyr": "CantoLyr - 歌詞生成ツール",
+				"cantoCap": "CantoCap - 広東語字幕生成アプリケーション"
+			},
+			"legal": {
+				"title": "法的事項",
+				"terms": "利用規約",
+				"privacy": "プライバシー",
+				"accessibility": "アクセシビリティ"
+			}
+		},
+		"disclaimer": "本プラットフォームは広東語学習を支援する教育資料とコミュニティリソースを提供します。",
+		"copyright": "© 著作権 2025 - Canto101"
+	},
+	"cantoLyr": {
+		"pron": {
+			"title": "発音検索",
+			"placeholder": "発音を入力（例: ngo5）",
+			"resultsRegionLabel": "発音検索結果"
+		},
+		"rhyme": {
+			"title": "韻検索",
+			"placeholder": "韻コードを入力（例: aa）",
+			"resultsRegionLabel": "韻検索結果"
+		},
+		"pages": {
+			"overview": {
+				"title": "CantoLyr レキシコン",
+				"description": "発音や韻を検証し、歌詞作成前に韻ファミリーを作るためのツールを探索。",
+				"featuresLabel": "レキシコンツール",
+				"lexiconTitle": "レキシコンツール",
+				"lexiconDescription": "アイデアを下書きする前に、発音や韻の一致を専用検索で特定。",
+				"lyricsTitle": "歌詞生成",
+				"lyricsDescription": "トーンシーケンスと創作プロンプトをマッピングし、広東語の韻律に沿った下書き歌詞を生成。",
+				"lyricSearchTitle": "歌詞検索",
+				"lyricSearchDescription": "声調数字や韻母で既存の広東語歌詞行を検索し、作詞の参考にします。"
+			},
+			"ai": {
+				"title": "AIツール",
+				"description": "歌詞下書きと語彙発見を加速するAI支援ツールです。",
+				"heading": "AIツール",
+				"lexiconTag": "学習／作詞ツール",
+				"lyricsPreview": "AI支援でトーン配列と創作プロンプトから下書き歌詞を生成します。",
+				"lexiconPreview": "歌詞作成向けに候補と用例を提案するAI搭載の語彙検索。",
+				"lyricSearchPreview": "意味ヒントを添えたトーンまたは韻の検索で、歌詞行を調査します。"
+			},
+			"featureCta": "ツールを開く",
+			"backToOverview": "CantoLyr概要に戻る",
+			"pron": {
+				"heading": "発音ツール",
+				"preview": "Jyutpingの検証、トーンカーブの確認、歌声ラインを決める前にレキシコン一致を表示。",
+				"description": "Jyutpingやトーンコードで検索し、音節の正確さを確認。歌詞作成のための一致エントリや用法メモを整理。",
+				"numericHeading": "数値トーン記憶法",
+				"numericAccordionTrigger": "394052 → 開音節トーンマッピング（1–6）",
+				"numericIntro": "広東語作詞家は6つの開音節トーン（1–6）を「394052」として記憶し、saam1, gau2, sei3, ling4, ng5, ji6の発音が各トーンに対応します。",
+				"numericDescription": "拡張記憶法「394052786」は広東語音韻学で記録され、各数字がメロディ前の基準となります。下表はチェックトーン前に使われる主要な対応をまとめています。",
+				"numericCheckedNote": "7-8-6（chat1, baat3, luk6）は1,3,6トーンと同じピッチですが、-p/-t/-kで終わるチェック音節のみに現れます。",
+				"numericSourcesLabel": "参考文献",
+				"numericSourceEnglishLabel": "英語:『Cantonese phonology』（Wikipedia）—「394052786」記憶法を解説。",
+				"numericSourceChineseLabel": "中国語:『広東語声調』Wikipedia —「三九四零五二」九声記憶法を収録。",
+				"numericTable": {
+					"caption": "広東語トーンインデックスと作詞家の記憶数字対応表",
+					"columns": {
+						"toneIndex": "トーンインデックス",
+						"mnemonicDigit": "記憶数字",
+						"toneName": "伝統的トーン名",
+						"example": "Jyutping例",
+						"audio": "音声"
+					},
+					"rows": {
+						"tone1": {
+							"toneName": "トーン1・陰平（高平調）",
+							"example": "saam1 —「三」"
+						},
+						"tone2": {
+							"toneName": "トーン2・陰上（上昇調）",
+							"example": "gau2 —「九」"
+						},
+						"tone3": {
+							"toneName": "トーン3・陰去（中平調）",
+							"example": "sei3 —「四」"
+						},
+						"tone4": {
+							"toneName": "トーン4・陽平（低下降調）",
+							"example": "ling4 —「零」"
+						},
+						"tone5": {
+							"toneName": "トーン5・陽上（低上昇調）",
+							"example": "ng5 —「五」"
+						},
+						"tone6": {
+							"toneName": "トーン6・陽去（低平調）",
+							"example": "ji6 —「二」"
+						}
+					}
+				},
+				"jyutpingHeading": "Jyutping音節の基礎",
+				"jyutpingIntro": "広東語の各音節は任意の声母・韻母・声調で構成されます。LSHK 粵拼はこの構造を <声母><韻母><声調数字> で表記し、実際の抑揚と歌詞を合わせやすくします。",
+				"jyutpingDetails": {
+					"structure": "表記は常に <声母><韻母><声調数字> の順。例えば ngo5 = 声母 \"ng\" + 韻母 \"o\" + 第5声、aa3 は声母なしで韻母から始まります。",
+					"onset": "粵拼には 19 の声母があります。零声母の音節は韻母から書き出し、aa3 や oeng2 のように記述します。",
+					"tones": "声調数字 1〜6 は広東語の6種類の調値に対応します。-p/-t/-k で終わる入声音節も 1・3・6 を共有し、追加の数字は使いません。",
+					"rhymeLink": "韻母（韻）は母音核と語尾子音を担います。下の表は LSHK 粵拼と韻検索で使用する正規の韻母一覧です。"
+				},
+				"jyutpingConsonantsLabel": "Jyutping声母",
+				"jyutpingConsonantsDescription": "声母は音節の冒頭に現れる子音で、韻母と声調数字を組み合わせて完全なJyutping表記になります。母音から始まる音節は声母を付けずに韻母から書き始めます。",
+				"rhymeHeading": "韻母（韻）リファレンス",
+				"rhymeDescription": "広東語の音韻論では、韻（韻母）は母音核と語尾から成り、同じ韻を共有する語は自然な押韻を形成します。韻検索には下記のJyutping韻母コードを入力してください。",
+				"rhymeTable": {
+					"caption": "韻検索で使える主なJyutping韻母",
+					"columns": {
+						"range": "範囲",
+						"finals": "韻母"
+					}
+				},
+				"rhymeListNote": "韻母コードは小文字で入力し、Jyutpingの綴りと同じ大小文字を守ってください。",
+				"rhymeSourcesLabel": "参考資料",
+				"rhymeSourceJyutping": "Jyutpingの声母・韻母表（Wikipedia）",
+				"rhymeSourceRime": "広東語の音節構造と韻母の説明（Wikipedia）"
+			},
+			"rhyme": {
+				"heading": "韻ツール",
+				"preview": "同じ韻尾とトーンパターンを持つ音節を見つけて、本格的な韻構造を作成。",
+				"description": "韻コードでレキシコンを検索し、同じ韻とトーンを持つエントリをグループ化。韻グリッドを素早く作成。",
+				"sequenceEnabled": "連続した韻のみを表示",
+				"sequenceDisabled": "すべての韻を含む（位置に関係なく）",
+				"sequenceToggle": "連続韻モードを切り替える"
+			},
+			"lyrics": {
+				"heading": "歌詞ツール",
+				"preview": "トーングリッドと創作ブリーフを組み合わせて、広東語リズムに合った歌詞を生成。",
+				"description": "創作プロンプトとトーンシーケンスを入力し、構造化された歌詞案を受け取って調整できます。"
+			},
+			"aiLexicon": {
+				"description": "意味の説明と声調数字を組み合わせて、AI が順位付けした広東語語彙を取得します。",
+				"stepsHeading": "使い方",
+				"steps": {
+					"one": "自然な言葉でシーンや歌詞の狙いを説明します。",
+					"two": "希望する 394052 形式の声調数字を入力します。",
+					"three": "送信して類似度スコア付きの語彙候補を確認します。"
+				},
+				"notice": "結果は頻度と AI 類似度を組み合わせています。利用前に声調が目的に合うか再確認してください。",
+				"formHeading": "意味ベースの語彙検索を実行",
+				"formDescription": "説明と声調に基づいて語彙を照合します。いずれかを調整すると順位が更新されます。"
+			},
+			"lyricSearch": {
+				"heading": "歌詞検索",
+				"preview": "声調や韻脚で公開済みの歌詞行を調べ、作詞・分析を支援します。"
+			}
+		},
+		"lyrics": {
+			"title": "歌詞セッション",
+			"promptLabel": "歌詞プロンプト",
+			"promptPlaceholder": "シーンやテーマを記述",
+			"sequencesLabel": "トーンシーケンス",
+			"sequencesPlaceholder": "カンマ区切りのトーンシーケンス（例: 02,452）",
+			"generate": "生成",
+			"generating": "生成中..."
+		},
+		"errors": {
+			"pron": {
+				"missingQuery": "発音クエリを入力してください。"
+			},
+			"rhyme": {
+				"missingQuery": "韻クエリを入力してください。",
+				"invalidRhyme": "広東語の韻母として有効な値を入力してください（複数の場合はカンマ区切り）。"
+			},
+			"lyrics": {
+				"missingPrompt": "歌詞生成にはプロンプトが必要です。",
+				"missingSequences": "少なくとも1つのトーンシーケンスを入力してください（カンマまたは改行区切り）。",
+				"promptTooLong": "プロンプトが長すぎます（200文字以内）。",
+				"invalidSequences": "各行3桁以上・使用可能数字は 0 2 3 4 5 9 のみ・最大3行まで。",
+				"invalidSeed": "シードは0以上の整数で入力してください。",
+				"invalidTop": "段落出力数は 1〜3 の範囲で指定してください。",
+				"unexpected": "歌詞生成に失敗しました。しばらくしてから再試行してください。"
+			},
+			"lexicon": {
+				"invalidDigits": "0・2・3・4・5・9 の数字のみ使用できます。",
+				"tooLong": "クエリは4桁以内で入力してください。",
+				"missingQuery": "AI に探してほしい内容を説明してください。",
+				"missingPronunciation": "394052 方式の声調数字を入力してください。",
+				"invalidResponse": "AI 語彙検索の結果を処理できませんでした。もう一度お試しください。",
+				"limitRange": "制限は1から25の間で設定してください。"
+			}
+		},
+		"ai": {
+			"lyricSearch": {
+				"title": "歌詞検索",
+				"pron": {
+					"nav": "AI・声調検索",
+					"heading": "AI 歌詞・声調検索",
+					"description": "声調数字に意味のヒントを加えて、より賢く歌詞行を検索します。",
+					"tipsHeading": "AI 声調検索のヒント",
+					"tipsDescription": "数字と短い説明を組み合わせると再現率が向上します。",
+					"tips": {
+						"digits": "394052 型の数字で必要な輪郭を固定します。",
+						"position": "声調位置を指定して、行内の特定のビグラムにフォーカスします。",
+						"filters": "作詞者・年代・テーマ・キーワードで対象を絞り込みます。",
+						"aiQuery": "ムードや場面などの短い説明を追加して、意味検索を誘導します。"
+					},
+					"formHeading": "声調数字 + 意味で検索",
+					"formDescription": "声調数字と任意の意味説明を入力し、必要に応じてフィルターを追加します。",
+					"placeholder": "ムードや場面を説明（任意）"
+				},
+				"rhyme": {
+					"nav": "AI・韻脚検索",
+					"heading": "AI 歌詞・韻脚検索",
+					"description": "韻母に意味のヒントを組み合わせて歌詞行を見つけます。",
+					"tipsHeading": "AI 韻脚検索のヒント",
+					"tipsDescription": "韻母と短い説明を合わせて結果��絞り込みます。",
+					"tips": {
+						"families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
+						"placement": "韻脚位置を使って、行内のスロットを一致させます。",
+						"filters": "作詞者・歌手・年代などのフィルターを組み合わせます。",
+						"aiQuery": "場面やテーマなどの短い説明を追加して意味検索を誘導します。"
+					},
+					"formHeading": "韻母 + 意味で検索",
+					"formDescription": "Jyutping の韻母と任意の意味説明を入力し、必要ならフィルターを追加します。",
+					"placeholder": "ムードや使い方を説明（任意）"
+				}
+			},
+			"lyrics": {
+				"title": "歌詞生成",
+				"description": "創作のプロンプトと目標となる声調グリッドを指定して、構造化された広東語の歌詞アイデアを受け取ります。",
+				"page": {
+					"overview": "機能説明",
+					"shortOverview": "制限とヒント",
+					"limitationsHeading": "現在の制限",
+					"limitations": {
+						"lexiconCoverage": "出力品質は現在のレキシコンデータベースの範囲に制限されます。エントリが不十分な場合、意味的または韻の一致が不正確になる可能性があります。",
+						"modelRetrieval": "意味的検索とベクトル検索は現在のモデルに依存します。不十分な埋め込みは文脈的に関連する候補を見逃す可能性があります。",
+						"queryGeneration": "クエリとトーンシーケンスの組み合わせ戦略はまだ最適化されており、複雑なシナリオで不安定なソートを引き起こす可能性があります。",
+						"grammarPron": "生成された文には文法、コロケーション、またはトーン（発音）のエラーが含まれる可能性があり、手動での後編集が必要です。",
+						"limitedParagraphs": "段落組み合わせのサンプリングは現在少数の候補（top-N）に制限されており、より有望な組み合わせを見逃す可能性があります。",
+						"slowGeneration": "長いトーンシーケンスや複数の候補グループの再ランキング時に生成速度が大幅に低下します。",
+						"toneSequenceRange": "サポートされるトーンシーケンスの長さとグループ化はまだ調整中です。過度に長いシーケンスは切り詰められたり品質が低下したりする可能性があります。"
+					},
+					"improveHeading": "進化と改善",
+					"improvements": {
+						"lexiconGrowth": "レキシコンデータベースを拡張およびクリーンアップ（頻度、品詞、レジスタタグを含む）して候補の品質を向上させます。",
+						"retrievalRerank": "意味的検索、段階的再ランキング、多機能スコアリング（MMR / パターンフィット / 頻度）を最適化します。",
+						"patternScoring": "トーンパターンと構文構造の評価を改善して、不自然な休止と語順エラーを減らします。",
+						"feedbackLoop": "手動注釈とユーザーフィードバックループを導入して、エラー検出とランキングの正確性を強化します。"
+					},
+					"tipsHeading": "使用のヒント",
+					"tips": {
+						"expandLines": "各行を展開して候補文とパターン統計を表示し、インスピレーションを抽出したりセグメントを置き換えたりします。",
+						"refineSequences": "トーンシーケンスの長さと構造を調整（例: 長い行を2つに分割）してマッチングの安定性を向上させます。",
+						"lexiconSemantic": "行の語彙が硬すぎる場合、同じシーン説明を入力して代替表現を見つけるために意味的レキシコン検索ツールに切り替えます。",
+						"manualPolish": "生成された下書きをフレームワークとして扱います：語順、感情層、本物の話された広東語をさらに洗練します。"
+					},
+					"disclaimer": "出力は実験的な下書きです。手動でレビューしてください"
+				},
+				"formHeading": "セッションの説明",
+				"formDescription": "シーン、声調グリッド、および任意のシードを設定して歌詞行の下書きを開始します。",
+				"form": {
+					"promptLabel": "歌詞プロンプト",
+					"promptPlaceholder": "シーン、感情、または物語の場面を記述",
+					"sequencesLabel": "声調シーケンス",
+					"sequencesPlaceholder": "カンマまたは改行で区切って声調数字の列を入力",
+					"sequencesCaption": "広東語の声調数字を使用してください（例: 394052）。各行が生成される歌詞の一行になります。",
+					"seedLabel": "シード（任意）",
+					"seedPlaceholder": "ランダム",
+					"seedCaption": "ランダムシードを固定して再現可能な出力を得ます。",
+					"topLabel": "段落出力数",
+					"topCaption": "返す構成済み段落候補の数（1–3）。",
+					"submit": "歌詞を生成",
+					"generating": "生成中...",
+					"generatingHint": "システムは候補文を組み立て、順位付けを行っています。",
+					"apiKey": {
+						"button": "APIキーを設定",
+						"dialogTitle": "Google Gemini APIキーを入力",
+						"dialogDescriptionPrefix": "",
+						"dialogDescriptionMiddle": " からAPIキーを取得してください。",
+						"dialogDescriptionSuffix": "APIキーは記録されず、このセッションでのみ使用されます。保存されたり、システムの他の場所で使用されたりすることはありません。",
+						"label": "APIキー",
+						"placeholder": "Gemini APIキーを入力",
+						"save": "保存",
+						"requiredMessage": "歌詞を生成するにはGoogle Gemini APIキーを設定してください。",
+						"validation": {
+							"required": "APIキーは必須です",
+							"invalidFormat": "APIキーは 'AIza' で始まる必要があります",
+							"invalidLength": "APIキーは39文字である必要があります"
+						},
+						"showPassword": "パスワードを表示",
+						"hidePassword": "パスワードを隠す"
+					}
+				},
+				"summary": {
+					"title": "セッションの概要",
+					"description": "機能 {{feature}} · エンジン v{{version}}",
+					"feature": "機能: {{feature}}",
+					"version": "エンジンバージョン {{version}}",
+					"seed": "シード",
+					"createdAt": "作成日",
+					"lineCount": "行数",
+					"processingTime": "処理時間",
+					"processingTimeValue": "{{ms}} ms"
+				},
+				"topParagraphs": {
+					"title": "構成された段落",
+					"count": "{{count}} 件の提案",
+					"badge": "トップ {{index}}",
+					"empty": "段落の提案は生成されませんでした。段落出力数を増やすか、もう一度お試しください。"
+				},
+				"lines": {
+					"sectionTitle": "行ごとの内訳",
+					"count": "{{count}} 行",
+					"title": "行 {{index}} · 声調 {{tone}}",
+					"previewFallback": "先頭文がまだありません。診断情報を表示するには展開してください。",
+					"warningsCount": "{{count}} 件の警告",
+					"empty": "まだ行データがありません。",
+					"toneSequence": "声調 {{tone}}",
+					"lineIndex": "行 {{index}}",
+					"digitSet": "数字セット",
+					"primaryPattern": "パターン {{pattern}}",
+					"primaryRank": "ランク {{rank}}",
+					"primaryMmr": "MMR {{score}}",
+					"noPrimary": "この行のランク付けされた文は生成されませんでした。",
+					"error": "生成エラー: {{message}}",
+					"candidateStats": {
+						"heading": "候補プール",
+						"total": "候補総数",
+						"semantic": "意味一致",
+						"freqTop": "高頻度",
+						"freqRandom": "探索的"
+					},
+					"topSentences": {
+						"heading": "上位ランクの文",
+						"columns": {
+							"text": "文",
+							"pattern": "パターン",
+							"rank": "ランク",
+							"mmr": "MMR"
+						},
+						"empty": "ランク付けされた文は返されませんでした。"
+					},
+					"patterns": {
+						"heading": "声調パターン",
+						"groups": "グループ: {{groups}}",
+						"empty": "声調パターンは返されませんでした。"
+					},
+					"allCandidates": {
+						"heading": "全候補プール",
+						"pattern": "パターン {{pattern}}",
+						"empty": "追加の候補は返されませんでした。"
+					},
+					"additional": {
+						"heading": "追加のランク付けされた文",
+						"rank": "ランク {{rank}}",
+						"mmr": "MMR {{score}}"
+					},
+					"paragraphs": {
+						"heading": "この行を使った段落ブレンド",
+						"label": "段落 {{index}}"
+					}
+				}
+			},
+			"lexicon": {
+				"title": "語彙検索",
+				"description": "意味のヒントと声調数字を組み合わせることで、プロンプトに合う語彙や漢字候補を提案します。",
+				"form": {
+					"queryLabel": "利用シーンを説明",
+					"queryPlaceholder": "例：新しい始まりを歌う希望のサビ",
+					"pronunciationLabel": "目標の声調数字",
+					"pronunciationPlaceholder": "394 などの声調数字を入力",
+					"limitLabel": "候補数",
+					"limitCaption": "1〜25 件の範囲で設定できます。"
+				},
+				"summary": {
+					"query": "意味: {{query}}",
+					"pronunciation": "声調: {{pronunciation}}",
+					"timing": "{{ms}} ms"
+				},
+				"similarityBadge": "{{percentage}}% 意味的マッチ",
+				"noResults": "AI の候補が見つかりませんでした。説明を広げるか声調数字を調整してください。"
+			}
+		},
+		"lexicon": {
+			"types": {
+				"char": "文字",
+				"vocab": "語彙"
+			},
+			"details": {
+				"pronunciation": "発音",
+				"tone": "トーン",
+				"jyutping": "Jyutping",
+				"consonants": "子音",
+				"rhymes": "押韻",
+				"syllables": "音節数",
+				"frequency": "頻度",
+				"pos": "品詞",
+				"register": "レジスター",
+				"gloss": "語釈",
+				"source": "出典",
+				"position": "位置"
+			},
+			"badges": {
+				"cached": "キャッシュ"
+			},
+			"messages": {
+				"noMatches": "まだ結果がありません。別のクエリをお試しください。",
+				"endOfResults": "結果の末尾です。",
+				"hoverHint": "クリックして詳細を表示。"
+			},
+			"counts": {
+				"showing": "{{shown}} / {{total}} 件を表示"
+			},
+			"group": {
+				"label": "グループ {{index}}",
+				"range": "{{start}}–{{end}}"
+			},
+			"langHints": {
+				"zhHk": "「zh-HK」としてラベル付けされた語彙は、日常会話、ポップカルチャー、ネット言語などでよく使われます。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「書面語」と比べて、口語語彙は日常的な話し言葉に近い傾向があります。",
+				"zhTw": "「zh-TW」としてラベル付けされた語彙は、正式な文章、ニュース、本、公的文書などで多く見られ、中国語の書き言葉のレジスターに属します。この分類はあくまで参考であり、実際の使い分けには重なりや変化があり得ます。今後も継続的に改善されます。「口語」と比べて、書面語語彙はよりフォーマルで規範的な文脈に使われる傾向があります。",
+				"generic": "{{code}}"
+			},
+			"feedback": {
+				"up": "役に立った",
+				"down": "役に立たなかった"
+			},
+			"options": {
+				"label": "オプション"
+			},
+			"rhyme": {
+				"modeLabel": "押韻マッチングモード",
+				"sequenceEnabled": "連続した韻のみを表示",
+				"sequenceDisabled": "すべての韻を含む（位置に関係なく）",
+				"sequenceToggle": "連続押韻モードを切り替え",
+				"sequenceLabel": "連続",
+				"inclusiveLabel": "全て"
+			}
+		},
+		"lyricSearch": {
+			"title": "歌詞検索",
+			"nav": {
+				"pron": "歌詞・声調検索",
+				"rhyme": "歌詞・韻脚検索"
+			},
+			"rhyme": {
+				"heading": "歌詞・韻脚検索",
+				"description": "同じ韻母を共有する歌詞行を探し、押韻パターンづくりに役立てます。",
+				"tipsHeading": "韻脚検索のヒント",
+				"tipsDescription": "公開済みの歌詞で使われている韻脚ファミリーを素早く確認します。",
+				"tips": {
+					"families": "Jyutping の韻母を 1 つ以上入力（例: aa または aa,aai のようにカンマ区切りで複数指定）すると、同じ韻尾の歌詞を検索できます。",
+					"placement": "韻脚位置を指定し、歌詞行の中で韻が置かれる箇所を一致させます。",
+					"filters": "作詞者・歌手・年代などを組み合わせると対象作品を絞れます。"
+				},
+				"formHeading": "韻母で検索",
+				"formDescription": "Jyutping の韻母と必要なフィルターを入力し、既存の歌詞がその韻をどう使っているか確認します。",
+				"placeholder": "Jyutping の韻母を入力（例: aa または aa,aai のようにカンマ区切りで複数入力可）",
+				"modeLabel": "押韻マッチングモード",
+				"resultsRegionLabel": "歌詞・韻脚検索結果",
+				"sequenceEnabled": "連続した韻のみを表示",
+				"sequenceDisabled": "すべての韻を含む（位置に関係なく）",
+				"sequenceToggle": "連続韻モードを切り替える"
+			},
+			"placeholders": {
+				"aiQuery": "場面や使い方を自然な言葉で説明"
+			},
+			"filters": {
+				"label": "フィルターとオプション",
+				"reset": "フィルターをリセット",
+				"pageSize": {
+					"label": "取得件数",
+					"description": "1 回の取得で読み込む歌詞行の件数（1〜200）。"
+				},
+				"position": {
+					"label": "声調位置",
+					"placeholder": "例: 2",
+					"description": "指定した声調ビグラム（1 = 先頭ペア）だけに絞り込みます。"
+				},
+				"rhymePosition": {
+					"label": "韻脚位置",
+					"placeholder": "例: 5",
+					"description": "歌詞行の中で韻が置かれるインデックス（1始まり）を指定します。"
+				},
+				"themes": {
+					"label": "テーマ",
+					"placeholder": "カンマ区切りのテーマ"
+				},
+				"keywords": {
+					"label": "キーワード",
+					"placeholder": "カンマ区切りのキーワード"
+				},
+				"lyricist": {
+					"label": "作詞者",
+					"placeholder": "例: 黄霑"
+				},
+				"artist": {
+					"label": "歌手",
+					"placeholder": "例: 梅艷芳"
+				},
+				"id": {
+					"label": "歌詞ID",
+					"placeholder": "内部識別子"
+				},
+				"sentiment": {
+					"label": "感情",
+					"placeholder": "例: 希望に満ちた"
+				},
+				"year": {
+					"label": "年代",
+					"placeholder": "例: 1993"
+				}
+			},
+			"labels": {
+				"query": "歌詞検索クエリ",
+				"aiQuery": "意味クエリ（任意）",
+				"bigrams": "声調ビグラム",
+				"song": "楽曲",
+				"metadata": "行メタデータ",
+				"lineIndex": "{{index}} 行目",
+				"counts": "文字数 {{chars}}・音節 {{syllables}}・単語 {{tokens}}",
+				"sentiment": "感情",
+				"syntaxNotes": "定義",
+				"artists": "アーティスト",
+				"lyricists": "作詞者",
+				"tokens": "レキシコン"
+			},
+			"results": {
+				"count": "表示 {{shown}} / {{total}} 行",
+				"cached": "キャッシュ",
+				"timing": "{{ms}} ms"
+			},
+			"messages": {
+				"noMatches": "該当する歌詞行が見つかりません。条件を変更して再検索してください。",
+				"endOfResults": "結果はここまでです。"
+			},
+			"pron": {
+				"heading": "歌詞・声調検索",
+				"description": "声調数字を入力し、異なる楽曲で同じ声調パターンを持つ歌詞行を探します。",
+				"tipsHeading": "声調検索のヒント",
+				"tipsDescription": "394052 の数字記憶を使って素早く目的の輪郭を探しましょう。",
+				"tips": {
+					"digits": "394052 型の数字で探したい声調の輪郭を指定します。",
+					"position": "声調位置を指定すると特定のビグラムに絞り込めます。",
+					"filters": "作詞者・年代・テーマ・キーワードを組み合わせると分析対象を狭められます。"
+				},
+				"formHeading": "声調数字で検索",
+				"formDescription": "声調数字と必要なフィルターを入力し、輪郭が一致する既存の歌詞行を確認します。",
+				"placeholder": "声調数字を入力（例: 394052）",
+				"resultsRegionLabel": "歌詞・声調検索結果"
+			}
+		}
+	}
 }

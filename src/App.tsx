@@ -5,5 +5,5 @@ import './App.css';
 import Home from './pages/Home.tsx';
 
 export default function App(): ReactElement {
-  return <Home />;
+	return <Home />;
 }

@@ -1,732 +1,732 @@
 {
-  "common": {
-    "loading": "Loading...",
-    "error": "Error",
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "search": "Search",
-    "close": "Close",
-    "loadMore": "Load {{count}} more",
-    "showMore": "Show {{count}} more",
-    "reset": "Reset"
-  },
-  "notFound": {
-    "title": "Page Not Found",
-    "description": "The page you are looking for does not exist.",
-    "goHome": "Go Home"
-  },
-  "errors": {
-    "network": {
-      "title": "Network issue",
-      "message": "We couldn't reach the server. Please check your connection."
-    },
-    "api": {
-      "title": "Request failed",
-      "message": "The server reported a problem."
-    },
-    "unexpected": {
-      "title": "Something went wrong",
-      "message": "An unexpected error occurred."
-    },
-    "actions": {
-      "retry": "Retry",
-      "dismiss": "Dismiss"
-    }
-  },
-  "language": {
-    "english": "English",
-    "chineseTraditional": "Traditional Chinese",
-    "chineseSimplified": "Simplified Chinese",
-    "japanese": "Japanese",
-    "switchLanguage": "Switch Language",
-    "selectLanguage": "Select language"
-  },
-  "theme": {
-    "theme": "Theme",
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System"
-  },
-  "nav": {
-    "title": "Canto101",
-    "links": {
-      "programOverview": "Overview",
-      "gettingStarted": "Getting started",
-      "resources": "Resources",
-      "community": "Community",
-      "products": "Products"
-    },
-    "loading": {
-      "title": "Preparing your next view",
-      "description": "Fetching fresh content and keeping your progress in sync.",
-      "status": "Routing"
-    }
-  },
-  "test": {
-    "navigation": {
-      "loading": {
-        "title": "Simulating test navigation",
-        "description": "Spinning up fixtures and verifying mock contracts.",
-        "status": "Testing"
-      }
-    }
-  },
-  "footer": {
-    "title": "Canto101",
-    "summary": "Summarizes learning goals, curriculum structure, and how to navigate the platform for the best results.",
-    "sections": {
-      "gettingStarted": {
-        "title": "Getting Started / About Cantonese",
-        "about": "About Cantonese",
-        "background": "Background about Cantonese, its importance, dialectic features, how tones work, and regional context."
-      },
-      "resources": {
-        "title": "Resources & Extras",
-        "downloads": "Links to printable/downloadable materials",
-        "integrations": "App integrations for on-the-go learning",
-        "media": "Recommended podcasts, media, and reading"
-      },
-      "community": {
-        "title": "Community & Tutor Connection",
-        "qa": "Q&A forums, learning communities, or a place to book lessons with tutors",
-        "tutors": "Book lessons with tutors"
-      },
-      "products": {
-        "title": "Products",
-        "cantoLyr": "CantoLyr - Lyric generation tool",
-        "cantoCap": "CantoCap - Cantonese caption generation application"
-      },
-      "legal": {
-        "title": "Legal",
-        "terms": "Terms & Conditions",
-        "privacy": "Privacy",
-        "accessibility": "Accessibility"
-      }
-    },
-    "disclaimer": "This is an educational platform that provides learning materials and community resources to support Cantonese studies.",
-    "copyright": "© Copyright 2025 - Canto101"
-  },
-  "homepage": {
-    "ai": "AI",
-    "hero": {
-      "eyebrow": "Cantonese 101",
-      "title": "Find Your Cantonese Voice",
-      "subtitle": "A bold, modern learning studio that moves you from tone basics to confident conversations with immersive music-led practice.",
-      "primaryCta": "Start your journey",
-      "secondaryCta": "See curriculum map",
-      "metrics": {
-        "lessons": "60+ guided lessons",
-        "drills": "Tone-first micro drills",
-        "community": "Weekly community gatherings"
-      }
-    },
-    "programOverview": {
-      "title": "Homepage / Program Overview",
-      "description": "Understand the learning rhythm of Canto101, the focus of each stage, and how to make good use of platform features.",
-      "highlights": {
-        "roadmap": "Progressive roadmap from phonetics to narrative.",
-        "playlists": "Automatically adjusted lyric playlists combined with cultural notes.",
-        "checkpoints": "Milestones remind self-checks and connect to tutor feedback."
-      }
-    },
-    "gettingStarted": {
-      "title": "Getting Started / About Cantonese",
-      "description": "Dive into Cantonese history, regional usage, and the tonal system so every syllable lands with confidence.",
-      "highlights": {
-        "tones": "Interactive tone playground visualises contour patterns.",
-        "dialects": "Compare Hong Kong, Macau, and diaspora variations.",
-        "romanization": "Jyutping primer connects sound, script, and tone marks."
-      }
-    },
-    "resources": {
-      "title": "Resources & Extras",
-      "description": "Add-on assets keep you practising between sessions—online or offline.",
-      "highlights": {
-        "downloads": "Printable cheat sheets, tone charts, and handwriting grids.",
-        "integrations": "Sync drills to mobile via our companion app integrations.",
-        "media": "Curated podcasts, dramas, and reading lists for every level."
-      }
-    },
-    "community": {
-      "title": "Community & Tutor Connection",
-      "description": "Join a supportive network for Q&A, accountability, and live coaching.",
-      "highlights": {
-        "forums": "Peer-led forums surface questions and wins in real time.",
-        "events": "Weekly office hours with native tutors and industry guests.",
-        "booking": "Book 1:1 sessions or small-group labs directly inside the platform."
-      }
-    },
-    "products": {
-      "title": "Products",
-      "description": "Purpose-built tools accelerate your Cantonese learning flow.",
-      "items": {
-        "viewDetails": "View details",
-        "cantoLyr": {
-          "label": "CantoLyr",
-          "description": "Lyric-driven lessons that align pronunciation, script, and culture.",
-          "features": {
-            "romanization": "Romanization walkthroughs pair Jyutping with native audio.",
-            "vocabulary": "Core vocabulary decks with spaced repetition prompts.",
-            "phrases": "Essential dialogues map phrases to everyday scenarios.",
-            "grammar": "Grammar blueprints demystify particles and aspect markers.",
-            "pronunciation": "Tone lab visualises pitch curves to reinforce accuracy."
-          }
-        },
-        "cantoCap": {
-          "label": "CantoCap",
-          "description": "Auto-generate Cantonese captions to shadow authentic speech.",
-          "features": {
-            "captions": "Time-synced captions for dramas, vlogs, and live events.",
-            "annotations": "Inline annotations flag tone sandhi and colloquialisms.",
-            "export": "Export caption files for subtitles, flashcards, or karaoke.",
-            "mobile": "Send caption packs to mobile for on-the-go review."
-          }
-        }
-      }
-    },
-    "cta": {
-      "title": "Ready to step into Canto101?",
-      "description": "Unlock the full guided experience, personalise your roadmap, and keep Cantonese at the centre of your day.",
-      "button": "Create your learner profile"
-    }
-  },
-  "cantoLyr": {
-    "pron": {
-      "title": "Pronunciation Search",
-      "placeholder": "Enter pronunciation (e.g. ngo5)",
-      "resultsRegionLabel": "Pronunciation search results"
-    },
-    "rhyme": {
-      "title": "Rhyme Search",
-      "placeholder": "Enter rhyme code (e.g. aa)",
-      "resultsRegionLabel": "Rhyme search results"
-    },
-    "pages": {
-      "overview": {
-        "title": "CantoLyr Lexicon",
-        "description": "Explore focused tools that help you validate pronunciation and craft rhyme families before you draft lyrics.",
-        "featuresLabel": "Lexicon tools",
-        "lexiconTitle": "Lexicon tools",
-        "lexiconDescription": "Identify pronunciation or rhyme matches with purpose-built searches before you commit ideas to your draft.",
-        "lyricsTitle": "Lyric generation",
-        "lyricsDescription": "Map tone sequences to creative prompts and generate draft verses while staying aligned with Cantonese prosody.",
-        "lyricSearchTitle": "Lyric search",
-        "lyricSearchDescription": "Search existing Cantonese lyric lines by tone digits or rhyme finals to study precedent before drafting."
-      },
-      "ai": {
-        "title": "AI tools",
-        "description": "AI-assisted tools to accelerate lyric drafting and lexicon discovery.",
-        "heading": "AI tools",
-        "lexiconTag": "Learning / lyric tool",
-        "lyricsPreview": "Generate draft verses from tone sequences and creative prompts using AI assistance.",
-        "lexiconPreview": "AI-powered lexicon search to suggest matches and usage examples for lyric writing.",
-        "lyricSearchPreview": "Investigate lyric lines with AI-enhanced tone or rhyme queries using a semantic hint."
-      },
-      "featureCta": "Open tool",
-      "backToOverview": "Back to CantoLyr overview",
-      "pron": {
-        "heading": "Pronunciation tools",
-        "preview": "Validate Jyutping entries, inspect tone contours, and surface lexicon matches before you lock in a vocal line.",
-        "description": "Search by Jyutping or tone code to confirm syllable accuracy, review matched entries, and capture usage notes for lyric writing.",
-        "numericHeading": "Numeric tone mnemonic",
-        "numericAccordionTrigger": "394052 → open-syllable tone mapping (1–6)",
-        "numericIntro": "Cantonese lyricists map the six open-syllable tone indices (1–6) to the chant \"394052\" so the sounded digits saam1, gau2, sei3, ling4, ng5, ji6 mirror the tones they describe.",
-        "numericDescription": "The extended chant \"394052786\"—documented in Cantonese phonology guides—anchors lyric drafting because each digit carries the contour singers expect. The table summarises the core mapping used before checked tones enter a melody.",
-        "numericCheckedNote": "Digits 7-8-6 (chat1, baat3, luk6) share pitch contours with tones 1, 3, and 6 yet surface only on checked syllables ending in -p/-t/-k.",
-        "numericSourcesLabel": "References",
-        "numericSourceEnglishLabel": "English overview: \"Cantonese phonology\" (Wikipedia) — explains the \"394052786\" mnemonic.",
-        "numericSourceChineseLabel": "Chinese source: \"Cantonese Tones\" Wikipedia — includes the nine-tone formula \"394052786\".",
-        "numericTable": {
-          "caption": "Cantonese tone index mapped to lyricist mnemonic digits",
-          "columns": {
-            "toneIndex": "Tone index",
-            "mnemonicDigit": "Mnemonic digit",
-            "toneName": "Traditional tone name",
-            "example": "Jyutping example",
-            "audio": "Audio"
-          },
-          "rows": {
-            "tone1": {
-              "toneName": "Tone 1 · Yin Ping (high level)",
-              "example": "saam1 — \"three\" (三)"
-            },
-            "tone2": {
-              "toneName": "Tone 2 · Yin Shang (rising)",
-              "example": "gau2 — \"nine\" (九)"
-            },
-            "tone3": {
-              "toneName": "Tone 3 · Yin Qu (mid level)",
-              "example": "sei3 — \"four\" (四)"
-            },
-            "tone4": {
-              "toneName": "Tone 4 · Yang Ping (low falling)",
-              "example": "ling4 — \"zero\" (零)"
-            },
-            "tone5": {
-              "toneName": "Tone 5 · Yang Shang (low rising)",
-              "example": "ng5 — \"five\" (五)"
-            },
-            "tone6": {
-              "toneName": "Tone 6 · Yang Qu (low level)",
-              "example": "ji6 — \"two\" (二)"
-            }
-          }
-        },
-        "jyutpingHeading": "Jyutping syllable basics",
-        "jyutpingIntro": "Every Cantonese syllable can be analysed as an optional initial consonant, a vowel-based final, and a tone. The LSHK Jyutping scheme records that structure as <initial><final><tone digit>, which keeps lyric stress aligned with the spoken contour.",
-        "jyutpingDetails": {
-          "structure": "Write syllables as <initial><final><tone digit>; for example ngo5 = initial \"ng\" + final \"o\" + tone 5, while aa3 has no initial and starts directly with the final.",
-          "onset": "Jyutping recognises 19 initials. When a syllable lacks an initial (a \"null initial\" in Cantonese phonology) the spelling simply begins with the final, e.g. aa3 or oeng2.",
-          "tones": "Tone digits 1–6 map to the six Cantonese tone contours; checked syllables ending in -p/-t/-k reuse tone numbers 1, 3, or 6 instead of introducing extra digits.",
-          "rhymeLink": "Finals (rimes) carry the vowel nucleus and coda. The table below lists the authorised finals used by the LSHK scheme and by the rhyme search input."
-        },
-        "jyutpingConsonantsLabel": "Jyutping onsets",
-        "jyutpingConsonantsDescription": "These initials appear at the beginning of a syllable. Combine one of them (or none, for vowel-initial syllables) with a rime and tone digit to form a full Jyutping spelling.",
-        "rhymeHeading": "Rime (韻) reference",
-        "rhymeDescription": "In Cantonese phonology the rime (韻/韻母) contains the vowel nucleus plus any ending consonant. Syllables that share a rime form natural rhyme families—enter any final below to anchor the rhyme search.",
-        "rhymeTable": {
-          "caption": "Common Jyutping finals for rhyme search",
-          "columns": {
-            "range": "Range",
-            "finals": "Rhyme finals"
-          }
-        },
-        "rhymeListNote": "Finals are case-sensitive and should be entered in lowercase to match Jyutping conventions.",
-        "rhymeSourcesLabel": "References",
-        "rhymeSourceJyutping": "Jyutping initials and finals overview (Wikipedia)",
-        "rhymeSourceRime": "Cantonese syllable structure and rime explanation (Wikipedia)"
-      },
-      "rhyme": {
-        "heading": "Rhyme tools",
-        "preview": "Build authentic rhyme schemes by discovering syllables that share finals and tone patterns.",
-        "description": "Query the lexicon by rhyme code to group entries with shared finals and tones, making structured rhyme grids fast to assemble.",
-        "sequenceEnabled": "Contiguous pattern required",
-        "sequenceDisabled": "Inclusive pattern (any order)",
-        "sequenceToggle": "Toggle contiguous rhyme matching"
-      },
-      "lyrics": {
-        "heading": "Lyric tools",
-        "preview": "Blend tone grids with creative briefs to produce verses that respect Cantonese rhythm.",
-        "description": "Feed a creative prompt and tone sequences into the generator to receive structured lyric ideas you can iterate on."
-      },
-      "aiLexicon": {
-        "description": "Blend a semantic description with target tone digits to see AI-ranked vocabulary suggestions rooted in the Cantonese lexicon.",
-        "stepsHeading": "How it works",
-        "steps": {
-          "one": "Describe the scene or lyric intent in natural language.",
-          "two": "Enter the 394052-style tone digits you want the suggestions to follow.",
-          "three": "Submit to view ranked vocabulary with similarity scores you can explore."
-        },
-        "notice": "Results combine statistical frequency with AI similarity. Review tone digits before using entries in your draft.",
-        "formHeading": "Search the semantic lexicon",
-        "formDescription": "The assistant maps your description and tone digits to lexicon entries. Adjust either input to refine the ranked list."
-      },
-      "lyricSearch": {
-        "heading": "Lyric search",
-        "preview": "Investigate published lyric lines by tone pattern or rhyme family to support your own writing."
-      }
-    },
-    "badges": {
-      "ai": "AI",
-      "experimental": "Experimental"
-    },
-    "lyrics": {
-      "title": "Lyric Session",
-      "promptLabel": "Lyric prompt",
-      "promptPlaceholder": "Describe the scene or theme",
-      "sequencesLabel": "Tone sequences",
-      "sequencesPlaceholder": "Comma separated tone sequences (e.g. 02,452)",
-      "generate": "Generate",
-      "generating": "Generating..."
-    },
-    "ai": {
-      "lyricSearch": {
-        "title": "lyric search",
-        "pron": {
-          "nav": "AI tone search",
-          "heading": "AI lyric tone search",
-          "description": "Search lyric lines by tone digits with an optional semantic hint for smarter matches.",
-          "tipsHeading": "AI tone search tips",
-          "tipsDescription": "Combine tone digits with a short description to improve recall.",
-          "tips": {
-            "digits": "Use 394052-style tone digits to anchor the contour you need.",
-            "position": "Add a tone position to focus on a particular digit pair within the line.",
-            "filters": "Layer lyricist, year, themes, or keywords to narrow the catalogue slice you’re studying.",
-            "aiQuery": "Add a short description (e.g., mood or scene) to guide semantic recall."
-          },
-          "formHeading": "Search by tone digits + meaning",
-          "formDescription": "Enter tone digits and an optional semantic description, then refine with filters.",
-          "placeholder": "Describe mood or scene (optional)"
-        },
-        "rhyme": {
-          "nav": "AI rhyme search",
-          "heading": "AI lyric rhyme search",
-          "description": "Discover lyric lines by rhyme final with an optional semantic hint.",
-          "tipsHeading": "AI rhyme search tips",
-          "tipsDescription": "Pair a rhyme final with a brief description to focus results.",
-          "tips": {
-            "families": "Enter one or more Jyutping finals (e.g. aa or aa,aai for multiple rhymes - comma-separated).",
-            "placement": "Use the rhyme position to match the exact slot inside the line.",
-            "filters": "Combine lyricist, artist, or year filters to focus on a catalogue segment.",
-            "aiQuery": "Add a short description (e.g., scene or theme) to guide semantic retrieval."
-          },
-          "formHeading": "Search by rhyme + meaning",
-          "formDescription": "Provide a Jyutping final and an optional semantic description; add filters if needed.",
-          "placeholder": "Describe mood or usage (optional)"
-        }
-      },
-      "lyrics": {
-        "title": "Lyric generation",
-        "description": "Guide the engine with your creative prompt and target tone grids to receive structured Cantonese lyric ideas.",
-        "page": {
-          "overview": "Feature description",
-          "shortOverview": "Limitations & Tips",
-          "limitationsHeading": "Current Limitations",
-          "limitations": {
-            "lexiconCoverage": "Output quality is limited by the current lexicon database coverage. Insufficient entries may result in less precise semantic or rhyming matches.",
-            "modelRetrieval": "Semantic retrieval and vector recall depend on the current model; inadequate embeddings may miss contextually relevant candidates.",
-            "queryGeneration": "Query and tone sequence combination strategies are still being optimized, potentially leading to unstable sorting in complex scenarios.",
-            "grammarPron": "Generated sentences may contain grammatical, collocation, or tone (pronunciation) errors, requiring manual post-editing.",
-            "limitedParagraphs": "Paragraph combination sampling is currently limited to a small number of candidates (top-N), potentially missing more promising combinations.",
-            "slowGeneration": "Generation speed significantly slows down for longer tone sequences or when re-ranking multiple candidate groups.",
-            "toneSequenceRange": "Supported tone sequence length and grouping are still being adjusted; overly long sequences may be truncated or reduced in quality."
-          },
-          "improveHeading": "Evolution & Improvements",
-          "improvements": {
-            "lexiconGrowth": "Expand and clean the lexicon database (including frequency, part-of-speech, and register tags) to improve candidate quality.",
-            "retrievalRerank": "Optimize semantic retrieval, phased re-ranking, and multi-feature scoring (MMR / pattern fit / frequency).",
-            "patternScoring": "Improve tone pattern and syntactic structure evaluation to reduce unnatural pauses and word order errors.",
-            "feedbackLoop": "Introduce manual annotation and user feedback loops to enhance error detection and ranking accuracy."
-          },
-          "tipsHeading": "Usage Tips",
-          "tips": {
-            "expandLines": "Expand each line to view candidate sentences and pattern statistics, extract inspiration, or replace segments.",
-            "refineSequences": "Adjust tone sequence length and structure (e.g., split long lines into two) to improve matching stability.",
-            "lexiconSemantic": "If vocabulary feels too stiff in a line, switch to the semantic lexicon search tool and input the same scene description to find alternative expressions.",
-            "manualPolish": "Treat generated drafts as frameworks: further refine word order, emotional layers, and authentic spoken Cantonese."
-          },
-          "disclaimer": "Output is experimental draft; please review manually"
-        },
-        "formHeading": "Describe the session",
-        "formDescription": "Define the scene, tone grid, and optional seed before drafting lyric lines.",
-        "form": {
-          "promptLabel": "Lyric prompt",
-          "promptPlaceholder": "Describe the scene, emotion, or story beat",
-          "sequencesLabel": "Tone sequences",
-          "sequencesPlaceholder": "Enter tone digit sequences separated by commas or new lines",
-          "sequencesCaption": "Use Cantonese tone digits (e.g. 394052). Each line becomes a generated lyric line.",
-          "seedLabel": "Seed (optional)",
-          "seedPlaceholder": "Random",
-          "seedCaption": "Lock the random seed to regenerate comparable outputs.",
-          "topLabel": "Paragraph outputs",
-          "topCaption": "Number of composed paragraph suggestions to return (1–3).",
-          "submit": "Generate lyrics",
-          "generating": "Generating lyrics...",
-          "generatingHint": "The system is assembling candidate sentences and ranking them.",
-          "apiKey": {
-            "button": "Set API Key",
-            "dialogTitle": "Enter Google Gemini API Key",
-            "dialogDescriptionPrefix": "Get your API key from ",
-            "dialogDescriptionMiddle": ".",
-            "dialogDescriptionSuffix": "Your API key will not be logged and will only be used for this session. It will not be stored or used elsewhere in the system.",
-            "label": "API Key",
-            "placeholder": "Enter your Gemini API key",
-            "save": "Save",
-            "requiredMessage": "Please set your Google Gemini API key to generate lyrics.",
-            "validation": {
-              "required": "API key is required",
-              "invalidFormat": "API key must start with 'AIza'",
-              "invalidLength": "API key must be 39 characters long"
-            },
-            "showPassword": "Show password",
-            "hidePassword": "Hide password"
-          }
-        },
-        "summary": {
-          "title": "Session summary",
-          "description": "Feature {{feature}} · engine v{{version}}",
-          "feature": "Feature: {{feature}}",
-          "version": "Engine version {{version}}",
-          "seed": "Seed",
-          "createdAt": "Created",
-          "lineCount": "Lines",
-          "processingTime": "Processing",
-          "processingTimeValue": "{{ms}} ms"
-        },
-        "topParagraphs": {
-          "title": "Composed paragraphs",
-          "count": "{{count}} suggestions",
-          "badge": "Top {{index}}",
-          "empty": "No paragraph suggestions were generated. Increase the paragraph output count or try again."
-        },
-        "lines": {
-          "sectionTitle": "Line-by-line breakdown",
-          "count": "{{count}} lines",
-          "title": "Line {{index}} · Tone {{tone}}",
-          "previewFallback": "No leading sentence yet. Expand for diagnostic detail.",
-          "warningsCount": "{{count}} warnings",
-          "empty": "No line data available yet.",
-          "toneSequence": "Tone {{tone}}",
-          "lineIndex": "Line {{index}}",
-          "digitSet": "Digit set",
-          "primaryPattern": "Pattern {{pattern}}",
-          "primaryRank": "Rank {{rank}}",
-          "primaryMmr": "MMR {{score}}",
-          "noPrimary": "No ranked sentence was produced for this line.",
-          "error": "Generation error: {{message}}",
-          "candidateStats": {
-            "heading": "Candidate pool",
-            "total": "Total candidates",
-            "semantic": "Semantic matches",
-            "freqTop": "High frequency",
-            "freqRandom": "Exploratory"
-          },
-          "topSentences": {
-            "heading": "Top-ranked sentences",
-            "columns": {
-              "text": "Sentence",
-              "pattern": "Pattern",
-              "rank": "Rank",
-              "mmr": "MMR"
-            },
-            "empty": "No ranked sentences returned."
-          },
-          "patterns": {
-            "heading": "Tone patterns",
-            "groups": "Groups: {{groups}}",
-            "empty": "No tone patterns returned."
-          },
-          "allCandidates": {
-            "heading": "Full candidate pool",
-            "pattern": "Pattern {{pattern}}",
-            "empty": "No additional candidates were returned."
-          },
-          "additional": {
-            "heading": "Additional ranked sentences",
-            "rank": "Rank {{rank}}",
-            "mmr": "MMR {{score}}"
-          },
-          "paragraphs": {
-            "heading": "Paragraph blends using this line",
-            "label": "Paragraph {{index}}"
-          }
-        }
-      },
-      "lexicon": {
-        "title": "Lexicon Search",
-        "description": "Use semantic hints and tone digits to surface candidate words and characters that align with your prompt.",
-        "form": {
-          "queryLabel": "Describe the usage context",
-          "queryPlaceholder": "e.g. hopeful chorus about new beginnings",
-          "pronunciationLabel": "Target pronunciation digits",
-          "pronunciationPlaceholder": "Enter tone digits such as 394",
-          "limitLabel": "Suggestions",
-          "limitCaption": "Between 1 and 25 results."
-        },
-        "summary": {
-          "query": "Query: {{query}}",
-          "pronunciation": "Digits: {{pronunciation}}",
-          "timing": "{{ms}} ms"
-        },
-        "similarityBadge": "{{percentage}}% semantic match",
-        "noResults": "No AI suggestions yet. Try broadening your prompt or adjusting the tone digits."
-      }
-    },
-    "errors": {
-      "pron": {
-        "missingQuery": "Please enter a pronunciation query."
-      },
-      "rhyme": {
-        "missingQuery": "Please enter a rhyme query.",
-        "invalidRhyme": "Please enter valid rhyme(s) from the Cantonese rhyme table (comma-separated for multiple)."
-      },
-      "lyrics": {
-        "missingPrompt": "Prompt is required to generate lyrics.",
-        "missingSequences": "Provide at least one tone sequence (comma separated).",
-        "promptTooLong": "Prompt exceeds the maximum length (200 characters).",
-        "invalidSequences": "Each tone sequence must be ≥3 digits, digits limited to 0 2 3 4 5 9, max 3 sequences.",
-        "invalidSeed": "Seed must be a non-negative integer.",
-        "invalidTop": "Paragraph outputs must be between 1 and 3.",
-        "unexpected": "Lyric generation failed. Please try again in a moment."
-      },
-      "lexicon": {
-        "invalidDigits": "Only digits 0, 2, 3, 4, 5, and 9 are allowed.",
-        "tooLong": "Query must be no more than 4 digits long.",
-        "missingQuery": "Please describe what you want the AI to find.",
-        "missingPronunciation": "Enter tone digits using the 394052 scheme.",
-        "invalidResponse": "The AI lexicon response could not be decoded. Please try again.",
-        "limitRange": "Limit must be between 1 and 25."
-      }
-    },
-    "lexicon": {
-      "types": {
-        "char": "Character",
-        "vocab": "Vocabulary"
-      },
-      "details": {
-        "pronunciation": "Pronunciation",
-        "tone": "Tone",
-        "jyutping": "Jyutping",
-        "consonants": "Consonants",
-        "rhymes": "Rhymes",
-        "syllables": "Syllables",
-        "frequency": "Frequency",
-        "pos": "Part of speech",
-        "register": "Register",
-        "gloss": "Gloss",
-        "source": "Source",
-        "position": "Position"
-      },
-      "badges": {
-        "cached": "Cached"
-      },
-      "messages": {
-        "noMatches": "No matches yet. Try another query.",
-        "hoverHint": "Click a surface to inspect its details.",
-        "endOfResults": "You've reached the end of the results."
-      },
-      "counts": {
-        "showing": "Showing {{shown}} of {{total}} matches"
-      },
-      "group": {
-        "label": "Group {{index}}",
-        "range": "{{start}}–{{end}}"
-      },
-      "langHints": {
-        "zhHk": "Labeled as 'zh-HK': typically used in everyday speech, pop culture, and online language. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'written', colloquial words are closer to daily spoken contexts.",
-        "zhTw": "Labeled as 'zh-TW': typically found in formal texts, news, books, and official documents, representing the written register of Chinese. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'colloquial', written words tend to be more formal and standardized.",
-        "generic": "{{code}}"
-      },
-      "feedback": {
-        "up": "Mark helpful",
-        "down": "Mark not helpful"
-      },
-      "options": {
-        "label": "Options"
-      },
-      "rhyme": {
-        "modeLabel": "Rhyme matching mode",
-        "sequenceEnabled": "Show only consecutive rhymes",
-        "sequenceDisabled": "Contains all rhymes (regardless of position)",
-        "sequenceLabel": "Seq",
-        "inclusiveLabel": "All",
-        "sequenceToggle": "Toggle continuous rhyme mode"
-      }
-    },
-    "lyricSearch": {
-      "title": "Lyric Search",
-      "nav": {
-        "pron": "Lyric tone search",
-        "rhyme": "Lyric rhyme search"
-      },
-      "placeholders": {
-        "aiQuery": "Describe the scene or usage in natural language"
-      },
-      "filters": {
-        "label": "Filters & options",
-        "reset": "Reset filters",
-        "pageSize": {
-          "label": "Page size",
-          "description": "Number of lyric lines to fetch per request (1–200)."
-        },
-        "position": {
-          "label": "Tone position",
-          "placeholder": "e.g. 2",
-          "description": "Match a specific tone bigram slot (1 = first digit pair)."
-        },
-        "rhymePosition": {
-          "label": "Rhyme position",
-          "placeholder": "e.g. 5",
-          "description": "Match the rhyme slot index within the line (1-based)."
-        },
-        "themes": {
-          "label": "Themes",
-          "placeholder": "Comma separated themes"
-        },
-        "keywords": {
-          "label": "Keywords",
-          "placeholder": "Comma separated keywords"
-        },
-        "lyricist": {
-          "label": "Lyricist",
-          "placeholder": "e.g. James Wong"
-        },
-        "artist": {
-          "label": "Artist",
-          "placeholder": "e.g. Anita Mui"
-        },
-        "id": {
-          "label": "Lyric ID",
-          "placeholder": "Internal lyric identifier"
-        },
-        "sentiment": {
-          "label": "Sentiment",
-          "placeholder": "e.g. hopeful"
-        },
-        "year": {
-          "label": "Year",
-          "placeholder": "e.g. 1993"
-        }
-      },
-      "labels": {
-        "query": "Lyric search query",
-        "aiQuery": "Semantic query (optional)",
-        "bigrams": "Tone bigrams",
-        "song": "Song",
-        "metadata": "Line metrics",
-        "lineIndex": "Line {{index}}",
-        "counts": "Chars {{chars}} · Syllables {{syllables}} · Tokens {{tokens}}",
-        "sentiment": "Sentiment",
-        "syntaxNotes": "Definition",
-        "artists": "Artists",
-        "lyricists": "Lyricists",
-        "tokens": "Lexicon"
-      },
-      "results": {
-        "count": "Showing {{shown}} of {{total}} lines",
-        "cached": "Cached",
-        "timing": "{{ms}} ms"
-      },
-      "messages": {
-        "noMatches": "No lyric lines found yet. Try a different query or adjust the filters.",
-        "endOfResults": "You’ve reached the end of the result set."
-      },
-      "pron": {
-        "heading": "Lyric tone search",
-        "description": "Search lyric lines by tone digit sequences to trace pronunciation patterns across Cantonese songs.",
-        "tipsHeading": "Tone search tips",
-        "tipsDescription": "Use the numeric tone mnemonic to quickly surface matching lyric lines.",
-        "tips": {
-          "digits": "Use 394052-style tone digits to anchor the contour you need.",
-          "position": "Add a tone position to focus on a particular digit pair within the line.",
-          "filters": "Layer lyricist, year, themes, or keywords to narrow the catalogue slice you’re studying."
-        },
-        "formHeading": "Search by tone digits",
-        "formDescription": "Enter tone digits and optional filters to surface existing lyric lines that match your contour.",
-        "placeholder": "Enter tone digits such as 394052",
-        "resultsRegionLabel": "Lyric tone search results"
-      },
-      "rhyme": {
-        "heading": "Lyric rhyme search",
-        "description": "Discover lyric lines that share rhyme finals and metadata to help you craft rhyme grids.",
-        "tipsHeading": "Rhyme search tips",
-        "tipsDescription": "Identify rhyme families that appear in published Cantonese lyrics.",
-        "tips": {
-          "families": "Enter one or more Jyutping finals (e.g. aa or aa,aai for multiple rhymes - comma-separated).",
-          "placement": "Use the rhyme position to match the exact slot inside the line.",
-          "filters": "Combine lyricist, artist, or year filters to focus on a catalogue segment."
-        },
-        "formHeading": "Search by rhyme",
-        "formDescription": "Provide a Jyutping final and optional filters to inspect how existing lyrics deploy that rhyme.",
-        "placeholder": "Enter Jyutping final(s) (e.g. aa, aai - comma-separated for multiple)",
-        "modeLabel": "Rhyme matching mode",
-        "resultsRegionLabel": "Lyric rhyme search results",
-        "sequenceEnabled": "Show only consecutive rhymes",
-        "sequenceDisabled": "Contains all rhymes (regardless of position)",
-        "sequenceToggle": "Toggle continuous rhyme mode"
-      }
-    }
-  }
+	"common": {
+		"loading": "Loading...",
+		"error": "Error",
+		"save": "Save",
+		"cancel": "Cancel",
+		"delete": "Delete",
+		"edit": "Edit",
+		"search": "Search",
+		"close": "Close",
+		"loadMore": "Load {{count}} more",
+		"showMore": "Show {{count}} more",
+		"reset": "Reset"
+	},
+	"notFound": {
+		"title": "Page Not Found",
+		"description": "The page you are looking for does not exist.",
+		"goHome": "Go Home"
+	},
+	"errors": {
+		"network": {
+			"title": "Network issue",
+			"message": "We couldn't reach the server. Please check your connection."
+		},
+		"api": {
+			"title": "Request failed",
+			"message": "The server reported a problem."
+		},
+		"unexpected": {
+			"title": "Something went wrong",
+			"message": "An unexpected error occurred."
+		},
+		"actions": {
+			"retry": "Retry",
+			"dismiss": "Dismiss"
+		}
+	},
+	"language": {
+		"english": "English",
+		"chineseTraditional": "Traditional Chinese",
+		"chineseSimplified": "Simplified Chinese",
+		"japanese": "Japanese",
+		"switchLanguage": "Switch Language",
+		"selectLanguage": "Select language"
+	},
+	"theme": {
+		"theme": "Theme",
+		"light": "Light",
+		"dark": "Dark",
+		"system": "System"
+	},
+	"nav": {
+		"title": "Canto101",
+		"links": {
+			"programOverview": "Overview",
+			"gettingStarted": "Getting started",
+			"resources": "Resources",
+			"community": "Community",
+			"products": "Products"
+		},
+		"loading": {
+			"title": "Preparing your next view",
+			"description": "Fetching fresh content and keeping your progress in sync.",
+			"status": "Routing"
+		}
+	},
+	"test": {
+		"navigation": {
+			"loading": {
+				"title": "Simulating test navigation",
+				"description": "Spinning up fixtures and verifying mock contracts.",
+				"status": "Testing"
+			}
+		}
+	},
+	"footer": {
+		"title": "Canto101",
+		"summary": "Summarizes learning goals, curriculum structure, and how to navigate the platform for the best results.",
+		"sections": {
+			"gettingStarted": {
+				"title": "Getting Started / About Cantonese",
+				"about": "About Cantonese",
+				"background": "Background about Cantonese, its importance, dialectic features, how tones work, and regional context."
+			},
+			"resources": {
+				"title": "Resources & Extras",
+				"downloads": "Links to printable/downloadable materials",
+				"integrations": "App integrations for on-the-go learning",
+				"media": "Recommended podcasts, media, and reading"
+			},
+			"community": {
+				"title": "Community & Tutor Connection",
+				"qa": "Q&A forums, learning communities, or a place to book lessons with tutors",
+				"tutors": "Book lessons with tutors"
+			},
+			"products": {
+				"title": "Products",
+				"cantoLyr": "CantoLyr - Lyric generation tool",
+				"cantoCap": "CantoCap - Cantonese caption generation application"
+			},
+			"legal": {
+				"title": "Legal",
+				"terms": "Terms & Conditions",
+				"privacy": "Privacy",
+				"accessibility": "Accessibility"
+			}
+		},
+		"disclaimer": "This is an educational platform that provides learning materials and community resources to support Cantonese studies.",
+		"copyright": "© Copyright 2025 - Canto101"
+	},
+	"homepage": {
+		"ai": "AI",
+		"hero": {
+			"eyebrow": "Cantonese 101",
+			"title": "Find Your Cantonese Voice",
+			"subtitle": "A bold, modern learning studio that moves you from tone basics to confident conversations with immersive music-led practice.",
+			"primaryCta": "Start your journey",
+			"secondaryCta": "See curriculum map",
+			"metrics": {
+				"lessons": "60+ guided lessons",
+				"drills": "Tone-first micro drills",
+				"community": "Weekly community gatherings"
+			}
+		},
+		"programOverview": {
+			"title": "Homepage / Program Overview",
+			"description": "Understand the learning rhythm of Canto101, the focus of each stage, and how to make good use of platform features.",
+			"highlights": {
+				"roadmap": "Progressive roadmap from phonetics to narrative.",
+				"playlists": "Automatically adjusted lyric playlists combined with cultural notes.",
+				"checkpoints": "Milestones remind self-checks and connect to tutor feedback."
+			}
+		},
+		"gettingStarted": {
+			"title": "Getting Started / About Cantonese",
+			"description": "Dive into Cantonese history, regional usage, and the tonal system so every syllable lands with confidence.",
+			"highlights": {
+				"tones": "Interactive tone playground visualises contour patterns.",
+				"dialects": "Compare Hong Kong, Macau, and diaspora variations.",
+				"romanization": "Jyutping primer connects sound, script, and tone marks."
+			}
+		},
+		"resources": {
+			"title": "Resources & Extras",
+			"description": "Add-on assets keep you practising between sessions—online or offline.",
+			"highlights": {
+				"downloads": "Printable cheat sheets, tone charts, and handwriting grids.",
+				"integrations": "Sync drills to mobile via our companion app integrations.",
+				"media": "Curated podcasts, dramas, and reading lists for every level."
+			}
+		},
+		"community": {
+			"title": "Community & Tutor Connection",
+			"description": "Join a supportive network for Q&A, accountability, and live coaching.",
+			"highlights": {
+				"forums": "Peer-led forums surface questions and wins in real time.",
+				"events": "Weekly office hours with native tutors and industry guests.",
+				"booking": "Book 1:1 sessions or small-group labs directly inside the platform."
+			}
+		},
+		"products": {
+			"title": "Products",
+			"description": "Purpose-built tools accelerate your Cantonese learning flow.",
+			"items": {
+				"viewDetails": "View details",
+				"cantoLyr": {
+					"label": "CantoLyr",
+					"description": "Lyric-driven lessons that align pronunciation, script, and culture.",
+					"features": {
+						"romanization": "Romanization walkthroughs pair Jyutping with native audio.",
+						"vocabulary": "Core vocabulary decks with spaced repetition prompts.",
+						"phrases": "Essential dialogues map phrases to everyday scenarios.",
+						"grammar": "Grammar blueprints demystify particles and aspect markers.",
+						"pronunciation": "Tone lab visualises pitch curves to reinforce accuracy."
+					}
+				},
+				"cantoCap": {
+					"label": "CantoCap",
+					"description": "Auto-generate Cantonese captions to shadow authentic speech.",
+					"features": {
+						"captions": "Time-synced captions for dramas, vlogs, and live events.",
+						"annotations": "Inline annotations flag tone sandhi and colloquialisms.",
+						"export": "Export caption files for subtitles, flashcards, or karaoke.",
+						"mobile": "Send caption packs to mobile for on-the-go review."
+					}
+				}
+			}
+		},
+		"cta": {
+			"title": "Ready to step into Canto101?",
+			"description": "Unlock the full guided experience, personalise your roadmap, and keep Cantonese at the centre of your day.",
+			"button": "Create your learner profile"
+		}
+	},
+	"cantoLyr": {
+		"pron": {
+			"title": "Pronunciation Search",
+			"placeholder": "Enter pronunciation (e.g. ngo5)",
+			"resultsRegionLabel": "Pronunciation search results"
+		},
+		"rhyme": {
+			"title": "Rhyme Search",
+			"placeholder": "Enter rhyme code (e.g. aa)",
+			"resultsRegionLabel": "Rhyme search results"
+		},
+		"pages": {
+			"overview": {
+				"title": "CantoLyr Lexicon",
+				"description": "Explore focused tools that help you validate pronunciation and craft rhyme families before you draft lyrics.",
+				"featuresLabel": "Lexicon tools",
+				"lexiconTitle": "Lexicon tools",
+				"lexiconDescription": "Identify pronunciation or rhyme matches with purpose-built searches before you commit ideas to your draft.",
+				"lyricsTitle": "Lyric generation",
+				"lyricsDescription": "Map tone sequences to creative prompts and generate draft verses while staying aligned with Cantonese prosody.",
+				"lyricSearchTitle": "Lyric search",
+				"lyricSearchDescription": "Search existing Cantonese lyric lines by tone digits or rhyme finals to study precedent before drafting."
+			},
+			"ai": {
+				"title": "AI tools",
+				"description": "AI-assisted tools to accelerate lyric drafting and lexicon discovery.",
+				"heading": "AI tools",
+				"lexiconTag": "Learning / lyric tool",
+				"lyricsPreview": "Generate draft verses from tone sequences and creative prompts using AI assistance.",
+				"lexiconPreview": "AI-powered lexicon search to suggest matches and usage examples for lyric writing.",
+				"lyricSearchPreview": "Investigate lyric lines with AI-enhanced tone or rhyme queries using a semantic hint."
+			},
+			"featureCta": "Open tool",
+			"backToOverview": "Back to CantoLyr overview",
+			"pron": {
+				"heading": "Pronunciation tools",
+				"preview": "Validate Jyutping entries, inspect tone contours, and surface lexicon matches before you lock in a vocal line.",
+				"description": "Search by Jyutping or tone code to confirm syllable accuracy, review matched entries, and capture usage notes for lyric writing.",
+				"numericHeading": "Numeric tone mnemonic",
+				"numericAccordionTrigger": "394052 → open-syllable tone mapping (1–6)",
+				"numericIntro": "Cantonese lyricists map the six open-syllable tone indices (1–6) to the chant \"394052\" so the sounded digits saam1, gau2, sei3, ling4, ng5, ji6 mirror the tones they describe.",
+				"numericDescription": "The extended chant \"394052786\"—documented in Cantonese phonology guides—anchors lyric drafting because each digit carries the contour singers expect. The table summarises the core mapping used before checked tones enter a melody.",
+				"numericCheckedNote": "Digits 7-8-6 (chat1, baat3, luk6) share pitch contours with tones 1, 3, and 6 yet surface only on checked syllables ending in -p/-t/-k.",
+				"numericSourcesLabel": "References",
+				"numericSourceEnglishLabel": "English overview: \"Cantonese phonology\" (Wikipedia) — explains the \"394052786\" mnemonic.",
+				"numericSourceChineseLabel": "Chinese source: \"Cantonese Tones\" Wikipedia — includes the nine-tone formula \"394052786\".",
+				"numericTable": {
+					"caption": "Cantonese tone index mapped to lyricist mnemonic digits",
+					"columns": {
+						"toneIndex": "Tone index",
+						"mnemonicDigit": "Mnemonic digit",
+						"toneName": "Traditional tone name",
+						"example": "Jyutping example",
+						"audio": "Audio"
+					},
+					"rows": {
+						"tone1": {
+							"toneName": "Tone 1 · Yin Ping (high level)",
+							"example": "saam1 — \"three\" (三)"
+						},
+						"tone2": {
+							"toneName": "Tone 2 · Yin Shang (rising)",
+							"example": "gau2 — \"nine\" (九)"
+						},
+						"tone3": {
+							"toneName": "Tone 3 · Yin Qu (mid level)",
+							"example": "sei3 — \"four\" (四)"
+						},
+						"tone4": {
+							"toneName": "Tone 4 · Yang Ping (low falling)",
+							"example": "ling4 — \"zero\" (零)"
+						},
+						"tone5": {
+							"toneName": "Tone 5 · Yang Shang (low rising)",
+							"example": "ng5 — \"five\" (五)"
+						},
+						"tone6": {
+							"toneName": "Tone 6 · Yang Qu (low level)",
+							"example": "ji6 — \"two\" (二)"
+						}
+					}
+				},
+				"jyutpingHeading": "Jyutping syllable basics",
+				"jyutpingIntro": "Every Cantonese syllable can be analysed as an optional initial consonant, a vowel-based final, and a tone. The LSHK Jyutping scheme records that structure as <initial><final><tone digit>, which keeps lyric stress aligned with the spoken contour.",
+				"jyutpingDetails": {
+					"structure": "Write syllables as <initial><final><tone digit>; for example ngo5 = initial \"ng\" + final \"o\" + tone 5, while aa3 has no initial and starts directly with the final.",
+					"onset": "Jyutping recognises 19 initials. When a syllable lacks an initial (a \"null initial\" in Cantonese phonology) the spelling simply begins with the final, e.g. aa3 or oeng2.",
+					"tones": "Tone digits 1–6 map to the six Cantonese tone contours; checked syllables ending in -p/-t/-k reuse tone numbers 1, 3, or 6 instead of introducing extra digits.",
+					"rhymeLink": "Finals (rimes) carry the vowel nucleus and coda. The table below lists the authorised finals used by the LSHK scheme and by the rhyme search input."
+				},
+				"jyutpingConsonantsLabel": "Jyutping onsets",
+				"jyutpingConsonantsDescription": "These initials appear at the beginning of a syllable. Combine one of them (or none, for vowel-initial syllables) with a rime and tone digit to form a full Jyutping spelling.",
+				"rhymeHeading": "Rime (韻) reference",
+				"rhymeDescription": "In Cantonese phonology the rime (韻/韻母) contains the vowel nucleus plus any ending consonant. Syllables that share a rime form natural rhyme families—enter any final below to anchor the rhyme search.",
+				"rhymeTable": {
+					"caption": "Common Jyutping finals for rhyme search",
+					"columns": {
+						"range": "Range",
+						"finals": "Rhyme finals"
+					}
+				},
+				"rhymeListNote": "Finals are case-sensitive and should be entered in lowercase to match Jyutping conventions.",
+				"rhymeSourcesLabel": "References",
+				"rhymeSourceJyutping": "Jyutping initials and finals overview (Wikipedia)",
+				"rhymeSourceRime": "Cantonese syllable structure and rime explanation (Wikipedia)"
+			},
+			"rhyme": {
+				"heading": "Rhyme tools",
+				"preview": "Build authentic rhyme schemes by discovering syllables that share finals and tone patterns.",
+				"description": "Query the lexicon by rhyme code to group entries with shared finals and tones, making structured rhyme grids fast to assemble.",
+				"sequenceEnabled": "Contiguous pattern required",
+				"sequenceDisabled": "Inclusive pattern (any order)",
+				"sequenceToggle": "Toggle contiguous rhyme matching"
+			},
+			"lyrics": {
+				"heading": "Lyric tools",
+				"preview": "Blend tone grids with creative briefs to produce verses that respect Cantonese rhythm.",
+				"description": "Feed a creative prompt and tone sequences into the generator to receive structured lyric ideas you can iterate on."
+			},
+			"aiLexicon": {
+				"description": "Blend a semantic description with target tone digits to see AI-ranked vocabulary suggestions rooted in the Cantonese lexicon.",
+				"stepsHeading": "How it works",
+				"steps": {
+					"one": "Describe the scene or lyric intent in natural language.",
+					"two": "Enter the 394052-style tone digits you want the suggestions to follow.",
+					"three": "Submit to view ranked vocabulary with similarity scores you can explore."
+				},
+				"notice": "Results combine statistical frequency with AI similarity. Review tone digits before using entries in your draft.",
+				"formHeading": "Search the semantic lexicon",
+				"formDescription": "The assistant maps your description and tone digits to lexicon entries. Adjust either input to refine the ranked list."
+			},
+			"lyricSearch": {
+				"heading": "Lyric search",
+				"preview": "Investigate published lyric lines by tone pattern or rhyme family to support your own writing."
+			}
+		},
+		"badges": {
+			"ai": "AI",
+			"experimental": "Experimental"
+		},
+		"lyrics": {
+			"title": "Lyric Session",
+			"promptLabel": "Lyric prompt",
+			"promptPlaceholder": "Describe the scene or theme",
+			"sequencesLabel": "Tone sequences",
+			"sequencesPlaceholder": "Comma separated tone sequences (e.g. 02,452)",
+			"generate": "Generate",
+			"generating": "Generating..."
+		},
+		"ai": {
+			"lyricSearch": {
+				"title": "lyric search",
+				"pron": {
+					"nav": "AI tone search",
+					"heading": "AI lyric tone search",
+					"description": "Search lyric lines by tone digits with an optional semantic hint for smarter matches.",
+					"tipsHeading": "AI tone search tips",
+					"tipsDescription": "Combine tone digits with a short description to improve recall.",
+					"tips": {
+						"digits": "Use 394052-style tone digits to anchor the contour you need.",
+						"position": "Add a tone position to focus on a particular digit pair within the line.",
+						"filters": "Layer lyricist, year, themes, or keywords to narrow the catalogue slice you’re studying.",
+						"aiQuery": "Add a short description (e.g., mood or scene) to guide semantic recall."
+					},
+					"formHeading": "Search by tone digits + meaning",
+					"formDescription": "Enter tone digits and an optional semantic description, then refine with filters.",
+					"placeholder": "Describe mood or scene (optional)"
+				},
+				"rhyme": {
+					"nav": "AI rhyme search",
+					"heading": "AI lyric rhyme search",
+					"description": "Discover lyric lines by rhyme final with an optional semantic hint.",
+					"tipsHeading": "AI rhyme search tips",
+					"tipsDescription": "Pair a rhyme final with a brief description to focus results.",
+					"tips": {
+						"families": "Enter one or more Jyutping finals (e.g. aa or aa,aai for multiple rhymes - comma-separated).",
+						"placement": "Use the rhyme position to match the exact slot inside the line.",
+						"filters": "Combine lyricist, artist, or year filters to focus on a catalogue segment.",
+						"aiQuery": "Add a short description (e.g., scene or theme) to guide semantic retrieval."
+					},
+					"formHeading": "Search by rhyme + meaning",
+					"formDescription": "Provide a Jyutping final and an optional semantic description; add filters if needed.",
+					"placeholder": "Describe mood or usage (optional)"
+				}
+			},
+			"lyrics": {
+				"title": "Lyric generation",
+				"description": "Guide the engine with your creative prompt and target tone grids to receive structured Cantonese lyric ideas.",
+				"page": {
+					"overview": "Feature description",
+					"shortOverview": "Limitations & Tips",
+					"limitationsHeading": "Current Limitations",
+					"limitations": {
+						"lexiconCoverage": "Output quality is limited by the current lexicon database coverage. Insufficient entries may result in less precise semantic or rhyming matches.",
+						"modelRetrieval": "Semantic retrieval and vector recall depend on the current model; inadequate embeddings may miss contextually relevant candidates.",
+						"queryGeneration": "Query and tone sequence combination strategies are still being optimized, potentially leading to unstable sorting in complex scenarios.",
+						"grammarPron": "Generated sentences may contain grammatical, collocation, or tone (pronunciation) errors, requiring manual post-editing.",
+						"limitedParagraphs": "Paragraph combination sampling is currently limited to a small number of candidates (top-N), potentially missing more promising combinations.",
+						"slowGeneration": "Generation speed significantly slows down for longer tone sequences or when re-ranking multiple candidate groups.",
+						"toneSequenceRange": "Supported tone sequence length and grouping are still being adjusted; overly long sequences may be truncated or reduced in quality."
+					},
+					"improveHeading": "Evolution & Improvements",
+					"improvements": {
+						"lexiconGrowth": "Expand and clean the lexicon database (including frequency, part-of-speech, and register tags) to improve candidate quality.",
+						"retrievalRerank": "Optimize semantic retrieval, phased re-ranking, and multi-feature scoring (MMR / pattern fit / frequency).",
+						"patternScoring": "Improve tone pattern and syntactic structure evaluation to reduce unnatural pauses and word order errors.",
+						"feedbackLoop": "Introduce manual annotation and user feedback loops to enhance error detection and ranking accuracy."
+					},
+					"tipsHeading": "Usage Tips",
+					"tips": {
+						"expandLines": "Expand each line to view candidate sentences and pattern statistics, extract inspiration, or replace segments.",
+						"refineSequences": "Adjust tone sequence length and structure (e.g., split long lines into two) to improve matching stability.",
+						"lexiconSemantic": "If vocabulary feels too stiff in a line, switch to the semantic lexicon search tool and input the same scene description to find alternative expressions.",
+						"manualPolish": "Treat generated drafts as frameworks: further refine word order, emotional layers, and authentic spoken Cantonese."
+					},
+					"disclaimer": "Output is experimental draft; please review manually"
+				},
+				"formHeading": "Describe the session",
+				"formDescription": "Define the scene, tone grid, and optional seed before drafting lyric lines.",
+				"form": {
+					"promptLabel": "Lyric prompt",
+					"promptPlaceholder": "Describe the scene, emotion, or story beat",
+					"sequencesLabel": "Tone sequences",
+					"sequencesPlaceholder": "Enter tone digit sequences separated by commas or new lines",
+					"sequencesCaption": "Use Cantonese tone digits (e.g. 394052). Each line becomes a generated lyric line.",
+					"seedLabel": "Seed (optional)",
+					"seedPlaceholder": "Random",
+					"seedCaption": "Lock the random seed to regenerate comparable outputs.",
+					"topLabel": "Paragraph outputs",
+					"topCaption": "Number of composed paragraph suggestions to return (1–3).",
+					"submit": "Generate lyrics",
+					"generating": "Generating lyrics...",
+					"generatingHint": "The system is assembling candidate sentences and ranking them.",
+					"apiKey": {
+						"button": "Set API Key",
+						"dialogTitle": "Enter Google Gemini API Key",
+						"dialogDescriptionPrefix": "Get your API key from ",
+						"dialogDescriptionMiddle": ".",
+						"dialogDescriptionSuffix": "Your API key will not be logged and will only be used for this session. It will not be stored or used elsewhere in the system.",
+						"label": "API Key",
+						"placeholder": "Enter your Gemini API key",
+						"save": "Save",
+						"requiredMessage": "Please set your Google Gemini API key to generate lyrics.",
+						"validation": {
+							"required": "API key is required",
+							"invalidFormat": "API key must start with 'AIza'",
+							"invalidLength": "API key must be 39 characters long"
+						},
+						"showPassword": "Show password",
+						"hidePassword": "Hide password"
+					}
+				},
+				"summary": {
+					"title": "Session summary",
+					"description": "Feature {{feature}} · engine v{{version}}",
+					"feature": "Feature: {{feature}}",
+					"version": "Engine version {{version}}",
+					"seed": "Seed",
+					"createdAt": "Created",
+					"lineCount": "Lines",
+					"processingTime": "Processing",
+					"processingTimeValue": "{{ms}} ms"
+				},
+				"topParagraphs": {
+					"title": "Composed paragraphs",
+					"count": "{{count}} suggestions",
+					"badge": "Top {{index}}",
+					"empty": "No paragraph suggestions were generated. Increase the paragraph output count or try again."
+				},
+				"lines": {
+					"sectionTitle": "Line-by-line breakdown",
+					"count": "{{count}} lines",
+					"title": "Line {{index}} · Tone {{tone}}",
+					"previewFallback": "No leading sentence yet. Expand for diagnostic detail.",
+					"warningsCount": "{{count}} warnings",
+					"empty": "No line data available yet.",
+					"toneSequence": "Tone {{tone}}",
+					"lineIndex": "Line {{index}}",
+					"digitSet": "Digit set",
+					"primaryPattern": "Pattern {{pattern}}",
+					"primaryRank": "Rank {{rank}}",
+					"primaryMmr": "MMR {{score}}",
+					"noPrimary": "No ranked sentence was produced for this line.",
+					"error": "Generation error: {{message}}",
+					"candidateStats": {
+						"heading": "Candidate pool",
+						"total": "Total candidates",
+						"semantic": "Semantic matches",
+						"freqTop": "High frequency",
+						"freqRandom": "Exploratory"
+					},
+					"topSentences": {
+						"heading": "Top-ranked sentences",
+						"columns": {
+							"text": "Sentence",
+							"pattern": "Pattern",
+							"rank": "Rank",
+							"mmr": "MMR"
+						},
+						"empty": "No ranked sentences returned."
+					},
+					"patterns": {
+						"heading": "Tone patterns",
+						"groups": "Groups: {{groups}}",
+						"empty": "No tone patterns returned."
+					},
+					"allCandidates": {
+						"heading": "Full candidate pool",
+						"pattern": "Pattern {{pattern}}",
+						"empty": "No additional candidates were returned."
+					},
+					"additional": {
+						"heading": "Additional ranked sentences",
+						"rank": "Rank {{rank}}",
+						"mmr": "MMR {{score}}"
+					},
+					"paragraphs": {
+						"heading": "Paragraph blends using this line",
+						"label": "Paragraph {{index}}"
+					}
+				}
+			},
+			"lexicon": {
+				"title": "Lexicon Search",
+				"description": "Use semantic hints and tone digits to surface candidate words and characters that align with your prompt.",
+				"form": {
+					"queryLabel": "Describe the usage context",
+					"queryPlaceholder": "e.g. hopeful chorus about new beginnings",
+					"pronunciationLabel": "Target pronunciation digits",
+					"pronunciationPlaceholder": "Enter tone digits such as 394",
+					"limitLabel": "Suggestions",
+					"limitCaption": "Between 1 and 25 results."
+				},
+				"summary": {
+					"query": "Query: {{query}}",
+					"pronunciation": "Digits: {{pronunciation}}",
+					"timing": "{{ms}} ms"
+				},
+				"similarityBadge": "{{percentage}}% semantic match",
+				"noResults": "No AI suggestions yet. Try broadening your prompt or adjusting the tone digits."
+			}
+		},
+		"errors": {
+			"pron": {
+				"missingQuery": "Please enter a pronunciation query."
+			},
+			"rhyme": {
+				"missingQuery": "Please enter a rhyme query.",
+				"invalidRhyme": "Please enter valid rhyme(s) from the Cantonese rhyme table (comma-separated for multiple)."
+			},
+			"lyrics": {
+				"missingPrompt": "Prompt is required to generate lyrics.",
+				"missingSequences": "Provide at least one tone sequence (comma separated).",
+				"promptTooLong": "Prompt exceeds the maximum length (200 characters).",
+				"invalidSequences": "Each tone sequence must be ≥3 digits, digits limited to 0 2 3 4 5 9, max 3 sequences.",
+				"invalidSeed": "Seed must be a non-negative integer.",
+				"invalidTop": "Paragraph outputs must be between 1 and 3.",
+				"unexpected": "Lyric generation failed. Please try again in a moment."
+			},
+			"lexicon": {
+				"invalidDigits": "Only digits 0, 2, 3, 4, 5, and 9 are allowed.",
+				"tooLong": "Query must be no more than 4 digits long.",
+				"missingQuery": "Please describe what you want the AI to find.",
+				"missingPronunciation": "Enter tone digits using the 394052 scheme.",
+				"invalidResponse": "The AI lexicon response could not be decoded. Please try again.",
+				"limitRange": "Limit must be between 1 and 25."
+			}
+		},
+		"lexicon": {
+			"types": {
+				"char": "Character",
+				"vocab": "Vocabulary"
+			},
+			"details": {
+				"pronunciation": "Pronunciation",
+				"tone": "Tone",
+				"jyutping": "Jyutping",
+				"consonants": "Consonants",
+				"rhymes": "Rhymes",
+				"syllables": "Syllables",
+				"frequency": "Frequency",
+				"pos": "Part of speech",
+				"register": "Register",
+				"gloss": "Gloss",
+				"source": "Source",
+				"position": "Position"
+			},
+			"badges": {
+				"cached": "Cached"
+			},
+			"messages": {
+				"noMatches": "No matches yet. Try another query.",
+				"hoverHint": "Click a surface to inspect its details.",
+				"endOfResults": "You've reached the end of the results."
+			},
+			"counts": {
+				"showing": "Showing {{shown}} of {{total}} matches"
+			},
+			"group": {
+				"label": "Group {{index}}",
+				"range": "{{start}}–{{end}}"
+			},
+			"langHints": {
+				"zhHk": "Labeled as 'zh-HK': typically used in everyday speech, pop culture, and online language. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'written', colloquial words are closer to daily spoken contexts.",
+				"zhTw": "Labeled as 'zh-TW': typically found in formal texts, news, books, and official documents, representing the written register of Chinese. This tag is for reference only—actual usage may overlap or shift, and will be refined over time. Compared to 'colloquial', written words tend to be more formal and standardized.",
+				"generic": "{{code}}"
+			},
+			"feedback": {
+				"up": "Mark helpful",
+				"down": "Mark not helpful"
+			},
+			"options": {
+				"label": "Options"
+			},
+			"rhyme": {
+				"modeLabel": "Rhyme matching mode",
+				"sequenceEnabled": "Show only consecutive rhymes",
+				"sequenceDisabled": "Contains all rhymes (regardless of position)",
+				"sequenceLabel": "Seq",
+				"inclusiveLabel": "All",
+				"sequenceToggle": "Toggle continuous rhyme mode"
+			}
+		},
+		"lyricSearch": {
+			"title": "Lyric Search",
+			"nav": {
+				"pron": "Lyric tone search",
+				"rhyme": "Lyric rhyme search"
+			},
+			"placeholders": {
+				"aiQuery": "Describe the scene or usage in natural language"
+			},
+			"filters": {
+				"label": "Filters & options",
+				"reset": "Reset filters",
+				"pageSize": {
+					"label": "Page size",
+					"description": "Number of lyric lines to fetch per request (1–200)."
+				},
+				"position": {
+					"label": "Tone position",
+					"placeholder": "e.g. 2",
+					"description": "Match a specific tone bigram slot (1 = first digit pair)."
+				},
+				"rhymePosition": {
+					"label": "Rhyme position",
+					"placeholder": "e.g. 5",
+					"description": "Match the rhyme slot index within the line (1-based)."
+				},
+				"themes": {
+					"label": "Themes",
+					"placeholder": "Comma separated themes"
+				},
+				"keywords": {
+					"label": "Keywords",
+					"placeholder": "Comma separated keywords"
+				},
+				"lyricist": {
+					"label": "Lyricist",
+					"placeholder": "e.g. James Wong"
+				},
+				"artist": {
+					"label": "Artist",
+					"placeholder": "e.g. Anita Mui"
+				},
+				"id": {
+					"label": "Lyric ID",
+					"placeholder": "Internal lyric identifier"
+				},
+				"sentiment": {
+					"label": "Sentiment",
+					"placeholder": "e.g. hopeful"
+				},
+				"year": {
+					"label": "Year",
+					"placeholder": "e.g. 1993"
+				}
+			},
+			"labels": {
+				"query": "Lyric search query",
+				"aiQuery": "Semantic query (optional)",
+				"bigrams": "Tone bigrams",
+				"song": "Song",
+				"metadata": "Line metrics",
+				"lineIndex": "Line {{index}}",
+				"counts": "Chars {{chars}} · Syllables {{syllables}} · Tokens {{tokens}}",
+				"sentiment": "Sentiment",
+				"syntaxNotes": "Definition",
+				"artists": "Artists",
+				"lyricists": "Lyricists",
+				"tokens": "Lexicon"
+			},
+			"results": {
+				"count": "Showing {{shown}} of {{total}} lines",
+				"cached": "Cached",
+				"timing": "{{ms}} ms"
+			},
+			"messages": {
+				"noMatches": "No lyric lines found yet. Try a different query or adjust the filters.",
+				"endOfResults": "You’ve reached the end of the result set."
+			},
+			"pron": {
+				"heading": "Lyric tone search",
+				"description": "Search lyric lines by tone digit sequences to trace pronunciation patterns across Cantonese songs.",
+				"tipsHeading": "Tone search tips",
+				"tipsDescription": "Use the numeric tone mnemonic to quickly surface matching lyric lines.",
+				"tips": {
+					"digits": "Use 394052-style tone digits to anchor the contour you need.",
+					"position": "Add a tone position to focus on a particular digit pair within the line.",
+					"filters": "Layer lyricist, year, themes, or keywords to narrow the catalogue slice you’re studying."
+				},
+				"formHeading": "Search by tone digits",
+				"formDescription": "Enter tone digits and optional filters to surface existing lyric lines that match your contour.",
+				"placeholder": "Enter tone digits such as 394052",
+				"resultsRegionLabel": "Lyric tone search results"
+			},
+			"rhyme": {
+				"heading": "Lyric rhyme search",
+				"description": "Discover lyric lines that share rhyme finals and metadata to help you craft rhyme grids.",
+				"tipsHeading": "Rhyme search tips",
+				"tipsDescription": "Identify rhyme families that appear in published Cantonese lyrics.",
+				"tips": {
+					"families": "Enter one or more Jyutping finals (e.g. aa or aa,aai for multiple rhymes - comma-separated).",
+					"placement": "Use the rhyme position to match the exact slot inside the line.",
+					"filters": "Combine lyricist, artist, or year filters to focus on a catalogue segment."
+				},
+				"formHeading": "Search by rhyme",
+				"formDescription": "Provide a Jyutping final and optional filters to inspect how existing lyrics deploy that rhyme.",
+				"placeholder": "Enter Jyutping final(s) (e.g. aa, aai - comma-separated for multiple)",
+				"modeLabel": "Rhyme matching mode",
+				"resultsRegionLabel": "Lyric rhyme search results",
+				"sequenceEnabled": "Show only consecutive rhymes",
+				"sequenceDisabled": "Contains all rhymes (regardless of position)",
+				"sequenceToggle": "Toggle continuous rhyme mode"
+			}
+		}
+	}
 }
